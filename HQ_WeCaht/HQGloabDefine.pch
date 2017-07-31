@@ -1,0 +1,32 @@
+//
+//  HQGloabDefine.pch
+//  HQ_WeChat
+//
+//  Created by GoodSrc on 2017/2/20.
+//  Copyright © 2017年 黄麒展. All rights reserved.
+//
+
+#ifndef HQGloabDefine_pch
+#define HQGloabDefine_pch
+
+
+#ifdef DEBUG
+#define ICLog(format, ...)    NSLog(format, ##__VA_ARGS__)
+#else
+#define ICLog(format, ...)
+#endif
+
+
+
+
+#import "HQConstDefine.h"
+#import "HQHeaderDefine.h"
+
+
+
+
+
+
+
+
+#endif /* HQGloabDefine_pch */

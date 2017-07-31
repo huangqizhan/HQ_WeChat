@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HQChatEdiateMoreView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYJ-JA-Sfs">
+                    <rect key="frame" x="0.0" y="8" width="89" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="Session_Multi_Forward_HL"/>
+                    <connections>
+                        <action selector="shareButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="eZx-xo-SvN"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gj-rC-fF9">
+                    <rect key="frame" x="84" y="8" width="89" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="Session_Multi_Fav_HL"/>
+                    <connections>
+                        <action selector="collectionButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="iZi-Ro-MR7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MOR-ba-Q0m">
+                    <rect key="frame" x="173" y="8" width="89" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="Session_Multi_Delete_HL"/>
+                    <connections>
+                        <action selector="deleteButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Uhg-fD-67h"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCD-hf-GTG">
+                    <rect key="frame" x="270" y="8" width="89" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="Session_Multi_More_HL"/>
+                    <connections>
+                        <action selector="moreButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="tvZ-Hg-MmK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionButton" destination="1gj-rC-fF9" id="stQ-R5-CgP"/>
+                <outlet property="deleteButton" destination="MOR-ba-Q0m" id="609-tz-73F"/>
+                <outlet property="moreButton" destination="JCD-hf-GTG" id="3Td-El-z8x"/>
+                <outlet property="shareButton" destination="YYJ-JA-Sfs" id="MTg-KW-l9W"/>
+            </connections>
+            <point key="canvasLocation" x="40.5" y="106"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Session_Multi_Delete_HL" width="35" height="35"/>
+        <image name="Session_Multi_Fav_HL" width="35" height="35"/>
+        <image name="Session_Multi_Forward_HL" width="35" height="35"/>
+        <image name="Session_Multi_More_HL" width="35" height="35"/>
+    </resources>
+</document>

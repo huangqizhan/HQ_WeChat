@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="ChatListModel" representedClassName="ChatListModel" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="chatContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chatListId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="chatListType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isShow" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="messageTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="topMessageNum" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="unReadCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userHeadImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatMessageModel" syncable="YES"/>
+        <relationship name="messageUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ContractModel" syncable="YES"/>
+    </entity>
+    <entity name="ChatMessageModel" representedClassName="ChatMessageModel" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="cellHeight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contentLength" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="contentString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentUrlString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileExtion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isGroupChat" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="messageId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="messageStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="messageTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="messageType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="modelConfig" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiveId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="requestProcess" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="requestTimeral" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="speakerId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tempPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userHeadImageString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chatImageRect" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MessageRectModel" syncable="YES"/>
+        <relationship name="chatLabelRect" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MessageRectModel" syncable="YES"/>
+    </entity>
+    <entity name="ContractModel" representedClassName="ContractModel" syncable="YES" codeGenerationType="class">
+        <attribute name="createTime" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="firstFilter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="isGroupChat" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userHeadImaeUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userSignNatue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MessageRectModel" representedClassName="MessageRectModel" syncable="YES" codeGenerationType="class">
+        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="xx" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="yy" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ChatListModel" positionX="-371" positionY="-159" width="128" height="210"/>
+        <element name="ChatMessageModel" positionX="-74" positionY="-198" width="128" height="390"/>
+        <element name="ContractModel" positionX="-225" positionY="-45" width="128" height="180"/>
+        <element name="MessageRectModel" positionX="-225" positionY="-63" width="128" height="105"/>
+    </elements>
+</model>
