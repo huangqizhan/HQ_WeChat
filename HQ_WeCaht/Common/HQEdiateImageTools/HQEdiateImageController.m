@@ -8,6 +8,10 @@
 
 #import "HQEdiateImageController.h"
 #import "HQEdiateBottomView.h"
+#import "HQEdiateImageBaseTools.h"
+
+
+
 
 @interface HQEdiateImageController ()
 
@@ -62,7 +66,14 @@
 }
 #pragma mark ------- 切换底部视图按钮 -----
 - (void)clickBottomViewWith:(NSInteger )index{
+    [self hiddenMenuViewWithAnimation];
     NSLog(@"indx = %ld",index);
+    ///HQEdiateImageBaseTools
+}
+- (void)hiddenMenuViewWithAnimation{
+    [UIView animateWithDuration:.35 animations:^{
+        _menuView.top = APP_Frame_Height;
+    }];
 }
 //底层ScrollView
 - (void)initImageScrollView{

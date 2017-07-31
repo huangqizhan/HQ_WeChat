@@ -15,10 +15,10 @@
 
 typedef NS_ENUM(NSInteger,HQEdiateImageType) {
     HQEdiateImageDrawType = 1,            ///画笔编辑
-    HQEdiateImageMosaicType,        ///马赛克编辑
-    HQEdiateImageEmtionType,        ////表情
-    HQEdiateImageCutType,              ///裁剪
-    HQEdiateImageTextType             ///文本编辑
+    HQEdiateImageMosaicType,              ///马赛克编辑
+    HQEdiateImageEmtionType,              ////表情
+    HQEdiateImageCutType,                     ///裁剪
+    HQEdiateImageTextType                    ///文本编辑
 };
 
 @interface HQEdiateImageBaseTools : NSObject{
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
 
 @property (nonatomic,weak) HQEdiateImageController *imageEdiateController;
 @property (nonatomic,assign) HQEdiateImageType ediateType;
-
+@property (nonatomic,strong) UIView *ediateMenuView;
 
 
 

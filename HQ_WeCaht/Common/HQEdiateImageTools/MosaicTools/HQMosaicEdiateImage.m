@@ -9,6 +9,9 @@
 #import "HQMosaicEdiateImage.h"
 
 @implementation HQMosaicEdiateImage
+- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType)type{
+    return [super initWithEdiateController:ediateController andEdiateType:type];
+}
 
 
 - (void)setUpCurrentEdiateStatus{
