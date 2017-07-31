@@ -2932,7 +2932,7 @@
 				TargetAttributes = {
 					BACB054C1E59872E008B676D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = S748494QV4;
+						DevelopmentTeam = B5HHUXE3SK;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -3505,7 +3505,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = /Users/GoodSrc/Downloads/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HQ_WeCaht/HQGloabDefine.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -3552,7 +3552,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = /Users/GoodSrc/Downloads/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HQ_WeCaht/HQGloabDefine.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3573,15 +3573,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = S748494QV4;
+				DEVELOPMENT_TEAM = B5HHUXE3SK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FramWorks",
 				);
-				GCC_PREFIX_HEADER = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
-				INFOPLIST_FILE = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3605,15 +3604,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = S748494QV4;
+				DEVELOPMENT_TEAM = B5HHUXE3SK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FramWorks",
 				);
-				GCC_PREFIX_HEADER = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
-				INFOPLIST_FILE = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
