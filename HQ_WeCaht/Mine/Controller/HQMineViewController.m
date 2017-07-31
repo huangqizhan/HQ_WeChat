@@ -120,7 +120,7 @@
         [self.navigationController pushViewController:refershVC animated:YES];
     }else{
         HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
-        [self.navigationController pushViewController:ediateImageVC animated:YES];
+        [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
     }
 }
 - (void)didReceiveMemoryWarning {

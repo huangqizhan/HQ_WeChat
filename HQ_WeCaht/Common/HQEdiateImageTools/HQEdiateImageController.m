@@ -22,6 +22,14 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarHidden = YES;
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -32,8 +40,10 @@
     if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]){
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+    
     [self createMenuView];
     [self initImageScrollView];
+    [self createNaviGationViews];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0373" ofType:@".jpg"];
     _originalImage = [UIImage imageWithContentsOfFile:filePath];
@@ -53,7 +63,7 @@
     imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageScroll.showsHorizontalScrollIndicator = NO;
     imageScroll.showsVerticalScrollIndicator = NO;
-    imageScroll.backgroundColor = [UIColor redColor];
+    imageScroll.backgroundColor = [UIColor blackColor];
     imageScroll.delegate = self;
     imageScroll.clipsToBounds = NO;
 //    CGFloat y = self.navigationController.navigationBar.bottom;
@@ -62,6 +72,27 @@
     [self.view insertSubview:imageScroll atIndex:0];
     
     _scrollView = imageScroll;
+}
+- (void)createNaviGationViews{
+    UIButton *cancelButton  = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cancelButton];
+    
+    UIButton *finishButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-50, 10, 40, 40)];
+    [finishButton setTitle:@"完成" forState:UIControlStateNormal];
+    [finishButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [finishButton setTitleColor:CANCELBUTTONCOLOR forState:UIControlStateNormal];
+    [finishButton addTarget:self action:@selector(finishButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:finishButton];
+    
+}
+- (void)cancelButtonAction:(UIButton *)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+- (void)finishButtonAction:(UIButton *)sender{
+    
 }
 - (void)refreshImageView{
     _imageView.image = _originalImage;

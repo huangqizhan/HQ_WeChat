@@ -3568,8 +3568,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FramWorks",
 				);
-				GCC_PREFIX_HEADER = "/Users/GoodSrc/Downloads/HQ_WeCaht 2/HQ_WeCaht/HQGloabDefine.pch";
-				INFOPLIST_FILE = "/Users/GoodSrc/Downloads/HQ_WeCaht 2/HQ_WeCaht/Info.plist";
+				GCC_PREFIX_HEADER = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
+				INFOPLIST_FILE = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3600,8 +3600,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FramWorks",
 				);
-				GCC_PREFIX_HEADER = "/Users/GoodSrc/Downloads/HQ_WeCaht 2/HQ_WeCaht/HQGloabDefine.pch";
-				INFOPLIST_FILE = "/Users/GoodSrc/Downloads/HQ_WeCaht 2/HQ_WeCaht/Info.plist";
+				GCC_PREFIX_HEADER = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/HQGloabDefine.pch;
+				INFOPLIST_FILE = /Users/goodsrc/Desktop/myGitHubFile/HQ_WeCaht/HQ_WeCaht/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
