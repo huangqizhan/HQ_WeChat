@@ -27,7 +27,7 @@
 
 @property (nonatomic,copy)  void (^clickBackAction)(NSInteger index);
 
-- (instancetype)initWithFram:(CGRect)frame ImageName:(NSString *)imageName andClickCallBackAction:(void (^)(NSInteger index))clickCallBackAction;
+- (instancetype)initWithFram:(CGRect)frame ImageName:(NSString *)imageName  andIndex:(NSInteger )index  andClickCallBackAction:(void (^)(NSInteger index))clickCallBackAction;
 
 
 @end

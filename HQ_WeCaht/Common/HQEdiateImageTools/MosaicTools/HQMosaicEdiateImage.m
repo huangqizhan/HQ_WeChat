@@ -10,4 +10,13 @@
 
 @implementation HQMosaicEdiateImage
 
+
+- (void)setUpCurrentEdiateStatus{
+    NSLog(@"setUpCurrentEdiateStatus");
+}
+
+- (void)clearCurrentEdiateStatus{
+    
+}
+
 @end

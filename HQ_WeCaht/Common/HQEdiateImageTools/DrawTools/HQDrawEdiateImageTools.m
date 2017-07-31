@@ -10,4 +10,12 @@
 
 @implementation HQDrawEdiateImageTools
 
+- (void)setUpCurrentEdiateStatus{
+    NSLog(@"setUpCurrentEdiateStatus");
+}
+
+- (void)clearCurrentEdiateStatus{
+    
+}
+
 @end

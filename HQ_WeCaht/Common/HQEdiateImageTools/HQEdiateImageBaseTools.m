@@ -10,5 +10,22 @@
 
 @implementation HQEdiateImageBaseTools
 
+- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType )type{
+    self = [super init];
+    if (self) {
+        self.ediateType =  type;
+        self.imageEdiateController = ediateController;
+        [self setUpCurrentEdiateStatus];
+    }
+    return self;
+}
+
+- (void)setUpCurrentEdiateStatus{
+    
+}
+
+- (void)clearCurrentEdiateStatus{
+    
+}
 
 @end

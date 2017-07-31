@@ -10,6 +10,16 @@
 
 @implementation HQCutEdiateImageTools
 
+
+- (void)setUpCurrentEdiateStatus{
+    NSLog(@"setUpCurrentEdiateStatus");
+}
+
+- (void)clearCurrentEdiateStatus{
+    
+}
+
 @end
+
 
 
