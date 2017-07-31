@@ -7,6 +7,7 @@
 //
 
 #import "HQEdiateImageController.h"
+#import "HQEdiateBottomView.h"
 
 @interface HQEdiateImageController ()
 
@@ -41,8 +42,8 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
-    [self createMenuView];
     [self initImageScrollView];
+    [self createMenuView];
     [self createNaviGationViews];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0373" ofType:@".jpg"];
@@ -53,9 +54,15 @@
     [self refreshImageView];
 }
 - (void)createMenuView{
-    _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80)];
-    _menuView.backgroundColor = [UIColor grayColor];
+    WEAKSELF;
+    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(NSInteger index) {
+        [weakSelf  clickBottomViewWith:index];
+    }];
     [self.view addSubview:_menuView];
+}
+#pragma mark ------- 切换底部视图按钮 -----
+- (void)clickBottomViewWith:(NSInteger )index{
+    NSLog(@"indx = %ld",index);
 }
 //底层ScrollView
 - (void)initImageScrollView{
@@ -68,7 +75,7 @@
     imageScroll.clipsToBounds = NO;
 //    CGFloat y = self.navigationController.navigationBar.bottom;
     imageScroll.top =  0;
-    imageScroll.height = self.view.height - imageScroll.top - _menuView.height;
+    imageScroll.height = APP_Frame_Height ;
     [self.view insertSubview:imageScroll atIndex:0];
     
     _scrollView = imageScroll;

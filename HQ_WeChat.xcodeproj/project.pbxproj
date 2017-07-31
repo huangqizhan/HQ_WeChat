@@ -410,6 +410,7 @@
 		FDA1DB981E9B6F1B001A9854 /* CirclePercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA1DB971E9B6F1B001A9854 /* CirclePercentView.m */; };
 		FDA1DB9B1E9B6F49001A9854 /* PercentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA1DB9A1E9B6F49001A9854 /* PercentLabel.m */; };
 		FDA1DB9E1E9B776F001A9854 /* DownLoadPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA1DB9D1E9B776F001A9854 /* DownLoadPercentView.m */; };
+		FDB3B2641F2EFC4700A30CBE /* HQEdiateBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */; };
 		FDC848221E66AB9F00EF0940 /* HQFacePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC848211E66AB9F00EF0940 /* HQFacePageView.m */; };
 		FDC848251E66ABD000EF0940 /* HQFacePageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC848241E66ABD000EF0940 /* HQFacePageCollectionCell.m */; };
 		FDC848281E66BCC400EF0940 /* HQMoreListView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC848271E66BCC400EF0940 /* HQMoreListView.m */; };
@@ -1138,6 +1139,8 @@
 		FDA1DB9C1E9B776F001A9854 /* DownLoadPercentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadPercentView.h; sourceTree = "<group>"; };
 		FDA1DB9D1E9B776F001A9854 /* DownLoadPercentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadPercentView.m; sourceTree = "<group>"; };
 		FDA9E9351EEE4740006D1039 /* HQChatModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "HQChatModel 3.xcdatamodel"; sourceTree = "<group>"; };
+		FDB3B2621F2EFC4700A30CBE /* HQEdiateBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateBottomView.h; sourceTree = "<group>"; };
+		FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateBottomView.m; sourceTree = "<group>"; };
 		FDC848201E66AB9F00EF0940 /* HQFacePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFacePageView.h; sourceTree = "<group>"; };
 		FDC848211E66AB9F00EF0940 /* HQFacePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFacePageView.m; sourceTree = "<group>"; };
 		FDC848231E66ABD000EF0940 /* HQFacePageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFacePageCollectionCell.h; sourceTree = "<group>"; };
@@ -1463,6 +1466,8 @@
 				FD1DDF731F27343D00AAC89D /* HQEdiateImageBaseTools.m */,
 				FD1DDF841F2736E000AAC89D /* HQEdiateImageController.h */,
 				FD1DDF851F2736E000AAC89D /* HQEdiateImageController.m */,
+				FDB3B2621F2EFC4700A30CBE /* HQEdiateBottomView.h */,
+				FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */,
 			);
 			path = HQEdiateImageTools;
 			sourceTree = "<group>";
@@ -3128,6 +3133,7 @@
 				FD61A23A1F03387900F0830C /* HQSetChatBegImageController.m in Sources */,
 				FD2CAD411EE13CAA00FEEC7A /* libopencore-amrnb.a in Sources */,
 				FD2CAD421EE13CAA00FEEC7A /* dec_if.h in Sources */,
+				FDB3B2641F2EFC4700A30CBE /* HQEdiateBottomView.m in Sources */,
 				FD1D8BE71F0F271F0011A341 /* HQPopover.m in Sources */,
 				FD2CAD431EE13CAA00FEEC7A /* if_rom.h in Sources */,
 				FD2CAD441EE13CAA00FEEC7A /* libopencore-amrwb.a in Sources */,
