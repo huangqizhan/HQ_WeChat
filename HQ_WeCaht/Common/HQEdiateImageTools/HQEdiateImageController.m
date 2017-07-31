@@ -43,7 +43,7 @@
     [self refreshImageView];
 }
 - (void)createMenuView{
-    _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - 80, self.view.width, 80)];
+    _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80)];
     _menuView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_menuView];
 }
@@ -56,8 +56,8 @@
     imageScroll.backgroundColor = [UIColor redColor];
     imageScroll.delegate = self;
     imageScroll.clipsToBounds = NO;
-    CGFloat y = self.navigationController.navigationBar.bottom;
-    imageScroll.top = y;
+//    CGFloat y = self.navigationController.navigationBar.bottom;
+    imageScroll.top =  0;
     imageScroll.height = self.view.height - imageScroll.top - _menuView.height;
     [self.view insertSubview:imageScroll atIndex:0];
     
