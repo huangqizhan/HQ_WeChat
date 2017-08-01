@@ -7,19 +7,20 @@
 //
 
 #import "HQTextEdiateImageTools.h"
+#import "HQEdiateImageController.h"
 
 @implementation HQTextEdiateImageTools
 
-- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType)type{
-    return [super initWithEdiateController:ediateController andEdiateType:type];
+- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateToolInfo:(HQEdiateToolInfo *)toolInfo{
+    return [super initWithEdiateController:ediateController  andEdiateToolInfo:toolInfo];
 }
 
 - (void)setUpCurrentEdiateStatus{
-    NSLog(@"setUpCurrentEdiateStatus");
+    [super setUpCurrentEdiateStatus];
 }
 
 - (void)clearCurrentEdiateStatus{
-    
+    [super clearCurrentEdiateStatus];
 }
 
 //图片

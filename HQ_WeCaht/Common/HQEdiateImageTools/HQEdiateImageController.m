@@ -9,11 +9,14 @@
 #import "HQEdiateImageController.h"
 #import "HQEdiateBottomView.h"
 #import "HQEdiateImageBaseTools.h"
+#import "HQEdiateToolInfo.h"
 
 
 
 
 @interface HQEdiateImageController ()
+
+@property (nonatomic,strong) HQEdiateImageBaseTools *currentTool;
 
 @end
 
@@ -59,15 +62,23 @@
 }
 - (void)createMenuView{
     WEAKSELF;
-    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(HQEdiateImageToolInfo *toolInfo) {
+    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(HQEdiateToolInfo *toolInfo) {
         [weakSelf  clickBottomViewWith:toolInfo];
     }];
     [self.view addSubview:_menuView];
 }
 #pragma mark ------- 切换底部视图按钮 -----
-- (void)clickBottomViewWith:(HQEdiateImageToolInfo *)toolInfo{
+- (void)clickBottomViewWith:(HQEdiateToolInfo *)toolInfo{
     [self hiddenMenuViewWithAnimation];
-    NSLog(@"indx = %ld",toolInfo.orderNum);
+    Class toolClass = NSClassFromString(toolInfo.toolName);
+    if (toolClass) {
+        id object = [toolClass alloc];
+        if (object && [object isKindOfClass:[HQEdiateImageBaseTools class] ]) {
+            object = [object initWithEdiateController:self andEdiateToolInfo:toolInfo];
+            [object setUpCurrentEdiateStatus];
+            self.currentTool = object;
+        }
+    }
 }
 - (void)hiddenMenuViewWithAnimation{
     [UIView animateWithDuration:.15 animations:^{

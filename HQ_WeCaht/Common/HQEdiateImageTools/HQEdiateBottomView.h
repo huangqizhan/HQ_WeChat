@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "HQEdiateImageProtocal.h"
+#import "HQEdiateToolInfo.h"
 
 
 @class HQEdiateImageToolInfo;
 
 @interface HQEdiateBottomView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(HQEdiateImageToolInfo *toolInfo))callClickButtonIndex;
+- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(HQEdiateToolInfo *toolInfo))callClickButtonIndex;
 
-@property (nonatomic,copy)  void (^bottomEdiateViewClick)(HQEdiateImageToolInfo *toolInfo);
+@property (nonatomic,copy)  void (^bottomEdiateViewClick)(HQEdiateToolInfo *toolInfo);
 
 @end
 
@@ -33,9 +34,9 @@
 @interface HQEdiateItem :   UIControl
 
 
-@property (nonatomic,copy)  void (^clickBackAction)(HQEdiateImageToolInfo *info);
+@property (nonatomic,copy)  void (^clickBackAction)(HQEdiateToolInfo *info);
 
-- (instancetype)initWithFram:(CGRect)frame andToolInfo:(HQEdiateImageToolInfo *)toolInfo   andClickCallBackAction:(void (^)(HQEdiateImageToolInfo *info))clickCallBackAction;
+- (instancetype)initWithFram:(CGRect)frame andToolInfo:(HQEdiateToolInfo *)toolInfo   andClickCallBackAction:(void (^)(HQEdiateToolInfo *info))clickCallBackAction;
 
 
 
@@ -47,24 +48,3 @@
 
 
 
-
-
-
-
-
-#pragma mark -------- 底部编辑视图的封装模型 --------
-
-@interface HQEdiateImageToolInfo : NSObject
-
-@property (nonatomic, readonly) NSString *toolName; //类名
-@property (nonatomic, strong)   NSString *title;    //工具显示的名称
-@property (nonatomic, strong) UIImage  *iconImage;  //图片
-@property (nonatomic, readonly) NSArray  *subtools; //包含的子工具信息 KKImageToolInfo数组
-@property (nonatomic, assign) NSUInteger orderNum;  //显示的顺序
-
-
-+ (HQEdiateImageToolInfo *)toolInfoForToolClass:(Class<HQEdiateImageProtocal>)toolClass;
-
-+ (NSArray *)toolsWithToolClass:(Class<HQEdiateImageProtocal>)toolClass;
-
-@end

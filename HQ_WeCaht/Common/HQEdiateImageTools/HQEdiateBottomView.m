@@ -7,6 +7,7 @@
 //
 
 #import "HQEdiateBottomView.h"
+#import "HQEdiateToolInfo.h"
 #import "HQEdiateImageBaseTools.h"
 
 
@@ -14,7 +15,7 @@
 
 @implementation HQEdiateBottomView
 
-- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(HQEdiateImageToolInfo *toolInfo))callClickButtonIndex{
+- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(HQEdiateToolInfo *toolInfo))callClickButtonIndex{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
@@ -26,11 +27,9 @@
 
 - (void)createSubViews{
     CGFloat width  = (App_Frame_Width - 30)/5.0;
-    
-    NSArray *classes = [HQEdiateImageToolInfo toolsWithToolClass:[HQEdiateImageBaseTools class]];
-    
+    NSArray *classes = [HQEdiateToolInfo toolsWithToolClass:[HQEdiateImageBaseTools class]];
     for (int i = 0; i< classes.count; i++) {
-        HQEdiateItem *item = [[HQEdiateItem alloc] initWithFram:CGRectMake(15 + i*width, 10, width, 60)  andToolInfo:classes[i] andClickCallBackAction:^(HQEdiateImageToolInfo *info) {
+        HQEdiateItem *item = [[HQEdiateItem alloc] initWithFram:CGRectMake(15 + i*width, 10, width, 60)  andToolInfo:classes[i] andClickCallBackAction:^(HQEdiateToolInfo *info) {
             if (_bottomEdiateViewClick) {
                 _bottomEdiateViewClick(info);
             }
@@ -51,13 +50,13 @@
 
 @property (nonatomic,strong) UIImageView *contentImageView;
 
-@property (nonatomic,strong) HQEdiateImageToolInfo *info;
+@property (nonatomic,strong) HQEdiateToolInfo *info;
 
 @end
 
 @implementation HQEdiateItem
 
-- (instancetype)initWithFram:(CGRect)frame andToolInfo:(HQEdiateImageToolInfo *)toolInfo   andClickCallBackAction:(void (^)(HQEdiateImageToolInfo *info))clickCallBackAction{
+- (instancetype)initWithFram:(CGRect)frame andToolInfo:(HQEdiateToolInfo *)toolInfo   andClickCallBackAction:(void (^)(HQEdiateToolInfo *info))clickCallBackAction{
     self = [super initWithFrame:frame];
     if (self) {
         _clickBackAction = clickCallBackAction;
@@ -75,6 +74,9 @@
 - (void)buttonClickAction:(UIControl *)sender{
     if (_clickBackAction) _clickBackAction(self.info);
 }
+
+
+
 @end
 
 
@@ -84,55 +86,3 @@
 
 
 
-
-
-
-
-
-@interface HQEdiateImageToolInfo ()
-
-@property (nonatomic, copy) NSString *toolName;       //readonly
-@property (nonatomic, strong) NSArray *subtools;          //readonly
-
-@end
-
-@implementation HQEdiateImageToolInfo
-
-
-+ (HQEdiateImageToolInfo *)toolInfoForToolClass:(Class<HQEdiateImageProtocal>)toolClass{
-    if([(Class)toolClass conformsToProtocol:@protocol(HQEdiateImageProtocal)]){
-        HQEdiateImageToolInfo *info = [HQEdiateImageToolInfo new];
-        info.toolName  = NSStringFromClass(toolClass);
-        info.title     = [toolClass defaultTitle];
-        info.iconImage = [toolClass defaultIconImage];
-        info.subtools = [toolClass subtools];
-        info.orderNum = [toolClass orderNum];
-        return info;
-    }
-    return nil;
-}
-+ (NSArray *)toolsWithToolClass:(Class<HQEdiateImageProtocal>)toolClass{
-    NSMutableArray *array = [NSMutableArray array];
-    HQEdiateImageToolInfo *info;
-    NSArray *list = [HQEdiateImageToolInfo subclassesOfClass:toolClass];
-    for(Class subtool in list){
-        info = [HQEdiateImageToolInfo toolInfoForToolClass:subtool];
-        if(info){
-            [array addObject:info];
-        }
-    }
-    NSArray *newArray = [NSArray arrayWithArray:array];
-    newArray = [newArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        CGFloat dockedNum1 = [obj1 orderNum];
-        CGFloat dockedNum2 = [obj2 orderNum];
-        if(dockedNum1 < dockedNum2){
-            return NSOrderedAscending;
-        }
-        else if(dockedNum1 > dockedNum2){
-            return NSOrderedDescending;
-        }
-        return NSOrderedSame;
-    }];
-    return newArray;
-}
-@end

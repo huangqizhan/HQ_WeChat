@@ -304,8 +304,8 @@
 		FD831D101EDFE36D0038E7DA /* HQTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD831D0F1EDFE36D0038E7DA /* HQTipView.m */; };
 		FD831D171EE0091F0038E7DA /* HQRecordHUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD831D161EE0091F0038E7DA /* HQRecordHUDView.xib */; };
 		FD831D1A1EE009940038E7DA /* HQRecordHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD831D191EE009940038E7DA /* HQRecordHUDView.m */; };
-		FD86F9C91F2F16D800011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */; };
 		FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */; };
+		FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */; };
 		FD88475B1E71236B0085B355 /* KILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8847591E71236B0085B355 /* KILabel.m */; };
 		FD88476A1E7126180085B355 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847681E7126180085B355 /* libsqlite3.0.tbd */; };
 		FD88476B1E7126180085B355 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847691E7126180085B355 /* libsqlite3.tbd */; };
@@ -1002,11 +1002,11 @@
 		FD831D161EE0091F0038E7DA /* HQRecordHUDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HQRecordHUDView.xib; sourceTree = "<group>"; };
 		FD831D181EE009940038E7DA /* HQRecordHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQRecordHUDView.h; sourceTree = "<group>"; };
 		FD831D191EE009940038E7DA /* HQRecordHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRecordHUDView.m; sourceTree = "<group>"; };
-		FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateToolInfo.h; sourceTree = "<group>"; };
-		FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
 		FD86F9CA1F305A9800011DAA /* NSObject+SubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SubClass.h"; sourceTree = "<group>"; };
 		FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SubClass.m"; sourceTree = "<group>"; };
 		FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImageProtocal.h; sourceTree = "<group>"; };
+		FD86F9CE1F306F2500011DAA /* HQEdiateToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateToolInfo.h; sourceTree = "<group>"; };
+		FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
 		FD8847591E71236B0085B355 /* KILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KILabel.m; sourceTree = "<group>"; };
 		FD88475A1E71236B0085B355 /* KILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KILabel.h; sourceTree = "<group>"; };
 		FD8847681E7126180085B355 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1475,9 +1475,9 @@
 				FD1DDF851F2736E000AAC89D /* HQEdiateImageController.m */,
 				FDB3B2621F2EFC4700A30CBE /* HQEdiateBottomView.h */,
 				FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */,
-				FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */,
-				FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */,
 				FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */,
+				FD86F9CE1F306F2500011DAA /* HQEdiateToolInfo.h */,
+				FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */,
 			);
 			path = HQEdiateImageTools;
 			sourceTree = "<group>";
@@ -3160,7 +3160,6 @@
 				FD61A2311F0200A200F0830C /* HQChatDetailCell.m in Sources */,
 				FDA1DB9B1E9B6F49001A9854 /* PercentLabel.m in Sources */,
 				FD211C321EC143DB0040771A /* HQPlayGifImageView.m in Sources */,
-				FD86F9C91F2F16D800011DAA /* HQEdiateToolInfo.m in Sources */,
 				FD2ED8F81EADA8DA006E585F /* SDWebImageDownloaderOperation.m in Sources */,
 				FD9409061E5A7D0C00634206 /* UIResponder+GXRouter.m in Sources */,
 				BAF4A8031E73F11B00653204 /* AFImageDownloader.m in Sources */,
@@ -3354,6 +3353,7 @@
 				FD7F8F651E9DC49D00B61D63 /* HQBroswerViewController.m in Sources */,
 				FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */,
 				FD8DD8071EB824E3002125CD /* TranstionAnimationViewController.m in Sources */,
+				FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */,
 				FD2CAD231EE13A8E00FEEC7A /* HQAudioTools.m in Sources */,
 				FD3E80A11ECE85F700F3B430 /* HQWifiViewController.m in Sources */,
 				FDD18CF81F131EFA00E260BD /* MASViewAttribute.m in Sources */,
