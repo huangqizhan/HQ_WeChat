@@ -59,19 +59,18 @@
 }
 - (void)createMenuView{
     WEAKSELF;
-    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(NSInteger index) {
-        [weakSelf  clickBottomViewWith:index];
+    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(HQEdiateImageToolInfo *toolInfo) {
+        [weakSelf  clickBottomViewWith:toolInfo];
     }];
     [self.view addSubview:_menuView];
 }
 #pragma mark ------- 切换底部视图按钮 -----
-- (void)clickBottomViewWith:(NSInteger )index{
+- (void)clickBottomViewWith:(HQEdiateImageToolInfo *)toolInfo{
     [self hiddenMenuViewWithAnimation];
-    NSLog(@"indx = %ld",index);
-    ///HQEdiateImageBaseTools
+    NSLog(@"indx = %ld",toolInfo.orderNum);
 }
 - (void)hiddenMenuViewWithAnimation{
-    [UIView animateWithDuration:.35 animations:^{
+    [UIView animateWithDuration:.15 animations:^{
         _menuView.top = APP_Frame_Height;
     }];
 }

@@ -22,4 +22,19 @@
     
 }
 
+//图片   
++ (UIImage*)defaultIconImage{
+    return [UIImage imageNamed:@"ToolDraw"];
+}
+
+//工具名称
++ (NSString*)defaultTitle{
+    return nil;
+    
+}
+//显示顺序
++ (NSUInteger)orderNum{
+    return 1;
+}
+
 @end

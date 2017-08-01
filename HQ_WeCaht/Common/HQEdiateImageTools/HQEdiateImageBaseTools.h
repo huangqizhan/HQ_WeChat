@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HQEdiateImageProtocal.h"
 
 
 @class  HQEdiateImageController;
@@ -21,7 +22,8 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
     HQEdiateImageTextType                    ///文本编辑
 };
 
-@interface HQEdiateImageBaseTools : NSObject{
+
+@interface HQEdiateImageBaseTools : NSObject <HQEdiateImageProtocal>{
     
     __weak  HQEdiateImageController * _imageEdiateController;
     

@@ -305,6 +305,7 @@
 		FD831D171EE0091F0038E7DA /* HQRecordHUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD831D161EE0091F0038E7DA /* HQRecordHUDView.xib */; };
 		FD831D1A1EE009940038E7DA /* HQRecordHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD831D191EE009940038E7DA /* HQRecordHUDView.m */; };
 		FD86F9C91F2F16D800011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */; };
+		FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */; };
 		FD88475B1E71236B0085B355 /* KILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8847591E71236B0085B355 /* KILabel.m */; };
 		FD88476A1E7126180085B355 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847681E7126180085B355 /* libsqlite3.0.tbd */; };
 		FD88476B1E7126180085B355 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847691E7126180085B355 /* libsqlite3.tbd */; };
@@ -1003,6 +1004,9 @@
 		FD831D191EE009940038E7DA /* HQRecordHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRecordHUDView.m; sourceTree = "<group>"; };
 		FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateToolInfo.h; sourceTree = "<group>"; };
 		FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
+		FD86F9CA1F305A9800011DAA /* NSObject+SubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SubClass.h"; sourceTree = "<group>"; };
+		FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SubClass.m"; sourceTree = "<group>"; };
+		FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImageProtocal.h; sourceTree = "<group>"; };
 		FD8847591E71236B0085B355 /* KILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KILabel.m; sourceTree = "<group>"; };
 		FD88475A1E71236B0085B355 /* KILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KILabel.h; sourceTree = "<group>"; };
 		FD8847681E7126180085B355 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1473,6 +1477,7 @@
 				FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */,
 				FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */,
 				FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */,
+				FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */,
 			);
 			path = HQEdiateImageTools;
 			sourceTree = "<group>";
@@ -2394,7 +2399,6 @@
 				FD2ED9021EADC58F006E585F /* Public */,
 				FDA1DB8F1E9B26E8001A9854 /* ControllerTrastion */,
 				FD2ED8D01EADA8DA006E585F /* SDWebImage */,
-				FDF289101E9477BD0078286C /* CustomerRefersh */,
 				FDF2888F1E9474D80078286C /* Refersh */,
 				FDCEDD041E8CB90E00EE24E6 /* FileTools */,
 				FD28EA421E7B8B460077E009 /* PickImage */,
@@ -2837,6 +2841,8 @@
 				FDDEE3CB1E655B7D007E9AF9 /* NSObject+MJProperty.m */,
 				FDDEE3CC1E655B7D007E9AF9 /* NSString+MJExtension.h */,
 				FDDEE3CD1E655B7D007E9AF9 /* NSString+MJExtension.m */,
+				FD86F9CA1F305A9800011DAA /* NSObject+SubClass.h */,
+				FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */,
 			);
 			path = MJExtension;
 			sourceTree = "<group>";
@@ -2847,13 +2853,6 @@
 				FD1DDF5C1F26DA4500AAC89D /* HQRefershControll */,
 			);
 			path = Refersh;
-			sourceTree = "<group>";
-		};
-		FDF289101E9477BD0078286C /* CustomerRefersh */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomerRefersh;
 			sourceTree = "<group>";
 		};
 		FDFCB3EA1EFA5790008B7F07 /* Views */ = {
@@ -2932,7 +2931,7 @@
 				TargetAttributes = {
 					BACB054C1E59872E008B676D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = B5HHUXE3SK;
+						DevelopmentTeam = S748494QV4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -3172,6 +3171,7 @@
 				FDD18CFB1F131EFA00E260BD /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				FD2476EA1E6FA2410085A23C /* HQChatOtherVoiceCell.m in Sources */,
 				FD1DDF861F2736E000AAC89D /* HQEdiateImageController.m in Sources */,
+				FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */,
 				FDD18D021F13200700E260BD /* UIImage+GIF.m in Sources */,
 				FD6649971EBC2A62005E340B /* YYFrameImage.m in Sources */,
 				FD66A3A41EBB1A6800623F34 /* YYTextMagnifier.m in Sources */,
@@ -3573,7 +3573,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = S748494QV4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3604,7 +3604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = S748494QV4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

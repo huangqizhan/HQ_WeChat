@@ -9,6 +9,8 @@
 #import "HQEdiateImageBaseTools.h"
 #import "HQEdiateImageController.h"
 
+
+
 @implementation HQEdiateImageBaseTools
 
 - (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType )type{
@@ -34,4 +36,27 @@
     [self.ediateMenuView removeFromSuperview];
 }
 
+
+
+//图片
++ (UIImage*)defaultIconImage{
+    return nil;
+}
+
+//工具名称
++ (NSString*)defaultTitle{
+    return nil;
+    
+}
+
+//包含的子工具
++ (NSArray*)subtools{
+    return nil;
+    
+}
+
+//显示顺序
++ (NSUInteger)orderNum{
+    return 0;
+}
 @end

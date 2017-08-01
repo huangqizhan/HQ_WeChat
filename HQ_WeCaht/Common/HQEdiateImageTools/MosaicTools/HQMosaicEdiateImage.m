@@ -21,5 +21,19 @@
 - (void)clearCurrentEdiateStatus{
     
 }
+//图片
++ (UIImage*)defaultIconImage{
+    return [UIImage imageNamed:@"ToolMasaic"];
+}
+
+//工具名称
++ (NSString*)defaultTitle{
+    return nil;
+    
+}
+//显示顺序
++ (NSUInteger)orderNum{
+    return 2;
+}
 
 @end
