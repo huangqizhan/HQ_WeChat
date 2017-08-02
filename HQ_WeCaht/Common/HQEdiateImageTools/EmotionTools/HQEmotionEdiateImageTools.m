@@ -9,6 +9,12 @@
 #import "HQEmotionEdiateImageTools.h"
 #import "HQEdiateImageController.h"
 
+@interface HQEmotionEdiateImageTools ()
+
+
+
+@end
+
 
 @implementation HQEmotionEdiateImageTools
 - (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateToolInfo:(HQEdiateToolInfo *)toolInfo{
@@ -18,6 +24,9 @@
 
 - (void)setUpCurrentEdiateStatus{
     [super setUpCurrentEdiateStatus];
+    
+    
+    
 }
 
 - (void)clearCurrentEdiateStatus{
