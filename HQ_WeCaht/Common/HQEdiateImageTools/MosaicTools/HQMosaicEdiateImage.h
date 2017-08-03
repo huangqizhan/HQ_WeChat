@@ -11,3 +11,19 @@
 @interface HQMosaicEdiateImage : HQEdiateImageBaseTools
 
 @end
+
+
+
+
+
+@interface MosaicView : UIView
+
+//马赛克图片
+@property (nonatomic, strong) UIImage *image;
+
+//涂层图片.
+@property (nonatomic, strong) UIImage *surfaceImage;
+
+
+
+@end
