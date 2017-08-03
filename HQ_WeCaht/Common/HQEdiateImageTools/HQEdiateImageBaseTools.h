@@ -46,4 +46,6 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
 - (void)clearCurrentEdiateStatus;
 
 
+- (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock;
+
 @end

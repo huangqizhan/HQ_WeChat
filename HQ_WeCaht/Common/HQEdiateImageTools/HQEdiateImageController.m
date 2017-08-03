@@ -132,7 +132,9 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (void)finishButtonAction:(UIButton *)sender{
-    
+    [self.currentTool executeWithCompletionBlock:^(UIImage *image, NSError *error, NSDictionary *userInfo) {
+        NSLog(@"image = %@",image);
+    }];
 }
 - (void)refreshImageView{
     _ediateImageView.image = _originalImage;

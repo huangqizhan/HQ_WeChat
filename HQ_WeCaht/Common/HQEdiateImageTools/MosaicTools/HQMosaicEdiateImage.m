@@ -25,6 +25,9 @@
     [super clearCurrentEdiateStatus];
     
 }
+- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
+    
+}
 //图片
 + (UIImage*)defaultIconImage{
     return [UIImage imageNamed:@"ToolMasaic"];

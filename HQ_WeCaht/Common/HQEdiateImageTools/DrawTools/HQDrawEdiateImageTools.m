@@ -8,10 +8,12 @@
 
 #import "HQDrawEdiateImageTools.h"
 #import "HQEdiateImageController.h"
+#import "UIColor+Extern.h"
 
 
 @interface HQDrawEdiateImageTools (){
      CGSize _originalImageSize;        //初始大小
+    CGPoint _prevDraggingPosition; //拖动的起点
 }
 
 @property (nonatomic) UIView *drawMenuView;
@@ -21,6 +23,7 @@
 @property (nonatomic) UIView *strokePreview;
 @property (nonatomic) UIView *strokePreviewBackground;
 @property (nonatomic) UIImageView *eraserIcon; //橡皮擦
+@property (nonatomic) NSMutableArray *lineArray;
 
 
 
@@ -38,7 +41,6 @@
     _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
     
     _drawImageView = [[UIImageView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
-    _drawImageView.backgroundColor = [UIColor redColor];
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
     panGesture.maximumNumberOfTouches = 1;
     
@@ -59,7 +61,7 @@
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-80, 0, 60, 40)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
     [backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:backButton];
@@ -74,7 +76,15 @@
     } completion:nil];
 }
 
-
+- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = [self buildImage];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(image, nil, nil);
+        });
+    });
+}
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [self clearCurrentEdiateStatus];
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
@@ -94,8 +104,6 @@
         [_drawImageView removeFromSuperview];
     }];
 }
-
-
 - (void)setMenuView{
     CGFloat W = 80;
     
@@ -111,8 +119,8 @@
     _widthSlider.left = 10;
     _widthSlider.top = _colorSlider.bottom + 5;
     [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
-    _widthSlider.value = 0.1;
-    _widthSlider.backgroundColor = [UIColor colorWithPatternImage:[self widthSliderBackground]];
+    _widthSlider.value = 0;
+    _widthSlider.backgroundColor =    [UIColor colorWithPatternImage:[self widthSliderBackground]];
     [_drawMenuView addSubview:_widthSlider];
     
     
@@ -134,28 +142,139 @@
     _eraserIcon.hidden = YES;
     [_drawMenuView addSubview:_eraserIcon];
     
-    [self colorSliderDidChange:_colorSlider];
+//    [self colorSliderDidChange:_colorSlider];
     [self widthSliderDidChange:_widthSlider];
     
     _drawMenuView.clipsToBounds = NO;
+
 }
 
 #pragma mark  ------ SliderAction -------
 - (void)widthSliderDidChange:(UISlider *)sender{
-    
+    CGFloat scale = MAX(0.05, _widthSlider.value);
+    _strokePreview.transform = CGAffineTransformMakeScale(scale, scale);
+    _strokePreview.layer.borderWidth = 2/scale;
 }
 - (void)colorSliderDidChange:(UISlider *)sender{
-    
+    if(_eraserIcon.hidden){
+     _strokePreview.backgroundColor = [self colorForValue:_colorSlider.value];
+        _strokePreviewBackground.backgroundColor = _strokePreview.backgroundColor;
+        _colorSlider.thumbTintColor = _strokePreview.backgroundColor;
+    }
 }
 - (void)strokePreviewDidTap:(UITapGestureRecognizer *)tap{
+    _eraserIcon.hidden = !_eraserIcon.hidden;
     
+    if(_eraserIcon.hidden){
+        [self colorSliderDidChange:_colorSlider];
+    }else{
+        _strokePreview.backgroundColor = [UIColor blackColor];
+        _strokePreviewBackground.backgroundColor = _strokePreview.backgroundColor;
+    }
 }
 - (void)drawingViewDidPan:(UIPanGestureRecognizer *)sender{
-    NSLog(@"drawingViewDidPan");
+    CGPoint currentDraggingPosition = [sender locationInView:_drawImageView];
+    
+    if(sender.state == UIGestureRecognizerStateBegan){
+        _prevDraggingPosition = currentDraggingPosition;
+         [self.drawImageView.undoManager beginUndoGrouping];
+        if (_eraserIcon.hidden) {
+            DrawPointLine *line = [[DrawPointLine alloc] init];
+            line.begPoint = _prevDraggingPosition;
+            line.drawWidth = _widthSlider.value*70;
+            [self.lineArray addObject:line];
+        }
+    }
+    if(sender.state != UIGestureRecognizerStateEnded){
+        if (_eraserIcon.hidden || _lineArray.count) {
+            DrawPointLine *line = [_lineArray lastObject];
+            [line.drawPoints addObject:[NSValue  valueWithCGPoint:currentDraggingPosition]];
+            line.drawWidth = _widthSlider.value *70;
+            [self.lineArray addObject:line];
+        }
+        [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
+    }
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        [self.drawImageView.undoManager endUndoGrouping];
+    }
+    _prevDraggingPosition = currentDraggingPosition;
 }
 - (void)backButtonAction:(UIButton *)sender{
-    
+    if (self.lineArray.count) {
+        DrawPointLine *lastLine = _lineArray.lastObject;
+        for (NSValue *value in lastLine.drawPoints) {
+            [self reBackDrawLineWithBginPoint:lastLine.begPoint endPoint:[value CGPointValue] andLineWidth:lastLine.drawWidth];
+        }
+        [_lineArray removeObject:lastLine];
+    }
+    if ([self.drawImageView.undoManager canUndo]) {
+        [self.drawImageView.undoManager undo];
+    }
 }
+- (UIColor*)colorForValue:(CGFloat)value{
+    if(value<1/3.0){
+        return [UIColor colorWithWhite:value/0.3 alpha:1];
+    }
+    return [UIColor colorWithHue:((value-1/3.0)/0.7)*2/3.0 saturation:1 brightness:1 alpha:1];
+}
+//画线
+-(void)drawLine:(CGPoint)from to:(CGPoint)to{
+    CGSize size = _drawImageView.frame.size;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [_drawImageView.image drawAtPoint:CGPointZero];
+    
+    
+    CGFloat strokeWidth = MAX(1, _widthSlider.value * 65);
+    UIColor *strokeColor = _strokePreview.backgroundColor;
+    
+    CGContextSetLineWidth(context, strokeWidth);
+    CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    
+    if(!_eraserIcon.hidden){
+        CGContextSetBlendMode(context, kCGBlendModeClear);
+    }
+    
+    CGContextMoveToPoint(context, from.x, from.y);
+    CGContextAddLineToPoint(context, to.x, to.y);
+    CGContextStrokePath(context);
+    
+    _drawImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+}
+/////撤销线
+- (void)reBackDrawLineWithBginPoint:(CGPoint )begPoint endPoint:(CGPoint)endPoint andLineWidth:(CGFloat) lineWidth{
+    CGSize size = _drawImageView.frame.size;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [_drawImageView.image drawAtPoint:CGPointZero];
+    
+    
+//    CGFloat strokeWidth = MAX(1, _widthSlider.value * 0.65);
+    CGFloat strokeWidth =  lineWidth;
+    UIColor *strokeColor = _strokePreview.backgroundColor;
+    
+    CGContextSetLineWidth(context, strokeWidth);
+    CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
+    CGContextSetLineCap(context, kCGLineCapRound);
+
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    
+    CGContextMoveToPoint(context, begPoint.x, begPoint.y);
+    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+    CGContextStrokePath(context);
+    
+    _drawImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+}
+
 #pragma mark- other
 
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
@@ -218,8 +337,8 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIColor *color = [UIColor blackColor];
-    
+//    UIColor *color = [UIColor blackColor];
+    UIColor *color = CANCELBUTTONCOLOR;
     CGFloat strRadius = 1;
     CGFloat endRadius = size.height/2 * 0.6;
     
@@ -243,9 +362,19 @@
     CGPathRelease(path);
     
     UIGraphicsEndImageContext();
-    
     return tmp;
 }
+- (UIImage*)buildImage{
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.imageEdiateController.ediateImageView.image.scale);
+    
+    [self.imageEdiateController.ediateImageView.image drawAtPoint:CGPointZero];
+    [_drawImageView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
+    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return tmp;
+}
+
 //图片
 + (UIImage*)defaultIconImage{
     return [UIImage imageNamed:@"ToolDraw"];
@@ -261,4 +390,30 @@
     return 1;
 }
 
+- (NSMutableArray *)lineArray{
+    if (_lineArray == nil) {
+        _lineArray  = [NSMutableArray new];
+    }
+    return _lineArray;
+}
+
+@end
+
+
+
+
+
+
+
+
+
+@implementation DrawPointLine
+
+- (instancetype)init{
+    self = [super init ];
+    if (self) {
+        _drawPoints = [NSMutableArray new];
+    }
+    return self;
+}
 @end

@@ -11,3 +11,24 @@
 @interface HQDrawEdiateImageTools : HQEdiateImageBaseTools
 
 @end
+
+
+
+
+
+
+
+
+
+
+@interface DrawPointLine : NSObject
+
+
+@property (nonatomic,assign) CGFloat drawWidth;
+
+@property (nonatomic,assign) CGPoint  begPoint;
+
+@property (nonatomic,strong) NSMutableArray *drawPoints;
+
+
+@end
