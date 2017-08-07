@@ -91,6 +91,7 @@
 		FD2476F61E6FB6C50085A23C /* ChatMessageModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2476F51E6FB6C50085A23C /* ChatMessageModel+Action.m */; };
 		FD253DEA1E5A99AA00ACA282 /* HQCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD253DE91E5A99AA00ACA282 /* HQCoreDataManager.m */; };
 		FD253DF91E5AC25B00ACA282 /* ChatListModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD253DF81E5AC25B00ACA282 /* ChatListModel+Action.m */; };
+		FD25A9481F381C0C008589D5 /* AnimationTools in Resources */ = {isa = PBXBuildFile; fileRef = FD25A9471F381C0C008589D5 /* AnimationTools */; };
 		FD2653711EE92030006BAB5E /* Tuzki_16.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653611EE92030006BAB5E /* Tuzki_16.gif */; };
 		FD2653721EE92030006BAB5E /* Tuzki_15.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653621EE92030006BAB5E /* Tuzki_15.gif */; };
 		FD2653731EE92030006BAB5E /* Tuzki_14.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653631EE92030006BAB5E /* Tuzki_14.gif */; };
@@ -639,6 +640,7 @@
 		FD253DE91E5A99AA00ACA282 /* HQCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCoreDataManager.m; sourceTree = "<group>"; };
 		FD253DF71E5AC25B00ACA282 /* ChatListModel+Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ChatListModel+Action.h"; sourceTree = "<group>"; };
 		FD253DF81E5AC25B00ACA282 /* ChatListModel+Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ChatListModel+Action.m"; sourceTree = "<group>"; };
+		FD25A9471F381C0C008589D5 /* AnimationTools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AnimationTools; sourceTree = "<group>"; };
 		FD2653611EE92030006BAB5E /* Tuzki_16.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_16.gif; sourceTree = "<group>"; };
 		FD2653621EE92030006BAB5E /* Tuzki_15.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_15.gif; sourceTree = "<group>"; };
 		FD2653631EE92030006BAB5E /* Tuzki_14.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_14.gif; sourceTree = "<group>"; };
@@ -2389,6 +2391,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD25A9471F381C0C008589D5 /* AnimationTools */,
 				FD1DDF6C1F2732FE00AAC89D /* HQEdiateImageTools */,
 				FDCBB52D1EFBBA6C00D6F573 /* WebViewJavascriptBridge */,
 				FD831D111EDFEDD00038E7DA /* sourse */,
@@ -2975,6 +2978,7 @@
 				FD8DD7E91EB81D54002125CD /* 25.gif in Resources */,
 				FD26537B1EE92030006BAB5E /* Tuzki_6.gif in Resources */,
 				FD8DD7C71EB81D54002125CD /* 59.gif in Resources */,
+				FD25A9481F381C0C008589D5 /* AnimationTools in Resources */,
 				FD8DD7C61EB81D54002125CD /* 60.gif in Resources */,
 				FD26537E1EE92030006BAB5E /* Tuzki_3.gif in Resources */,
 				FD8DD7EB1EB81D54002125CD /* 23.gif in Resources */,

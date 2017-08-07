@@ -26,9 +26,19 @@
 
 @property (nonatomic,assign) CGFloat drawWidth;
 
+@property (nonatomic,strong) UIColor *drawColor;
+
+@property (nonatomic,strong) NSMutableArray *childLines;
+
+
+@end
+
+
+
+
+
+@interface DrawChildLine : NSObject
+
 @property (nonatomic,assign) CGPoint  begPoint;
-
-@property (nonatomic,strong) NSMutableArray *drawPoints;
-
-
+@property (nonatomic,assign) CGPoint  endPoint;
 @end

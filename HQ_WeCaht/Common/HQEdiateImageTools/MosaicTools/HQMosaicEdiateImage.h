@@ -25,5 +25,21 @@
 @property (nonatomic, strong) UIImage *surfaceImage;
 
 
+@property (nonatomic) NSMutableArray *linesArray;
+
+- (void)drawOndo;
+
+@end
+
+
+
+
+@interface MosaicLine : NSObject
+
+@property (nonatomic,assign) CGPoint begPoint;
+@property (nonatomic,strong) NSMutableArray *endDrawPoints;
+
+
+
 
 @end

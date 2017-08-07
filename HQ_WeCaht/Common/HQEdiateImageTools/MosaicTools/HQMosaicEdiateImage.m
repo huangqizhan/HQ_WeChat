@@ -23,6 +23,7 @@
 @property (nonatomic) UISlider *widthSlider;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UIView *strokePreview;
+@property (nonatomic) NSMutableArray *lineArray;
 
 @end
 
@@ -36,10 +37,8 @@
 - (void)setUpCurrentEdiateStatus{
     [super setUpCurrentEdiateStatus];
     
-    _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
+    [self setUpMosicView];
     
-    _mosaicView = [[MosaicView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
-    _mosaicView.backgroundColor = [UIColor redColor];
     [self.imageEdiateController.ediateImageView addSubview:_mosaicView];
     
     self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
@@ -69,6 +68,28 @@
         _drawMenuView.top = APP_Frame_Height- 100;
     } completion:nil];
 }
+- (void)setUpMosicView{
+    CIImage *ciImage = [[CIImage alloc] initWithImage:self.imageEdiateController.ediateImageView.image];
+    //生成马赛克
+    CIFilter *filter = [CIFilter filterWithName:@"CIPixellate"];
+    [filter setValue:ciImage  forKey:kCIInputImageKey];
+    //马赛克像素大小
+    [filter setValue:@(100) forKey:kCIInputScaleKey];
+    CIImage *outImage = [filter valueForKey:kCIOutputImageKey];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage = [context createCGImage:outImage fromRect:[outImage extent]];
+    UIImage *showImage = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    
+    
+    _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
+    
+    _mosaicView = [[MosaicView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
+    _mosaicView.surfaceImage = self.imageEdiateController.ediateImageView.image;
+    _mosaicView.image = showImage;
+    _mosaicView.linesArray = self.lineArray;
+}
 
 - (void)clearCurrentEdiateStatus{
     [super clearCurrentEdiateStatus];
@@ -92,12 +113,13 @@
     }];
 }
 - (void)backButtonAction:(UIButton *)sender{
-
+    [_mosaicView  removeFromSuperview];
+    [self setUpMosicView];
+    [self.imageEdiateController.ediateImageView addSubview:_mosaicView];
+    [_mosaicView  drawOndo];
 }
-
 - (void)setMenuView{
     CGFloat W = 80;
-    
     _widthSlider = [self defaultSliderWithWidth:_drawMenuView.width - W - 20];
     _widthSlider.left = 10;
     _widthSlider.top = 40;
@@ -178,7 +200,12 @@
 + (NSUInteger)orderNum{
     return 2;
 }
-
+- (NSMutableArray *)lineArray{
+    if (_lineArray == nil) {
+        _lineArray  = [NSMutableArray new];
+    }
+    return _lineArray;
+}
 @end
 
 
@@ -194,6 +221,8 @@
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
 @property (nonatomic, assign) CGMutablePathRef path;
+
+
 
 @end
 
@@ -233,29 +262,69 @@
     }
     return self;
 }
+- (void)drawOndo{
+//    if ([self.undoManager canUndo]) {
+//        [self.undoManager undo];
+//    }
+    if (self.linesArray.count) {
+        [self.linesArray removeLastObject];
+        for (MosaicLine *line in self.linesArray) {
+            [self beginRebackDrawLine:line];
+            for (NSValue *value in line.endDrawPoints) {
+                [self rebackDrawWithPoint:[value CGPointValue]];
+            }
+        }
+    }
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
+//    [self.undoManager beginUndoGrouping];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    CGPathMoveToPoint(self.path, NULL, point.x, point.y);
-    CGMutablePathRef path = CGPathCreateMutableCopy(self.path);
-    self.shapeLayer.path = path;
-    CGPathRelease(path);
-    
+    [self begDrawLineWithPoint:point];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    [self addLineWithPoint:point];
+    MosaicLine *line  = [[MosaicLine alloc] init];
+    line.begPoint = point;
+    [self addLineWithMosaicPoint:point];
 }
 
-- (void)addLineWithPoint:(CGPoint )point{
-//    [[self.undoManager prepareWithInvocationTarget:self] removeLine:line];
+- (void)begDrawLineWithPoint:(CGPoint)point{
+    MosaicLine *line = [[MosaicLine alloc] init];
+    line.begPoint = point;
+    [self.linesArray addObject:line];
+    CGPathMoveToPoint(self.path, NULL, point.x, point.y);
+    CGMutablePathRef path = CGPathCreateMutableCopy(self.path);
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+}
+- (void)addLineWithMosaicPoint:(CGPoint )point{
+    if (self.linesArray.count) {
+        MosaicLine *lastLine = [self.linesArray lastObject];
+        [lastLine.endDrawPoints addObject:[NSValue valueWithCGPoint:point]];
+        CGPathAddLineToPoint(self.path, NULL, point.x, point.y);
+        CGMutablePathRef path = CGPathCreateMutableCopy(self.path);
+        CGContextRef currentContext = UIGraphicsGetCurrentContext();
+        CGContextAddPath(currentContext, path);
+        [[UIColor blueColor] setStroke];
+        CGContextDrawPath(currentContext, kCGPathStroke);
+        self.shapeLayer.path = path;
+        CGPathRelease(path);
+    }
+}
+- (void)beginRebackDrawLine:(MosaicLine *)line{
+    CGPathMoveToPoint(self.path, NULL, line.begPoint.x, line.begPoint.y);
+    CGMutablePathRef path = CGPathCreateMutableCopy(self.path);
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+}
+- (void)rebackDrawWithPoint:(CGPoint )point{
     CGPathAddLineToPoint(self.path, NULL, point.x, point.y);
     CGMutablePathRef path = CGPathCreateMutableCopy(self.path);
-    //
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     CGContextAddPath(currentContext, path);
     [[UIColor blueColor] setStroke];
@@ -263,11 +332,9 @@
     self.shapeLayer.path = path;
     CGPathRelease(path);
 }
-- (void)removeLineWithPoint:(CGPoint )point{
-    
-}
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
+//      [self.undoManager endUndoGrouping];
 }
 - (void)setImage:(UIImage *)image{
     //底图
@@ -281,5 +348,18 @@
     self.surfaceImageView.image = surfaceImage;
 }
 
+@end
+
+
+
+@implementation MosaicLine
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        _endDrawPoints = [ NSMutableArray new];
+    }
+    return self;
+}
 
 @end

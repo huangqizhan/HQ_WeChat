@@ -15,7 +15,7 @@
      CGSize _originalImageSize;        //初始大小
     CGPoint _prevDraggingPosition; //拖动的起点
 }
-
+@property (nonatomic) UIButton *backButton;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UIImageView *drawImageView;
 @property (nonatomic) UISlider *colorSlider;
@@ -40,14 +40,8 @@
     
     _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
     
-    _drawImageView = [[UIImageView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
-    panGesture.maximumNumberOfTouches = 1;
+    [self setDrawImageView];
     
-    _drawImageView.userInteractionEnabled = YES;
-    [_drawImageView addGestureRecognizer:panGesture];
-    
-    [self.imageEdiateController.ediateImageView addSubview:_drawImageView];
     self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
     self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
     self.imageEdiateController.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
@@ -61,10 +55,10 @@
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
-    [backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_drawMenuView addSubview:backButton];
+   _backButton  = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
+    [_backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_drawMenuView addSubview:_backButton];
     
     
     [self.imageEdiateController.view addSubview:_drawMenuView];
@@ -104,6 +98,16 @@
         [_drawImageView removeFromSuperview];
     }];
 }
+- (void)setDrawImageView{
+    _drawImageView = [[UIImageView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
+    panGesture.maximumNumberOfTouches = 1;
+    
+    _drawImageView.userInteractionEnabled = YES;
+    [_drawImageView addGestureRecognizer:panGesture];
+    
+    [self.imageEdiateController.ediateImageView addSubview:_drawImageView];
+}
 - (void)setMenuView{
     CGFloat W = 80;
     
@@ -142,7 +146,7 @@
     _eraserIcon.hidden = YES;
     [_drawMenuView addSubview:_eraserIcon];
     
-//    [self colorSliderDidChange:_colorSlider];
+    [self colorSliderDidChange:_colorSlider];
     [self widthSliderDidChange:_widthSlider];
     
     _drawMenuView.clipsToBounds = NO;
@@ -177,38 +181,38 @@
     
     if(sender.state == UIGestureRecognizerStateBegan){
         _prevDraggingPosition = currentDraggingPosition;
-         [self.drawImageView.undoManager beginUndoGrouping];
-        if (_eraserIcon.hidden) {
-            DrawPointLine *line = [[DrawPointLine alloc] init];
-            line.begPoint = _prevDraggingPosition;
-            line.drawWidth = _widthSlider.value*70;
-            [self.lineArray addObject:line];
-        }
+        DrawPointLine *line = [[DrawPointLine alloc] init];
+        line.drawColor = _strokePreview.backgroundColor;
+        line.drawWidth = _widthSlider.value*70;
+        [self.lineArray addObject:line];
     }
     if(sender.state != UIGestureRecognizerStateEnded){
-        if (_eraserIcon.hidden || _lineArray.count) {
+        if (_lineArray.count) {
             DrawPointLine *line = [_lineArray lastObject];
-            [line.drawPoints addObject:[NSValue  valueWithCGPoint:currentDraggingPosition]];
-            line.drawWidth = _widthSlider.value *70;
-            [self.lineArray addObject:line];
+            DrawChildLine *childLine = [[DrawChildLine alloc] init];
+            childLine.begPoint = _prevDraggingPosition;
+            childLine.endPoint = currentDraggingPosition;
+            [line.childLines addObject:childLine];
         }
         [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
-        [self.drawImageView.undoManager endUndoGrouping];
+        [self setReBackButtonStatusWith:self.lineArray?YES:NO];
     }
     _prevDraggingPosition = currentDraggingPosition;
 }
 - (void)backButtonAction:(UIButton *)sender{
-    if (self.lineArray.count) {
-        DrawPointLine *lastLine = _lineArray.lastObject;
-        for (NSValue *value in lastLine.drawPoints) {
-            [self reBackDrawLineWithBginPoint:lastLine.begPoint endPoint:[value CGPointValue] andLineWidth:lastLine.drawWidth];
-        }
-        [_lineArray removeObject:lastLine];
+    if (self.lineArray.count <= 0) {
+        return;
     }
-    if ([self.drawImageView.undoManager canUndo]) {
-        [self.drawImageView.undoManager undo];
+    [_drawImageView removeFromSuperview];
+    [self setDrawImageView];
+    [self.lineArray removeLastObject];
+    for (DrawPointLine *line in self.lineArray) {
+        [self reBackDrawLineWithLine:line];
+    }
+    if (self.lineArray.count  <= 0) {
+        [self setReBackButtonStatusWith:NO];
     }
 }
 - (UIColor*)colorForValue:(CGFloat)value{
@@ -246,8 +250,9 @@
     
     UIGraphicsEndImageContext();
 }
-/////撤销线
-- (void)reBackDrawLineWithBginPoint:(CGPoint )begPoint endPoint:(CGPoint)endPoint andLineWidth:(CGFloat) lineWidth{
+
+////撤销时 划线
+- (void)reBackDrawLineWithLine:(DrawPointLine *)line{
     CGSize size = _drawImageView.frame.size;
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
@@ -256,27 +261,23 @@
     [_drawImageView.image drawAtPoint:CGPointZero];
     
     
-//    CGFloat strokeWidth = MAX(1, _widthSlider.value * 0.65);
-    CGFloat strokeWidth =  lineWidth;
-    UIColor *strokeColor = _strokePreview.backgroundColor;
+    CGFloat strokeWidth = MAX(1, line.drawWidth);
+    UIColor *strokeColor = line.drawColor;
     
     CGContextSetLineWidth(context, strokeWidth);
     CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
     CGContextSetLineCap(context, kCGLineCapRound);
-
-    CGContextSetBlendMode(context, kCGBlendModeClear);
     
-    CGContextMoveToPoint(context, begPoint.x, begPoint.y);
-    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-    CGContextStrokePath(context);
-    
+    for (DrawChildLine *childLine in line.childLines) {
+        CGContextMoveToPoint(context, childLine.begPoint.x, childLine.begPoint.y);
+        CGContextAddLineToPoint(context, childLine.endPoint.x, childLine.endPoint.y);
+        CGContextStrokePath(context);
+    }
     _drawImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
 }
-
 #pragma mark- other
-
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 34)];
     
@@ -375,6 +376,31 @@
     return tmp;
 }
 
+- (void)setReBackButtonStatusWith:(BOOL)active{
+    [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime: 0
+                                relativeDuration: 1 / 3.0
+                                      animations: ^{
+                                          if (active) {
+                                            _backButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                          }else{
+                                              _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                          }
+                                      }];
+//        [UIView addKeyframeWithRelativeStartTime: 1 / 3.0
+//                                relativeDuration: 1 / 3.0
+//                                      animations: ^{
+//                                          _backButton.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//                                      }];
+//        [UIView addKeyframeWithRelativeStartTime: 2 / 3.0
+//                                relativeDuration: 1 / 3.0
+//                                      animations: ^{
+//                                          _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+//                                      }];
+    } completion: ^(BOOL finished) {
+        
+    }];
+}
 //图片
 + (UIImage*)defaultIconImage{
     return [UIImage imageNamed:@"ToolDraw"];
@@ -412,8 +438,18 @@
 - (instancetype)init{
     self = [super init ];
     if (self) {
-        _drawPoints = [NSMutableArray new];
+        _childLines = [NSMutableArray new];
     }
     return self;
 }
+@end
+
+
+
+
+
+
+@implementation DrawChildLine
+
+
 @end
