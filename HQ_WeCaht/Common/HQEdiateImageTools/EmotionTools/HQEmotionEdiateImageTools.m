@@ -74,7 +74,6 @@
 }
 
 - (void)backButtonAction:(UIButton *)sender{
-    
 }
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
@@ -95,9 +94,7 @@
     }];
 }
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
-    
 }
-
 #pragma mark   -------- UICollectionViewDelegate   UICollectionViewDataSourse --------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.emotionArray.count;
@@ -173,7 +170,6 @@
     }
     return  self;
 }
-
 - (void)setImageName:(NSString *)imageName{
     _imageName = imageName;
     self.contentImageView.image =   [UIImage imageNamed:_imageName];
