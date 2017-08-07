@@ -24,6 +24,7 @@
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UIView *strokePreview;
 @property (nonatomic) NSMutableArray *lineArray;
+@property (nonatomic) UIButton *backButton;
 
 @end
 
@@ -48,16 +49,16 @@
     
     
     _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 100)];
-    _drawMenuView.backgroundColor = [UIColor redColor];
+    _drawMenuView.backgroundColor = [UIColor clearColor];
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [cancelBut setImage:[UIImage imageNamed:@"EmoticonCloseButton_16x16_"] forState:UIControlStateNormal];
+    [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
-    [backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_drawMenuView addSubview:backButton];
+    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
+    [_backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_drawMenuView addSubview:_backButton];
     
     
     [self.imageEdiateController.view addSubview:_drawMenuView];
@@ -74,7 +75,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIPixellate"];
     [filter setValue:ciImage  forKey:kCIInputImageKey];
     //马赛克像素大小
-    [filter setValue:@(100) forKey:kCIInputScaleKey];
+    [filter setValue:@(10) forKey:kCIInputScaleKey];
     CIImage *outImage = [filter valueForKey:kCIOutputImageKey];
     
     CIContext *context = [CIContext contextWithOptions:nil];
@@ -86,6 +87,10 @@
     _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
     
     _mosaicView = [[MosaicView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
+    WEAKSELF;
+    [_mosaicView setRefershBackButtonCallBack:^(BOOL isActive){
+        [weakSelf  setReBackButtonStatusWith:isActive];
+    }];
     _mosaicView.surfaceImage = self.imageEdiateController.ediateImageView.image;
     _mosaicView.image = showImage;
     _mosaicView.linesArray = self.lineArray;
@@ -101,6 +106,19 @@
         [_mosaicView removeFromSuperview];
     }];
 }
+- (void)setMenuView{
+    CGFloat W = 80;
+    _widthSlider = [self defaultSliderWithWidth:_drawMenuView.width - W - 20];
+    _widthSlider.left = 10;
+    _widthSlider.top = 40;
+    [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
+    _widthSlider.value = 0;
+    _widthSlider.backgroundColor =    [UIColor colorWithPatternImage:[self widthSliderBackground]];
+    [_drawMenuView addSubview:_widthSlider];
+
+    [self widthSliderDidChange:_widthSlider];
+    _drawMenuView.clipsToBounds = NO;
+}
 
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [self clearCurrentEdiateStatus];
@@ -113,29 +131,23 @@
     }];
 }
 - (void)backButtonAction:(UIButton *)sender{
+    if (self.lineArray.count <= 0){
+        return;
+    }
     [_mosaicView  removeFromSuperview];
     [self setUpMosicView];
     [self.imageEdiateController.ediateImageView addSubview:_mosaicView];
     [_mosaicView  drawOndo];
-}
-- (void)setMenuView{
-    CGFloat W = 80;
-    _widthSlider = [self defaultSliderWithWidth:_drawMenuView.width - W - 20];
-    _widthSlider.left = 10;
-    _widthSlider.top = 40;
-    [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
-    _widthSlider.value = 0;
-    _widthSlider.backgroundColor =    [UIColor colorWithPatternImage:[self widthSliderBackground]];
-    [_drawMenuView addSubview:_widthSlider];
-    [self widthSliderDidChange:_widthSlider];
-    _drawMenuView.clipsToBounds = NO;
+    if (self.lineArray.count <= 0) {
+        [self setReBackButtonStatusWith:NO];
+    }
 }
 - (void)widthSliderDidChange:(UISlider *)slider{
-//    CGFloat scale = MAX(0.05, _widthSlider.value);
-//    _strokePreview.transform = CGAffineTransformMakeScale(scale, scale);
-//    _strokePreview.layer.borderWidth = 2/scale;
+    CGFloat scale = MAX(0.05, _widthSlider.value);
+    _mosaicView.drawWidth = scale * 60;
+    _strokePreview.transform = CGAffineTransformMakeScale(scale, scale);
+    _strokePreview.layer.borderWidth = 2/scale;
 }
-
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 34)];
     
@@ -186,6 +198,32 @@
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
     
 }
+- (void)setReBackButtonStatusWith:(BOOL)active{
+        [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
+            [UIView addKeyframeWithRelativeStartTime: 0
+                                    relativeDuration: 1 / 3.0
+                                          animations: ^{
+                                              if (active) {
+                                                  _backButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                              }else{
+                                                  _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                              }
+                                          }];
+            //        [UIView addKeyframeWithRelativeStartTime: 1 / 3.0
+            //                                relativeDuration: 1 / 3.0
+            //                                      animations: ^{
+            //                                          _backButton.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            //                                      }];
+            //        [UIView addKeyframeWithRelativeStartTime: 2 / 3.0
+            //                                relativeDuration: 1 / 3.0
+            //                                      animations: ^{
+            //                                          _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            //                                      }];
+        } completion: ^(BOOL finished) {
+            
+        }];
+}
+
 //图片
 + (UIImage*)defaultIconImage{
     return [UIImage imageNamed:@"ToolMasaic"];
@@ -262,10 +300,11 @@
     }
     return self;
 }
+- (void)setDrawWidth:(CGFloat)drawWidth{
+    _drawWidth = drawWidth;
+    self.shapeLayer.lineWidth = _drawWidth;
+}
 - (void)drawOndo{
-//    if ([self.undoManager canUndo]) {
-//        [self.undoManager undo];
-//    }
     if (self.linesArray.count) {
         [self.linesArray removeLastObject];
         for (MosaicLine *line in self.linesArray) {
@@ -334,7 +373,9 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
-//      [self.undoManager endUndoGrouping];
+    if (_refershBackButtonCallBack) {
+        _refershBackButtonCallBack(self.linesArray.count?YES:NO);
+    }
 }
 - (void)setImage:(UIImage *)image{
     //底图

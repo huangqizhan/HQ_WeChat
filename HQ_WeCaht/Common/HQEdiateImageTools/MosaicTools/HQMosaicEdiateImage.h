@@ -24,8 +24,12 @@
 //涂层图片.
 @property (nonatomic, strong) UIImage *surfaceImage;
 
+@property (nonatomic,assign) CGFloat drawWidth;
+
 
 @property (nonatomic) NSMutableArray *linesArray;
+
+@property (nonatomic,copy) void (^refershBackButtonCallBack)(BOOL isActive);
 
 - (void)drawOndo;
 

@@ -23,6 +23,7 @@
 }
 
 - (void)setUpCurrentEdiateStatus{
+    
 }
 
 - (void)clearCurrentEdiateStatus{

@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
     
 }
 
+
 - (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateToolInfo:(HQEdiateToolInfo *)toolInfo;
 
 
@@ -37,7 +38,6 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
 @property (nonatomic,weak) HQEdiateImageController *imageEdiateController;
 @property (nonatomic,strong) HQEdiateToolInfo *toolInfo;
 @property (nonatomic,strong) UIView *ediateMenuView;
-
 
 
 

@@ -15,7 +15,6 @@
      CGSize _originalImageSize;        //初始大小
     CGPoint _prevDraggingPosition; //拖动的起点
 }
-@property (nonatomic) UIButton *backButton;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UIImageView *drawImageView;
 @property (nonatomic) UISlider *colorSlider;
@@ -24,6 +23,7 @@
 @property (nonatomic) UIView *strokePreviewBackground;
 @property (nonatomic) UIImageView *eraserIcon; //橡皮擦
 @property (nonatomic) NSMutableArray *lineArray;
+@property (nonatomic,strong) UIButton *backButton;
 
 
 
@@ -49,9 +49,9 @@
     
     
     _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 120)];
-    _drawMenuView.backgroundColor = [UIColor redColor];
+    _drawMenuView.backgroundColor = [UIColor clearColor];
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [cancelBut setImage:[UIImage imageNamed:@"EmoticonCloseButton_16x16_"] forState:UIControlStateNormal];
+    [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
@@ -59,7 +59,6 @@
     [_backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:_backButton];
-    
     
     [self.imageEdiateController.view addSubview:_drawMenuView];
     
@@ -377,6 +376,7 @@
 }
 
 - (void)setReBackButtonStatusWith:(BOOL)active{
+    
     [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
         [UIView addKeyframeWithRelativeStartTime: 0
                                 relativeDuration: 1 / 3.0
