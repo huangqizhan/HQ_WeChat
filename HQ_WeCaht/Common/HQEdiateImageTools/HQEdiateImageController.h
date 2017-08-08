@@ -16,7 +16,7 @@
 ////要编辑的image 
 @property (nonatomic,strong) UIImage *originalImage;
 
-@property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic,strong) UIImageView *ediateImageView;
 
 @property (nonatomic,weak,readonly) UIScrollView *scrollView;
 
@@ -25,6 +25,8 @@
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated;
 - (void)resetZoomScaleWithAnimated:(BOOL)animated;
+
+- (void)resetBottomViewEdiateStatus;
 
 
 @end

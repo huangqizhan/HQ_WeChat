@@ -9,11 +9,16 @@
 #import "HQEdiateImageController.h"
 #import "HQEdiateBottomView.h"
 #import "HQEdiateImageBaseTools.h"
+#import "HQEdiateToolInfo.h"
 
 
 
 
-@interface HQEdiateImageController ()
+@interface HQEdiateImageController (){
+    UIView *testView;
+}
+
+@property (nonatomic,strong) HQEdiateImageBaseTools *currentTool;
 
 @end
 
@@ -53,26 +58,43 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0373" ofType:@".jpg"];
     _originalImage = [UIImage imageWithContentsOfFile:filePath];
     
-    _imageView = [[UIImageView alloc] init];
-    [_scrollView addSubview:_imageView];
+    _ediateImageView= [[UIImageView alloc] init];
+    [_scrollView addSubview:_ediateImageView];
     [self refreshImageView];
 }
 - (void)createMenuView{
     WEAKSELF;
-    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(NSInteger index) {
-        [weakSelf  clickBottomViewWith:index];
+    _menuView = [[HQEdiateBottomView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height - 80, self.view.width, 80) andClickButtonIndex:^(HQEdiateToolInfo *toolInfo) {
+        [weakSelf  clickBottomViewWith:toolInfo];
     }];
     [self.view addSubview:_menuView];
 }
 #pragma mark ------- 切换底部视图按钮 -----
-- (void)clickBottomViewWith:(NSInteger )index{
+- (void)clickBottomViewWith:(HQEdiateToolInfo *)toolInfo{
     [self hiddenMenuViewWithAnimation];
-    NSLog(@"indx = %ld",index);
-    ///HQEdiateImageBaseTools
+    Class toolClass = NSClassFromString(toolInfo.toolName);
+    if (toolClass) {
+        id object = [toolClass alloc];
+        if (object && [object isKindOfClass:[HQEdiateImageBaseTools class] ]) {
+            object = [object initWithEdiateController:self andEdiateToolInfo:toolInfo];
+            self.currentTool = object;
+        }
+    }
+}
+//初始化当前工具
+- (void)setCurrentTool:(HQEdiateImageBaseTools *)currentTool{
+    [_currentTool clearCurrentEdiateStatus];
+    _currentTool = currentTool;
+    [_currentTool setUpCurrentEdiateStatus];
 }
 - (void)hiddenMenuViewWithAnimation{
-    [UIView animateWithDuration:.35 animations:^{
+    [UIView animateWithDuration:.15 animations:^{
         _menuView.top = APP_Frame_Height;
+    }];
+}
+- (void)resetBottomViewEdiateStatus{
+    [UIView animateWithDuration:.15 animations:^{
+        _menuView.top = APP_Frame_Height - 80;
     }];
 }
 //底层ScrollView
@@ -110,33 +132,35 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (void)finishButtonAction:(UIButton *)sender{
-    
+    [self.currentTool executeWithCompletionBlock:^(UIImage *image, NSError *error, NSDictionary *userInfo) {
+        NSLog(@"image = %@",image);
+    }];
 }
 - (void)refreshImageView{
-    _imageView.image = _originalImage;
+    _ediateImageView.image = _originalImage;
     [self resetImageViewFrame];
     [self resetZoomScaleWithAnimated:NO];
 }
 - (void)resetImageViewFrame{
-    CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
+    CGSize size = (_ediateImageView.image) ? _ediateImageView.image.size : _ediateImageView.frame.size;
     if(size.width>0 && size.height>0){
         CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
-        _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        _ediateImageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
     }
 }
 - (void)resetZoomScaleWithAnimated:(BOOL)animated{
     
-    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
-    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
+    CGFloat Rw = _scrollView.frame.size.width / _ediateImageView.frame.size.width;
+    CGFloat Rh = _scrollView.frame.size.height / _ediateImageView.frame.size.height;
     
     //CGFloat scale = [[UIScreen mainScreen] scale];
     CGFloat scale = 1;
-    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
-    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
+    Rw = MAX(Rw, _ediateImageView.image.size.width / (scale * _scrollView.frame.size.width));
+    Rh = MAX(Rh, _ediateImageView.image.size.height / (scale * _scrollView.frame.size.height));
     
-    _scrollView.contentSize = _imageView.frame.size;
+    _scrollView.contentSize = _ediateImageView.frame.size;
     _scrollView.minimumZoomScale = 1;
     _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
     
@@ -151,7 +175,7 @@
 }
 #pragma mark - UIScrollViewDelegate
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return _imageView;
+    return _ediateImageView;
 }
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
     scrollView.contentInset = UIEdgeInsetsZero;
@@ -169,7 +193,7 @@
 - (void)refreshImageContainerViewCenter {
     CGFloat offsetX = (_scrollView.tz_width > _scrollView.contentSize.width) ? ((_scrollView.tz_width - _scrollView.contentSize.width) * 0.5) : 0.0;
     CGFloat offsetY = (_scrollView.tz_height > _scrollView.contentSize.height) ? ((_scrollView.tz_height - _scrollView.contentSize.height) * 0.5) : 0.0;
-    self.imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
+    self.ediateImageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

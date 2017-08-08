@@ -91,6 +91,7 @@
 		FD2476F61E6FB6C50085A23C /* ChatMessageModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2476F51E6FB6C50085A23C /* ChatMessageModel+Action.m */; };
 		FD253DEA1E5A99AA00ACA282 /* HQCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD253DE91E5A99AA00ACA282 /* HQCoreDataManager.m */; };
 		FD253DF91E5AC25B00ACA282 /* ChatListModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD253DF81E5AC25B00ACA282 /* ChatListModel+Action.m */; };
+		FD25A9481F381C0C008589D5 /* AnimationTools in Resources */ = {isa = PBXBuildFile; fileRef = FD25A9471F381C0C008589D5 /* AnimationTools */; };
 		FD2653711EE92030006BAB5E /* Tuzki_16.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653611EE92030006BAB5E /* Tuzki_16.gif */; };
 		FD2653721EE92030006BAB5E /* Tuzki_15.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653621EE92030006BAB5E /* Tuzki_15.gif */; };
 		FD2653731EE92030006BAB5E /* Tuzki_14.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD2653631EE92030006BAB5E /* Tuzki_14.gif */; };
@@ -304,7 +305,8 @@
 		FD831D101EDFE36D0038E7DA /* HQTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD831D0F1EDFE36D0038E7DA /* HQTipView.m */; };
 		FD831D171EE0091F0038E7DA /* HQRecordHUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD831D161EE0091F0038E7DA /* HQRecordHUDView.xib */; };
 		FD831D1A1EE009940038E7DA /* HQRecordHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD831D191EE009940038E7DA /* HQRecordHUDView.m */; };
-		FD86F9C91F2F16D800011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */; };
+		FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */; };
+		FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */; };
 		FD88475B1E71236B0085B355 /* KILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8847591E71236B0085B355 /* KILabel.m */; };
 		FD88476A1E7126180085B355 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847681E7126180085B355 /* libsqlite3.0.tbd */; };
 		FD88476B1E7126180085B355 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847691E7126180085B355 /* libsqlite3.tbd */; };
@@ -638,6 +640,7 @@
 		FD253DE91E5A99AA00ACA282 /* HQCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCoreDataManager.m; sourceTree = "<group>"; };
 		FD253DF71E5AC25B00ACA282 /* ChatListModel+Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ChatListModel+Action.h"; sourceTree = "<group>"; };
 		FD253DF81E5AC25B00ACA282 /* ChatListModel+Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ChatListModel+Action.m"; sourceTree = "<group>"; };
+		FD25A9471F381C0C008589D5 /* AnimationTools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AnimationTools; sourceTree = "<group>"; };
 		FD2653611EE92030006BAB5E /* Tuzki_16.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_16.gif; sourceTree = "<group>"; };
 		FD2653621EE92030006BAB5E /* Tuzki_15.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_15.gif; sourceTree = "<group>"; };
 		FD2653631EE92030006BAB5E /* Tuzki_14.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Tuzki_14.gif; sourceTree = "<group>"; };
@@ -1001,8 +1004,11 @@
 		FD831D161EE0091F0038E7DA /* HQRecordHUDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HQRecordHUDView.xib; sourceTree = "<group>"; };
 		FD831D181EE009940038E7DA /* HQRecordHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQRecordHUDView.h; sourceTree = "<group>"; };
 		FD831D191EE009940038E7DA /* HQRecordHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRecordHUDView.m; sourceTree = "<group>"; };
-		FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateToolInfo.h; sourceTree = "<group>"; };
-		FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
+		FD86F9CA1F305A9800011DAA /* NSObject+SubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SubClass.h"; sourceTree = "<group>"; };
+		FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SubClass.m"; sourceTree = "<group>"; };
+		FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImageProtocal.h; sourceTree = "<group>"; };
+		FD86F9CE1F306F2500011DAA /* HQEdiateToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateToolInfo.h; sourceTree = "<group>"; };
+		FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
 		FD8847591E71236B0085B355 /* KILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KILabel.m; sourceTree = "<group>"; };
 		FD88475A1E71236B0085B355 /* KILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KILabel.h; sourceTree = "<group>"; };
 		FD8847681E7126180085B355 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1471,8 +1477,9 @@
 				FD1DDF851F2736E000AAC89D /* HQEdiateImageController.m */,
 				FDB3B2621F2EFC4700A30CBE /* HQEdiateBottomView.h */,
 				FDB3B2631F2EFC4700A30CBE /* HQEdiateBottomView.m */,
-				FD86F9C71F2F16D800011DAA /* HQEdiateToolInfo.h */,
-				FD86F9C81F2F16D800011DAA /* HQEdiateToolInfo.m */,
+				FD86F9CD1F305C4C00011DAA /* HQEdiateImageProtocal.h */,
+				FD86F9CE1F306F2500011DAA /* HQEdiateToolInfo.h */,
+				FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */,
 			);
 			path = HQEdiateImageTools;
 			sourceTree = "<group>";
@@ -2384,6 +2391,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD25A9471F381C0C008589D5 /* AnimationTools */,
 				FD1DDF6C1F2732FE00AAC89D /* HQEdiateImageTools */,
 				FDCBB52D1EFBBA6C00D6F573 /* WebViewJavascriptBridge */,
 				FD831D111EDFEDD00038E7DA /* sourse */,
@@ -2394,7 +2402,6 @@
 				FD2ED9021EADC58F006E585F /* Public */,
 				FDA1DB8F1E9B26E8001A9854 /* ControllerTrastion */,
 				FD2ED8D01EADA8DA006E585F /* SDWebImage */,
-				FDF289101E9477BD0078286C /* CustomerRefersh */,
 				FDF2888F1E9474D80078286C /* Refersh */,
 				FDCEDD041E8CB90E00EE24E6 /* FileTools */,
 				FD28EA421E7B8B460077E009 /* PickImage */,
@@ -2837,6 +2844,8 @@
 				FDDEE3CB1E655B7D007E9AF9 /* NSObject+MJProperty.m */,
 				FDDEE3CC1E655B7D007E9AF9 /* NSString+MJExtension.h */,
 				FDDEE3CD1E655B7D007E9AF9 /* NSString+MJExtension.m */,
+				FD86F9CA1F305A9800011DAA /* NSObject+SubClass.h */,
+				FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */,
 			);
 			path = MJExtension;
 			sourceTree = "<group>";
@@ -2847,13 +2856,6 @@
 				FD1DDF5C1F26DA4500AAC89D /* HQRefershControll */,
 			);
 			path = Refersh;
-			sourceTree = "<group>";
-		};
-		FDF289101E9477BD0078286C /* CustomerRefersh */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomerRefersh;
 			sourceTree = "<group>";
 		};
 		FDFCB3EA1EFA5790008B7F07 /* Views */ = {
@@ -2932,7 +2934,7 @@
 				TargetAttributes = {
 					BACB054C1E59872E008B676D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = B5HHUXE3SK;
+						DevelopmentTeam = S748494QV4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -2976,6 +2978,7 @@
 				FD8DD7E91EB81D54002125CD /* 25.gif in Resources */,
 				FD26537B1EE92030006BAB5E /* Tuzki_6.gif in Resources */,
 				FD8DD7C71EB81D54002125CD /* 59.gif in Resources */,
+				FD25A9481F381C0C008589D5 /* AnimationTools in Resources */,
 				FD8DD7C61EB81D54002125CD /* 60.gif in Resources */,
 				FD26537E1EE92030006BAB5E /* Tuzki_3.gif in Resources */,
 				FD8DD7EB1EB81D54002125CD /* 23.gif in Resources */,
@@ -3161,7 +3164,6 @@
 				FD61A2311F0200A200F0830C /* HQChatDetailCell.m in Sources */,
 				FDA1DB9B1E9B6F49001A9854 /* PercentLabel.m in Sources */,
 				FD211C321EC143DB0040771A /* HQPlayGifImageView.m in Sources */,
-				FD86F9C91F2F16D800011DAA /* HQEdiateToolInfo.m in Sources */,
 				FD2ED8F81EADA8DA006E585F /* SDWebImageDownloaderOperation.m in Sources */,
 				FD9409061E5A7D0C00634206 /* UIResponder+GXRouter.m in Sources */,
 				BAF4A8031E73F11B00653204 /* AFImageDownloader.m in Sources */,
@@ -3172,6 +3174,7 @@
 				FDD18CFB1F131EFA00E260BD /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				FD2476EA1E6FA2410085A23C /* HQChatOtherVoiceCell.m in Sources */,
 				FD1DDF861F2736E000AAC89D /* HQEdiateImageController.m in Sources */,
+				FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */,
 				FDD18D021F13200700E260BD /* UIImage+GIF.m in Sources */,
 				FD6649971EBC2A62005E340B /* YYFrameImage.m in Sources */,
 				FD66A3A41EBB1A6800623F34 /* YYTextMagnifier.m in Sources */,
@@ -3354,6 +3357,7 @@
 				FD7F8F651E9DC49D00B61D63 /* HQBroswerViewController.m in Sources */,
 				FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */,
 				FD8DD8071EB824E3002125CD /* TranstionAnimationViewController.m in Sources */,
+				FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */,
 				FD2CAD231EE13A8E00FEEC7A /* HQAudioTools.m in Sources */,
 				FD3E80A11ECE85F700F3B430 /* HQWifiViewController.m in Sources */,
 				FDD18CF81F131EFA00E260BD /* MASViewAttribute.m in Sources */,
@@ -3573,7 +3577,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = S748494QV4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3604,7 +3608,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = S748494QV4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

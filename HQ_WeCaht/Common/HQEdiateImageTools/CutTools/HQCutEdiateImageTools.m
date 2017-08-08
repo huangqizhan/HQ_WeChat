@@ -7,20 +7,41 @@
 //
 
 #import "HQCutEdiateImageTools.h"
+#import "HQEdiateImageController.h"
+
+
 
 @implementation HQCutEdiateImageTools
 
 
-- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType)type{
-    return [super initWithEdiateController:ediateController andEdiateType:type];
+- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateToolInfo:(HQEdiateToolInfo *)toolInfo{
+    return [super initWithEdiateController:ediateController andEdiateToolInfo:toolInfo];
 }
 
 - (void)setUpCurrentEdiateStatus{
-    NSLog(@"setUpCurrentEdiateStatus");
+    [super setUpCurrentEdiateStatus];
 }
 
 - (void)clearCurrentEdiateStatus{
+    [super clearCurrentEdiateStatus];
+}
+- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
     
+}
+//图片
++ (UIImage*)defaultIconImage{
+    return [UIImage imageNamed:@"ToolClipping"];
+}
+
+//工具名称
++ (NSString*)defaultTitle{
+    return nil;
+    
+}
+
+//显示顺序
++ (NSUInteger)orderNum{
+    return 4;
 }
 
 @end

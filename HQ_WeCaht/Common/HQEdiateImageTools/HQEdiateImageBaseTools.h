@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HQEdiateImageProtocal.h"
+#import "HQEdiateToolInfo.h"
 
 
 @class  HQEdiateImageController;
@@ -21,20 +23,21 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
     HQEdiateImageTextType                    ///文本编辑
 };
 
-@interface HQEdiateImageBaseTools : NSObject{
+
+@interface HQEdiateImageBaseTools : NSObject <HQEdiateImageProtocal>{
     
     __weak  HQEdiateImageController * _imageEdiateController;
     
 }
 
-- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateType:(HQEdiateImageType )type;
+
+- (instancetype)initWithEdiateController:(HQEdiateImageController *)ediateController andEdiateToolInfo:(HQEdiateToolInfo *)toolInfo;
 
 
 
 @property (nonatomic,weak) HQEdiateImageController *imageEdiateController;
-@property (nonatomic,assign) HQEdiateImageType ediateType;
+@property (nonatomic,strong) HQEdiateToolInfo *toolInfo;
 @property (nonatomic,strong) UIView *ediateMenuView;
-
 
 
 
@@ -42,5 +45,7 @@ typedef NS_ENUM(NSInteger,HQEdiateImageType) {
 
 - (void)clearCurrentEdiateStatus;
 
+
+- (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock;
 
 @end

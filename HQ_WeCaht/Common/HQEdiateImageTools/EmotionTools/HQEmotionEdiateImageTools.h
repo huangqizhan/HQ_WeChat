@@ -11,3 +11,14 @@
 @interface HQEmotionEdiateImageTools : HQEdiateImageBaseTools
 
 @end
+
+
+
+
+
+
+@interface EmotionCollectionViewCell : UICollectionViewCell
+
+@property (nonatomic,copy) NSString *imageName;
+
+@end

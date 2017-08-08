@@ -7,10 +7,15 @@
 //
 
 #import "HQEdiateBottomView.h"
+#import "HQEdiateToolInfo.h"
+#import "HQEdiateImageBaseTools.h"
+
+
+
 
 @implementation HQEdiateBottomView
 
-- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(NSInteger index))callClickButtonIndex{
+- (instancetype)initWithFrame:(CGRect)frame andClickButtonIndex:(void(^)(HQEdiateToolInfo *toolInfo))callClickButtonIndex{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
@@ -22,15 +27,19 @@
 
 - (void)createSubViews{
     CGFloat width  = (App_Frame_Width - 30)/5.0;
-    NSArray *imageArray = @[@"ToolDraw",@"ToolMasaic",@"ToolViewEmotion",@"ToolClipping",@"ToolText"];
-    for (int i = 0; i< 5; i++) {
-        HQEdiateItem *item = [[HQEdiateItem alloc] initWithFram:CGRectMake(15 + i*width, 10, width, 60) ImageName:imageArray[i]   andIndex:i+1 andClickCallBackAction:^(NSInteger index) {
-            if (_bottomEdiateViewClick)  _bottomEdiateViewClick(index);
+    NSArray *classes = [HQEdiateToolInfo toolsWithToolClass:[HQEdiateImageBaseTools class]];
+    for (int i = 0; i< classes.count; i++) {
+        HQEdiateItem *item = [[HQEdiateItem alloc] initWithFram:CGRectMake(15 + i*width, 10, width, 60)  andToolInfo:classes[i] andClickCallBackAction:^(HQEdiateToolInfo *info) {
+            if (_bottomEdiateViewClick) {
+                _bottomEdiateViewClick(info);
+            }
         }];
         [self addSubview:item];
     }
     
 }
+
+
 
 
 @end
@@ -41,19 +50,19 @@
 
 @property (nonatomic,strong) UIImageView *contentImageView;
 
-@property (nonatomic,assign) NSInteger index;
+@property (nonatomic,strong) HQEdiateToolInfo *info;
 
 @end
 
 @implementation HQEdiateItem
 
-- (instancetype)initWithFram:(CGRect)frame ImageName:(NSString *)imageName  andIndex:(NSInteger )index  andClickCallBackAction:(void (^)(NSInteger index))clickCallBackAction{
+- (instancetype)initWithFram:(CGRect)frame andToolInfo:(HQEdiateToolInfo *)toolInfo   andClickCallBackAction:(void (^)(HQEdiateToolInfo *info))clickCallBackAction{
     self = [super initWithFrame:frame];
     if (self) {
         _clickBackAction = clickCallBackAction;
-        self.index = index;
+        self.info = toolInfo;
         _contentImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.width - 30)/2.0, (self.height - 30)/2.0, 30, 30)];
-        _contentImageView.image = [UIImage imageNamed:imageName];
+        _contentImageView.image = toolInfo.iconImage;
         _contentImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_contentImageView];
         
@@ -63,6 +72,17 @@
 }
 
 - (void)buttonClickAction:(UIControl *)sender{
-    if (_clickBackAction) _clickBackAction(self.index);
+    if (_clickBackAction) _clickBackAction(self.info);
 }
+
+
+
 @end
+
+
+
+
+
+
+
+
