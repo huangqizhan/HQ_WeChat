@@ -121,7 +121,6 @@
         UICollectionViewFlowLayout *layput = [[UICollectionViewFlowLayout alloc] init];
         layput.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layput.sectionInset = UIEdgeInsetsMake(0, 0,0, 0);
-//        layput.headerReferenceSize = CGSizeMake(App_Frame_Width, 0.1);
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, App_Frame_Width-20, 70) collectionViewLayout:layput];
         _collectionView.delegate  = self;
