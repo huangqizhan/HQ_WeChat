@@ -10,6 +10,7 @@
 		BACB055B1E59872E008B676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB05591E59872E008B676D /* Main.storyboard */; };
 		BACB055D1E59872E008B676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACB055C1E59872E008B676D /* Assets.xcassets */; };
 		BACB05601E59872E008B676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB055E1E59872E008B676D /* LaunchScreen.storyboard */; };
+		BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */; };
 		BAF4A7FB1E73F11B00653204 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7D91E73F11B00653204 /* AFHTTPSessionManager.m */; };
 		BAF4A7FC1E73F11B00653204 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7DC1E73F11B00653204 /* AFNetworkReachabilityManager.m */; };
 		BAF4A7FD1E73F11B00653204 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7DE1E73F11B00653204 /* AFSecurityPolicy.m */; };
@@ -491,6 +492,8 @@
 		BACB055F1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BACB05661E59872F008B676D /* HQ_WeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HQ_WeChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACB05711E59872F008B676D /* HQ_WeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HQ_WeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAE3E0E21F39F9BE0010ACED /* HQEdiateImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImgView.h; sourceTree = "<group>"; };
+		BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateImgView.m; sourceTree = "<group>"; };
 		BAF4A7D81E73F11B00653204 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		BAF4A7D91E73F11B00653204 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		BAF4A7DA1E73F11B00653204 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1507,6 +1510,8 @@
 			children = (
 				FD1DDF7B1F2735EB00AAC89D /* HQEmotionEdiateImageTools.h */,
 				FD1DDF7C1F2735EB00AAC89D /* HQEmotionEdiateImageTools.m */,
+				BAE3E0E21F39F9BE0010ACED /* HQEdiateImgView.h */,
+				BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */,
 			);
 			path = EmotionTools;
 			sourceTree = "<group>";
@@ -3263,6 +3268,7 @@
 				FD6649F31EBC722E005E340B /* HqChatOtherGifCell.m in Sources */,
 				FD1DDF7D1F2735EB00AAC89D /* HQEmotionEdiateImageTools.m in Sources */,
 				FDD18CF91F131EFA00E260BD /* MASViewConstraint.m in Sources */,
+				BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */,
 				FD37B0BC1E67B0D300FDD2A4 /* HQFaceMenuView.m in Sources */,
 				FDD18CFC1F131EFA00E260BD /* View+MASAdditions.m in Sources */,
 				FDDEE3D31E655B7D007E9AF9 /* MJPropertyType.m in Sources */,
