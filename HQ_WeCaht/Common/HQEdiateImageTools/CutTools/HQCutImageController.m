@@ -64,13 +64,12 @@
     _gridView.gridColor = [UIColor whiteColor];
     //[[UIColor whiteColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
-    [self resetScrollViewContentinsetWith:_gridView.frame];
+//    [self resetScrollViewContentinsetWith:_gridView.frame];
     [self fixZoomScaleWithAnimated:YES];
-    
 }
 //底层ScrollView
 - (void)initImageScrollView{
-    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, App_Frame_Width, APP_Frame_Height-20-80-40)];
+    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, App_Frame_Width, APP_Frame_Height-20-80)];
     imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageScroll.showsHorizontalScrollIndicator = NO;
     imageScroll.showsVerticalScrollIndicator = NO;
@@ -83,6 +82,9 @@
 - (void)createMenuView{
     
     _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height-80, self.view.width, 80) ];
+    _menuView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_menuView];
+    
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];
     [_cancelButton setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [_cancelButton addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -102,7 +104,7 @@
     [_confirmButton setImage:[UIImage imageNamed:@"EdiateImageConfirm"] forState:UIControlStateNormal];
     [_confirmButton addTarget:self action:@selector(confirmButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_menuView addSubview:_confirmButton];
-    [self.view addSubview:_menuView];
+    
 }
 ///取消
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
@@ -154,7 +156,7 @@
     CGFloat minZoomScale = _scrollView.minimumZoomScale;
 //    _scrollView.maximumZoomScale = 0.95*minZoomScale;
 //    _scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [_scrollView setZoomScale:0.85*minZoomScale animated:animated];
+    [_scrollView setZoomScale:0.5*minZoomScale animated:animated];
 }
 #pragma mark - UIScrollViewDelegate
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {

@@ -241,7 +241,11 @@ static const NSUInteger RightBottomCircleView = 4;
     return YES;
 }
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-    return self.imageEdiateController.scrollView;
+    [super hitTest:point withEvent:event];
+    if ([self pointInside:point withEvent:event]) {
+        return self.imageEdiateController.scrollView;
+    }
+    return nil;
 }
 @end
 
