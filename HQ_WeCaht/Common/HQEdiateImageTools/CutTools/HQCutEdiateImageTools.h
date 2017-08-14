@@ -11,3 +11,9 @@
 @interface HQCutEdiateImageTools : HQEdiateImageBaseTools
 
 @end
+
+
+
+
+
+

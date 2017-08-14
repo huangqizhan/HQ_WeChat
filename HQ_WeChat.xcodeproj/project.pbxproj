@@ -32,6 +32,8 @@
 		FD033B861EF3763600C85B04 /* HQContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD033B851EF3763600C85B04 /* HQContactDetailController.m */; };
 		FD033B891EF3767D00C85B04 /* HQContactHeadDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD033B881EF3767D00C85B04 /* HQContactHeadDetailCell.m */; };
 		FD04841C1EAEEE080042E702 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD04841B1EAEEE080042E702 /* TestTableViewController.m */; };
+		FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD055AA41F412907001850FE /* IMG_2750.jpg */; };
+		FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD055AA71F4135F9001850FE /* HQCutImageController.m */; };
 		FD11AD7F1E8F5AF10060E020 /* HQChatRefershControll.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */; };
 		FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1504A31EEFBE1C000E9DED /* HQChatDateCell.m */; };
 		FD1A314F1F0CBA090017FDBC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1A314E1F0CBA090017FDBC /* CoreTelephony.framework */; };
@@ -176,6 +178,7 @@
 		FD3BEDB01EE685F500A74F69 /* HQDeviceVoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3BEDAF1EE685F500A74F69 /* HQDeviceVoiceManager.m */; };
 		FD3BEDB21EE6910700A74F69 /* HQDeviceVoiceTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD3BEDB11EE6910700A74F69 /* HQDeviceVoiceTipView.xib */; };
 		FD3BEDB51EE694DB00A74F69 /* HQDeviceVoiceTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3BEDB41EE694DB00A74F69 /* HQDeviceVoiceTipView.m */; };
+		FD3DE7EC1F3BE619002BF6A6 /* HQEdiateImageCutView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3DE7EB1F3BE619002BF6A6 /* HQEdiateImageCutView.m */; };
 		FD3E809A1ECE7E9800F3B430 /* m1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD3E80991ECE7E9800F3B430 /* m1.mp4 */; };
 		FD3E809E1ECE83A600F3B430 /* HQWiFiTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3E809D1ECE83A600F3B430 /* HQWiFiTools.m */; };
 		FD3E80A11ECE85F700F3B430 /* HQWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3E80A01ECE85F700F3B430 /* HQWifiViewController.m */; };
@@ -538,6 +541,9 @@
 		FD033B881EF3767D00C85B04 /* HQContactHeadDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQContactHeadDetailCell.m; sourceTree = "<group>"; };
 		FD04841A1EAEEE080042E702 /* TestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewController.h; sourceTree = "<group>"; };
 		FD04841B1EAEEE080042E702 /* TestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewController.m; sourceTree = "<group>"; };
+		FD055AA41F412907001850FE /* IMG_2750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_2750.jpg; sourceTree = "<group>"; };
+		FD055AA61F4135F9001850FE /* HQCutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCutImageController.h; sourceTree = "<group>"; };
+		FD055AA71F4135F9001850FE /* HQCutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCutImageController.m; sourceTree = "<group>"; };
 		FD11AD7D1E8F5AF10060E020 /* HQChatRefershControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatRefershControll.h; sourceTree = "<group>"; };
 		FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatRefershControll.m; sourceTree = "<group>"; };
 		FD1504A21EEFBE1C000E9DED /* HQChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatDateCell.h; sourceTree = "<group>"; };
@@ -780,6 +786,8 @@
 		FD3BEDB11EE6910700A74F69 /* HQDeviceVoiceTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HQDeviceVoiceTipView.xib; sourceTree = "<group>"; };
 		FD3BEDB31EE694DB00A74F69 /* HQDeviceVoiceTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQDeviceVoiceTipView.h; sourceTree = "<group>"; };
 		FD3BEDB41EE694DB00A74F69 /* HQDeviceVoiceTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQDeviceVoiceTipView.m; sourceTree = "<group>"; };
+		FD3DE7EA1F3BE619002BF6A6 /* HQEdiateImageCutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImageCutView.h; sourceTree = "<group>"; };
+		FD3DE7EB1F3BE619002BF6A6 /* HQEdiateImageCutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateImageCutView.m; sourceTree = "<group>"; };
 		FD3E80991ECE7E9800F3B430 /* m1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = m1.mp4; sourceTree = "<group>"; };
 		FD3E809C1ECE83A600F3B430 /* HQWiFiTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQWiFiTools.h; sourceTree = "<group>"; };
 		FD3E809D1ECE83A600F3B430 /* HQWiFiTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQWiFiTools.m; sourceTree = "<group>"; };
@@ -1530,6 +1538,10 @@
 			children = (
 				FD1DDF811F27363000AAC89D /* HQCutEdiateImageTools.h */,
 				FD1DDF821F27363000AAC89D /* HQCutEdiateImageTools.m */,
+				FD3DE7EA1F3BE619002BF6A6 /* HQEdiateImageCutView.h */,
+				FD3DE7EB1F3BE619002BF6A6 /* HQEdiateImageCutView.m */,
+				FD055AA61F4135F9001850FE /* HQCutImageController.h */,
+				FD055AA71F4135F9001850FE /* HQCutImageController.m */,
 			);
 			path = CutTools;
 			sourceTree = "<group>";
@@ -2252,6 +2264,7 @@
 		FD831D111EDFEDD00038E7DA /* sourse */ = {
 			isa = PBXGroup;
 			children = (
+				FD055AA41F412907001850FE /* IMG_2750.jpg */,
 				FDD18D0B1F13248500E260BD /* AMap.bundle */,
 				FDD18D091F13226800E260BD /* in.caf */,
 				FD42B5ED1F0A2AEE00D6F0C4 /* loading.gif */,
@@ -3083,6 +3096,7 @@
 				FD8DD7F11EB81D54002125CD /* 17.gif in Resources */,
 				FD8DD7E51EB81D54002125CD /* 29.gif in Resources */,
 				FD8DD7BB1EB81D54002125CD /* 71.gif in Resources */,
+				FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */,
 				FD8DD7BA1EB81D54002125CD /* 72.gif in Resources */,
 				FD8DD7E41EB81D54002125CD /* 30.gif in Resources */,
 				FD2653781EE92030006BAB5E /* Tuzki_9.gif in Resources */,
@@ -3231,6 +3245,7 @@
 				FD2476CD1E6F9D5B0085A23C /* HQChatOtherBaseCell.m in Sources */,
 				FD9409051E5A7D0C00634206 /* UIView+Extension.m in Sources */,
 				FD7570501EFB714D00CA7112 /* HQWebViewController.m in Sources */,
+				FD3DE7EC1F3BE619002BF6A6 /* HQEdiateImageCutView.m in Sources */,
 				FDE5CED81ED81C4F0072882A /* UIApplication+HQExtern.m in Sources */,
 				FD2ED8F41EADA8DA006E585F /* SDImageCache.m in Sources */,
 				FDE5CED21ED817C30072882A /* HQActionSheet.m in Sources */,
@@ -3261,6 +3276,7 @@
 				FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */,
 				FD3E80A51ECE8E3200F3B430 /* HQDownLoadFile.m in Sources */,
 				BAF4A8011E73F11B00653204 /* README.md in Sources */,
+				FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */,
 				FD6649981EBC2A62005E340B /* YYImage.m in Sources */,
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
 				FD42B5E61F09E41C00D6F0C4 /* VisualEffectViewController.m in Sources */,

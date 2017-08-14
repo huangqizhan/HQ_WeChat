@@ -81,6 +81,7 @@ __strong typeof(weakSelf) strongSelf = weakSelf
 #define SEARCHBACKGROUNDCOLOR  [UIColor colorWithRed:(110.0)/255.0 green:(110.0)/255.0 blue:(110.0)/255.0 alpha:0.4]
 #define  CANCELBUTTONCOLOR [UIColor colorWithRed:(85.0)/255.0 green:(185.0)/255.0 blue:(50.0)/255.0 alpha:1]
 
+#define BOTTOMBARCOLOR [UIColor colorWithRed:(34.0)/255.0 green:(35.0)/255.0 blue:(36.0)/255.0 alpha:1]
 
 #define BackgroundColor_nearWhite [UIColor colorWithRed:251/255.0 green:251/255.0 blue:251/255.0 alpha:1]
 
