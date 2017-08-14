@@ -42,7 +42,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     self.view.clipsToBounds = YES;
     if([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]){
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -50,7 +50,6 @@
     if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]){
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-    
     [self initImageScrollView];
     [self createMenuView];
     [self createNaviGationViews];
@@ -166,6 +165,12 @@
     
     [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
 }
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [_scrollView touchesBegan:touches withEvent:event];
+//}
+//- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [_scrollView touchesMoved:touches withEvent:event];
+//}
 #pragma mark- ScrollView delegate
 - (void)fixZoomScaleWithAnimated:(BOOL)animated{
     CGFloat minZoomScale = _scrollView.minimumZoomScale;

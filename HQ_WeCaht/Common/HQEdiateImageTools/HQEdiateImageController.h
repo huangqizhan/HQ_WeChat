@@ -24,9 +24,12 @@
 
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated;
+
 - (void)resetZoomScaleWithAnimated:(BOOL)animated;
 
 - (void)resetBottomViewEdiateStatus;
+
+- (void)resetImageViewFrame;
 
 
 @end

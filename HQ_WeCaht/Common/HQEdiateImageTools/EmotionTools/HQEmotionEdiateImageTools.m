@@ -8,10 +8,15 @@
 
 #import "HQEmotionEdiateImageTools.h"
 #import "HQEdiateImageController.h"
+#import "HQEdiateImgView.h"
+
+
 
 @interface HQEmotionEdiateImageTools ()<UICollectionViewDelegate,UICollectionViewDataSource>{
     
     CGSize _originalImageSize;
+    //修改前的图片
+    UIImage *_originalImage;
     
 }
 
@@ -19,6 +24,7 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray *emotionArray;
+@property (nonatomic) NSMutableArray *emotionViewArray;
 @property (nonatomic) UIView *workView;
 
 @end
@@ -34,11 +40,11 @@
     
     _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
     
-    
+    _originalImage = self.imageEdiateController.ediateImageView.image;
     _originalImageSize = self.imageEdiateController.ediateImageView.image.size;
     
     _workView = [[UIView alloc] initWithFrame:self.imageEdiateController.ediateImageView.bounds];
-    _workView.backgroundColor = [UIColor clearColor];
+    _workView.clipsToBounds = YES;
     [self.imageEdiateController.ediateImageView addSubview:_workView];
     
     self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
@@ -53,7 +59,7 @@
     
     
     _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 120)];
-    _drawMenuView.backgroundColor = [UIColor clearColor];
+    _drawMenuView.backgroundColor = BOTTOMBARCOLOR;
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -74,6 +80,11 @@
 }
 
 - (void)backButtonAction:(UIButton *)sender{
+    if (self.emotionViewArray.count) {
+        HQEdiateImgView *ediateView = self.emotionViewArray.lastObject;
+        [self deleteEdiateImageViewWith:ediateView];
+    }
+    [self setReBackButtonStatusWith:self.emotionViewArray.count?YES:NO];
 }
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
@@ -94,6 +105,13 @@
     }];
 }
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self clearaAllEdiateImageViewSeleteStatus];
+        UIImage *image = [self buildImage:_originalImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(image, nil, nil);
+        });
+    });
 }
 #pragma mark   -------- UICollectionViewDelegate   UICollectionViewDataSourse --------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -107,7 +125,40 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
+    [self ClickEmotionItem:indexPath];
+}
+#pragma mark -------- 点击表情处理 -------
+- (void)ClickEmotionItem:(NSIndexPath *)indexPath{
+    [self clearaAllEdiateImageViewSeleteStatus];
+    HQEdiateImgView *ediateImage = [[HQEdiateImgView  alloc] initWithContentImage:[UIImage imageNamed:self.emotionArray[indexPath.item]]];
+    ediateImage.center = CGPointMake(_workView.width/2, _workView.height/2);
+    [ediateImage setActiveEmoticonViewWithActive:YES];
+    WEAKSELF;
+    [ediateImage setBeginDragCallBack:^(HQEdiateImgView *ediateView){
+        [weakSelf clearaAllEdiateImageViewSeleteStatus];
+    }];
+    [ediateImage setDeleteEdiateImageViewCallBack:^(HQEdiateImgView *ediateView){
+        [weakSelf deleteEdiateImageViewWith:ediateView];
+    }];
+    [self.emotionViewArray addObject:ediateImage];
+    [_workView addSubview:ediateImage];
+    [self setReBackButtonStatusWith:self.emotionViewArray.count?YES:NO];
+}
+- (void)clearaAllEdiateImageViewSeleteStatus{
+    for (HQEdiateImgView *emotionView in self.emotionViewArray) {
+        [emotionView setActiveEmoticonViewWithActive:NO];
+    }
+}
+- (void)deleteEdiateImageViewWith:(HQEdiateImgView *)ediateImageVierw{
+    if (ediateImageVierw) {
+        [self.emotionViewArray removeObject:ediateImageVierw];
+        [ediateImageVierw removeFromSuperview];
+        if (self.emotionViewArray.count) {
+            HQEdiateImgView *LastemotionView = self.emotionViewArray.lastObject;
+            [LastemotionView setActiveEmoticonViewWithActive:YES];
+        }
+    }
+    [self setReBackButtonStatusWith:self.emotionViewArray.count?YES:NO];
 }
 - (NSMutableArray *)emotionArray{
     if (_emotionArray == nil) {
@@ -116,12 +167,17 @@
     }
     return _emotionArray;
 }
+- (NSMutableArray *)emotionViewArray{
+    if (_emotionViewArray== nil) {
+        _emotionViewArray = [NSMutableArray new];
+    }
+    return _emotionViewArray;
+}
 - (UICollectionView *)collectionView{
     if (_collectionView == nil) {
         UICollectionViewFlowLayout *layput = [[UICollectionViewFlowLayout alloc] init];
         layput.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layput.sectionInset = UIEdgeInsetsMake(0, 0,0, 0);
-//        layput.headerReferenceSize = CGSizeMake(App_Frame_Width, 0.1);
 
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, App_Frame_Width-20, 70) collectionViewLayout:layput];
         _collectionView.delegate  = self;
@@ -133,6 +189,48 @@
     }
     return _collectionView;
 }
+- (void)setReBackButtonStatusWith:(BOOL)active{
+    [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime: 0
+                                relativeDuration: 1 / 3.0
+                                      animations: ^{
+                                          if (active) {
+                                              _backButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                          }else{
+                                              _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                          }
+                                      }];
+        //        [UIView addKeyframeWithRelativeStartTime: 1 / 3.0
+        //                                relativeDuration: 1 / 3.0
+        //                                      animations: ^{
+        //                                          _backButton.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        //                                      }];
+        //        [UIView addKeyframeWithRelativeStartTime: 2 / 3.0
+        //                                relativeDuration: 1 / 3.0
+        //                                      animations: ^{
+        //                                          _backButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        //                                      }];
+    } completion: ^(BOOL finished) {
+        
+    }];
+}
+- (UIImage*)buildImage:(UIImage*)image{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    
+    [image drawAtPoint:CGPointZero];
+    
+    //缩放比例
+    CGFloat scale = image.size.width / _workView.width;
+    CGContextScaleCTM(UIGraphicsGetCurrentContext(), scale, scale);
+    [_workView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return tmp;
+}
+
 //图片
 + (UIImage*)defaultIconImage{
     return [UIImage imageNamed:@"ToolViewEmotion"];

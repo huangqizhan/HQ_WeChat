@@ -49,7 +49,7 @@
     
     
     _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 100)];
-    _drawMenuView.backgroundColor = [UIColor clearColor];
+    _drawMenuView.backgroundColor = BOTTOMBARCOLOR;
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -196,7 +196,14 @@
 
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = [self buildImage];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(image, nil, nil);
+        });
+    });
+
 }
 - (void)setReBackButtonStatusWith:(BOOL)active{
         [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
@@ -222,6 +229,15 @@
         } completion: ^(BOOL finished) {
             
         }];
+}
+- (UIImage*)buildImage{
+    UIGraphicsBeginImageContextWithOptions(_mosaicView.bounds.size, NO, 0);
+    [_mosaicView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    return image;
 }
 
 //图片
