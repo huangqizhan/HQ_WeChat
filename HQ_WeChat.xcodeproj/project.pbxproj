@@ -76,6 +76,7 @@
 		FD1DDF801F27361600AAC89D /* HQDrawEdiateImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDF7F1F27361600AAC89D /* HQDrawEdiateImageTools.m */; };
 		FD1DDF831F27363000AAC89D /* HQCutEdiateImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDF821F27363000AAC89D /* HQCutEdiateImageTools.m */; };
 		FD1DDF861F2736E000AAC89D /* HQEdiateImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1DDF851F2736E000AAC89D /* HQEdiateImageController.m */; };
+		FD20EEE81F428E5A0067152E /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD20EEE71F428E5A0067152E /* TestView.xib */; };
 		FD211C311EC143DB0040771A /* HQGifPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD211C2E1EC143DB0040771A /* HQGifPlayManager.m */; };
 		FD211C321EC143DB0040771A /* HQPlayGifImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD211C301EC143DB0040771A /* HQPlayGifImageView.m */; };
 		FD2476C61E6F91440085A23C /* HQMessageBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2476C51E6F91440085A23C /* HQMessageBaseController.m */; };
@@ -613,6 +614,7 @@
 		FD1DDF821F27363000AAC89D /* HQCutEdiateImageTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCutEdiateImageTools.m; sourceTree = "<group>"; };
 		FD1DDF841F2736E000AAC89D /* HQEdiateImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImageController.h; sourceTree = "<group>"; };
 		FD1DDF851F2736E000AAC89D /* HQEdiateImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateImageController.m; sourceTree = "<group>"; };
+		FD20EEE71F428E5A0067152E /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
 		FD211C2D1EC143DB0040771A /* HQGifPlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQGifPlayManager.h; sourceTree = "<group>"; };
 		FD211C2E1EC143DB0040771A /* HQGifPlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQGifPlayManager.m; sourceTree = "<group>"; };
 		FD211C2F1EC143DB0040771A /* HQPlayGifImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPlayGifImageView.h; sourceTree = "<group>"; };
@@ -2117,6 +2119,7 @@
 			children = (
 				FD66A3501EBABFF400623F34 /* HttpReDefine.h */,
 				FD66A3511EBABFF400623F34 /* HttpReDefine.m */,
+				FD20EEE71F428E5A0067152E /* TestView.xib */,
 			);
 			path = temp;
 			sourceTree = "<group>";
@@ -3045,6 +3048,7 @@
 				FD8DD7F71EB81D54002125CD /* 11.gif in Resources */,
 				FDD18CF31F131EFA00E260BD /* Info.plist in Resources */,
 				FD6649DD1EBC6EFF005E340B /* g11.gif in Resources */,
+				FD20EEE81F428E5A0067152E /* TestView.xib in Resources */,
 				FD2653771EE92030006BAB5E /* Tuzki_10.gif in Resources */,
 				FD8DD7C01EB81D54002125CD /* 66.gif in Resources */,
 				FD8DD7D01EB81D54002125CD /* 50.gif in Resources */,

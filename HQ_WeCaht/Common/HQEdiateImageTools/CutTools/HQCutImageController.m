@@ -48,6 +48,7 @@
     [self createMenuView];
     
     _ediateImageView= [[UIImageView alloc] init];
+    _ediateImageView.image = _originalImage;
     [_scrollView addSubview:_ediateImageView];
     [self refreshImageView];
     
@@ -57,32 +58,32 @@
     self.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
     self.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
-    _gridView = [[HQEdiateImageCutView alloc] initWithSuperview:self.view frame:_ediateImageView.frame];
+    CGRect gridFrame = [self.scrollView convertRect:_ediateImageView.frame toView:self.view];
+    _gridView = [[HQEdiateImageCutView alloc] initWithSuperview:self.view frame:gridFrame];
     _gridView.imageEdiateController = self;
     _gridView.backgroundColor = [UIColor clearColor];
     _gridView.bgColor = [UIColor clearColor];
     _gridView.gridColor = [UIColor whiteColor];
     //[[UIColor whiteColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
-//    [self resetScrollViewContentinsetWith:_gridView.frame];
-    [self fixZoomScaleWithAnimated:YES];
+    [self resetScrollViewContentinsetWith:_gridView.gridLayer.frame];
+//    [self fixZoomScaleWithAnimated:YES];
 }
 //底层ScrollView
 - (void)initImageScrollView{
-    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, App_Frame_Width, APP_Frame_Height-20-80)];
+    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, App_Frame_Width-40, APP_Frame_Height-20-80)];
     imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageScroll.showsHorizontalScrollIndicator = NO;
     imageScroll.showsVerticalScrollIndicator = NO;
-    imageScroll.backgroundColor = [UIColor redColor];
+    imageScroll.backgroundColor = [UIColor blackColor];
     imageScroll.delegate = self;
     imageScroll.clipsToBounds = NO;
     [self.view insertSubview:imageScroll atIndex:0];
-    _scrollView = imageScroll;
+    self.scrollView = imageScroll;
 }
 - (void)createMenuView{
-    
-    _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height-80, self.view.width, 80) ];
-    _menuView.backgroundColor = [UIColor grayColor];
+    _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height-80, self.view.width, 80)];
+    _menuView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_menuView];
     
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];
@@ -118,39 +119,48 @@
 - (void)rebackButtonAction:(UIButton *)sender{
     
 }
+///完成
 - (void)confirmButtonAction:(UIButton *)sender{
-    
+    [UIView animateWithDuration:0.35 animations:^{
+        _gridView.clippingRect = _gridView.bounds;
+    }];
 }
 - (void)refreshImageView{
     _ediateImageView.image = _originalImage;
     [self resetImageViewFrame];
-    [self resetZoomScaleWithAnimated:YES];
+//    [self resetZoomScaleWithAnimated:YES];
 }
 - (void)resetImageViewFrame{
     CGSize size = (_ediateImageView.image) ? _ediateImageView.image.size : _ediateImageView.frame.size;
     if(size.width>0 && size.height>0){
-        CGFloat ratio = MIN(App_Frame_Width / size.width, (APP_Frame_Height - 20 - 120) / size.height);
+        CGFloat ratio = MIN((App_Frame_Width-40) / size.width, (APP_Frame_Height - 20 - 80) / size.height);
          CGFloat scale = _scrollView.zoomScale;
         CGFloat W = ratio * size.width *scale;
         CGFloat H = ratio * size.height * scale;
-        _ediateImageView.frame = CGRectMake(MAX(0, (App_Frame_Width-W)/2), MAX(20, ((APP_Frame_Height - 20 - 120)-H)/2), W, H);;
+        _ediateImageView.frame = CGRectMake(MAX(0, ((App_Frame_Width-40) -W)/2), MAX(20, ((APP_Frame_Height - 20 - 80)-H)/2), W, H);
     }
 }
 - (void)resetScrollViewContentinsetWith:(CGRect )frame{
-    CGRect newRect = [_gridView convertRect:frame toView:self.view];
-    _scrollView.contentInset = UIEdgeInsetsMake(newRect.origin.y-20, newRect.origin.x ,_scrollView.height - newRect.size.height - newRect.origin.y + 20 , _scrollView.width - newRect.size.width - newRect.origin.x);
+    ////刚开始系统默认  scrollView.contentInset的top  是放大视图ediateImageView的top      scrollView.contentInset的tleft 是放大视图ediateImageView的left  bottom 是0 right是0
+    CGRect newRect = [_gridView convertRect:frame toView:self.scrollView];//newRect.origin.y-20
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, newRect.origin.x , self.scrollView.height-newRect.size.height, self.scrollView.width - newRect.size.width - newRect.origin.x);
+//    UIEdgeInsets inset = self.scrollView.contentInset;
+//    CGSize size = self.scrollView.contentSize;
+//    CGPoint point = self.scrollView.contentOffset;
+//    NSLog(@"mkl;sd");
+    ///self.scrollView.height - newRect.size.height - newRect.origin.y
 }
-- (void)resetZoomScaleWithAnimated:(BOOL)animated{
-    CGFloat Rw = _scrollView.frame.size.width / _ediateImageView.frame.size.width;
-    CGFloat Rh = _scrollView.frame.size.height / _ediateImageView.frame.size.height;
-    CGFloat scale = 1;
-    Rw = MAX(Rw, _ediateImageView.image.size.width / (scale * _scrollView.frame.size.width));
-    Rh = MAX(Rh, _ediateImageView.image.size.height / (scale * _scrollView.frame.size.height));
-    _scrollView.contentSize = _ediateImageView.frame.size;
-    _scrollView.minimumZoomScale = 1;
-    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
+//- (void)resetZoomScaleWithAnimated:(BOOL)animated{
+//    CGFloat Rw = _scrollView.frame.size.width / _ediateImageView.frame.size.width;
+//    CGFloat Rh = _scrollView.frame.size.height / _ediateImageView.frame.size.height;
+//    CGFloat scale = 1;
+//    Rw = MAX(Rw, _ediateImageView.image.size.width / (scale * _scrollView.frame.size.width));
+//    Rh = MAX(Rh, _ediateImageView.image.size.height / (scale * _scrollView.frame.size.height));
+//    _scrollView.contentSize = _ediateImageView.frame.size;
+//    _scrollView.minimumZoomScale = 1;
+//    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
 //    [_scrollView setZoomScale:1.01 animated:animated];
-}
+//}
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated{
     CGFloat minZoomScale = _scrollView.minimumZoomScale;
@@ -166,7 +176,7 @@
 //    scrollView.contentInset = UIEdgeInsetsZero;
 }
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self refreshImageContainerViewCenter];
+//    [self refreshImageContainerViewCenter];
 }
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
 //    [self refreshScrollViewContentSize];

@@ -20,7 +20,6 @@ static const NSUInteger RightBottomCircleView = 4;
 
 @interface HQEdiateImageCutView (){
     
-    CutLineView *_gridLayer;
     //4个角
     CutCircleView *_ltView;
     CutCircleView *_lbView;
@@ -120,8 +119,7 @@ static const NSUInteger RightBottomCircleView = 4;
     CGFloat ratio = (sender.view.tag == LeftBottomCircleView || sender.view.tag == RightTopCircleView) ? -0 : 0;
     
     switch (sender.view.tag) {
-        case LeftTopCircleView: // upper left
-        {
+        case LeftTopCircleView:{// upper left
             maxX = MAX((rct.origin.x + rct.size.width)  - 0.1 * W, 0.1 * W);
             maxY = MAX((rct.origin.y + rct.size.height) - 0.1 * H, 0.1 * H);
             
@@ -136,20 +134,17 @@ static const NSUInteger RightBottomCircleView = 4;
                 
                 if(-dp.x*ratio + dp.y > 0){ point.x = (point.y - y0) / ratio; }
                 else{ point.y = point.x * ratio + y0; }
-            }
-            else{
+            }else{
                 point.x = MAX(minX, MIN(point.x, maxX));
                 point.y = MAX(minY, MIN(point.y, maxY));
             }
-            
             rct.size.width  = rct.size.width  - (point.x - rct.origin.x);
             rct.size.height = rct.size.height - (point.y - rct.origin.y);
             rct.origin.x = point.x;
             rct.origin.y = point.y;
             break;
         }
-        case LeftBottomCircleView: // lower left
-        {
+        case LeftBottomCircleView:{// lower left
             maxX = MAX((rct.origin.x + rct.size.width)  - 0.1 * W, 0.1 * W);
             minY = MAX(rct.origin.y + 0.1 * H, 0.1 * H);
             
@@ -164,8 +159,7 @@ static const NSUInteger RightBottomCircleView = 4;
                 
                 if(-dp.x*ratio + dp.y < 0){ point.x = (point.y - y0) / ratio; }
                 else{ point.y = point.x * ratio + y0; }
-            }
-            else{
+            }else{
                 point.x = MAX(minX, MIN(point.x, maxX));
                 point.y = MAX(minY, MIN(point.y, maxY));
             }
@@ -175,8 +169,7 @@ static const NSUInteger RightBottomCircleView = 4;
             rct.origin.x = point.x;
             break;
         }
-        case RightTopCircleView: // upper right
-        {
+        case RightTopCircleView:{
             minX = MAX(rct.origin.x + 0.1 * W, 0.1 * W);
             maxY = MAX((rct.origin.y + rct.size.height) - 0.1 * H, 0.1 * H);
             
@@ -192,19 +185,16 @@ static const NSUInteger RightBottomCircleView = 4;
                 
                 if(-dp.x*ratio + dp.y > 0){ point.x = (point.y - y0) / ratio; }
                 else{ point.y = point.x * ratio + y0; }
-            }
-            else{
+            }else{
                 point.x = MAX(minX, MIN(point.x, maxX));
                 point.y = MAX(minY, MIN(point.y, maxY));
             }
-            
             rct.size.width  = point.x - rct.origin.x;
             rct.size.height = rct.size.height - (point.y - rct.origin.y);
             rct.origin.y = point.y;
             break;
         }
-        case RightBottomCircleView: // lower right
-        {
+        case RightBottomCircleView:{// lower right
             minX = MAX(rct.origin.x + 0.1 * W, 0.1 * W);
             minY = MAX(rct.origin.y + 0.1 * H, 0.1 * H);
             
@@ -220,8 +210,7 @@ static const NSUInteger RightBottomCircleView = 4;
                 
                 if(-dp.x*ratio + dp.y < 0){ point.x = (point.y - y0) / ratio; }
                 else{ point.y = point.x * ratio + y0; }
-            }
-            else{
+            }else{
                 point.x = MAX(minX, MIN(point.x, maxX));
                 point.y = MAX(minY, MIN(point.y, maxY));
             }
@@ -234,7 +223,7 @@ static const NSUInteger RightBottomCircleView = 4;
     }
     self.clippingRect = rct;
     CGRect newRect = [self convertRect:rct toView:self.imageEdiateController.view];
-    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(newRect.origin.y-20, newRect.origin.x ,self.imageEdiateController.scrollView.height - newRect.size.height - newRect.origin.y + 20 , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x);
+    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(rct.origin.y, newRect.origin.x-20 ,self.imageEdiateController.scrollView.height-rct.origin.y-rct.size.height , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x+20);
 }
 #pragma mark --------- 事件处理    -----------
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{

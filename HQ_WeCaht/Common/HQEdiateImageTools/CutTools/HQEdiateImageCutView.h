@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
+@class CutLineView;
+
 @class HQCutImageController;
 
 @interface HQEdiateImageCutView : UIView<UIGestureRecognizerDelegate>
@@ -16,6 +18,7 @@
 
 @property (nonatomic,weak) HQCutImageController *imageEdiateController;
 
+@property (nonatomic,strong) CutLineView *gridLayer;
 @property (nonatomic, assign) CGRect clippingRect;  //裁剪范围
 
 - (id)initWithSuperview:(UIView*)superview frame:(CGRect)frame;
