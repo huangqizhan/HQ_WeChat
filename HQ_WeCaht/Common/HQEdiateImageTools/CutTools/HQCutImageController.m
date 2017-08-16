@@ -108,6 +108,9 @@
 }
 ///取消
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
+    if (_endEdiateImageCallBack) {
+        _endEdiateImageCallBack();
+    }
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 ///旋转
@@ -119,15 +122,30 @@
 ///完成
 - (void)confirmButtonAction:(UIButton *)sender{
     [UIView animateWithDuration:0.35 animations:^{
-        [self refreshScrollViewToScalCenter:CGPointZero];
-        _gridView.clippingRect = _gridView.bounds;
+        [self refreshScrollViewToScaleRect];
+    } completion:^(BOOL finished) {
+        
     }];
 }
-- (void)refreshScrollViewToScalCenter:(CGPoint )center{
-    CGFloat wroate = _gridView.width/_gridView.gridLayer.clippingRect.size.width;
-    CGFloat hroate = _gridView.height/_gridView.gridLayer.clippingRect.size.height;
-    CGFloat raote  = self.scrollView.zoomScale + MIN(wroate, hroate);
-    [self.scrollView setZoomScale:raote];
+- (void)refreshScrollViewToScaleRect{
+    CGFloat origalscale = _gridView.width/_gridView.height;
+    CGFloat newscale = _gridView.gridLayer.clippingRect.size.width/_gridView.gridLayer.clippingRect.size.height;
+    CGSize newSize ;
+    if (newscale > origalscale) {
+        newSize.width =   _gridView.width;
+        newSize.height = (_gridView.width/_gridView.gridLayer.clippingRect.size.width)*_gridView.gridLayer.clippingRect.size.height;
+    }else{
+        newSize.height = _gridView.height;
+        newSize.width = (_gridView.height/_gridView.gridLayer.clippingRect.size.height)*_gridView.gridLayer.clippingRect.size.width;
+    }
+    CGPoint origalcenter = CGPointMake(_gridView.width/2.0, _gridView.height/2.0);
+    CGRect originalRect = [_gridView convertRect:_gridView.gridLayer.clippingRect toView:self.ediateImageView];
+    
+    CGRect targetRect = CGRectMake(origalcenter.x - newSize.width/2.0, origalcenter.y - newSize.height/2.0, newSize.width, newSize.height);
+    
+    _gridView.clippingRect = targetRect;
+    [self.scrollView zoomToRect:originalRect animated:YES];
+    
 }
 - (void)refreshImageView{
     _ediateImageView.image = _originalImage;

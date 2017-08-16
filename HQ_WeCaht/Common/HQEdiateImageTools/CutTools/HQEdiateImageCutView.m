@@ -59,6 +59,9 @@ static const NSUInteger RightBottomCircleView = 4;
 - (void)setClippingRect:(CGRect)clippingRect{
     _clippingRect = clippingRect;
     
+    CGRect newRect = [self convertRect:clippingRect toView:self.imageEdiateController.view];
+    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(clippingRect.origin.y, newRect.origin.x-20 ,self.imageEdiateController.scrollView.height-clippingRect.origin.y-clippingRect.size.height , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x+20);
+
     _ltView.center = [self.superview convertPoint:CGPointMake(_clippingRect.origin.x, _clippingRect.origin.y) fromView:self];
     _lbView.center = [self.superview convertPoint:CGPointMake(_clippingRect.origin.x, _clippingRect.origin.y+_clippingRect.size.height) fromView:self];
     _rtView.center = [self.superview convertPoint:CGPointMake(_clippingRect.origin.x+_clippingRect.size.width, _clippingRect.origin.y) fromView:self];
@@ -222,8 +225,8 @@ static const NSUInteger RightBottomCircleView = 4;
             break;
     }
     self.clippingRect = rct;
-    CGRect newRect = [self convertRect:rct toView:self.imageEdiateController.view];
-    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(rct.origin.y, newRect.origin.x-20 ,self.imageEdiateController.scrollView.height-rct.origin.y-rct.size.height , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x+20);
+//    CGRect newRect = [self convertRect:rct toView:self.imageEdiateController.view];
+//    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(rct.origin.y, newRect.origin.x-20 ,self.imageEdiateController.scrollView.height-rct.origin.y-rct.size.height , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x+20);
 }
 #pragma mark --------- 事件处理    -----------
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{

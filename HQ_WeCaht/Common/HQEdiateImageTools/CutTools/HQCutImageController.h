@@ -15,4 +15,7 @@
 ////要编辑的image
 @property (nonatomic,strong) UIImage *originalImage;
 
+////结束编辑
+@property (nonatomic,copy) void (^endEdiateImageCallBack)();
+
 @end
