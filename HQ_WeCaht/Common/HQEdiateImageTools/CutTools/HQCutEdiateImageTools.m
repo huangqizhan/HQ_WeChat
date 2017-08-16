@@ -38,12 +38,12 @@
     
     HQCutImageController *cutVc  = [[HQCutImageController alloc] init];
     cutVc.originalImage = self.imageEdiateController.originalImage;
+    cutVc.transitioningDelegate = self.imageEdiateController;
     WEAKSELF;
     [cutVc setEndEdiateImageCallBack:^{
         [weakSelf clearDrawViewButtonAction:nil];
     }];
-    [self.imageEdiateController presentViewController:cutVc animated:NO completion:nil];
-    
+    [self.imageEdiateController presentViewController:cutVc animated:YES completion:nil];
 }
 - (void)clearCurrentEdiateStatus{
     [super clearCurrentEdiateStatus];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface HQCutImageController : UIViewController
 
 @property (nonatomic) UIScrollView *scrollView;
@@ -17,5 +18,14 @@
 
 ////结束编辑
 @property (nonatomic,copy) void (^endEdiateImageCallBack)();
+
+@end
+
+
+
+
+
+
+@interface CoverView : UIView
 
 @end

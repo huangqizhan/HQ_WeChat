@@ -10,6 +10,7 @@
 #import "HQEdiateBottomView.h"
 #import "HQEdiateImageBaseTools.h"
 #import "HQEdiateToolInfo.h"
+#import "HQCutImageController.h"
 
 
 
@@ -203,4 +204,97 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark ------- UIViewControllerTransitioningDelegate ------
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    HQEdiateImageControllerEdiateTranstion* animator = [[HQEdiateImageControllerEdiateTranstion alloc] initWithPresenting:YES];
+    return animator;
+}
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    HQEdiateImageControllerEdiateTranstion* animator = [[HQEdiateImageControllerEdiateTranstion alloc] initWithPresenting:NO];
+    return animator;
+}
+
+@end
+
+
+
+@implementation HQEdiateImageControllerEdiateTranstion
+
+- (instancetype)initWithPresenting:(BOOL)presenting{
+    self = [super init];
+    if (self) {
+    }
+    self.presenting = presenting;
+    return self;
+}
+// 返回动画时长
+- (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
+    return 0.35;
+}
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    if (self.presenting) {
+        [self presentingAnimation:transitionContext];
+    }
+    else {
+        [self dismissingAnimation:transitionContext];
+    }
+}
+// present视图控制器的自定义动画(modal出视图控制器)
+- (void)presentingAnimation:(id<UIViewControllerContextTransitioning>)transitionContext {
+    // 通过字符串常量Key从转场上下文种获得相应的对象
+    UIView *containerView = [transitionContext containerView];
+    HQEdiateImageController *fromVC = (HQEdiateImageController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIView *fromView = fromVC.view;
+    
+    HQCutImageController *toVC = (HQCutImageController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *toView = toVC.view;
+    
+    // 要将toView添加到容器视图中
+    [containerView addSubview:toView];
+    toView.transform = CGAffineTransformIdentity;
+    toView.alpha = 0;
+    fromView.alpha = 1;
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+    } completion:^(BOOL finished) {
+        BOOL success = ![transitionContext transitionWasCancelled];
+        [UIView animateWithDuration:.35 animations:^{
+            toView.alpha = 1;
+            fromView.alpha = 0;
+        } completion:^(BOOL finished) {
+            // 注意:这边一定要调用这句否则UIKit会一直等待动画完成
+            [transitionContext completeTransition:success];
+        }];
+    }];
+}
+// dissmiss视图控制器的自定义动画(关闭modal视图控制器)
+- (void)dismissingAnimation:(id<UIViewControllerContextTransitioning>)transitionContext {
+    // 通过字符串常量Key从转场上下文种获得相应的对象
+    UIView *containerView = [transitionContext containerView];
+    HQCutImageController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIView *fromView = fromVC.view;
+    //[transitionContext viewForKey:UITransitionContextFromViewKey];
+    HQEdiateImageController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *toView = toVC.view;
+    //    [transitionContext viewForKey:UITransitionContextToViewKey];
+    // 先把原来的视图添加回去
+    [containerView insertSubview:toView atIndex:0];
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        //        fromView.transform = CGAffineTransformMakeScale(1.0, 0.001);
+        toView.transform = CGAffineTransformIdentity;
+        //sy这边不能直接设置成0,否则看不出动画效果
+    } completion:^(BOOL finished){
+        [UIView animateWithDuration:.35 animations:^{
+            toView.alpha = 1.0;
+            fromView.alpha = 0.0;
+        }completion:^(BOOL finished) {
+            BOOL success = ![transitionContext transitionWasCancelled];
+            // 注意要把视图移除
+            [fromView removeFromSuperview];
+            // 注意:这边一定要调用这句否则UIKit会一直等待动画完成
+            [transitionContext completeTransition:success];
+        }];
+    }];
+}
+
+
 @end

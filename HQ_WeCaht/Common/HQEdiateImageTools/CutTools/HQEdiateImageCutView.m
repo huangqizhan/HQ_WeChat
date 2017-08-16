@@ -67,6 +67,7 @@ static const NSUInteger RightBottomCircleView = 4;
     _rtView.center = [self.superview convertPoint:CGPointMake(_clippingRect.origin.x+_clippingRect.size.width, _clippingRect.origin.y) fromView:self];
     _rbView.center = [self.superview convertPoint:CGPointMake(_clippingRect.origin.x+_clippingRect.size.width, _clippingRect.origin.y+_clippingRect.size.height) fromView:self];
     
+
     _gridLayer.clippingRect = clippingRect;
     [self setNeedsDisplay];
 }
@@ -107,11 +108,18 @@ static const NSUInteger RightBottomCircleView = 4;
 }
 //拖动4个角
 - (void)panCircleView:(UIPanGestureRecognizer*)sender{
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewWillBeginDrag:)]) {
+            [_delegate EdiateImageCutViewWillBeginDrag:self] ;
+        }
+    }else if (sender.state == UIGestureRecognizerStateEnded){
+        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewDidEndDrag:)]) {
+            [_delegate EdiateImageCutViewDidEndDrag:self] ;
+        }
+    }
     CGPoint point = [sender locationInView:self];
     CGPoint dp = [sender translationInView:self];
-    
     CGRect rct = self.clippingRect;
-    
     const CGFloat W = self.frame.size.width;
     const CGFloat H = self.frame.size.height;
     CGFloat minX = 0;
@@ -234,11 +242,13 @@ static const NSUInteger RightBottomCircleView = 4;
 }
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     [super hitTest:point withEvent:event];
-    if ([self pointInside:point withEvent:event]) {
+  if ([self pointInside:point withEvent:event]) {
         return self.imageEdiateController.scrollView;
     }
     return nil;
 }
+
+
 @end
 
 

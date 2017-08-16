@@ -10,7 +10,15 @@
 #import "HQEdiateImageCutView.h"
 
 
-@interface HQCutImageController () <UIScrollViewDelegate>
+
+
+
+
+#define COVERVIEWCOLOR  [UIColor colorWithRed:0 green:00 blue:0 alpha:0.4]
+
+@interface HQCutImageController () <UIScrollViewDelegate,HQCutCircleViewPanGestureDelegate>{
+    CGRect _originalRect;
+}
 
 @property (nonatomic) UIImageView *ediateImageView;
 
@@ -19,6 +27,10 @@
 @property (nonatomic) UIButton *rotateButton;
 @property (nonatomic) UIButton *reBackButton;
 @property (nonatomic) UIButton *confirmButton;
+@property (nonatomic) UIView *topCoverView;
+@property (nonatomic) CoverView *leftCoverView;
+@property (nonatomic) CoverView *bottomCoverView;
+@property (nonatomic) CoverView *rightCoverView;
 @property (nonatomic) HQEdiateImageCutView *gridView;
 
 @end
@@ -46,11 +58,13 @@
     
     [self initImageScrollView];
     [self createMenuView];
+    [self creatCoverViewWhenCutFinish];
     
     _ediateImageView= [[UIImageView alloc] init];
     _ediateImageView.image = _originalImage;
     [_scrollView addSubview:_ediateImageView];
     [self refreshImageView];
+    
     
     self.ediateImageView.userInteractionEnabled = YES;
     self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
@@ -59,8 +73,10 @@
     self.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
     CGRect gridFrame = [self.scrollView convertRect:_ediateImageView.frame toView:self.view];
+    _originalRect =  gridFrame;
     _gridView = [[HQEdiateImageCutView alloc] initWithSuperview:self.view frame:gridFrame];
     _gridView.imageEdiateController = self;
+    _gridView.delegate = self;
     _gridView.backgroundColor = [UIColor clearColor];
     _gridView.bgColor = [UIColor clearColor];
     _gridView.gridColor = [UIColor whiteColor];
@@ -68,6 +84,7 @@
     _gridView.clipsToBounds = NO;
     [self resetScrollViewContentinsetWith:_gridView.gridLayer.frame];
     [self fixZoomScaleWithAnimated:YES];
+    
 }
 //底层ScrollView
 - (void)initImageScrollView{
@@ -91,12 +108,7 @@
     [_cancelButton addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_menuView addSubview:_cancelButton];
 
-    _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width/4.0, 20, 40, 40)];
-    [_rotateButton setImage:[UIImage imageNamed:@"EdiateImageRotaio"] forState:UIControlStateNormal];
-    [_rotateButton addTarget:self action:@selector(roateButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_menuView addSubview:_rotateButton];
-
-    _reBackButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width/2.0+20, 20, 40, 40)];
+    _reBackButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width/2.0-20, 20, 40, 40)];
     [_reBackButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
     [_reBackButton addTarget:self action:@selector(rebackButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_menuView  addSubview:_reBackButton];
@@ -106,26 +118,94 @@
     [_confirmButton addTarget:self action:@selector(confirmButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_menuView addSubview:_confirmButton];
 }
+- (void)creatCoverViewWhenCutFinish{
+    
+    _topCoverView = [[CoverView alloc] init];
+    _topCoverView.backgroundColor = COVERVIEWCOLOR;
+    [self.view addSubview:_topCoverView];
+    
+    _leftCoverView = [[CoverView alloc] init];
+    _leftCoverView.backgroundColor = COVERVIEWCOLOR;
+    [self.view addSubview:_leftCoverView];
+    
+    _bottomCoverView = [[CoverView alloc] init];
+    _bottomCoverView.backgroundColor = COVERVIEWCOLOR;
+    [self.view addSubview:_bottomCoverView];
+    
+    
+    _rightCoverView = [[CoverView alloc] init];
+    _rightCoverView.backgroundColor = COVERVIEWCOLOR;
+    [self.view addSubview:_rightCoverView];
+}
+- (void)refreshCoverViewsSizes{
+    CGRect cutRect = [_gridView.layer convertRect:_gridView.gridLayer.clippingRect toLayer:self.view.layer];
+    [UIView animateWithDuration:.002 animations:^{
+        _topCoverView.hidden = NO;
+        _leftCoverView.hidden = NO;
+        _bottomCoverView.hidden = NO;
+        _rightCoverView.hidden = NO;
+        _topCoverView.frame = CGRectMake(0, 0, App_Frame_Width, cutRect.origin.y);
+        _leftCoverView.frame = CGRectMake(0, cutRect.origin.y, cutRect.origin.x, cutRect.size.height);
+        _bottomCoverView.frame = CGRectMake(0, cutRect.origin.y + cutRect.size.height, App_Frame_Width, APP_Frame_Height-80-cutRect.origin.y + cutRect.size.height);
+        _rightCoverView.frame = CGRectMake( cutRect.origin.x + cutRect.size.width , cutRect.origin.y, App_Frame_Width-cutRect.origin.x - cutRect.size.width, cutRect.size.height);
+    }];
+}
+- (void)hiddenCoverViews{
+    [UIView animateWithDuration:0.2 animations:^{
+        _topCoverView.hidden = YES;
+        _leftCoverView.hidden = YES;
+        _bottomCoverView.hidden = YES;
+        _rightCoverView.hidden = YES;
+    }];
+}
 ///取消
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     if (_endEdiateImageCallBack) {
         _endEdiateImageCallBack();
     }
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 ///旋转
 - (void)roateButtonAction:(UIButton *)sender{
-}
-////返回上一步
-- (void)rebackButtonAction:(UIButton *)sender{
-}
-///完成
-- (void)confirmButtonAction:(UIButton *)sender{
-    [UIView animateWithDuration:0.35 animations:^{
-        [self refreshScrollViewToScaleRect];
+    float centerX = _gridView.gridLayer.clippingRect.size.width/2.0;
+    float centerY = _gridView.gridLayer.clippingRect.size.height/2.0;
+    CGPoint centerPoint = [_gridView.gridLayer convertPoint:CGPointMake(centerX, centerY) toLayer:self.ediateImageView.layer];
+    CGPoint anchorPoint = CGPointMake(centerPoint.x/self.ediateImageView.width, centerPoint.y/self.ediateImageView.height);
+    float angle = M_PI/2.0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.ediateImageView.layer.anchorPoint = anchorPoint;
+        _gridView.gridLayer.anchorPoint = anchorPoint;
+        CATransform3D rotatedTransform = self.ediateImageView.layer.transform;
+        rotatedTransform = CATransform3DMakeRotation(angle, 0, 0, 1.0);
+        self.ediateImageView.layer.transform = rotatedTransform;
+        _gridView.gridLayer.transform = rotatedTransform;
     } completion:^(BOOL finished) {
         
     }];
+}
+////返回上一步
+- (void)rebackButtonAction:(UIButton *)sender{
+    [self setReBackButtonStatusWith:NO];
+    _gridView.clippingRect = CGRectMake(0, 0, _originalRect.size.width, _originalRect.size.height);
+    [self.scrollView setZoomScale:1.001 animated:YES];
+}
+///完成
+- (void)confirmButtonAction:(UIButton *)sender{
+    UIImage *oriImage = self.ediateImageView.image;
+    NSLog(@"oriImage = %@",oriImage);
+    CGFloat zoomScale = self.ediateImageView.width / self.ediateImageView.image.size.width;
+    CGRect cutRect = [_gridView.layer convertRect:_gridView.gridLayer.clippingRect toLayer:self.ediateImageView.layer];
+    cutRect.size.width  /= zoomScale;
+    cutRect.size.height /= zoomScale;
+    cutRect.origin.x    /= zoomScale;
+    cutRect.origin.y    /= zoomScale;
+    
+    CGPoint origin = CGPointMake(cutRect.origin.x, cutRect.origin.y);
+    UIGraphicsBeginImageContextWithOptions(cutRect.size, NO, self.ediateImageView.image.scale);
+    [self.ediateImageView.image drawAtPoint:origin];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSLog(@"img = %@",img);
 }
 - (void)refreshScrollViewToScaleRect{
     CGFloat origalscale = _gridView.width/_gridView.height;
@@ -159,6 +239,7 @@
         CGFloat W = ratio * size.width *scale;
         CGFloat H = ratio * size.height * scale;
         _ediateImageView.frame = CGRectMake(MAX(0, ((App_Frame_Width-40) -W)/2), MAX(0, ((APP_Frame_Height - 20 - 80)-H)/2), W, H);
+        
     }
 }
 - (void)resetScrollViewContentinsetWith:(CGRect )frame{
@@ -174,12 +255,54 @@
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return _ediateImageView;
 }
-- (void)refreshImageContainerViewCenter {
-    CGFloat offsetX = (_scrollView.width > _scrollView.contentSize.width) ? ((_scrollView.width - _scrollView.contentSize.width) * 0.5) : 0.0;
-    CGFloat offsetY = (_scrollView.height > _scrollView.contentSize.height) ? ((_scrollView.height - _scrollView.contentSize.height) * 0.5) : 0.0;
-    self.ediateImageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView{
+    [self setReBackButtonStatusWith:YES];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self refreshCoverViewsSizes];
+}
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view{
+    [self hiddenCoverViews];
+}
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale{
+    [self refreshCoverViewsSizes];
+}
+- (void)setReBackButtonStatusWith:(BOOL)active{
+    [UIView animateKeyframesWithDuration: 0.35 delay: 0 options: 0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime: 0  relativeDuration: 1 / 3.0 animations: ^{
+              if (active) {
+                  _reBackButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+              }else{
+                  _reBackButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+              }
+         }];
+    } completion: ^(BOOL finished) {
+        
+    }];
 }
 
+#pragma  ------- HQCutCircleViewPanGestureDelegate ------
+/**
+ 切图圆角将要开始拖动
+ 
+ @param ediateView HQEdiateImageCutView
+ */
+- (void)EdiateImageCutViewWillBeginDrag:(HQEdiateImageCutView *)ediateView{
+    [self hiddenCoverViews];
+}
+/**
+ 切图圆角已经停止拖动
+ 
+ @param ediateView HQEdiateImageCutView
+ */
+- (void)EdiateImageCutViewDidEndDrag:(HQEdiateImageCutView *)ediateView{
+    [UIView animateWithDuration:0.35 animations:^{
+        [self refreshScrollViewToScaleRect];
+    } completion:^(BOOL finished) {
+        
+    }];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -194,5 +317,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+@end
+
+
+
+
+
+@implementation CoverView
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    [super hitTest:point withEvent:event];
+    return nil;
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.nextResponder touchesBegan:touches withEvent:event];
+}
 
 @end

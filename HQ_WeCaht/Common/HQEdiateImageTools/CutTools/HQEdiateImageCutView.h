@@ -8,14 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
-
 @class CutLineView;
+
+@class HQEdiateImageCutView;
+
+@protocol HQCutCircleViewPanGestureDelegate <NSObject>
+
+/**
+ 切图圆角将要开始拖动
+ 
+ @param ediateView HQEdiateImageCutView
+ */
+- (void)EdiateImageCutViewWillBeginDrag:(HQEdiateImageCutView *)ediateView;
+
+
+/**
+ 切图圆角已经停止拖动
+ 
+ @param ediateView HQEdiateImageCutView
+ */
+- (void)EdiateImageCutViewDidEndDrag:(HQEdiateImageCutView *)ediateView;
+
+@end
+
+
+
+
 
 @class HQCutImageController;
 
 @interface HQEdiateImageCutView : UIView<UIGestureRecognizerDelegate>
 
 
+@property (nonatomic,weak) id <HQCutCircleViewPanGestureDelegate> delegate;
 @property (nonatomic,weak) HQCutImageController *imageEdiateController;
 
 @property (nonatomic,strong) CutLineView *gridLayer;
