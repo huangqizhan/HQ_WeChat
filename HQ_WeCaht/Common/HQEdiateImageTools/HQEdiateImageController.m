@@ -16,9 +16,8 @@
 
 
 @interface HQEdiateImageController (){
-    UIView *testView;
 }
-
+@property (nonatomic) UIView *topView;
 @property (nonatomic,strong) HQEdiateImageBaseTools *currentTool;
 
 @end
@@ -104,7 +103,7 @@
 }
 //底层ScrollView
 - (void)initImageScrollView{
-    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-80)];
+    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, App_Frame_Width, APP_Frame_Height-80-40)];
     imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageScroll.showsHorizontalScrollIndicator = NO;
     imageScroll.showsVerticalScrollIndicator = NO;
@@ -112,22 +111,26 @@
     imageScroll.delegate = self;
     imageScroll.clipsToBounds = NO;
     [self.view insertSubview:imageScroll atIndex:0];
-    
     _scrollView = imageScroll;
 }
 - (void)createNaviGationViews{
-    UIButton *cancelButton  = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
+    
+    _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, 40)];
+    _topView.backgroundColor = [UIColor  clearColor];
+    [self.view addSubview:_topView];
+    
+    UIButton *cancelButton  = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:cancelButton];
+    [_topView addSubview:cancelButton];
     
-    UIButton *finishButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-50, 10, 40, 40)];
+    UIButton *finishButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-50, 0, 40, 40)];
     [finishButton setTitle:@"完成" forState:UIControlStateNormal];
     [finishButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [finishButton setTitleColor:CANCELBUTTONCOLOR forState:UIControlStateNormal];
     [finishButton addTarget:self action:@selector(finishButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:finishButton];
+    [_topView addSubview:finishButton];
     
 }
 - (void)cancelButtonAction:(UIButton *)sender{
