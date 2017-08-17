@@ -55,7 +55,7 @@
     [self createMenuView];
     [self createNaviGationViews];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0373" ofType:@".jpg"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_2750" ofType:@".jpg"];
     _originalImage = [UIImage imageWithContentsOfFile:filePath];
     _ediateImageView= [[UIImageView alloc] init];
     [_scrollView addSubview:_ediateImageView];
@@ -84,6 +84,7 @@
 - (void)setCurrentTool:(HQEdiateImageBaseTools *)currentTool{
     [_currentTool clearCurrentEdiateStatus];
     _currentTool = currentTool;
+    [_scrollView setZoomScale:1.0 animated:YES];
     [_currentTool setUpCurrentEdiateStatus];
 }
 - (void)hiddenMenuViewWithAnimation{
@@ -94,20 +95,22 @@
 - (void)resetBottomViewEdiateStatus{
     [UIView animateWithDuration:.15 animations:^{
         _menuView.top = APP_Frame_Height - 80;
+        [_scrollView setZoomScale:1.0];
     }];
+}
+- (void)reSetEdiateControllerContentUIFrameWithBottomViewHeight:(CGFloat)bottomViewHeight{
+    self.scrollView.height = APP_Frame_Height-bottomViewHeight;
+     [self refreshImageView];
 }
 //底层ScrollView
 - (void)initImageScrollView{
-    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-80)];
     imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageScroll.showsHorizontalScrollIndicator = NO;
     imageScroll.showsVerticalScrollIndicator = NO;
     imageScroll.backgroundColor = [UIColor blackColor];
     imageScroll.delegate = self;
     imageScroll.clipsToBounds = NO;
-//    CGFloat y = self.navigationController.navigationBar.bottom;
-    imageScroll.top =  0;
-    imageScroll.height = APP_Frame_Height ;
     [self.view insertSubview:imageScroll atIndex:0];
     
     _scrollView = imageScroll;
@@ -132,7 +135,8 @@
 }
 - (void)finishButtonAction:(UIButton *)sender{
     [self.currentTool executeWithCompletionBlock:^(UIImage *image, NSError *error, NSDictionary *userInfo) {
-        NSLog(@"image = %@",image);
+        _originalImage = image;
+        [self refreshImageView];
     }];
 }
 - (void)refreshImageView{
@@ -161,16 +165,16 @@
     
     _scrollView.contentSize = _ediateImageView.frame.size;
     _scrollView.minimumZoomScale = 1;
-    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
+    _scrollView.maximumZoomScale = 10;
     
     [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
 }
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [_scrollView touchesBegan:touches withEvent:event];
-//}
-//- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [_scrollView touchesMoved:touches withEvent:event];
-//}
+- (void)refershUIWhenediateCompliteWithNewImage:(UIImage *)newImage{
+    _originalImage = newImage;
+    _ediateImageView.image = _originalImage;
+    [self resetImageViewFrame];
+    [self resetZoomScaleWithAnimated:NO];
+}
 #pragma mark- ScrollView delegate
 - (void)fixZoomScaleWithAnimated:(BOOL)animated{
     CGFloat minZoomScale = _scrollView.minimumZoomScale;
@@ -188,22 +192,13 @@
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     [self refreshImageContainerViewCenter];
 }
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    [self refreshScrollViewContentSize];
-}
-#pragma mark ----------- Private -------------
-- (void)refreshScrollViewContentSize {
-    
-}
+
 - (void)refreshImageContainerViewCenter {
     CGFloat offsetX = (_scrollView.tz_width > _scrollView.contentSize.width) ? ((_scrollView.tz_width - _scrollView.contentSize.width) * 0.5) : 0.0;
     CGFloat offsetY = (_scrollView.tz_height > _scrollView.contentSize.height) ? ((_scrollView.tz_height - _scrollView.contentSize.height) * 0.5) : 0.0;
     self.ediateImageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark ------- UIViewControllerTransitioningDelegate ------
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
     HQEdiateImageControllerEdiateTranstion* animator = [[HQEdiateImageControllerEdiateTranstion alloc] initWithPresenting:YES];
@@ -213,8 +208,45 @@
     HQEdiateImageControllerEdiateTranstion* animator = [[HQEdiateImageControllerEdiateTranstion alloc] initWithPresenting:NO];
     return animator;
 }
-
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

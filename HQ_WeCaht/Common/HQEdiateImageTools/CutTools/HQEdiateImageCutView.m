@@ -108,15 +108,6 @@ static const NSUInteger RightBottomCircleView = 4;
 }
 //拖动4个角
 - (void)panCircleView:(UIPanGestureRecognizer*)sender{
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewWillBeginDrag:)]) {
-            [_delegate EdiateImageCutViewWillBeginDrag:self] ;
-        }
-    }else if (sender.state == UIGestureRecognizerStateEnded){
-        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewDidEndDrag:)]) {
-            [_delegate EdiateImageCutViewDidEndDrag:self] ;
-        }
-    }
     CGPoint point = [sender locationInView:self];
     CGPoint dp = [sender translationInView:self];
     CGRect rct = self.clippingRect;
@@ -233,6 +224,15 @@ static const NSUInteger RightBottomCircleView = 4;
             break;
     }
     self.clippingRect = rct;
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewWillBeginDrag:)]) {
+            [_delegate EdiateImageCutViewWillBeginDrag:self] ;
+        }
+    }else if (sender.state == UIGestureRecognizerStateEnded){
+        if (_delegate && [_delegate respondsToSelector:@selector(EdiateImageCutViewDidEndDrag:)]) {
+            [_delegate EdiateImageCutViewDidEndDrag:self] ;
+        }
+    }
 //    CGRect newRect = [self convertRect:rct toView:self.imageEdiateController.view];
 //    self.imageEdiateController.scrollView.contentInset = UIEdgeInsetsMake(rct.origin.y, newRect.origin.x-20 ,self.imageEdiateController.scrollView.height-rct.origin.y-rct.size.height , self.imageEdiateController.scrollView.width - newRect.size.width - newRect.origin.x+20);
 }

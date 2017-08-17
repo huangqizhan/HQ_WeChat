@@ -15,11 +15,7 @@
 
 
 
-
-
-
-
-
+/////画的线   ////画的线是由 每一个很短的线段组成的
 
 @interface DrawPointLine : NSObject
 
@@ -36,6 +32,8 @@
 
 
 
+
+/////线上的小线段
 
 @interface DrawChildLine : NSObject
 

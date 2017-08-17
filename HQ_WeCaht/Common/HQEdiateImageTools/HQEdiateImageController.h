@@ -31,6 +31,8 @@
 
 - (void)resetImageViewFrame;
 
+- (void)refershUIWhenediateCompliteWithNewImage:(UIImage *)newImage;
+
 
 @end
 

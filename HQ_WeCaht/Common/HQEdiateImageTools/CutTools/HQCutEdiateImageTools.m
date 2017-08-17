@@ -43,6 +43,10 @@
     [cutVc setEndEdiateImageCallBack:^{
         [weakSelf clearDrawViewButtonAction:nil];
     }];
+    [cutVc setEdiateCompliteCallBack:^(UIImage *image){
+        [weakSelf clearDrawViewButtonAction:nil];
+        [weakSelf.imageEdiateController refershUIWhenediateCompliteWithNewImage:image];
+    }];
     [self.imageEdiateController presentViewController:cutVc animated:YES completion:nil];
 }
 - (void)clearCurrentEdiateStatus{
@@ -53,7 +57,6 @@
         _bottomMenuView.top = APP_Frame_Height;
     } completion:^(BOOL finished){
         [_bottomMenuView removeFromSuperview];
-        [self resetEdiateControllerOriginalStatus];
     }];
 }
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
@@ -64,16 +67,10 @@
     } completion:^(BOOL finished){
         [_bottomMenuView removeFromSuperview];
         [self.imageEdiateController resetBottomViewEdiateStatus];
-        [self resetEdiateControllerOriginalStatus];
     }];
 }
-- (void)resetEdiateControllerOriginalStatus{
-    self.imageEdiateController.scrollView.frame = CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height);
-    self.imageEdiateController.scrollView.contentSize = CGSizeMake(App_Frame_Width, APP_Frame_Height);
-    [self.imageEdiateController resetImageViewFrame];
-}
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
-    
+    completionBlock(self.imageEdiateController.ediateImageView.image,nil,nil);
 }
 
 - (void)confirmButtonAction:(UIButton *)sender{

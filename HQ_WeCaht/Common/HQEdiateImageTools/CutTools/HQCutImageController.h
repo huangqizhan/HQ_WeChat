@@ -19,6 +19,9 @@
 ////结束编辑
 @property (nonatomic,copy) void (^endEdiateImageCallBack)();
 
+////完成编辑
+@property (nonatomic,copy) void (^ediateCompliteCallBack)(UIImage *image);
+
 @end
 
 

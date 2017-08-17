@@ -8,13 +8,11 @@
 
 #import "HQCutImageController.h"
 #import "HQEdiateImageCutView.h"
+#import "UIImage+Resize.h"
 
 
 
-
-
-
-#define COVERVIEWCOLOR  [UIColor colorWithRed:0 green:00 blue:0 alpha:0.4]
+#define COVERVIEWCOLOR  [UIColor colorWithRed:0 green:00 blue:0 alpha:0.6]
 
 @interface HQCutImageController () <UIScrollViewDelegate,HQCutCircleViewPanGestureDelegate>{
     CGRect _originalRect;
@@ -191,21 +189,23 @@
 }
 ///完成
 - (void)confirmButtonAction:(UIButton *)sender{
-    UIImage *oriImage = self.ediateImageView.image;
-    NSLog(@"oriImage = %@",oriImage);
-    CGFloat zoomScale = self.ediateImageView.width / self.ediateImageView.image.size.width;
-    CGRect cutRect = [_gridView.layer convertRect:_gridView.gridLayer.clippingRect toLayer:self.ediateImageView.layer];
-    cutRect.size.width  /= zoomScale;
-    cutRect.size.height /= zoomScale;
-    cutRect.origin.x    /= zoomScale;
-    cutRect.origin.y    /= zoomScale;
-    
-    CGPoint origin = CGPointMake(cutRect.origin.x, cutRect.origin.y);
-    UIGraphicsBeginImageContextWithOptions(cutRect.size, NO, self.ediateImageView.image.scale);
-    [self.ediateImageView.image drawAtPoint:origin];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    NSLog(@"img = %@",img);
+    ////截取的起始点
+    CGPoint p = _gridView.gridLayer.clippingRect.origin;
+    ////起始点转化到图片上
+    CGPoint originPoint = [_gridView convertPoint:p toView:self.ediateImageView];
+    ///提问题没搞清楚     图片放大后 frame 宽高没有改变  乘以 放大比例
+    originPoint.x  *= self.scrollView.zoomScale;
+    originPoint.y *= self.scrollView.zoomScale;
+    ////截取图片的起始点不能超出图片的size 范围
+            ///图片放大后的size跟图片的原始size的比例
+    CGFloat imageWidthRote = self.ediateImageView.image.size.width/self.ediateImageView.width;
+    CGFloat imageHeightRote = self.ediateImageView.image.size.height/self.ediateImageView.height;
+    ////生成截取的目标frame
+    CGRect targetRect = CGRectMake(originPoint.x*imageWidthRote, originPoint.y*imageHeightRote, _gridView.gridLayer.clippingRect.size.width*imageWidthRote, _gridView.gridLayer.clippingRect.size.height*imageHeightRote);
+    ////截取图片  图片截取是按照
+    UIImage *img = [self.ediateImageView.image croppedImage:targetRect];
+    _ediateCompliteCallBack(img);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)refreshScrollViewToScaleRect{
     CGFloat origalscale = _gridView.width/_gridView.height;
@@ -218,14 +218,12 @@
         newSize.height = _gridView.height;
         newSize.width = (_gridView.height/_gridView.gridLayer.clippingRect.size.height)*_gridView.gridLayer.clippingRect.size.width;
     }
-    CGPoint origalcenter = CGPointMake(_gridView.width/2.0, _gridView.height/2.0);
     CGRect originalRect = [_gridView convertRect:_gridView.gridLayer.clippingRect toView:self.ediateImageView];
+    [self.scrollView zoomToRect:originalRect animated:NO];
     
+    CGPoint origalcenter = CGPointMake(_gridView.width/2.0, _gridView.height/2.0);
     CGRect targetRect = CGRectMake(origalcenter.x - newSize.width/2.0, origalcenter.y - newSize.height/2.0, newSize.width, newSize.height);
-    
     _gridView.clippingRect = targetRect;
-    [self.scrollView zoomToRect:originalRect animated:YES];
-    
 }
 - (void)refreshImageView{
     _ediateImageView.image = _originalImage;
@@ -292,32 +290,18 @@
 }
 /**
  切图圆角已经停止拖动
- 
  @param ediateView HQEdiateImageCutView
  */
 - (void)EdiateImageCutViewDidEndDrag:(HQEdiateImageCutView *)ediateView{
     [UIView animateWithDuration:0.35 animations:^{
         [self refreshScrollViewToScaleRect];
     } completion:^(BOOL finished) {
-        
+        [self refreshCoverViewsSizes];
     }];
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
 
 

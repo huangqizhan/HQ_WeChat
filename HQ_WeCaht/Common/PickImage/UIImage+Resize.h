@@ -10,8 +10,10 @@
 
 @interface UIImage (Resize)
 
+///截取图片  截取时  按照图片的原始size 截取   范围如果超出图片大小范围 则返回空
 - (UIImage *)croppedImage:(CGRect)bounds;
 
+///
 - (UIImage *)resizedImage:(CGSize)newSize
      interpolationQuality:(CGInterpolationQuality)quality;
 
