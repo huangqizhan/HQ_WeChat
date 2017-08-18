@@ -8,13 +8,17 @@
 
 #import "HQTextEdiateImageTools.h"
 #import "HQEdiateImageController.h"
+#import "HQEdiateImageTextView.h"
 
-@interface HQTextEdiateImageTools ()
+@interface HQTextEdiateImageTools ()<UITextViewDelegate>
 
 
 @property (nonatomic) UIView *drawMenuView;
-@property (nonatomic) UIImageView *drawImageView;
 @property (nonatomic) UISlider *colorSlider;
+@property (nonatomic) UITextView *textView;
+@property (nonatomic) UIView *topView;
+@property (nonatomic) UIView *begView;
+
 
 
 @end
@@ -65,9 +69,7 @@
     title.textColor = CANCELBUTTONCOLOR;
     [_drawMenuView addSubview:title];
     
-    
 }
-
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 30)];
     
@@ -85,19 +87,93 @@
         _drawMenuView.top = APP_Frame_Height;
     } completion:^(BOOL finished){
         [_drawMenuView removeFromSuperview];
-        [_drawImageView removeFromSuperview];
         [self.imageEdiateController resetBottomViewEdiateStatus];
     }];
 }
 - (void)addButtonAction:(UIButton *)sender{
-    
+    [self showTextViewWithText:nil];
 }
 - (void)colorSliderDidChange:(UISlider *)slider{
-    
+    if(slider.value<1/3.0){
+         _colorSlider.thumbTintColor =  [UIColor colorWithWhite:slider.value/0.3 alpha:1];
+    }else {
+     _colorSlider.thumbTintColor = [UIColor colorWithHue:((slider.value-1/3.0)/0.7)*2/3.0 saturation:1 brightness:1 alpha:1];
+  }
 }
+
+
+- (void)showTextViewWithText:(NSString *)text{
+    if (_begView == nil) {
+        _begView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-80)];
+        _begView.backgroundColor = [UIColor  clearColor];
+        [self.imageEdiateController.view addSubview:_begView];
+        
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, 40)];
+        _topView.backgroundColor = [UIColor clearColor];
+        [_begView addSubview:_topView];
+        
+        UIButton *cancelButton  = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+        [cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_topView addSubview:cancelButton];
+        
+        UIButton *finishButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-50, 0, 40, 40)];
+        [finishButton setTitle:@"完成" forState:UIControlStateNormal];
+        [finishButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+        [finishButton setTitleColor:CANCELBUTTONCOLOR forState:UIControlStateNormal];
+        [finishButton addTarget:self action:@selector(finishButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_topView addSubview:finishButton];
+        
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width,APP_Frame_Height-40)];
+        UIColor *textViewBgColor = [UIColor blackColor];
+        _textView.backgroundColor = [textViewBgColor colorWithAlphaComponent:0.85];
+        [_textView setTextColor:[UIColor whiteColor]];
+        [_textView setFont:[UIFont systemFontOfSize:30]];
+        [_textView setReturnKeyType:UIReturnKeyDone];
+        _textView.delegate = self;
+        [_begView addSubview:_textView];
+    }
+    [_textView setText:text];
+    _begView.transform = CGAffineTransformMakeTranslation(0, 600);
+    _topView.hidden = YES;
+    [UIView animateWithDuration:0.35  animations:^{
+        _begView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        _topView.hidden = NO;
+    }];
+    [_textView becomeFirstResponder];
+}
+
 - (void)clearCurrentEdiateStatus{
     [super clearCurrentEdiateStatus];
 }
+- (void)cancelButtonAction:(UIButton *)sender{
+    [self dismissBegView];
+}
+- (void)finishButtonAction:(UIButton *)sender{
+    [self dismissBegView];
+    if (_textView.text.length <= 0) {
+        return;
+    }
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:40],NSFontAttributeName:[UIColor redColor]}];
+    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self andAttrubuteString:att];
+    [self.imageEdiateController.ediateImageView addSubview:textView];
+}
+- (void)dismissBegView{
+    _topView.hidden =  YES;
+    [_textView resignFirstResponder];
+    [UIView animateWithDuration:0.35  animations:^{
+        _begView.transform = CGAffineTransformMakeTranslation(0, 600);
+    }   completion:^(BOOL finished) {
+        [_begView removeFromSuperview];
+        _begView = nil;
+    }];
+}
+
+
+
+
 - (UIImage*)colorSliderBackground{
     CGSize size = _colorSlider.frame.size;
     
