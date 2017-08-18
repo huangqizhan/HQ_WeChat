@@ -74,6 +74,7 @@
     frame.size.height += 10;
     frame.origin.x = (textTool.imageEdiateController.ediateImageView.width-frame.size.width)/2.0;
     frame.origin.y = (textTool.imageEdiateController.ediateImageView.height -frame.size.height)/2.0;
+    
     return frame;
 }
 
