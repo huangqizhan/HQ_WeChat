@@ -32,6 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self createContentImageView];
+        [self setUpGesture];
     }
      return self;
 }
@@ -41,11 +42,29 @@
     tempLabel.attributedText = self.attrubuteString;
     UIImage *image = [UIImage lw_imageFromView:tempLabel];
     _contentImageView = [[UIImageView alloc] initWithImage:image];
+    _contentImageView.backgroundColor = [UIColor redColor];
     [self addSubview:_contentImageView];
 }
 
-
-
+- (void)setUpGesture{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textvViewTapAction:)];
+    [self addGestureRecognizer:tap];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(textViewPanAction:)];
+    [self addGestureRecognizer:pan];
+    
+    UIPinchGestureRecognizer *pin = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(textActionPinAction:)];
+    [self addGestureRecognizer:pin];
+}
+- (void)textvViewTapAction:(UITapGestureRecognizer *)tap{
+    NSLog(@"textvViewTapAction");
+}
+- (void)textViewPanAction:(UIPanGestureRecognizer *)pan{
+    NSLog(@"textViewPanAction");
+}
+- (void)textActionPinAction:(UIPinchGestureRecognizer *)pin{
+    NSLog(@"textActionPinAction");
+}
 +  (CGRect)caculateContentStringWithAttrubuteString:(NSAttributedString *)attrubuteStr andTool:(HQTextEdiateImageTools *)textTool{
     if (attrubuteStr == nil) {
         attrubuteStr = [[NSAttributedString alloc] initWithString:@""];
@@ -58,6 +77,12 @@
     return frame;
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    if ([self pointInside:point withEvent:event]) {
+        return self;
+    }
+    return nil;
+}
 
 @end
 

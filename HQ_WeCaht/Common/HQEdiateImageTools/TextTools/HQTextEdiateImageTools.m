@@ -156,7 +156,7 @@
     if (_textView.text.length <= 0) {
         return;
     }
-    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:40],NSFontAttributeName:[UIColor redColor]}];
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSFontAttributeName:[UIColor redColor]}];
     HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self andAttrubuteString:att];
     [self.imageEdiateController.ediateImageView addSubview:textView];
 }
