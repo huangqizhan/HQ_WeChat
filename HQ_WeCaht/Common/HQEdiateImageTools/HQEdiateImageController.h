@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HQEdiateImageController : UIViewController <UIScrollViewDelegate> {
+@interface HQEdiateImageController : UIViewController <UIScrollViewDelegate,UIViewControllerTransitioningDelegate> {
     
     __weak UIScrollView *_scrollView;
 }
@@ -31,5 +31,18 @@
 
 - (void)resetImageViewFrame;
 
+- (void)refershUIWhenediateCompliteWithNewImage:(UIImage *)newImage;
+
+
+@end
+
+
+#pragma mark ------ 裁剪跳转界面的专场动画  ----------- 
+
+@interface HQEdiateImageControllerEdiateTranstion : NSObject<UIViewControllerAnimatedTransitioning>
+
+@property (nonatomic, assign) BOOL presenting;
+
+- (instancetype)initWithPresenting:(BOOL)presenting;
 
 @end

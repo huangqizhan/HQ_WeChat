@@ -48,14 +48,14 @@
     self.imageEdiateController.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
     
-    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 120)];
-    _drawMenuView.backgroundColor = BOTTOMBARCOLOR;
-    UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 80)];
+    _drawMenuView.backgroundColor = [UIColor clearColor];//BOTTOMBARCOLOR
+    UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 5, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
-   _backButton  = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
+   _backButton  = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 5, 40, 30)];
     [_backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:_backButton];
@@ -65,7 +65,7 @@
     [self setMenuView];
     
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
-        _drawMenuView.top = APP_Frame_Height- 120;
+        _drawMenuView.top = APP_Frame_Height- 80;
     } completion:nil];
 }
 
@@ -75,11 +75,14 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
+            self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
+            [self clearDrawViewButtonAction:nil];
         });
     });
 }
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [self clearCurrentEdiateStatus];
+    self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
         _drawMenuView.top = APP_Frame_Height;
     } completion:^(BOOL finished){
@@ -118,17 +121,17 @@
     _colorSlider.value = 0;
     [_drawMenuView addSubview:_colorSlider];
     
-    _widthSlider = [self defaultSliderWithWidth:_colorSlider.width];
-    _widthSlider.left = 10;
-    _widthSlider.top = _colorSlider.bottom + 5;
-    [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
-    _widthSlider.value = 0;
-    _widthSlider.backgroundColor =    [UIColor colorWithPatternImage:[self widthSliderBackground]];
-    [_drawMenuView addSubview:_widthSlider];
+//    _widthSlider = [self defaultSliderWithWidth:_colorSlider.width];
+//    _widthSlider.left = 10;
+//    _widthSlider.top = _colorSlider.bottom + 5;
+//    [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
+//    _widthSlider.value = 0;
+//    _widthSlider.backgroundColor =    [UIColor colorWithPatternImage:[self widthSliderBackground]];
+//    [_drawMenuView addSubview:_widthSlider];
+//    
     
-    
-    _strokePreview = [[UIView alloc] initWithFrame:CGRectMake(0, 35, W - 10, W - 10)];
-    _strokePreview.layer.cornerRadius = _strokePreview.height/2;
+    _strokePreview = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 30,30)];
+    _strokePreview.layer.cornerRadius = 15;
     _strokePreview.layer.borderWidth = 1;
     _strokePreview.layer.borderColor = [[UIColor blackColor] CGColor];
     _strokePreview.center = CGPointMake(_drawMenuView.width-W/2-10, (_drawMenuView.height-40)/2+35);
@@ -146,7 +149,8 @@
     [_drawMenuView addSubview:_eraserIcon];
     
     [self colorSliderDidChange:_colorSlider];
-    [self widthSliderDidChange:_widthSlider];
+    _strokePreview.backgroundColor = [self colorForValue:0.5];
+//    [self widthSliderDidChange:_widthSlider];
     
     _drawMenuView.clipsToBounds = NO;
 
@@ -278,7 +282,7 @@
 }
 #pragma mark- other
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 34)];
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 30)];
     
     [slider setMaximumTrackImage:[UIImage new] forState:UIControlStateNormal];
     [slider setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal];

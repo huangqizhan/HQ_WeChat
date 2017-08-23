@@ -48,14 +48,14 @@
     self.imageEdiateController.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
     
-    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 100)];
-    _drawMenuView.backgroundColor = BOTTOMBARCOLOR;
-    UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 80)];
+    _drawMenuView.backgroundColor = [UIColor clearColor];
+    UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 5, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:cancelBut];
     
-    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 0, 40, 30)];
+    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-40, 5, 40, 30)];
     [_backButton setImage:[UIImage imageNamed:@"EditImageRevokeDisable_21x21_"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_drawMenuView addSubview:_backButton];
@@ -66,7 +66,7 @@
     [self setMenuView];
     
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
-        _drawMenuView.top = APP_Frame_Height- 100;
+        _drawMenuView.top = APP_Frame_Height- 80;
     } completion:nil];
 }
 - (void)setUpMosicView{
@@ -107,9 +107,8 @@
     }];
 }
 - (void)setMenuView{
-    CGFloat W = 80;
-    _widthSlider = [self defaultSliderWithWidth:_drawMenuView.width - W - 20];
-    _widthSlider.left = 10;
+    _widthSlider = [self defaultSliderWithWidth:_drawMenuView.width - 100];
+    _widthSlider.left = 50;
     _widthSlider.top = 40;
     [_widthSlider addTarget:self action:@selector(widthSliderDidChange:) forControlEvents:UIControlEventValueChanged];
     _widthSlider.value = 0;
@@ -122,6 +121,7 @@
 
 - (void)clearDrawViewButtonAction:(UIButton *)sender{
     [self clearCurrentEdiateStatus];
+    self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
         _drawMenuView.top = APP_Frame_Height;
     } completion:^(BOOL finished){
@@ -200,7 +200,9 @@
         UIImage *image = [self buildImage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
             completionBlock(image, nil, nil);
+            [self clearDrawViewButtonAction:nil];
         });
     });
 

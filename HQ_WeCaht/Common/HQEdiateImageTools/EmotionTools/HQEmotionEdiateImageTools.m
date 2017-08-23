@@ -58,8 +58,8 @@
     self.imageEdiateController.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
     
-    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 120)];
-    _drawMenuView.backgroundColor = BOTTOMBARCOLOR;
+    _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 80)];
+    _drawMenuView.backgroundColor = [UIColor clearColor];
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,7 +75,7 @@
     [_drawMenuView addSubview:self.collectionView];
     
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
-        _drawMenuView.top = APP_Frame_Height- 120;
+        _drawMenuView.top = APP_Frame_Height- 80;
     } completion:nil];
 }
 
@@ -110,6 +110,8 @@
         UIImage *image = [self buildImage:_originalImage];
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
+            self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
+            [self clearDrawViewButtonAction:nil];
         });
     });
 }
@@ -126,6 +128,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     [self ClickEmotionItem:indexPath];
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake (35, 35);
 }
 #pragma mark -------- 点击表情处理 -------
 - (void)ClickEmotionItem:(NSIndexPath *)indexPath{
@@ -179,10 +184,11 @@
         layput.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layput.sectionInset = UIEdgeInsetsMake(0, 0,0, 0);
 
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, App_Frame_Width-20, 70) collectionViewLayout:layput];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 35, App_Frame_Width-20, 30) collectionViewLayout:layput];
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate  = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.bounces = YES;
         [_collectionView registerClass:[EmotionCollectionViewCell class] forCellWithReuseIdentifier:@"EmotionCollectionViewCell"];
