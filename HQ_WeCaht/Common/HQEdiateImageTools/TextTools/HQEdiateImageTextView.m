@@ -15,7 +15,7 @@
 
 
 
-@interface HQEdiateImageTextView ()
+@interface HQEdiateImageTextView ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic,copy) NSAttributedString *attrubuteString;
 @property (nonatomic) UIImageView *contentImageView;
@@ -25,13 +25,15 @@
 @implementation HQEdiateImageTextView
 
 
-- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool andAttrubuteString:(NSAttributedString *)attrubute{
-    _textTool = textTool;
-    _attrubuteString = attrubute;
-    CGRect frame = [HQEdiateImageTextView caculateContentStringWithAttrubuteString:attrubute andTool:_textTool];
+- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute{
+    CGRect frame = [HQEdiateImageTextView caculateContentStringWithAttrubuteString:attrubute andTool:textTool];
     self = [super initWithFrame:frame];
     if (self) {
-        [self createContentImageView];
+        _textTool = textTool;
+        _attrubuteString = attrubute;
+        self.backgroundColor = [UIColor blackColor];
+//        [superView addSubview:self];
+//        [self createContentImageView];
         [self setUpGesture];
     }
      return self;
@@ -42,19 +44,39 @@
     tempLabel.attributedText = self.attrubuteString;
     UIImage *image = [UIImage lw_imageFromView:tempLabel];
     _contentImageView = [[UIImageView alloc] initWithImage:image];
+    _contentImageView.userInteractionEnabled = YES;
     _contentImageView.backgroundColor = [UIColor redColor];
     [self addSubview:_contentImageView];
 }
-
+- (void)refreshContentImageView{
+    
+}
 - (void)setUpGesture{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textvViewTapAction:)];
+    tap.delegate = self;
     [self addGestureRecognizer:tap];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(textViewPanAction:)];
+    pan.delegate = self;
     [self addGestureRecognizer:pan];
     
     UIPinchGestureRecognizer *pin = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(textActionPinAction:)];
+    pin.delegate = self;
     [self addGestureRecognizer:pin];
+    
+    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
+    but.backgroundColor = [UIColor redColor];
+    [but addTarget:self action:@selector(testButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:but];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchbegin");
+}
+- (void)testButtonAction:(UIButton *)sender{
+    NSLog(@"testButtonAction");
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
 }
 - (void)textvViewTapAction:(UITapGestureRecognizer *)tap{
     NSLog(@"textvViewTapAction");

@@ -157,8 +157,19 @@
         return;
     }
     NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSFontAttributeName:[UIColor redColor]}];
-    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self andAttrubuteString:att];
+//    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:att];
+    HQEdiateImageTextView *textView  = [[HQEdiateImageTextView alloc] initWithFrame:CGRectMake(10, 100, 200, 100)];
+    textView.backgroundColor = [UIColor  redColor];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(150, 10, 50, 50)];
+    button.backgroundColor = [UIColor grayColor];
+    [button addTarget:self action:@selector(textViewTestAction:) forControlEvents:UIControlEventTouchUpInside];
+    [textView addSubview:button];
+//    [textView refreshContentImageView];
+//    [textView setUpGesture];
     [self.imageEdiateController.ediateImageView addSubview:textView];
+}
+- (void)textViewTestAction:(UIButton *)sender{
+    NSLog(@"textViewTestAction");
 }
 - (void)dismissBegView{
     _topView.hidden =  YES;

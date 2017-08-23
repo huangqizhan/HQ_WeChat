@@ -587,15 +587,18 @@ static CGFloat HQScreenScale;
     if ([asset isKindOfClass:[PHAsset class]]) {
         CGSize imageSize;
         PHAsset *phAsset = (PHAsset *)asset;
-        if (photoWidth < HQScreenWidth && photoWidth < _photoPreviewMaxWidth) {
-            imageSize = AssetGridThumbnailSize;
-        } else {
-            CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
-            CGFloat pixelWidth = photoWidth * HQScreenScale;
-            CGFloat pixelHeight = pixelWidth / aspectRatio;
-            imageSize = CGSizeMake(pixelWidth, pixelHeight);
-        }
-        
+//        if (photoWidth < HQScreenWidth && photoWidth < _photoPreviewMaxWidth) {
+//            imageSize = AssetGridThumbnailSize;
+//        } else {
+//            CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
+//            CGFloat pixelWidth = photoWidth * HQScreenScale;
+//            CGFloat pixelHeight = pixelWidth / aspectRatio;
+//            imageSize = CGSizeMake(pixelWidth, pixelHeight);
+//        }
+        CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
+        CGFloat pixelWidth = photoWidth * HQScreenScale;
+        CGFloat pixelHeight = pixelWidth / aspectRatio;
+        imageSize = CGSizeMake(pixelWidth, pixelHeight);
         // 修复获取图片时出现的瞬间内存过高问题
         // 下面两行代码，来自hsjcom，他的github是：https://github.com/hsjcom 表示感谢
         PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];

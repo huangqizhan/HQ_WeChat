@@ -14,7 +14,13 @@
 
 @property (nonatomic,weak) HQTextEdiateImageTools *textTool;
 
-- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool andAttrubuteString:(NSAttributedString *)attrubute;
+- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool  withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute;
+
+
+- (void)setUpGesture;
+
+
+- (void)refreshContentImageView;
 
 @end
 
