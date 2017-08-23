@@ -54,7 +54,7 @@
     [self createMenuView];
     [self createNaviGationViews];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_2750" ofType:@".jpg"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test2" ofType:@".jpg"];
     _originalImage = [UIImage imageWithContentsOfFile:filePath];
     _ediateImageView= [[UIImageView alloc] init];
     [_scrollView addSubview:_ediateImageView];
