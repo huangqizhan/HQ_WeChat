@@ -77,6 +77,7 @@
         }];
     } else {
         // pop Animation
+        fromViewController.scrollView.hidden = YES;
         toTransitionBut.hidden = YES;
         [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
         [containerView addSubview:newTranstionBut];
