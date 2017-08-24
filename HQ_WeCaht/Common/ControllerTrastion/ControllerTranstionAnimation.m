@@ -68,7 +68,7 @@
 //                newTranstionBut.transform = CGAffineTransformMakeScale(1.0, 1.0);
                 [newTranstionBut removeFromSuperview];
                 fromTransitionBut.hidden = NO;
-                toTransitionBut.hidden = YES;
+                toTransitionBut.hidden = NO;
                 toViewController.scrollView.hidden = NO;
                 [newTranstionBut removeFromSuperview];
 //                // transition end

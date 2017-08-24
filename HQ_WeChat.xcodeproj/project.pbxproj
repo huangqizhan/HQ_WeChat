@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
+		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
 		BACB055B1E59872E008B676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB05591E59872E008B676D /* Main.storyboard */; };
 		BACB055D1E59872E008B676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACB055C1E59872E008B676D /* Assets.xcassets */; };
 		BACB05601E59872E008B676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB055E1E59872E008B676D /* LaunchScreen.storyboard */; };
@@ -491,6 +493,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
+		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
 		BACB054D1E59872E008B676D /* HQ_WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HQ_WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACB055A1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BACB055C1E59872E008B676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -2273,6 +2277,8 @@
 		FD831D111EDFEDD00038E7DA /* sourse */ = {
 			isa = PBXGroup;
 			children = (
+				BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */,
+				BA4CCDA21F4D9A360086BA15 /* test2.jpg */,
 				FD055AA41F412907001850FE /* IMG_2750.jpg */,
 				FDD18D0B1F13248500E260BD /* AMap.bundle */,
 				FDD18D091F13226800E260BD /* in.caf */,
@@ -3044,6 +3050,7 @@
 				FD8DD7F31EB81D54002125CD /* 15.gif in Resources */,
 				FD2653751EE92030006BAB5E /* Tuzki_12.gif in Resources */,
 				FD77A34C1EC58F0A0017B41A /* 004@2x.gif in Resources */,
+				BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */,
 				FD6649E81EBC6EFF005E340B /* g7.gif in Resources */,
 				FD8DD7E81EB81D54002125CD /* 26.gif in Resources */,
 				FD6649E51EBC6EFF005E340B /* g4.gif in Resources */,
@@ -3109,6 +3116,7 @@
 				FD6649DB1EBC6EFF005E340B /* g1.gif in Resources */,
 				FD831D171EE0091F0038E7DA /* HQRecordHUDView.xib in Resources */,
 				FD8DD7D81EB81D54002125CD /* 42.gif in Resources */,
+				BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */,
 				FD6649DE1EBC6EFF005E340B /* g12.gif in Resources */,
 				FD4769061E665DF400CEC7A6 /* mahuateng.jpeg in Resources */,
 				FD8DD7F11EB81D54002125CD /* 17.gif in Resources */,

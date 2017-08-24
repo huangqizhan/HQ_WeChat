@@ -337,21 +337,28 @@ static inline CGFloat DegreesToRadians(CGFloat degrees)
 }
 + (CGRect)caculateBroswerImageSizeWith:(UIImage *)image{
     CGRect resultRect;
-    resultRect.size.width = App_Frame_Width;
-    if (image.size.height / image.size.width > APP_Frame_Height / App_Frame_Width) {
-        resultRect.size.height = floor(image.size.height / (image.size.width / App_Frame_Width));
-    } else {
-        CGFloat height = image.size.height / image.size.width * App_Frame_Width;
-        if (height < 1 || isnan(height)) height = APP_Frame_Height;
-        height = floor(height);
-        resultRect.size.height = height;
-    }
+//    resultRect.size.width = App_Frame_Width;
+//    if (image.size.height / image.size.width > APP_Frame_Height / App_Frame_Width) {
+//        resultRect.size.height = floor(image.size.height / (image.size.width / App_Frame_Width));
+//    } else {
+//        CGFloat height = image.size.height / image.size.width * App_Frame_Width;
+//        if (height < 1 || isnan(height)) height = APP_Frame_Height;
+//        height = floor(height);
+//        resultRect.size.height = height;
+//    }
 //    if (resultRect.size.height > APP_Frame_Height && resultRect.size.height - APP_Frame_Height <= 1) {
 //        resultRect.size.height = APP_Frame_Height;
 //    }
 //    CGFloat contentSizeH = MAX(resultRect.size.height, APP_Frame_Height);
 //    resultRect.size.height = contentSizeH;
-    return resultRect;
+//    return resultRect;
+    
+    CGSize size = (image) ? image.size : CGSizeMake(App_Frame_Width, APP_Frame_Height);
+    CGFloat ratio = MIN(App_Frame_Width / size.width, APP_Frame_Height / size.height);
+    CGFloat W = ratio * size.width ;
+    CGFloat H = ratio * size.height ;
+    resultRect = CGRectMake(MAX(0, (App_Frame_Width-W)/2), MAX(0, (APP_Frame_Height-H)/2), W, H);
+     return resultRect;
 }
 
 
