@@ -17,10 +17,9 @@
 - (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool  withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute;
 
 
-- (void)setUpGesture;
+@property (nonatomic,copy) void (^tapCallBack)(NSAttributedString *attibuteString);
 
 
-- (void)refreshContentImageView;
 
 @end
 
