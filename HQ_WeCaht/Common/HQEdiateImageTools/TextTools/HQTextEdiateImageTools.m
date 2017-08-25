@@ -13,6 +13,7 @@
 @interface HQTextEdiateImageTools ()<UITextViewDelegate>
 
 
+@property (nonatomic) NSMutableArray *textViewArray;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UISlider *colorSlider;
 @property (nonatomic) UITextView *textView;
@@ -245,4 +246,10 @@
     return 5;
 }
 
+- (NSMutableArray *)textViewArray{
+    if (_textViewArray  == nil) {
+        _textViewArray = [NSMutableArray new];
+    }
+    return _textViewArray;
+}
 @end
