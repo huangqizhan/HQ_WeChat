@@ -279,6 +279,8 @@
 		FD66A3B61EBB1BFF00623F34 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD66A3B51EBB1BFF00623F34 /* libz.tbd */; };
 		FD66A3B81EBB1C1000623F34 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD66A3B71EBB1C1000623F34 /* MobileCoreServices.framework */; };
 		FD66A3BA1EBB1C2400623F34 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD66A3B91EBB1C2400623F34 /* Accelerate.framework */; };
+		FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6753981F4FD622005AD79B /* GestureViewController.m */; };
+		FD67539C1F4FD6BB005AD79B /* SPUserResizableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD67539B1F4FD6BB005AD79B /* SPUserResizableView.m */; };
 		FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6CF0231E81FEE2001E5984 /* HQLocalImageManager.m */; };
 		FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D88841E76306900794E7F /* HQReceiveMessageManager.m */; };
 		FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D888E1E76743D00794E7F /* HQTextView.m */; };
@@ -966,6 +968,10 @@
 		FD66A3B51EBB1BFF00623F34 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		FD66A3B71EBB1C1000623F34 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FD66A3B91EBB1C2400623F34 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FD6753971F4FD622005AD79B /* GestureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureViewController.h; sourceTree = "<group>"; };
+		FD6753981F4FD622005AD79B /* GestureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
+		FD67539A1F4FD6BB005AD79B /* SPUserResizableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUserResizableView.h; sourceTree = "<group>"; };
+		FD67539B1F4FD6BB005AD79B /* SPUserResizableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUserResizableView.m; sourceTree = "<group>"; };
 		FD6CF0221E81FEE2001E5984 /* HQLocalImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQLocalImageManager.h; sourceTree = "<group>"; };
 		FD6CF0231E81FEE2001E5984 /* HQLocalImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQLocalImageManager.m; sourceTree = "<group>"; };
 		FD6D88831E76306900794E7F /* HQReceiveMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQReceiveMessageManager.h; sourceTree = "<group>"; };
@@ -2072,6 +2078,8 @@
 		FD6649C61EBC2D7B005E340B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD67539A1F4FD6BB005AD79B /* SPUserResizableView.h */,
+				FD67539B1F4FD6BB005AD79B /* SPUserResizableView.m */,
 				FD8015BB1ED4033F00BCAFCF /* HQDownLoadTbaleViewCell.h */,
 				FD8015BC1ED4033F00BCAFCF /* HQDownLoadTbaleViewCell.m */,
 				FD6649C71EBC2DA3005E340B /* LoadGifImageCell.h */,
@@ -2616,6 +2624,8 @@
 				FD42B5F61F0A412000D6F0C4 /* SendMessageTestViewController.m */,
 				FD1DDF691F26E15800AAC89D /* RefershViewController.h */,
 				FD1DDF6A1F26E15800AAC89D /* RefershViewController.m */,
+				FD6753971F4FD622005AD79B /* GestureViewController.h */,
+				FD6753981F4FD622005AD79B /* GestureViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3440,6 +3450,7 @@
 				FD6649A91EBC2A84005E340B /* CALayer+YYWebImage.m in Sources */,
 				FD2476DE1E6FA1D10085A23C /* HQChatMineFileCell.m in Sources */,
 				FD28EA721E7B8E3B0077E009 /* HQVideoPlayerController.m in Sources */,
+				FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */,
 				FD2ED8CF1EAD9780006E585F /* HQChatModel.xcdatamodeld in Sources */,
 				FD66A39F1EBB1A6800623F34 /* YYTextEffectWindow.m in Sources */,
 				FD66A3521EBABFF400623F34 /* HttpReDefine.m in Sources */,
@@ -3458,6 +3469,7 @@
 				FD3B4B571EE5095C00252F92 /* HQPlayVoiceOtherButton.m in Sources */,
 				FD28EA511E7B8C000077E009 /* LxGridViewFlowLayout.m in Sources */,
 				FD1DDF801F27361600AAC89D /* HQDrawEdiateImageTools.m in Sources */,
+				FD67539C1F4FD6BB005AD79B /* SPUserResizableView.m in Sources */,
 				FD66A3AA1EBB1A6800623F34 /* YYTextRunDelegate.m in Sources */,
 				FD6649AA1EBC2A84005E340B /* MKAnnotationView+YYWebImage.m in Sources */,
 				FDDEE3D11E655B7D007E9AF9 /* MJProperty.m in Sources */,
