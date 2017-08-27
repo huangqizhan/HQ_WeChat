@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
 		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
+		BAB31B7B1F5300750055D5FE /* PoperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B7A1F5300750055D5FE /* PoperViewController.m */; };
+		BAB31B7F1F5302150055D5FE /* HQPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B7E1F5302150055D5FE /* HQPopoverView.m */; };
+		BAB31B821F5303D80055D5FE /* HQPopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B811F5303D80055D5FE /* HQPopoverAction.m */; };
+		BAB31B851F5307DC0055D5FE /* HQPopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B841F5307DC0055D5FE /* HQPopoverViewCell.m */; };
 		BACB055B1E59872E008B676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB05591E59872E008B676D /* Main.storyboard */; };
 		BACB055D1E59872E008B676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACB055C1E59872E008B676D /* Assets.xcassets */; };
 		BACB05601E59872E008B676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB055E1E59872E008B676D /* LaunchScreen.storyboard */; };
@@ -497,6 +501,14 @@
 /* Begin PBXFileReference section */
 		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
 		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
+		BAB31B791F5300750055D5FE /* PoperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoperViewController.h; sourceTree = "<group>"; };
+		BAB31B7A1F5300750055D5FE /* PoperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoperViewController.m; sourceTree = "<group>"; };
+		BAB31B7D1F5302150055D5FE /* HQPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPopoverView.h; sourceTree = "<group>"; };
+		BAB31B7E1F5302150055D5FE /* HQPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPopoverView.m; sourceTree = "<group>"; };
+		BAB31B801F5303D80055D5FE /* HQPopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPopoverAction.h; sourceTree = "<group>"; };
+		BAB31B811F5303D80055D5FE /* HQPopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPopoverAction.m; sourceTree = "<group>"; };
+		BAB31B831F5307DC0055D5FE /* HQPopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPopoverViewCell.h; sourceTree = "<group>"; };
+		BAB31B841F5307DC0055D5FE /* HQPopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPopoverViewCell.m; sourceTree = "<group>"; };
 		BACB054D1E59872E008B676D /* HQ_WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HQ_WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACB055A1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BACB055C1E59872E008B676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
@@ -1334,6 +1346,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BAB31B7C1F5301AA0055D5FE /* PorperView */ = {
+			isa = PBXGroup;
+			children = (
+				BAB31B7D1F5302150055D5FE /* HQPopoverView.h */,
+				BAB31B7E1F5302150055D5FE /* HQPopoverView.m */,
+				BAB31B831F5307DC0055D5FE /* HQPopoverViewCell.h */,
+				BAB31B841F5307DC0055D5FE /* HQPopoverViewCell.m */,
+				BAB31B801F5303D80055D5FE /* HQPopoverAction.h */,
+				BAB31B811F5303D80055D5FE /* HQPopoverAction.m */,
+			);
+			path = PorperView;
+			sourceTree = "<group>";
+		};
 		BACB05441E59872E008B676D = {
 			isa = PBXGroup;
 			children = (
@@ -2591,6 +2616,7 @@
 		FD9408B61E5A723F00634206 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BAB31B7C1F5301AA0055D5FE /* PorperView */,
 				FD6649C61EBC2D7B005E340B /* Views */,
 				FD9408C61E5A730C00634206 /* HQMineViewController.h */,
 				FD9408C71E5A730C00634206 /* HQMineViewController.m */,
@@ -2626,6 +2652,8 @@
 				FD1DDF6A1F26E15800AAC89D /* RefershViewController.m */,
 				FD6753971F4FD622005AD79B /* GestureViewController.h */,
 				FD6753981F4FD622005AD79B /* GestureViewController.m */,
+				BAB31B791F5300750055D5FE /* PoperViewController.h */,
+				BAB31B7A1F5300750055D5FE /* PoperViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3280,6 +3308,7 @@
 				FD9DB8611ED2E46100540889 /* HQDownLoadFileController.m in Sources */,
 				FD831D101EDFE36D0038E7DA /* HQTipView.m in Sources */,
 				FD2476CD1E6F9D5B0085A23C /* HQChatOtherBaseCell.m in Sources */,
+				BAB31B7B1F5300750055D5FE /* PoperViewController.m in Sources */,
 				FD9409051E5A7D0C00634206 /* UIView+Extension.m in Sources */,
 				FD7570501EFB714D00CA7112 /* HQWebViewController.m in Sources */,
 				FD3DE7EC1F3BE619002BF6A6 /* HQEdiateImageCutView.m in Sources */,
@@ -3327,6 +3356,7 @@
 				FDDEE3D31E655B7D007E9AF9 /* MJPropertyType.m in Sources */,
 				FDD18D101F132AF600E260BD /* HQLocationMapSearchFirstCell.m in Sources */,
 				FD9408BF1E5A72A000634206 /* HQChatViewController.m in Sources */,
+				BAB31B851F5307DC0055D5FE /* HQPopoverViewCell.m in Sources */,
 				FD033B861EF3763600C85B04 /* HQContactDetailController.m in Sources */,
 				FD6649BA1EBC2AAD005E340B /* YYMemoryCache.m in Sources */,
 				FD9408BC1E5A728B00634206 /* HQChatListViewController.m in Sources */,
@@ -3368,6 +3398,7 @@
 				FD94090B1E5A7D0C00634206 /* NSDate+Extension.m in Sources */,
 				FD2476ED1E6FA2540085A23C /* HQChatOtherFileCell.m in Sources */,
 				FD2737271E69687500629143 /* HQFaceMorePageView.m in Sources */,
+				BAB31B821F5303D80055D5FE /* HQPopoverAction.m in Sources */,
 				FD66A3AE1EBB1A6900623F34 /* UIView+YYText.m in Sources */,
 				FD2476D81E6FA19C0085A23C /* HQChatMineVidioCell.m in Sources */,
 				FDE9A4F81ECD8B6C008C2570 /* SDNetworkActivityIndicator.m in Sources */,
@@ -3415,6 +3446,7 @@
 				BAF4A8001E73F11B00653204 /* AFURLSessionManager.m in Sources */,
 				FD42B5EC1F0A16DD00D6F0C4 /* UIImage+Gallop.m in Sources */,
 				FD7F8F651E9DC49D00B61D63 /* HQBroswerViewController.m in Sources */,
+				BAB31B7F1F5302150055D5FE /* HQPopoverView.m in Sources */,
 				FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */,
 				FD8DD8071EB824E3002125CD /* TranstionAnimationViewController.m in Sources */,
 				FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */,
