@@ -19,6 +19,8 @@
 #import "SendMessageTestViewController.h"
 #import "RefershViewController.h"
 #import "HQEdiateImageController.h"
+#import "GestureViewController.h"
+
 
 
 
@@ -44,7 +46,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    return 13;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
@@ -77,8 +79,10 @@
         cell.textLabel.text = @"distributionMessage";
     }else if (indexPath.row == 10){
         cell.textLabel.text = @"RefershViewController";
-    }else{
+    }else if (indexPath.row == 11){
         cell.textLabel.text = @"HQEdiateImageController";
+    }else{
+        cell.textLabel.text = @"gestureView";
     }
     return cell;
 }
@@ -118,9 +122,12 @@
     }else if (indexPath.row == 10){
         RefershViewController *refershVC  = [[RefershViewController alloc] init];
         [self.navigationController pushViewController:refershVC animated:YES];
-    }else{
+    }else if (indexPath.row == 11){
         HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
         [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
+    }else{
+        GestureViewController *gestureVC = [[GestureViewController alloc] init];
+        [self.navigationController pushViewController:gestureVC animated:YES];
     }
 }
 - (void)didReceiveMemoryWarning {

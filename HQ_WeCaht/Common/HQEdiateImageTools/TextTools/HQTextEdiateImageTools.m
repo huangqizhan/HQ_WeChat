@@ -13,11 +13,13 @@
 @interface HQTextEdiateImageTools ()<UITextViewDelegate>
 
 
+@property (nonatomic) NSMutableArray *textViewArray;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UISlider *colorSlider;
 @property (nonatomic) UITextView *textView;
 @property (nonatomic) UIView *topView;
 @property (nonatomic) UIView *begView;
+
 
 
 
@@ -46,6 +48,8 @@
     
     [self.imageEdiateController.view addSubview:_drawMenuView];
     
+     self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    
     [self setMenuView];
 
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
@@ -59,7 +63,8 @@
     _colorSlider.top  = 40;
     [_colorSlider addTarget:self action:@selector(colorSliderDidChange:) forControlEvents:UIControlEventValueChanged];
     _colorSlider.backgroundColor = [UIColor colorWithPatternImage:[self colorSliderBackground]];
-    _colorSlider.value = 0;
+    _colorSlider.value = 0.30;
+    [self colorSliderDidChange:_colorSlider];
     [_drawMenuView addSubview:_colorSlider];
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake((App_Frame_Width-100)/2.0, 5, 100, 20)];
@@ -92,6 +97,7 @@
 }
 - (void)addButtonAction:(UIButton *)sender{
     [self showTextViewWithText:nil];
+
 }
 - (void)colorSliderDidChange:(UISlider *)slider{
     if(slider.value<1/3.0){
@@ -101,8 +107,7 @@
   }
 }
 
-
-- (void)showTextViewWithText:(NSString *)text{
+- (void)showTextViewWithText:(NSAttributedString *)attStr{
     if (_begView == nil) {
         _begView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-80)];
         _begView.backgroundColor = [UIColor  clearColor];
@@ -134,7 +139,7 @@
         _textView.delegate = self;
         [_begView addSubview:_textView];
     }
-    [_textView setText:text];
+    [_textView setAttributedText:attStr];
     _begView.transform = CGAffineTransformMakeTranslation(0, 600);
     _topView.hidden = YES;
     [UIView animateWithDuration:0.35  animations:^{
@@ -142,6 +147,7 @@
     } completion:^(BOOL finished) {
         _topView.hidden = NO;
     }];
+    _textView.textColor  =_colorSlider.thumbTintColor;
     [_textView becomeFirstResponder];
 }
 
@@ -156,21 +162,15 @@
     if (_textView.text.length <= 0) {
         return;
     }
-    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSFontAttributeName:[UIColor redColor]}];
-//    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:att];
-    HQEdiateImageTextView *textView  = [[HQEdiateImageTextView alloc] initWithFrame:CGRectMake(10, 100, 200, 100)];
-    textView.backgroundColor = [UIColor  redColor];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(150, 10, 50, 50)];
-    button.backgroundColor = [UIColor grayColor];
-    [button addTarget:self action:@selector(textViewTestAction:) forControlEvents:UIControlEventTouchUpInside];
-    [textView addSubview:button];
-//    [textView refreshContentImageView];
-//    [textView setUpGesture];
-    [self.imageEdiateController.ediateImageView addSubview:textView];
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:_colorSlider.thumbTintColor}];
+    self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
+    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:att];
+    WEAKSELF;
+    [textView setTapCallBack:^(NSAttributedString *attStr){
+        [weakSelf showTextViewWithText:attStr];
+    }];
 }
-- (void)textViewTestAction:(UIButton *)sender{
-    NSLog(@"textViewTestAction");
-}
+
 - (void)dismissBegView{
     _topView.hidden =  YES;
     [_textView resignFirstResponder];
@@ -246,4 +246,10 @@
     return 5;
 }
 
+- (NSMutableArray *)textViewArray{
+    if (_textViewArray  == nil) {
+        _textViewArray = [NSMutableArray new];
+    }
+    return _textViewArray;
+}
 @end

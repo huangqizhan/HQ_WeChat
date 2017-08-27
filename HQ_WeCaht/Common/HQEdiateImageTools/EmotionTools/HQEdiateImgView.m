@@ -143,7 +143,6 @@ static const NSUInteger kDeleteBtnSize = 32;
         _initialArg = _arg;
         _initialScale = _scale;
     }
-    
     p = CGPointMake(_initialPoint.x + p.x - self.center.x, _initialPoint.y + p.y - self.center.y);
     CGFloat R = sqrt(p.x*p.x + p.y*p.y); //拖动后的距离
     CGFloat arg = atan2(p.y, p.x);    // 拖动后的旋转角度

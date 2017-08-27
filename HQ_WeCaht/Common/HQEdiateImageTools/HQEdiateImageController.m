@@ -54,9 +54,10 @@
     [self createMenuView];
     [self createNaviGationViews];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test2" ofType:@".jpg"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0373" ofType:@".jpg"];
     _originalImage = [UIImage imageWithContentsOfFile:filePath];
     _ediateImageView= [[UIImageView alloc] init];
+    _ediateImageView.clipsToBounds = YES;
     [_scrollView addSubview:_ediateImageView];
     [self refreshImageView];
 }

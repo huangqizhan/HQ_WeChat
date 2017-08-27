@@ -58,7 +58,6 @@
 
 
 @property (nonatomic) UIScrollView *scrollView;
-@property (nonatomic) UIView *imageContainerView;
 @property (nonatomic) UIImageView *contentImageView;
 @property (nonatomic) UIImageView *tempImageView;
 
@@ -88,18 +87,18 @@
         _scrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:_scrollView];
         
-        _imageContainerView = [[UIView alloc] initWithFrame:_scrollView.bounds];
-        _imageContainerView.clipsToBounds = YES;
-        _imageContainerView.contentMode = UIViewContentModeScaleAspectFill;
-        _imageContainerView.backgroundColor = [UIColor clearColor];
-        [_scrollView addSubview:_imageContainerView];
+//        _imageContainerView = [[UIView alloc] initWithFrame:_scrollView.bounds];
+//        _imageContainerView.clipsToBounds = YES;
+//        _imageContainerView.contentMode = UIViewContentModeScaleAspectFill;
+//        _imageContainerView.backgroundColor = [UIColor clearColor];
+//        [_scrollView addSubview:_imageContainerView];
         
-        _contentImageView = [[UIImageView alloc] initWithFrame:_imageContainerView.bounds];
+        _contentImageView = [[UIImageView alloc] initWithFrame:_scrollView.bounds];
         _contentImageView.backgroundColor = [UIColor blackColor];
         _contentImageView.backgroundColor = [UIColor clearColor];
         _contentImageView.contentMode = UIViewContentModeScaleAspectFill;
         _contentImageView.clipsToBounds = YES;
-        [_imageContainerView addSubview:_contentImageView];
+        [_scrollView addSubview:_contentImageView];
         
         
         UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
@@ -156,71 +155,30 @@
 #pragma mark - UIScrollViewDelegate
 
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return _imageContainerView;
+    return _contentImageView;
 }
-
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
     scrollView.contentInset = UIEdgeInsetsZero;
 }
-
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self refreshImageContainerViewCenter];
+     [self refreshImageContainerViewCenter];
 }
-
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    [self refreshScrollViewContentSize];
+    scrollView.contentInset = UIEdgeInsetsZero;
 }
 - (void)resizeSubviews {
-    _imageContainerView.tz_origin = CGPointZero;
-    _imageContainerView.tz_width = self.scrollView.tz_width;
-    
-    UIImage *image = _contentImageView.image;
-    if (image.size.height / image.size.width > self.tz_height / self.scrollView.tz_width) {
-        _imageContainerView.tz_height = floor(image.size.height / (image.size.width / self.scrollView.tz_width));
-    } else {
-        CGFloat height = image.size.height / image.size.width * self.scrollView.tz_width;
-        if (height < 1 || isnan(height)) height = self.tz_height;
-        height = floor(height);
-        _imageContainerView.tz_height = height;
-        _imageContainerView.tz_centerY = self.tz_height / 2;
-    }
-    if (_imageContainerView.tz_height > self.tz_height && _imageContainerView.tz_height - self.tz_height <= 1) {
-        _imageContainerView.tz_height = self.tz_height;
-    }
-    CGFloat contentSizeH = MAX(_imageContainerView.tz_height, self.tz_height);
-    _scrollView.contentSize = CGSizeMake(self.scrollView.tz_width, contentSizeH);
-    [_scrollView scrollRectToVisible:self.bounds animated:NO];
-    _scrollView.alwaysBounceVertical = _imageContainerView.tz_height <= self.tz_height ? NO : YES;
-    _contentImageView.frame = _imageContainerView.bounds;
-    
-    [self refreshScrollViewContentSize];
+    CGRect resultRect;
+    CGSize size = (_contentImageView.image) ? _contentImageView.image.size : CGSizeMake(App_Frame_Width, APP_Frame_Height);
+    CGFloat ratio = MIN(App_Frame_Width / size.width, APP_Frame_Height / size.height);
+    CGFloat W = ratio * size.width ;
+    CGFloat H = ratio * size.height ;
+    resultRect = CGRectMake(MAX(0, (App_Frame_Width-W)/2), MAX(0, (APP_Frame_Height-H)/2), W, H);
+    _contentImageView.frame = resultRect;
+
 }
-
-- (void)refreshScrollViewContentSize {
-    if (_allowCrop) {
-        // 如果允许裁剪,需要让图片的任意部分都能在裁剪框内，于是对_scrollView做了如下处理：
-        // 1.让contentSize增大(裁剪框右下角的图片部分)
-        CGFloat contentWidthAdd = self.scrollView.tz_width - CGRectGetMaxX(_cropRect);
-        CGFloat contentHeightAdd = (MIN(_imageContainerView.tz_height, self.tz_height) - self.cropRect.size.height) / 2;
-        CGFloat newSizeW = self.scrollView.contentSize.width + contentWidthAdd;
-        CGFloat newSizeH = MAX(self.scrollView.contentSize.height, self.tz_height) + contentHeightAdd;
-        _scrollView.contentSize = CGSizeMake(newSizeW, newSizeH);
-        _scrollView.alwaysBounceVertical = YES;
-        // 2.让scrollView新增滑动区域（裁剪框左上角的图片部分）
-        if (contentHeightAdd > 0) {
-            _scrollView.contentInset = UIEdgeInsetsMake(contentHeightAdd, _cropRect.origin.x, 0, 0);
-        } else {
-            _scrollView.contentInset = UIEdgeInsetsZero;
-        }
-    }
-}
-
-#pragma mark - Private
-
 - (void)refreshImageContainerViewCenter {
     CGFloat offsetX = (_scrollView.tz_width > _scrollView.contentSize.width) ? ((_scrollView.tz_width - _scrollView.contentSize.width) * 0.5) : 0.0;
     CGFloat offsetY = (_scrollView.tz_height > _scrollView.contentSize.height) ? ((_scrollView.tz_height - _scrollView.contentSize.height) * 0.5) : 0.0;
-    self.imageContainerView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
+    _contentImageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX, _scrollView.contentSize.height * 0.5 + offsetY);
 }
-
 @end

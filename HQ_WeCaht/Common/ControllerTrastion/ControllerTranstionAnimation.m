@@ -68,7 +68,7 @@
 //                newTranstionBut.transform = CGAffineTransformMakeScale(1.0, 1.0);
                 [newTranstionBut removeFromSuperview];
                 fromTransitionBut.hidden = NO;
-                toTransitionBut.hidden = NO;
+                toTransitionBut.hidden = YES;
                 toViewController.scrollView.hidden = NO;
                 [newTranstionBut removeFromSuperview];
 //                // transition end
@@ -77,6 +77,7 @@
         }];
     } else {
         // pop Animation
+        fromViewController.scrollView.hidden = YES;
         toTransitionBut.hidden = YES;
         [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
         [containerView addSubview:newTranstionBut];
