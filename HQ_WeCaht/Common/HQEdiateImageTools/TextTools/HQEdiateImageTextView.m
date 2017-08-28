@@ -95,6 +95,13 @@
     CGPoint p = [pan translationInView:self.superview];
     if (pan.state == UIGestureRecognizerStateBegan) {
         _initialPoint = self.center;
+        [self textViewDidBeginDrag];
+    }
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        [self textViewDidEndDrag];
+    }
+    if (pan.state == UIGestureRecognizerStateChanged) {
+        [self textViewDidChangeDrag];
     }
     self.center = CGPointMake(_initialPoint.x + p.x, _initialPoint.y + p.y);
 }
@@ -106,47 +113,14 @@
         pinchGestureRecognizer.scale = 1;
         return;
     }
-    
-    /*
-     if(sender.state == UIGestureRecognizerStateBegan){
-     //缩放按钮中点与表情view中点的直线距离
-     tmpR = sqrt(p.x*p.x + p.y*p.y); //开根号
-     //缩放按钮中点与表情view中点连线的斜率角度
-     tmpA = atan2(p.y, p.x);//反正切函数
-     
-     _initialArg = _arg;
-     _initialScale = _scale;
-     }
-     
-  
-     
-     */
-//    static CGFloat tmpR = 1; //临时缩放值
-//    static CGFloat tmpA = 0; //临时旋转值
     CGPoint location = [pinchGestureRecognizer locationInView:view.superview];
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan) {
         [view.superview bringSubviewToFront:view];
-//        _initialPoint = [self convertPoint:_contentImageView.center toView:self.superview];
-//        
-//        _initialArg = _arg;
-//        _initialScale = _scale;
-
     }
-//    CGPoint P  = CGPointMake(_initialPoint.x - location.x , _initialPoint.y - location.y );
-//    //拖动后的距离
-//    _scale = sqrt(location.x*location.x + location.y*location.y) / _initialScale;
-//    // 拖动后的旋转角度
-//    CGFloat arg = atan2(P.y, P.x);
-//    //旋转角度 //原始角度+拖动后的角度 - 拖动前的角度
-//    _arg   = _initialArg + arg - tmpA;
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         if (pinchGestureRecognizer.numberOfTouches > 1) {
             view.transform = CGAffineTransformScale(pinchGestureRecognizer.view.transform, pinchGestureRecognizer.scale, pinchGestureRecognizer.scale);
             view.center = CGPointMake(location.x, location.y);
-//            NSLog(@"scale = %f", _scale );
-//            self.transform = CGAffineTransformIdentity;
-//            view.transform = CGAffineTransformMakeScale(_scale, _scale); //缩放
-//            view.transform = CGAffineTransformMakeRotation(_arg); //旋转
             pinchGestureRecognizer.scale = 1;
         }
     }
@@ -177,11 +151,8 @@
         attrubuteStr = [[NSAttributedString alloc] initWithString:@""];
     }
     CGRect frame = [attrubuteStr boundingRectWithSize:CGSizeMake(textTool.imageEdiateController.ediateImageView.width-10, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-//    frame.size.width -= 10;
-//    frame.size.height = 10;
     frame.origin.x = (textTool.imageEdiateController.ediateImageView.width-frame.size.width)/2.0;
     frame.origin.y = (textTool.imageEdiateController.ediateImageView.height -frame.size.height)/2.0;
-    
     return frame;
 }
 
@@ -190,6 +161,22 @@
         return self;
     }
     return nil;
+}
+- (void)textViewDidBeginDrag{
+    self.textTool.imageEdiateController.ediateImageView.clipsToBounds = NO;
+    [self.textTool setMenuViewDeleteStatusIsActive:NO];
+}
+- (void)textViewDidEndDrag{
+    self.textTool.imageEdiateController.ediateImageView.clipsToBounds = YES;
+    [self.textTool setMenuViewDefaultStatus];
+}
+- (void)textViewDidChangeDrag{
+    CGPoint p = [self.textTool.imageEdiateController.ediateImageView convertPoint:CGPointMake(self.center.x, self.center.y+self.height/2.0) toView:self.textTool.imageEdiateController.view];
+    if ((p.y > APP_Frame_Height-80) && (p.x > (App_Frame_Width/2.0 - 40)) && (p.x < (App_Frame_Width/2.0 +40))) {
+         [self.textTool setMenuViewDeleteStatusIsActive:YES];
+    }else{
+         [self.textTool setMenuViewDeleteStatusIsActive:NO];
+    }
 }
 
 @end

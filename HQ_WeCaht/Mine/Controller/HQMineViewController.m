@@ -41,6 +41,8 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
+
+    
     
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -84,6 +86,8 @@
         cell.textLabel.text = @"HQEdiateImageController";
     }else if (indexPath.row == 12){
         cell.textLabel.text = @"gestureView";
+    }else{
+        cell.textLabel.text = @"properView";
     }
     return cell;
 }

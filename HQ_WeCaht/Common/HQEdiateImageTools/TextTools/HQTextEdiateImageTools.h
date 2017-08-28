@@ -10,4 +10,11 @@
 
 @interface HQTextEdiateImageTools : HQEdiateImageBaseTools
 
+
+- (void)setMenuViewDeleteStatusIsActive:(BOOL)active;
+
+
+- (void)setMenuViewDefaultStatus;
+
+
 @end

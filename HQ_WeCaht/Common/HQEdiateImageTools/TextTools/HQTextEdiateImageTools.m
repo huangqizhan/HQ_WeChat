@@ -14,6 +14,9 @@
 
 
 @property (nonatomic) NSMutableArray *textViewArray;
+@property (nonatomic) UIView *normalView;
+@property (nonatomic) UIView *deleteView;
+@property (nonatomic) UIButton *deleteBut;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UISlider *colorSlider;
 @property (nonatomic) UITextView *textView;
@@ -36,15 +39,19 @@
     [super setUpCurrentEdiateStatus];
     _drawMenuView =  [[UIView alloc] initWithFrame:CGRectMake(0, APP_Frame_Height, App_Frame_Width, 80)];
     _drawMenuView.backgroundColor = [UIColor clearColor];//BOTTOMBARCOLOR
+    
+    _normalView = [[UIView alloc] initWithFrame:_drawMenuView.bounds];
+    [_drawMenuView addSubview:_normalView];
+    
     UIButton *cancelBut = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
     [cancelBut setImage:[UIImage imageNamed:@"EdiateImageDismissBut"] forState:UIControlStateNormal];
     [cancelBut addTarget:self action:@selector(clearDrawViewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_drawMenuView addSubview:cancelBut];
+    [_normalView addSubview:cancelBut];
     
     UIButton *addButton  = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width-50, 5, 40, 40)];
     [addButton setImage:[UIImage imageNamed:@"addActionIcon"] forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_drawMenuView addSubview:addButton];
+    [_normalView addSubview:addButton];
     
     [self.imageEdiateController.view addSubview:_drawMenuView];
     
@@ -65,14 +72,14 @@
     _colorSlider.backgroundColor = [UIColor colorWithPatternImage:[self colorSliderBackground]];
     _colorSlider.value = 0.30;
     [self colorSliderDidChange:_colorSlider];
-    [_drawMenuView addSubview:_colorSlider];
+    [_normalView addSubview:_colorSlider];
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake((App_Frame_Width-100)/2.0, 5, 100, 20)];
     title.text = @"滑动调整色值";
     title.textAlignment = NSTextAlignmentCenter;
     title.font = [UIFont systemFontOfSize:14];
     title.textColor = CANCELBUTTONCOLOR;
-    [_drawMenuView addSubview:title];
+    [_normalView addSubview:title];
     
 }
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width{
@@ -182,9 +189,6 @@
     }];
 }
 
-
-
-
 - (UIImage*)colorSliderBackground{
     CGSize size = _colorSlider.frame.size;
     
@@ -230,6 +234,40 @@
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
     
+}
+
+- (void)setMenuViewDeleteStatusIsActive:(BOOL)active{
+    if (_deleteView == nil) {
+        [self createDeleteView];
+    }
+    [UIView animateWithDuration:0.15 animations:^{
+        if (!active) {
+            [_deleteBut setImage:[UIImage imageNamed:@"deleteTextIcon"] forState:UIControlStateNormal];
+        }else{
+            [_deleteBut setImage:[UIImage imageNamed:@"deleteEdiateTextViewActiveStatus"] forState:UIControlStateNormal];
+        }
+        _normalView.alpha = 0.0;
+        _deleteView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        _normalView.hidden = YES;
+        _deleteView.hidden = NO;
+    }];
+}
+- (void)setMenuViewDefaultStatus{
+    [UIView animateWithDuration:0.35 animations:^{
+        _normalView.alpha = 1.0;
+        _deleteView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        _normalView.hidden = NO;
+        _deleteView.hidden = YES;
+    }];
+}
+
+- (void)createDeleteView{
+    _deleteView = [[UIView alloc] initWithFrame:_drawMenuView.bounds];
+    _deleteBut = [[UIButton alloc] initWithFrame:CGRectMake((App_Frame_Width - 60)/2.0, 10, 60, 60)];
+    [_deleteView addSubview:_deleteBut];
+    [_drawMenuView addSubview:_deleteView];
 }
 //图片
 + (UIImage*)defaultIconImage{
