@@ -25,8 +25,9 @@
     
 }
 
-@property (nonatomic,copy) NSAttributedString *attrubuteString;
+
 @property (nonatomic) UIImageView *contentImageView;
+@property (nonatomic) UIColor *color;
 @property CGFloat lastRotation;
 
 
@@ -35,18 +36,19 @@
 @implementation HQEdiateImageTextView
 
 
-- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute{
+- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute andWithColor:(UIColor *)color{
     CGRect frame = [HQEdiateImageTextView caculateContentStringWithAttrubuteString:attrubute andTool:textTool];
     self = [super initWithFrame:frame];
     if (self) {
         _scale = _initialScale = 1;
         _textTool = textTool;
         _attrubuteString = attrubute;
+        _color = color;
         [superView addSubview:self];
         [self createContentImageView];
         [self setUpGesture];
         
-        self.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.layer.borderColor = _color.CGColor;
         self.layer.borderWidth = 1.0;
         
     }
@@ -62,9 +64,23 @@
     _contentImageView.center = CGPointMake(self.width/2.0, self.height/2.0);
     _contentImageView.userInteractionEnabled = YES;
     [self addSubview:_contentImageView];
-    
 }
-
+- (void)refreshContentViewWith:(NSAttributedString *)attStr{
+     _attrubuteString = attStr;
+    CGRect frame = [HQEdiateImageTextView caculateContentStringWithAttrubuteString:_attrubuteString andTool:_textTool];
+    self.width = frame.size.width;
+    self.height = frame.size.height;
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height )];
+    tempLabel.numberOfLines = 0;
+    tempLabel.attributedText = _attrubuteString;
+    UIImage *image = [UIImage lw_imageFromView:tempLabel];
+    _contentImageView.image = image;
+//    [[UIImageView alloc] initWithImage:];
+    _contentImageView.width = self.width;
+    _contentImageView.height = self.height;
+    _contentImageView.center = CGPointMake(self.width/2.0, self.height/2.0);
+    [self hiddenCurrentViewLayerIsBegin:YES];
+}
 - (void)setUpGesture{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textvViewTapAction:)];
     tap.numberOfTapsRequired = 2;
@@ -80,14 +96,13 @@
     [self addGestureRecognizer:pin];
     [self addGestureRecognizer:rotationGestureRecognizer];
 }
-
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     return YES;
 }
 ////双击
 - (void)textvViewTapAction:(UITapGestureRecognizer *)tap{
     if (_tapCallBack) {
-        _tapCallBack(self.attrubuteString);
+        _tapCallBack(self);
     }
 }
 ////拖动
@@ -96,14 +111,16 @@
     if (pan.state == UIGestureRecognizerStateBegan) {
         _initialPoint = self.center;
         [self textViewDidBeginDrag];
+         [self hiddenCurrentViewLayerIsBegin:YES];
     }
     if (pan.state == UIGestureRecognizerStateEnded) {
         [self textViewDidEndDrag];
+        [self hiddenCurrentViewLayerIsBegin:NO];
     }
     if (pan.state == UIGestureRecognizerStateChanged) {
         [self textViewDidChangeDrag];
+        self.center = CGPointMake(_initialPoint.x + p.x, _initialPoint.y + p.y);
     }
-    self.center = CGPointMake(_initialPoint.x + p.x, _initialPoint.y + p.y);
 }
 ////放缩
 - (void)textActionPinAction:(UIPinchGestureRecognizer *)pinchGestureRecognizer{
@@ -111,10 +128,12 @@
     UIView *view = pinchGestureRecognizer.view;
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         pinchGestureRecognizer.scale = 1;
+        [self hiddenCurrentViewLayerIsBegin:NO];
         return;
     }
     CGPoint location = [pinchGestureRecognizer locationInView:view.superview];
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        [self hiddenCurrentViewLayerIsBegin:YES];
         [view.superview bringSubviewToFront:view];
     }
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
@@ -129,10 +148,12 @@
 - (void)rotateViewAction:(UIRotationGestureRecognizer *)roteGesture{
     UIView *view = roteGesture.view;
     if (roteGesture.state == UIGestureRecognizerStateBegan) {
+          [self hiddenCurrentViewLayerIsBegin:YES];
         [self.superview bringSubviewToFront:view];
     }
     if (roteGesture.state == UIGestureRecognizerStateEnded) {
         self.lastRotation = 0;
+          [self hiddenCurrentViewLayerIsBegin:NO];
         return;
     }
     CGPoint location = [roteGesture locationInView:self.superview];
@@ -168,7 +189,21 @@
 }
 - (void)textViewDidEndDrag{
     self.textTool.imageEdiateController.ediateImageView.clipsToBounds = YES;
-    [self.textTool setMenuViewDefaultStatus];
+     [self.textTool setMenuViewDefaultStatus];
+    CGPoint p = [self.textTool.imageEdiateController.ediateImageView convertPoint:self.center toView:self.textTool.imageEdiateController.view];
+    if (![self.textTool.imageEdiateController.ediateImageView pointInside:self.center withEvent:nil]  ) {
+        if (p.y <  (APP_Frame_Height-80)) {
+            self.center = _initialPoint;
+            return;
+        }
+    }
+    CGPoint p1 = [self.textTool.imageEdiateController.ediateImageView convertPoint:CGPointMake(self.center.x, self.center.y+self.height/2.0) toView:self.textTool.imageEdiateController.view];
+    if ((p1.y > APP_Frame_Height-80) && (p1.x > (App_Frame_Width/2.0 - 40)) && (p1.x < (App_Frame_Width/2.0 +40))) {
+        if (_deleteTextViewCallBack) {
+            _deleteTextViewCallBack(self);
+        }
+        [self removeFromSuperview];
+    }
 }
 - (void)textViewDidChangeDrag{
     CGPoint p = [self.textTool.imageEdiateController.ediateImageView convertPoint:CGPointMake(self.center.x, self.center.y+self.height/2.0) toView:self.textTool.imageEdiateController.view];
@@ -178,7 +213,17 @@
          [self.textTool setMenuViewDeleteStatusIsActive:NO];
     }
 }
-
+- (void)hiddenCurrentViewLayerIsBegin:(BOOL)isBegin{
+    if (isBegin) {
+        [UIView animateWithDuration:0.35 animations:^{
+            self.layer.borderWidth = 1.0;
+        }];
+    }else{
+        [UIView animateWithDuration:0.35 animations:^{
+            self.layer.borderWidth = 0.0;
+        }];
+    }
+}
 @end
 
 

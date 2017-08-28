@@ -13,9 +13,11 @@
 @interface HQTextEdiateImageTools ()<UITextViewDelegate>
 
 
+@property (nonatomic) HQEdiateImageTextView *currntTextView;
 @property (nonatomic) NSMutableArray *textViewArray;
 @property (nonatomic) UIView *normalView;
 @property (nonatomic) UIView *deleteView;
+@property (nonatomic) UILabel *deleteStatusLabel;
 @property (nonatomic) UIButton *deleteBut;
 @property (nonatomic) UIView *drawMenuView;
 @property (nonatomic) UISlider *colorSlider;
@@ -169,15 +171,35 @@
     if (_textView.text.length <= 0) {
         return;
     }
-    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:_colorSlider.thumbTintColor}];
-    self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
-    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:att];
-    WEAKSELF;
-    [textView setTapCallBack:^(NSAttributedString *attStr){
-        [weakSelf showTextViewWithText:attStr];
-    }];
+    if (self.currntTextView) {
+        if ([self.textViewArray containsObject:self.currntTextView]) {
+            [self.currntTextView refreshContentViewWith:[self creatAttributeString]];
+            return;
+        }
+    }
+    [self addNewTextView];
 }
 
+- (void)addNewTextView{
+
+    self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
+    HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:[self creatAttributeString] andWithColor:_colorSlider.thumbTintColor];
+    WEAKSELF;
+    [textView setTapCallBack:^(HQEdiateImageTextView *View){
+        weakSelf.currntTextView = View;
+        [weakSelf showTextViewWithText:View.attrubuteString];
+    }];
+    [textView setDeleteTextViewCallBack:^(HQEdiateImageTextView *textView){
+        if ([weakSelf.textViewArray containsObject:textView]) {
+            [weakSelf.textViewArray removeObject:textView];
+        }
+    }];
+    [self.textViewArray addObject:textView];
+}
+- (NSAttributedString *)creatAttributeString{
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:_textView.text attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:_colorSlider.thumbTintColor}];
+    return att;
+}
 - (void)dismissBegView{
     _topView.hidden =  YES;
     [_textView resignFirstResponder];
@@ -243,8 +265,10 @@
     [UIView animateWithDuration:0.15 animations:^{
         if (!active) {
             [_deleteBut setImage:[UIImage imageNamed:@"deleteTextIcon"] forState:UIControlStateNormal];
+            _deleteStatusLabel.text = @"拖动到此处删除";
         }else{
             [_deleteBut setImage:[UIImage imageNamed:@"deleteEdiateTextViewActiveStatus"] forState:UIControlStateNormal];
+            _deleteStatusLabel.text = @"松开即可删除";
         }
         _normalView.alpha = 0.0;
         _deleteView.alpha = 1.0;
@@ -262,11 +286,15 @@
         _deleteView.hidden = YES;
     }];
 }
-
 - (void)createDeleteView{
     _deleteView = [[UIView alloc] initWithFrame:_drawMenuView.bounds];
-    _deleteBut = [[UIButton alloc] initWithFrame:CGRectMake((App_Frame_Width - 60)/2.0, 10, 60, 60)];
+    _deleteBut = [[UIButton alloc] initWithFrame:CGRectMake((App_Frame_Width - 30)/2.0, 10, 30, 40)];
+    _deleteStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake((App_Frame_Width-100)/2.0, _deleteBut.bottom, 100, 20)];
+    _deleteStatusLabel.font = [UIFont systemFontOfSize:13];
+    _deleteStatusLabel.textAlignment = NSTextAlignmentCenter;
+    _deleteStatusLabel.textColor = CANCELBUTTONCOLOR;
     [_deleteView addSubview:_deleteBut];
+    [_deleteView addSubview:_deleteStatusLabel];
     [_drawMenuView addSubview:_deleteView];
 }
 //图片

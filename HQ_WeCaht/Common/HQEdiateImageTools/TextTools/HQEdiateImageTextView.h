@@ -12,14 +12,19 @@
 
 @interface HQEdiateImageTextView : UIView
 
+@property (nonatomic,copy) NSAttributedString *attrubuteString;
+
 @property (nonatomic,weak) HQTextEdiateImageTools *textTool;
 
-- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool  withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute;
+- (instancetype)initWithTextTool:(HQTextEdiateImageTools *)textTool  withSuperView:(UIView *)superView andAttrubuteString:(NSAttributedString *)attrubute andWithColor:(UIColor *)color;
 
 
-@property (nonatomic,copy) void (^tapCallBack)(NSAttributedString *attibuteString);
+@property (nonatomic,copy) void (^tapCallBack)(HQEdiateImageTextView *rextView);
+
+@property (nonatomic,copy) void (^deleteTextViewCallBack)(HQEdiateImageTextView *rextView);
 
 
+- (void)refreshContentViewWith:(NSAttributedString *)attStr;
 
 @end
 
