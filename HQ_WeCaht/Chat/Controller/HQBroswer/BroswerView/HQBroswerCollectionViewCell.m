@@ -111,7 +111,6 @@
     }
     return self;
 }
-
 - (void)setBroswerModel:(HQBroswerModel *)broswerModel{
     _broswerModel = broswerModel;
     _contentImageView.image = _broswerModel.tempImage;

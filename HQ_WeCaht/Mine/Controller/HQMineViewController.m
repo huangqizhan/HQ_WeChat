@@ -20,6 +20,7 @@
 #import "RefershViewController.h"
 #import "HQEdiateImageController.h"
 #import "GestureViewController.h"
+#import "PoperViewController.h"
 
 
 
@@ -46,7 +47,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 13;
+    return 14;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
@@ -81,7 +82,7 @@
         cell.textLabel.text = @"RefershViewController";
     }else if (indexPath.row == 11){
         cell.textLabel.text = @"HQEdiateImageController";
-    }else{
+    }else if (indexPath.row == 12){
         cell.textLabel.text = @"gestureView";
     }
     return cell;
@@ -125,9 +126,12 @@
     }else if (indexPath.row == 11){
         HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
         [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
-    }else{
+    }else if (indexPath.row == 12){
         GestureViewController *gestureVC = [[GestureViewController alloc] init];
         [self.navigationController pushViewController:gestureVC animated:YES];
+    }else{
+        PoperViewController *properVC = [[PoperViewController alloc] init];
+        [self.navigationController pushViewController:properVC animated:YES];
     }
 }
 - (void)didReceiveMemoryWarning {
