@@ -129,6 +129,9 @@
         [self.navigationController pushViewController:refershVC animated:YES];
     }else if (indexPath.row == 11){
         HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
+        [ediateImageVC setCallBackImageAfterEdiate:^(UIImage *image){
+            
+        }];
         [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
     }else if (indexPath.row == 12){
         GestureViewController *gestureVC = [[GestureViewController alloc] init];

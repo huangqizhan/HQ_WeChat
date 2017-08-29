@@ -26,6 +26,8 @@
 
 - (void)refreshContentViewWith:(NSAttributedString *)attStr;
 
+- (void)hiddenCurrentViewLayerIsBegin:(BOOL)isBegin;
+
 @end
 
 

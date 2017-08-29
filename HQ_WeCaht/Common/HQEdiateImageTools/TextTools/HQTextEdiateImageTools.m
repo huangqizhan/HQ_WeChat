@@ -9,8 +9,15 @@
 #import "HQTextEdiateImageTools.h"
 #import "HQEdiateImageController.h"
 #import "HQEdiateImageTextView.h"
+#import "NSDate+Extension.h"
 
-@interface HQTextEdiateImageTools ()<UITextViewDelegate>
+
+
+@interface HQTextEdiateImageTools ()<UITextViewDelegate>{
+    
+       UIImage *_originalImage;
+    
+}
 
 
 @property (nonatomic) HQEdiateImageTextView *currntTextView;
@@ -24,6 +31,10 @@
 @property (nonatomic) UITextView *textView;
 @property (nonatomic) UIView *topView;
 @property (nonatomic) UIView *begView;
+@property (nonatomic,assign) NSTimeInterval lastSoundTime;
+@property (nonatomic,assign) CGRect keyboardFrame;
+
+
 
 
 
@@ -55,16 +66,36 @@
     [addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_normalView addSubview:addButton];
     
+    _originalImage = self.imageEdiateController.originalImage;
+    
     [self.imageEdiateController.view addSubview:_drawMenuView];
     
      self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
     
     [self setMenuView];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
     [UIView animateWithDuration:0.15 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCurlDown animations:^{
         _drawMenuView.top = APP_Frame_Height- 80;
     } completion:nil];
     
+}
+- (void)keyboardWillHide:(NSNotification *)notification{
+    self.keyboardFrame = CGRectZero;
+}
+- (void)keyboardFrameWillChange:(NSNotification *)notification{
+    self.keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keybordSize = [value CGRectValue].size;
+    NSValue *keyAnimationTime  =[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval keyBordTimerval;
+    [keyAnimationTime getValue:&keyBordTimerval];
+    [UIView animateWithDuration:keyBordTimerval animations:^{
+        _textView.height = (APP_Frame_Height-40) - keybordSize.height;
+    }];
 }
 - (void)setMenuView{
     _colorSlider = [self defaultSliderWithWidth:_drawMenuView.width - 40];
@@ -101,8 +132,20 @@
         _drawMenuView.top = APP_Frame_Height;
     } completion:^(BOOL finished){
         [_drawMenuView removeFromSuperview];
+        [self clearAltextView];
+        [self removeKeyBoardNotication];
         [self.imageEdiateController resetBottomViewEdiateStatus];
     }];
+}
+- (void)clearAltextView{
+    for (HQEdiateImageTextView *textView in self.textViewArray) {
+        [textView removeFromSuperview];
+    }
+    [self.textViewArray removeAllObjects];
+}
+- (void)removeKeyBoardNotication{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 - (void)addButtonAction:(UIButton *)sender{
     [self showTextViewWithText:nil];
@@ -119,7 +162,7 @@
 - (void)showTextViewWithText:(NSAttributedString *)attStr{
     if (_begView == nil) {
         _begView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-80)];
-        _begView.backgroundColor = [UIColor  clearColor];
+        _textView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
         [self.imageEdiateController.view addSubview:_begView];
         
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, 40)];
@@ -140,8 +183,7 @@
         [_topView addSubview:finishButton];
         
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width,APP_Frame_Height-40)];
-        UIColor *textViewBgColor = [UIColor blackColor];
-        _textView.backgroundColor = [textViewBgColor colorWithAlphaComponent:0.85];
+        _textView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.85];
         [_textView setTextColor:[UIColor whiteColor]];
         [_textView setFont:[UIFont systemFontOfSize:30]];
         [_textView setReturnKeyType:UIReturnKeyDone];
@@ -187,7 +229,8 @@
     WEAKSELF;
     [textView setTapCallBack:^(HQEdiateImageTextView *View){
         weakSelf.currntTextView = View;
-        [weakSelf showTextViewWithText:View.attrubuteString];
+        NSAttributedString *att = [[NSAttributedString alloc] initWithString:View.attrubuteString.string attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:_colorSlider.thumbTintColor}];
+        [weakSelf showTextViewWithText:att];
     }];
     [textView setDeleteTextViewCallBack:^(HQEdiateImageTextView *textView){
         if ([weakSelf.textViewArray containsObject:textView]) {
@@ -255,14 +298,22 @@
 }
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock{
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self clearaAllEdiateImageViewStatus];
+        UIImage *image = [self buildImage:_originalImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(image, nil, nil);
+            self.imageEdiateController.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
+            [self clearDrawViewButtonAction:nil];
+        });
+    });    
 }
 
 - (void)setMenuViewDeleteStatusIsActive:(BOOL)active{
     if (_deleteView == nil) {
         [self createDeleteView];
     }
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:0.35 animations:^{
         if (!active) {
             [_deleteBut setImage:[UIImage imageNamed:@"deleteTextIcon"] forState:UIControlStateNormal];
             _deleteStatusLabel.text = @"拖动到此处删除";
@@ -276,6 +327,11 @@
         _normalView.hidden = YES;
         _deleteView.hidden = NO;
     }];
+}
+- (void)clearaAllEdiateImageViewStatus{
+    for (HQEdiateImageTextView *textView in self.textViewArray) {
+        [textView hiddenCurrentViewLayerIsBegin:NO];
+    }
 }
 - (void)setMenuViewDefaultStatus{
     [UIView animateWithDuration:0.35 animations:^{
@@ -296,6 +352,35 @@
     [_deleteView addSubview:_deleteBut];
     [_deleteView addSubview:_deleteStatusLabel];
     [_drawMenuView addSubview:_deleteView];
+}
+
+- (UIImage*)buildImage:(UIImage*)image{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    
+    [image drawAtPoint:CGPointZero];
+    
+    CGFloat scale = image.size.width / self.imageEdiateController.ediateImageView.width;
+    CGContextScaleCTM(UIGraphicsGetCurrentContext(), scale, scale);
+    [self.imageEdiateController.ediateImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return tmp;
+}
+
+- (void) textViewDidBeginEditing:(UITextView *)textView{
+}
+- (void) textViewDidChange:(UITextView *)textView{
+    if (textView.text.length > 1000) { // 限制5000字内
+        textView.text = [textView.text substringToIndex:1000];
+    }
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){
+        [self finishButtonAction:nil];
+    }
+    return YES;
 }
 //图片
 + (UIImage*)defaultIconImage{

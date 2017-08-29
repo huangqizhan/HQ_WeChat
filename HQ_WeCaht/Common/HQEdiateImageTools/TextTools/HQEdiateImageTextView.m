@@ -22,6 +22,7 @@
     CGFloat _arg;                  //当前旋转比例
     CGFloat _initialScale;   //修改前的缩放比例
     CGFloat _initialArg;     //修改前旋转比例
+ 
     
 }
 
@@ -75,7 +76,6 @@
     tempLabel.attributedText = _attrubuteString;
     UIImage *image = [UIImage lw_imageFromView:tempLabel];
     _contentImageView.image = image;
-//    [[UIImageView alloc] initWithImage:];
     _contentImageView.width = self.width;
     _contentImageView.height = self.height;
     _contentImageView.center = CGPointMake(self.width/2.0, self.height/2.0);
@@ -214,16 +214,15 @@
     }
 }
 - (void)hiddenCurrentViewLayerIsBegin:(BOOL)isBegin{
-    if (isBegin) {
-        [UIView animateWithDuration:0.35 animations:^{
+    [UIView animateWithDuration:0.35 animations:^{
+        if (isBegin) {
             self.layer.borderWidth = 1.0;
-        }];
-    }else{
-        [UIView animateWithDuration:0.35 animations:^{
+        }else{
             self.layer.borderWidth = 0.0;
-        }];
-    }
-}
+        }
+    }];
+
+  }
 @end
 
 
