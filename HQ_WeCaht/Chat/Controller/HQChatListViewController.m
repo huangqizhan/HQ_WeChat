@@ -14,6 +14,7 @@
 #import "UIViewController+HQPresentTranstion.h"
 #import "HQPopoverAction.h"
 #import "HQPopoverView.h"
+#import "HQQRCodeViewController.h"
 
 
 
@@ -306,7 +307,8 @@
     }];
     // 扫一扫 action
     HQPopoverAction *QRAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_QR"] title:@"扫一扫" handler:^(HQPopoverAction *action) {
-        
+        HQQRCodeViewController *rCodeVC = [[HQQRCodeViewController alloc] init];
+        [self.navigationController pushViewController:rCodeVC animated:YES];
     }];
     // 付款 action
     HQPopoverAction *payMoneyAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_payMoney"] title:@"收付款" handler:^(HQPopoverAction *action) {

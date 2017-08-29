@@ -47,5 +47,8 @@
 + (void)showConfirmAlertWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message firstActionTitle:(NSString *_Nullable)firstActionTitle firstAction:(void (^ __nullable)())firstAction secondActionTitle:(NSString *_Nullable)secondActionTitle secondAction:(void (^ __nullable)())secondAction;
 
 
++ (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation;
+
++ (CGRect)screenBounds;
 
 @end

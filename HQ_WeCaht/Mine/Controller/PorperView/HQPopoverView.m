@@ -248,7 +248,7 @@ float DegreesToRadians(float angle) {
     self.layer.anchorPoint = CGPointMake(arrowPoint.x/currentW, _isUpward ? 0.f : 1.f);
     self.frame = oldFrame;
     self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.15f animations:^{
         self.transform = CGAffineTransformIdentity;
         _shadeView.alpha = 1.f;
     }];
@@ -301,7 +301,7 @@ float DegreesToRadians(float angle) {
 }
 ////点击隐藏
 - (void)hide {
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.15f animations:^{
         self.alpha = 0.f;
         _shadeView.alpha = 0.f;
         self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
@@ -359,7 +359,7 @@ float DegreesToRadians(float angle) {
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.15f animations:^{
         self.alpha = 0.f;
         _shadeView.alpha = 0.f;
     } completion:^(BOOL finished) {

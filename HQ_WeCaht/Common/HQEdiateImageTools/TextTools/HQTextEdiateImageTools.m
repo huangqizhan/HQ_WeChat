@@ -223,7 +223,6 @@
 }
 
 - (void)addNewTextView{
-
     self.imageEdiateController.ediateImageView.userInteractionEnabled = YES;
     HQEdiateImageTextView *textView = [[HQEdiateImageTextView alloc] initWithTextTool:self  withSuperView:self.imageEdiateController.ediateImageView  andAttrubuteString:[self creatAttributeString] andWithColor:_colorSlider.thumbTintColor];
     WEAKSELF;
