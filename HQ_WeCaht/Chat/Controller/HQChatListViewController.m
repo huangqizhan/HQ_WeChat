@@ -122,7 +122,6 @@
     
     return dic;
 }
-
 - (void)setUpUI{
     self.tableView.backgroundColor = XZRGB(0xf4f1f1);
     _searchbar = [HQSearchBar defaultSearchBar];;

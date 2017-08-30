@@ -286,6 +286,7 @@
 		FD66A3BA1EBB1C2400623F34 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD66A3B91EBB1C2400623F34 /* Accelerate.framework */; };
 		FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6753981F4FD622005AD79B /* GestureViewController.m */; };
 		FD67539C1F4FD6BB005AD79B /* SPUserResizableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD67539B1F4FD6BB005AD79B /* SPUserResizableView.m */; };
+		FD69B7C31F565F710087126A /* HQRQCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD69B7C21F565F710087126A /* HQRQCodeView.m */; };
 		FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6CF0231E81FEE2001E5984 /* HQLocalImageManager.m */; };
 		FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D88841E76306900794E7F /* HQReceiveMessageManager.m */; };
 		FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D888E1E76743D00794E7F /* HQTextView.m */; };
@@ -987,6 +988,8 @@
 		FD6753981F4FD622005AD79B /* GestureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
 		FD67539A1F4FD6BB005AD79B /* SPUserResizableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUserResizableView.h; sourceTree = "<group>"; };
 		FD67539B1F4FD6BB005AD79B /* SPUserResizableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUserResizableView.m; sourceTree = "<group>"; };
+		FD69B7C11F565F710087126A /* HQRQCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQRQCodeView.h; sourceTree = "<group>"; };
+		FD69B7C21F565F710087126A /* HQRQCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRQCodeView.m; sourceTree = "<group>"; };
 		FD6CF0221E81FEE2001E5984 /* HQLocalImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQLocalImageManager.h; sourceTree = "<group>"; };
 		FD6CF0231E81FEE2001E5984 /* HQLocalImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQLocalImageManager.m; sourceTree = "<group>"; };
 		FD6D88831E76306900794E7F /* HQReceiveMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQReceiveMessageManager.h; sourceTree = "<group>"; };
@@ -2022,6 +2025,8 @@
 		FD5101F21F551A2000455CC6 /* CodeViews */ = {
 			isa = PBXGroup;
 			children = (
+				FD69B7C11F565F710087126A /* HQRQCodeView.h */,
+				FD69B7C21F565F710087126A /* HQRQCodeView.m */,
 			);
 			path = CodeViews;
 			sourceTree = "<group>";
@@ -3269,6 +3274,7 @@
 				FDA1DB9B1E9B6F49001A9854 /* PercentLabel.m in Sources */,
 				FD211C321EC143DB0040771A /* HQPlayGifImageView.m in Sources */,
 				FD2ED8F81EADA8DA006E585F /* SDWebImageDownloaderOperation.m in Sources */,
+				FD69B7C31F565F710087126A /* HQRQCodeView.m in Sources */,
 				FD9409061E5A7D0C00634206 /* UIResponder+GXRouter.m in Sources */,
 				BAF4A8031E73F11B00653204 /* AFImageDownloader.m in Sources */,
 				FDEE9E9C1F14A8AA008E04CB /* HQMapSearchController.m in Sources */,

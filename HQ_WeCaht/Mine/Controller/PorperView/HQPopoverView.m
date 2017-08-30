@@ -82,7 +82,8 @@ float DegreesToRadians(float angle) {
     if (_style == HQPopoverActionDefauleStyle) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1.00];
+        self.backgroundColor = XZColor(43, 45, 40);
+        //[UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1.00];
     }
 }
 
