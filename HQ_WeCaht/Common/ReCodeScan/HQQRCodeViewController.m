@@ -8,6 +8,8 @@
 
 #import "HQQRCodeViewController.h"
 #import "HQRQCodeView.h"
+#import "ZbarWraper.h"
+
 
 
 
@@ -15,6 +17,7 @@
 @interface HQQRCodeViewController ()
 
 @property (nonatomic,strong) HQRQCodeView *recodeView;
+@property (nonatomic,strong) ZbarWraper *zabarWraper;
 
 @end
 
@@ -36,9 +39,32 @@
 }
 - (void)creatRecodeView{
     [self.view addSubview:self.recodeView];
-
+    
+    [self performSelector:@selector(startReCode) withObject:nil afterDelay:0.3];
+    
 }
 
+- (void)startReCode{
+    
+    UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    videoView.backgroundColor = [UIColor clearColor];
+    [self.view insertSubview:videoView atIndex:0];
+    
+    _zabarWraper = [[ZbarWraper alloc]initWithPreView:videoView barCodeType:ZBAR_I25 block:^(NSArray<ZbarResult *> *result) {
+        NSLog(@"result = %@",result);
+//        //测试，只使用扫码结果第一项
+//        LBXZbarResult *firstObj = result[0];
+//        
+//        LBXScanResult *scanResult = [[LBXScanResult alloc]init];
+//        scanResult.strScanned = firstObj.strScanned;
+//        scanResult.imgScanned = firstObj.imgScanned;
+//        scanResult.strBarCodeType = [LBXZBarWrapper convertFormat2String:firstObj.format];
+//        
+//        [weakSelf scanResultWithArray:@[scanResult]];
+    }];
+    [_zabarWraper start];
+
+}
 
 - (HQRQCodeView *)recodeView{
     if (_recodeView == nil) {
@@ -48,17 +74,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

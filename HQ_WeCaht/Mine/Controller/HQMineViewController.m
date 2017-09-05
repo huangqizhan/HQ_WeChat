@@ -21,6 +21,7 @@
 #import "HQEdiateImageController.h"
 #import "GestureViewController.h"
 #import "PoperViewController.h"
+#import "ReCodeTestController.h"
 
 
 
@@ -49,7 +50,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 14;
+    return 15;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
@@ -86,8 +87,10 @@
         cell.textLabel.text = @"HQEdiateImageController";
     }else if (indexPath.row == 12){
         cell.textLabel.text = @"gestureView";
-    }else{
+    }else if (indexPath.row == 13){
         cell.textLabel.text = @"properView";
+    }else{
+        cell.textLabel.text = @"ReCodeTestController";
     }
     return cell;
 }
@@ -136,9 +139,12 @@
     }else if (indexPath.row == 12){
         GestureViewController *gestureVC = [[GestureViewController alloc] init];
         [self.navigationController pushViewController:gestureVC animated:YES];
-    }else{
+    }else if (indexPath.row == 13){
         PoperViewController *properVC = [[PoperViewController alloc] init];
         [self.navigationController pushViewController:properVC animated:YES];
+    }else{
+        ReCodeTestController *recodeVC = [[ReCodeTestController alloc] init];
+        [self.navigationController pushViewController:recodeVC animated:YES];
     }
 }
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,7 @@
 #ifndef HQHeaderDefine_h
 #define HQHeaderDefine_h
 
+#ifdef __OBJC__
 
 
 #import <UIKit/UIKit.h>
@@ -45,9 +46,13 @@
 #import "UIImageView+WebCache.h"
 #import "HQSearchBar.h"
 #import "HQWebViewController.h"
+#import "ReCodeHelper.h"
 
 
 
+#endif
 
 
-#endif /* HQHeaderDefine_h */
+#endif   /* HQHeaderDefine_h */
+
+
