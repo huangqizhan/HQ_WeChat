@@ -138,9 +138,15 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (void)finishButtonAction:(UIButton *)sender{
+    if (self.currentTool == nil) {
+        if (_CallBackImageAfterEdiate) _CallBackImageAfterEdiate(_originalImage);
+        return;
+    }
+    
     [self.currentTool executeWithCompletionBlock:^(UIImage *image, NSError *error, NSDictionary *userInfo) {
         _originalImage = image;
         [self refreshImageView];
+        self.currentTool = nil;
     }];
 }
 - (void)refreshImageView{

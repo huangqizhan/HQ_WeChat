@@ -10,6 +10,9 @@
 #import "HQEdiateImageController.h"
 #import "UIColor+Extern.h"
 
+static CGFloat LINEWIDTH = 5;
+
+
 
 @interface HQDrawEdiateImageTools (){
      CGSize _originalImageSize;        //初始大小
@@ -158,7 +161,7 @@
 
 #pragma mark  ------ SliderAction -------
 - (void)widthSliderDidChange:(UISlider *)sender{
-    CGFloat scale = MAX(0.05, _widthSlider.value);
+    CGFloat scale = MAX(0.05, LINEWIDTH);
     _strokePreview.transform = CGAffineTransformMakeScale(scale, scale);
     _strokePreview.layer.borderWidth = 2/scale;
 }
@@ -186,7 +189,7 @@
         _prevDraggingPosition = currentDraggingPosition;
         DrawPointLine *line = [[DrawPointLine alloc] init];
         line.drawColor = _strokePreview.backgroundColor;
-        line.drawWidth = _widthSlider.value*70;
+        line.drawWidth = LINEWIDTH;
         [self.lineArray addObject:line];
     }
     if(sender.state != UIGestureRecognizerStateEnded){
@@ -234,7 +237,7 @@
     [_drawImageView.image drawAtPoint:CGPointZero];
     
     
-    CGFloat strokeWidth = MAX(1, _widthSlider.value * 65);
+    CGFloat strokeWidth = MAX(1, LINEWIDTH);
     UIColor *strokeColor = _strokePreview.backgroundColor;
     
     CGContextSetLineWidth(context, strokeWidth);

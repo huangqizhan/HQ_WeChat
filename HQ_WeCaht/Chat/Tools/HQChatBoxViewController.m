@@ -496,7 +496,9 @@
 - (void)HQCameraController:(HQCameraController *)cameraVC andCameraImage:(UIImage *)cameraImage andInfo:(NSDictionary *)info andIdentifer:(NSString *)identufer{
     if (cameraImage) {
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendImageMessage:imagePath: andFileName:)]) {
-            [_delegate chatBoxViewController:self sendImageMessage:cameraImage imagePath:identufer andFileName:[NSDate getCurrnetSendImageName]];
+            if (cameraImage) {
+                [_delegate chatBoxViewController:self sendImageMessage:@[cameraImage] imagePath:@[identufer] andFileName:@[[NSDate getCurrnetSendImageName]]];
+            }
         }
     }
 //    __block PHAsset *imageAsset = nil;

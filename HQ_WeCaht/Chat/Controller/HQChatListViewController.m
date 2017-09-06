@@ -12,9 +12,9 @@
 #import "ContractModel+Action.h"
 #import "HQGifPlayManager.h"
 #import "UIViewController+HQPresentTranstion.h"
-
-
-
+#import "HQPopoverAction.h"
+#import "HQPopoverView.h"
+#import "HQQRCodeViewController.h"
 
 
 
@@ -37,7 +37,7 @@
     [self loadDataSource];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testButtonAction)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"msg" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)];
-
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -72,21 +72,25 @@
 //    } andError:^{
 //        NSLog(@"work save faild");
 //    }];
-    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
-        for (ContractModel *con in resultList) {
-            ChatListModel *list = [ChatListModel customerInit];
-            list.messageUser = con;
-            list.chatListType = 1;
-            list.chatListId = con.userId;
-            list.isShow = NO;
-            list.userName = con.userName;
-            [list saveToDBChatLisModelAsyThread:^{
-                NSLog(@" user save success");
-            } andError:^{
-                NSLog(@" user save error");
-            }];
-        }
-    }];
+//    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
+//        for (ContractModel *con in resultList) {
+//            ChatListModel *list = [ChatListModel customerInit];
+//            list.messageUser = con;
+//            list.chatListType = 1;
+//            list.chatListId = con.userId;
+//            list.isShow = NO;
+//            list.userName = con.userName;
+//            [list saveToDBChatLisModelAsyThread:^{
+//                NSLog(@" user save success");
+//            } andError:^{
+//                NSLog(@" user save error");
+//            }];
+//        }
+//    }];
+    
+    HQPopoverView *popoverView = [HQPopoverView popoverView];
+    popoverView.style = HQHQPopoverActionDarkStyle;
+    [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];
 }
 - (void)testAction:(UIBarButtonItem *)item{
     NSDictionary *diction = [self  creatTextNessageWithIndex:1];
@@ -118,7 +122,6 @@
     
     return dic;
 }
-
 - (void)setUpUI{
     self.tableView.backgroundColor = XZRGB(0xf4f1f1);
     _searchbar = [HQSearchBar defaultSearchBar];;
@@ -292,6 +295,28 @@
     return NO;
 }
 #pragma mark ------- setter and getter --------
+- (NSArray <HQPopoverAction *> *)getQQActions{
+    // 发起多人聊天 action
+    HQPopoverAction *multichatAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_multichat"] title:@"发起群聊" handler:^(HQPopoverAction *action) {
+        
+    }];
+    // 加好友 action
+    HQPopoverAction *addFriAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_addFri"] title:@"添加好友" handler:^(HQPopoverAction *action) {
+        
+    }];
+    // 扫一扫 action
+    HQPopoverAction *QRAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_QR"] title:@"扫一扫" handler:^(HQPopoverAction *action) {
+        HQQRCodeViewController *rCodeVC = [[HQQRCodeViewController alloc] init];
+        [self.navigationController pushViewController:rCodeVC animated:YES];
+    }];
+    // 付款 action
+    HQPopoverAction *payMoneyAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_payMoney"] title:@"收付款" handler:^(HQPopoverAction *action) {
+        
+    }];
+    return @[multichatAction, addFriAction, QRAction, payMoneyAction];
+}
+
+
 - (UITableView *)tableView{
     if (nil == _tableView) {
         UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];

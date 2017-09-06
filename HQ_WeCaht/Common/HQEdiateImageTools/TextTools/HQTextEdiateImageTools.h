@@ -10,4 +10,20 @@
 
 @interface HQTextEdiateImageTools : HQEdiateImageBaseTools
 
+
+
+/**
+ 底部栏删除时删除框的状态
+
+ @param active bool
+ */
+- (void)setMenuViewDeleteStatusIsActive:(BOOL)active;
+
+
+/**
+ 重置底部栏状态
+ */
+- (void)setMenuViewDefaultStatus;
+
+
 @end

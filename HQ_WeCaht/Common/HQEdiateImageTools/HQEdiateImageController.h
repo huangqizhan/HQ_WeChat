@@ -17,20 +17,31 @@
 @property (nonatomic,strong) UIImage *originalImage;
 
 @property (nonatomic,strong) UIImageView *ediateImageView;
-
+/////
 @property (nonatomic,weak,readonly) UIScrollView *scrollView;
-
+////底部栏视图
 @property (nonatomic,strong) UIView *menuView;
+////图片编辑后的回调
+@property (nonatomic,copy) void (^CallBackImageAfterEdiate)(UIImage *);
 
+/**
+ 重置scrollView的放大和缩小值
 
-- (void)fixZoomScaleWithAnimated:(BOOL)animated;
-
+ @param animated bool
+ */
 - (void)resetZoomScaleWithAnimated:(BOOL)animated;
 
+/**
+ 重置底部栏的初始状态
+ */
 - (void)resetBottomViewEdiateStatus;
 
-- (void)resetImageViewFrame;
 
+/**
+ 裁剪图片时裁剪结果
+
+ @param newImage 裁剪后的image
+ */
 - (void)refershUIWhenediateCompliteWithNewImage:(UIImage *)newImage;
 
 
