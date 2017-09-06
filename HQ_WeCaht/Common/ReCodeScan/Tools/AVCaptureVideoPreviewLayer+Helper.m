@@ -50,7 +50,9 @@
     }
     
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
-    [output setMetadataObjectsDelegate:metadataObjectsDelegate queue:dispatch_get_main_queue()];
+    dispatch_queue_t metadataQueue = dispatch_queue_create("com.yaming.ColloQR.metadata", 0);
+    ///dispatch_get_main_queue()
+    [output setMetadataObjectsDelegate:metadataObjectsDelegate queue:metadataQueue];
     
     //识别区域
     [output setRectOfInterest:rectOfInterest];

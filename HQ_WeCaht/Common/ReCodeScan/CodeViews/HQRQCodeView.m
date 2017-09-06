@@ -14,7 +14,11 @@ static CGFloat ScabRentangleHeight = 200.0;
 static CGFloat NavigationBarDistance = 100;
 
 @interface HQRQCodeView ()
+
 @property (nonatomic,strong) ReCodeIndicatorView *indicatorView;
+@property (nonatomic,strong) UIImageView *recodeLineView;
+@property (nonatomic,strong) NSTimer *timer;
+
 @end
 
 
@@ -30,17 +34,8 @@ static CGFloat NavigationBarDistance = 100;
 }
 - (void)drawRect:(CGRect)rect{
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    //设置非识别区域颜色
-    
-    const CGFloat *components = CGColorGetComponents([[UIColor redColor] colorWithAlphaComponent:0.2] .CGColor);
-    
-    CGFloat red_notRecoginitonArea = components[0];
-    CGFloat green_notRecoginitonArea = components[1];
-    CGFloat blue_notRecoginitonArea = components[2];
-    CGFloat alpa_notRecoginitonArea = components[3];
-    CGContextSetRGBFillColor(context, red_notRecoginitonArea, green_notRecoginitonArea,
-                             blue_notRecoginitonArea, alpa_notRecoginitonArea);
+
+    CGContextSetRGBFillColor(context, 0, 0, 0, 0.6);
     
     //扫码区域上面填充
     CGRect scanrect = CGRectMake(0, 0, App_Frame_Width, NavigationBarDistance);
@@ -107,7 +102,32 @@ static CGFloat NavigationBarDistance = 100;
 - (void)startRecodeWithContent:(NSString *)content{
     [self.indicatorView startRecodeWithContent:content];
 }
-
+- (void)beginRecodeWhenDidEndAnimation{
+    [self.indicatorView removeFromSuperview];
+    [self showRecodeAniamtionView];
+}
+#pragma mark ------- 显示扫码条 -----
+- (void)showRecodeAniamtionView{
+    [self addSubview:self.recodeLineView];
+    
+    _timer = [NSTimer  scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(showRecodeViewTimerAction) userInfo:nil repeats:YES];
+    [_timer fire];
+}
+- (void)dismissReCodeView{
+    [self.recodeLineView removeFromSuperview];
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+- (void)showRecodeViewTimerAction{
+    if (self.recodeLineView.origin.y > self.ScanRect.origin.y + self.ScanRect.size.height-10) {
+        self.recodeLineView.top = self.ScanRect.origin.x;
+    }
+    [UIView animateWithDuration:0.01 animations:^{
+        self.recodeLineView.top += 0.5;
+    }];
+}
 - (ReCodeIndicatorView *)indicatorView{
     if (_indicatorView == nil) {
         _indicatorView  = [[ReCodeIndicatorView alloc] initWithFrame:CGRectMake(self.ScanRect.origin.x + (self.ScanRect.size.width - 100)/2.0, self.ScanRect.origin.y + (self.ScanRect.size.height  - 70)/2.0, 100, 70)];
@@ -115,7 +135,13 @@ static CGFloat NavigationBarDistance = 100;
     }
     return _indicatorView;
 }
-
+- (UIImageView *)recodeLineView{
+    if (_recodeLineView == nil) {
+        _recodeLineView = [[UIImageView alloc] initWithFrame:CGRectMake(self.ScanRect.origin.x, self.ScanRect.origin.y, self.ScanRect.size.width, 10)];
+        _recodeLineView.image = [UIImage imageNamed:@"scanAnimationImage"];
+    }
+    return _recodeLineView;
+}
 @end
 
 

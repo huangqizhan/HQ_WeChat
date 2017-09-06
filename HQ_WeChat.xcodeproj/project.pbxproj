@@ -190,6 +190,7 @@
 		FD2ED9051EADC5AA006E585F /* HQUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED9041EADC5AA006E585F /* HQUserInfoModel.m */; };
 		FD2ED9081EADC5BE006E585F /* HQPublicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2ED9071EADC5BE006E585F /* HQPublicManager.m */; };
 		FD2ED90A1EADED7B006E585F /* 置顶.png in Resources */ = {isa = PBXBuildFile; fileRef = FD2ED9091EADED7B006E585F /* 置顶.png */; };
+		FD33B68A1F5FA0D500379642 /* HQReCodeResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD33B6891F5FA0D500379642 /* HQReCodeResultController.m */; };
 		FD37B0BC1E67B0D300FDD2A4 /* HQFaceMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD37B0BB1E67B0D300FDD2A4 /* HQFaceMenuView.m */; };
 		FD37B0BE1E67BF3100FDD2A4 /* CostomerEmoj.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD37B0BD1E67BF3100FDD2A4 /* CostomerEmoj.plist */; };
 		FD37B0C01E67C52300FDD2A4 /* SystemEmoj.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD37B0BF1E67C52300FDD2A4 /* SystemEmoj.plist */; };
@@ -855,6 +856,8 @@
 		FD2ED9061EADC5BE006E585F /* HQPublicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPublicManager.h; sourceTree = "<group>"; };
 		FD2ED9071EADC5BE006E585F /* HQPublicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPublicManager.m; sourceTree = "<group>"; };
 		FD2ED9091EADED7B006E585F /* 置顶.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "置顶.png"; sourceTree = "<group>"; };
+		FD33B6881F5FA0D500379642 /* HQReCodeResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQReCodeResultController.h; sourceTree = "<group>"; };
+		FD33B6891F5FA0D500379642 /* HQReCodeResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQReCodeResultController.m; sourceTree = "<group>"; };
 		FD37B0BA1E67B0D300FDD2A4 /* HQFaceMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFaceMenuView.h; sourceTree = "<group>"; };
 		FD37B0BB1E67B0D300FDD2A4 /* HQFaceMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFaceMenuView.m; sourceTree = "<group>"; };
 		FD37B0BD1E67BF3100FDD2A4 /* CostomerEmoj.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CostomerEmoj.plist; sourceTree = "<group>"; };
@@ -1573,6 +1576,8 @@
 				FD0E98EE1F5D221900B16263 /* CodeViews */,
 				FD0E98F11F5D221900B16263 /* HQQRCodeViewController.h */,
 				FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */,
+				FD33B6881F5FA0D500379642 /* HQReCodeResultController.h */,
+				FD33B6891F5FA0D500379642 /* HQReCodeResultController.m */,
 			);
 			path = ReCodeScan;
 			sourceTree = "<group>";
@@ -3561,6 +3566,7 @@
 				FD1DDF7D1F2735EB00AAC89D /* HQEmotionEdiateImageTools.m in Sources */,
 				FDD18CF91F131EFA00E260BD /* MASViewConstraint.m in Sources */,
 				BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */,
+				FD33B68A1F5FA0D500379642 /* HQReCodeResultController.m in Sources */,
 				FD37B0BC1E67B0D300FDD2A4 /* HQFaceMenuView.m in Sources */,
 				FDD18CFC1F131EFA00E260BD /* View+MASAdditions.m in Sources */,
 				FDDEE3D31E655B7D007E9AF9 /* MJPropertyType.m in Sources */,

@@ -14,6 +14,11 @@
 
 - (void)startRecodeWithContent:(NSString *)content;
 
+- (void)beginRecodeWhenDidEndAnimation;
+
+
+- (void)dismissReCodeView;
+
 
 @end
 

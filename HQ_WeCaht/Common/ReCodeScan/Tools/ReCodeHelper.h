@@ -10,10 +10,10 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-static const float kLineMinY = 121;
+static const float kLineMinY = 100;
 static const float kLineMaxY = 380;
-static const float kReaderViewWidth = 259;
-static const float kReaderViewHeight = 259;
+static const float kReaderViewWidth = 200;
+static const float kReaderViewHeight = 200;
 
 @interface ReCodeHelper : NSObject
 

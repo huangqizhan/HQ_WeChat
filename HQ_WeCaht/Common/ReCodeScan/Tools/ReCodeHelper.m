@@ -97,7 +97,7 @@
 }
 
 + (CGRect)getReaderViewBoundsWithSize:(CGSize)asize {
-    return CGRectMake(kLineMinY / APP_Frame_Height, ((App_Frame_Width - asize.width) / 2.0) / App_Frame_Width, asize.height / APP_Frame_Height, asize.width / App_Frame_Width);
+    return CGRectMake(kLineMinY / (APP_Frame_Height-64), ((App_Frame_Width - asize.width) / 2.0) / App_Frame_Width, asize.height / (APP_Frame_Height-64), asize.width / App_Frame_Width);
 }
 
 + (CAKeyframeAnimation *)zoomOutAnimation {
