@@ -10,15 +10,34 @@
 
 @interface HQReCodeResultController ()
 
+@property(nonatomic,strong) UILabel *conentLabel;
+
 @end
 
 @implementation HQReCodeResultController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    //得到当前视图控制器中的所有控制器
+    NSMutableArray *array = [self.navigationController.viewControllers mutableCopy];
+    //把B从里面删除
+    [array removeObjectAtIndex:1];
+    //把删除后的控制器数组再次赋值
+    [self.navigationController setViewControllers:[array copy] animated:YES];
+    
+    [self.view addSubview:self.conentLabel];
+    self.conentLabel.text = _codeString;
 }
 
+
+- (UILabel *)conentLabel{
+    if (_conentLabel  == nil) {
+        _conentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, App_Frame_Width-20, 100)];
+    }
+    return _conentLabel;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -10,4 +10,7 @@
 
 @interface HQReCodeResultController : UIViewController
 
+@property (nonatomic,copy) NSString *codeString;
+
+
 @end
