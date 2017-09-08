@@ -22,6 +22,7 @@
 #import "GestureViewController.h"
 #import "PoperViewController.h"
 #import "ReCodeTestController.h"
+#import "FaceViewController.h"
 
 
 
@@ -50,7 +51,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 15;
+    return 16;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
@@ -89,8 +90,10 @@
         cell.textLabel.text = @"gestureView";
     }else if (indexPath.row == 13){
         cell.textLabel.text = @"properView";
-    }else{
+    }else if (indexPath.row == 14){
         cell.textLabel.text = @"ReCodeTestController";
+    }else{
+        cell.textLabel.text = @"FaceViewController";
     }
     return cell;
 }
@@ -142,9 +145,12 @@
     }else if (indexPath.row == 13){
         PoperViewController *properVC = [[PoperViewController alloc] init];
         [self.navigationController pushViewController:properVC animated:YES];
-    }else{
+    }else if (indexPath.row == 14){
         ReCodeTestController *recodeVC = [[ReCodeTestController alloc] init];
         [self.navigationController pushViewController:recodeVC animated:YES];
+    }else{
+        FaceViewController *faceVC = [[FaceViewController alloc] init];
+        [self.navigationController pushViewController:faceVC animated:YES];
     }
 }
 - (void)didReceiveMemoryWarning {

@@ -40,17 +40,12 @@
 		FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD055AA41F412907001850FE /* IMG_2750.jpg */; };
 		FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD055AA71F4135F9001850FE /* HQCutImageController.m */; };
 		FD0661C91F53AB0C005FE459 /* PoperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0661C71F53AB0C005FE459 /* PoperViewController.m */; };
+		FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C31F623DBA002C27F2 /* FaceViewController.m */; };
+		FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */; };
+		FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD0E03C81F62408D002C27F2 /* faces5.jpg */; };
 		FD0E98EC1F5D211D00B16263 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0E98EB1F5D211D00B16263 /* libiconv.tbd */; };
 		FD0E98FA1F5D221900B16263 /* HQRQCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E98F01F5D221900B16263 /* HQRQCodeView.m */; };
 		FD0E98FB1F5D221900B16263 /* HQQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */; };
-		FD0E992A1F5D270800B16263 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E991A1F5D270800B16263 /* bitstream.c */; };
-		FD0E992B1F5D270800B16263 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E991C1F5D270800B16263 /* mask.c */; };
-		FD0E992C1F5D270800B16263 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E991F1F5D270800B16263 /* QRCodeGenerator.m */; };
-		FD0E992D1F5D270800B16263 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E99201F5D270800B16263 /* qrencode.c */; };
-		FD0E992E1F5D270800B16263 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E99221F5D270800B16263 /* qrinput.c */; };
-		FD0E992F1F5D270800B16263 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E99241F5D270800B16263 /* qrspec.c */; };
-		FD0E99301F5D270800B16263 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E99261F5D270800B16263 /* rscode.c */; };
-		FD0E99311F5D270800B16263 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0E99281F5D270800B16263 /* split.c */; };
 		FD11AD7F1E8F5AF10060E020 /* HQChatRefershControll.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */; };
 		FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1504A31EEFBE1C000E9DED /* HQChatDateCell.m */; };
 		FD1A314F1F0CBA090017FDBC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1A314E1F0CBA090017FDBC /* CoreTelephony.framework */; };
@@ -579,27 +574,16 @@
 		FD055AA71F4135F9001850FE /* HQCutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCutImageController.m; sourceTree = "<group>"; };
 		FD0661C61F53AB0C005FE459 /* PoperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoperViewController.h; sourceTree = "<group>"; };
 		FD0661C71F53AB0C005FE459 /* PoperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoperViewController.m; sourceTree = "<group>"; };
+		FD0E03C21F623DBA002C27F2 /* FaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceViewController.h; sourceTree = "<group>"; };
+		FD0E03C31F623DBA002C27F2 /* FaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceViewController.m; sourceTree = "<group>"; };
+		FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
+		FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Face.m"; sourceTree = "<group>"; };
+		FD0E03C81F62408D002C27F2 /* faces5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = faces5.jpg; sourceTree = "<group>"; };
 		FD0E98EB1F5D211D00B16263 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		FD0E98EF1F5D221900B16263 /* HQRQCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQRQCodeView.h; sourceTree = "<group>"; };
 		FD0E98F01F5D221900B16263 /* HQRQCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRQCodeView.m; sourceTree = "<group>"; };
 		FD0E98F11F5D221900B16263 /* HQQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQQRCodeViewController.h; sourceTree = "<group>"; };
 		FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQQRCodeViewController.m; sourceTree = "<group>"; };
-		FD0E991A1F5D270800B16263 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
-		FD0E991B1F5D270800B16263 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
-		FD0E991C1F5D270800B16263 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
-		FD0E991D1F5D270800B16263 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
-		FD0E991E1F5D270800B16263 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
-		FD0E991F1F5D270800B16263 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
-		FD0E99201F5D270800B16263 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
-		FD0E99211F5D270800B16263 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
-		FD0E99221F5D270800B16263 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
-		FD0E99231F5D270800B16263 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
-		FD0E99241F5D270800B16263 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
-		FD0E99251F5D270800B16263 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
-		FD0E99261F5D270800B16263 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
-		FD0E99271F5D270800B16263 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
-		FD0E99281F5D270800B16263 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
-		FD0E99291F5D270800B16263 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		FD11AD7D1E8F5AF10060E020 /* HQChatRefershControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatRefershControll.h; sourceTree = "<group>"; };
 		FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatRefershControll.m; sourceTree = "<group>"; };
 		FD1504A21EEFBE1C000E9DED /* HQChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatDateCell.h; sourceTree = "<group>"; };
@@ -1445,6 +1429,7 @@
 		BACB05501E59872E008B676D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FD0E03C81F62408D002C27F2 /* faces5.jpg */,
 				FD6649CA1EBC6EFF005E340B /* gifImages */,
 				FD8DD7711EB81D12002125CD /* tempGifImage */,
 				FD4769031E665DF400CEC7A6 /* mayun.jpg */,
@@ -1537,7 +1522,6 @@
 			isa = PBXGroup;
 			children = (
 				FDD2D82A1F5E925F00C2E993 /* Tools */,
-				FD0E99191F5D270800B16263 /* libqrencode */,
 				FD0E98EE1F5D221900B16263 /* CodeViews */,
 				FD0E98F11F5D221900B16263 /* HQQRCodeViewController.h */,
 				FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */,
@@ -1554,29 +1538,6 @@
 				FD0E98F01F5D221900B16263 /* HQRQCodeView.m */,
 			);
 			path = CodeViews;
-			sourceTree = "<group>";
-		};
-		FD0E99191F5D270800B16263 /* libqrencode */ = {
-			isa = PBXGroup;
-			children = (
-				FD0E991A1F5D270800B16263 /* bitstream.c */,
-				FD0E991B1F5D270800B16263 /* bitstream.h */,
-				FD0E991C1F5D270800B16263 /* mask.c */,
-				FD0E991D1F5D270800B16263 /* mask.h */,
-				FD0E991E1F5D270800B16263 /* QRCodeGenerator.h */,
-				FD0E991F1F5D270800B16263 /* QRCodeGenerator.m */,
-				FD0E99201F5D270800B16263 /* qrencode.c */,
-				FD0E99211F5D270800B16263 /* qrencode.h */,
-				FD0E99221F5D270800B16263 /* qrinput.c */,
-				FD0E99231F5D270800B16263 /* qrinput.h */,
-				FD0E99241F5D270800B16263 /* qrspec.c */,
-				FD0E99251F5D270800B16263 /* qrspec.h */,
-				FD0E99261F5D270800B16263 /* rscode.c */,
-				FD0E99271F5D270800B16263 /* rscode.h */,
-				FD0E99281F5D270800B16263 /* split.c */,
-				FD0E99291F5D270800B16263 /* split.h */,
-			);
-			path = libqrencode;
 			sourceTree = "<group>";
 		};
 		FD1A315E1F0CBC0C0017FDBC /* Map */ = {
@@ -2748,6 +2709,8 @@
 				FD0661C71F53AB0C005FE459 /* PoperViewController.m */,
 				FDD2D8271F5E918D00C2E993 /* ReCodeTestController.h */,
 				FDD2D8281F5E918D00C2E993 /* ReCodeTestController.m */,
+				FD0E03C21F623DBA002C27F2 /* FaceViewController.h */,
+				FD0E03C31F623DBA002C27F2 /* FaceViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2831,6 +2794,8 @@
 				FD42B5E81F0A149200D6F0C4 /* NSObject+HQCGRectTransform.m */,
 				FD42B5EA1F0A16DD00D6F0C4 /* UIImage+Gallop.h */,
 				FD42B5EB1F0A16DD00D6F0C4 /* UIImage+Gallop.m */,
+				FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */,
+				FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3247,6 +3212,7 @@
 				FD8DD7DD1EB81D54002125CD /* 37.gif in Resources */,
 				FD6649DF1EBC6EFF005E340B /* g13.gif in Resources */,
 				FDD18D071F13218800E260BD /* 3.gif in Resources */,
+				FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */,
 				FD8DD7CA1EB81D54002125CD /* 56.gif in Resources */,
 				FD8DD7CC1EB81D54002125CD /* 54.gif in Resources */,
 				FD26537F1EE92030006BAB5E /* Tuzki_2.gif in Resources */,
@@ -3400,7 +3366,6 @@
 				FDDEE3AF1E655644007E9AF9 /* HQFaceTools.m in Sources */,
 				FD2ED8FF1EADA8DA006E585F /* UIImageView+HighlightedWebCache.m in Sources */,
 				FD2ED8FB1EADA8DA006E585F /* UIButton+WebCache.m in Sources */,
-				FD0E992C1F5D270800B16263 /* QRCodeGenerator.m in Sources */,
 				FD1B09C71E7FB5FA0090AB82 /* HQCameraManager.m in Sources */,
 				FD28EA631E7B8DC70077E009 /* HQPickerProcessView.m in Sources */,
 				FD9869E91EDE9D9C00460E11 /* HQDisPlayTextController.m in Sources */,
@@ -3420,7 +3385,6 @@
 				FD7570501EFB714D00CA7112 /* HQWebViewController.m in Sources */,
 				FD3DE7EC1F3BE619002BF6A6 /* HQEdiateImageCutView.m in Sources */,
 				FDE5CED81ED81C4F0072882A /* UIApplication+HQExtern.m in Sources */,
-				FD0E992E1F5D270800B16263 /* qrinput.c in Sources */,
 				FD2ED8F41EADA8DA006E585F /* SDImageCache.m in Sources */,
 				FDE5CED21ED817C30072882A /* HQActionSheet.m in Sources */,
 				FDD18CFD1F131EFA00E260BD /* ViewController+MASAdditions.m in Sources */,
@@ -3428,7 +3392,6 @@
 				BAF4A8061E73F11B00653204 /* UIButton+AFNetworking.m in Sources */,
 				FD47693B1E667D7900CEC7A6 /* HQChatBoxViewController.m in Sources */,
 				FD562D0B1EFCA00A00E39756 /* HQWebJsManager.m in Sources */,
-				FD0E99301F5D270800B16263 /* rscode.c in Sources */,
 				FDA1DB951E9B2755001A9854 /* ControllerTranstionAnimation.m in Sources */,
 				FD28EA501E7B8C000077E009 /* NSBundle+TZImagePicker.m in Sources */,
 				FD66A3B11EBB1A6900623F34 /* YYTextUtilities.m in Sources */,
@@ -3473,7 +3436,6 @@
 				FD9408BC1E5A728B00634206 /* HQChatListViewController.m in Sources */,
 				FD2476D51E6FA1880085A23C /* HQChatMineImageCell.m in Sources */,
 				FD7F8F5A1E9DB87F00B61D63 /* UIViewController+HQPresentTranstion.m in Sources */,
-				FD0E992D1F5D270800B16263 /* qrencode.c in Sources */,
 				BAF4A8051E73F11B00653204 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				FD2ED9001EADA8DA006E585F /* UIImageView+WebCache.m in Sources */,
 				FD2ED8F61EADA8DA006E585F /* SDWebImageDecoder.m in Sources */,
@@ -3502,6 +3464,7 @@
 				FDD2D8301F5E967D00C2E993 /* AVCaptureVideoPreviewLayer+Helper.m in Sources */,
 				FD66A3551EBAD19500623F34 /* HQGifPageView.m in Sources */,
 				BAF4A7FE1E73F11B00653204 /* AFURLRequestSerialization.m in Sources */,
+				FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */,
 				FD80E3551ED66D9D00203097 /* ApplicationHelper.m in Sources */,
 				FD2CAD3A1EE13C6100FEEC7A /* amrFileCodec.mm in Sources */,
 				FD2ED8FD1EADA8DA006E585F /* UIImage+MultiFormat.m in Sources */,
@@ -3512,7 +3475,6 @@
 				FD94090B1E5A7D0C00634206 /* NSDate+Extension.m in Sources */,
 				FD2476ED1E6FA2540085A23C /* HQChatOtherFileCell.m in Sources */,
 				FD2737271E69687500629143 /* HQFaceMorePageView.m in Sources */,
-				FD0E992B1F5D270800B16263 /* mask.c in Sources */,
 				BAB31B821F5303D80055D5FE /* HQPopoverAction.m in Sources */,
 				FD66A3AE1EBB1A6900623F34 /* UIView+YYText.m in Sources */,
 				FD2476D81E6FA19C0085A23C /* HQChatMineVidioCell.m in Sources */,
@@ -3560,12 +3522,12 @@
 				FD1A317B1F0CCBC90017FDBC /* HQChatLocationOtherCell.m in Sources */,
 				BAF4A8001E73F11B00653204 /* AFURLSessionManager.m in Sources */,
 				FD42B5EC1F0A16DD00D6F0C4 /* UIImage+Gallop.m in Sources */,
+				FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */,
 				FD7F8F651E9DC49D00B61D63 /* HQBroswerViewController.m in Sources */,
 				BAB31B7F1F5302150055D5FE /* HQPopoverView.m in Sources */,
 				FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */,
 				FD8DD8071EB824E3002125CD /* TranstionAnimationViewController.m in Sources */,
 				FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */,
-				FD0E992F1F5D270800B16263 /* qrspec.c in Sources */,
 				FD2CAD231EE13A8E00FEEC7A /* HQAudioTools.m in Sources */,
 				FD3E80A11ECE85F700F3B430 /* HQWifiViewController.m in Sources */,
 				FDD18CF81F131EFA00E260BD /* MASViewAttribute.m in Sources */,
@@ -3573,7 +3535,6 @@
 				FD7F8F6B1E9DC62500B61D63 /* HQBroswerCollectionViewCell.m in Sources */,
 				FD04841C1EAEEE080042E702 /* TestTableViewController.m in Sources */,
 				FDA1DB9E1E9B776F001A9854 /* DownLoadPercentView.m in Sources */,
-				FD0E992A1F5D270800B16263 /* bitstream.c in Sources */,
 				FD9408A71E5A716500634206 /* HQBaseViewController.m in Sources */,
 				FD61A24C1F0488F500F0830C /* DownLoadBackImageCell.m in Sources */,
 				FDA1DB8E1E9B24F0001A9854 /* UIViewController+HQTranstion.m in Sources */,
@@ -3627,7 +3588,6 @@
 				FD3B33531ECBF5C600A9075E /* DownLoadTest.m in Sources */,
 				FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */,
 				FD2CAD3B1EE13C6100FEEC7A /* wav.mm in Sources */,
-				FD0E99311F5D270800B16263 /* split.c in Sources */,
 				BAF4A80A1E73F11B00653204 /* UIWebView+AFNetworking.m in Sources */,
 				FD2ED8F31EADA8DA006E585F /* NSData+ImageContentType.m in Sources */,
 				FDCBB5381EFBBA6C00D6F573 /* WebViewJavascriptBridgeBase.m in Sources */,
