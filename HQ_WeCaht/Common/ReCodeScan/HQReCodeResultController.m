@@ -35,6 +35,7 @@
 - (UILabel *)conentLabel{
     if (_conentLabel  == nil) {
         _conentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, App_Frame_Width-20, 100)];
+        _conentLabel.numberOfLines = 0;
     }
     return _conentLabel;
 }

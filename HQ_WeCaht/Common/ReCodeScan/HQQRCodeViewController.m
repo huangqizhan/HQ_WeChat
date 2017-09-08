@@ -36,28 +36,78 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.recodeView startRecodeWithContent:@"正在启动相机"];
+    if (!_qrSession.isRunning) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.recodeView beginRecodeWhenDidEndAnimation];
+            [self startSesstionRecode];
+        });
+    }
+}
+- (void)willMoveToParentViewController:(UIViewController*)parent{
+    if ([self isViewLoaded]) {
+        [self stopSesstionRecode];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     self.title = @"扫码";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开灯" style:UIBarButtonItemStylePlain target:self action:@selector(flushFocusAction:)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone; //UIRectEdgeAll
     }
     if (![ReCodeHelper canAccessAVCaptureDeviceForMediaType:AVMediaTypeVideo]) {
         return;
     }
-     [self setUp];
+    [self setUp];
+}
+- (void)applicationWillEnterForeground:(NSNotification *)note{
+    [self startSesstionRecode];
+}
+- (void)applicationDidEnterBackground:(NSNotification *)note{
+    [self stopSesstionRecode];
+}
+
+- (void)flushFocusAction:(UIBarButtonItem *)sender{
+    if ([sender.title isEqualToString:@"开灯"]) {
+        [self turnOnTorch:YES];
+        [sender setTitle:@"关灯"];
+    }else{
+        [self turnOnTorch:NO];
+        [sender setTitle:@"开灯"];
+    }
+}
+- (void)turnOnTorch:(BOOL)on {
+    if (_captureDevice) {
+        [_captureDevice lockForConfiguration:nil];
+        if (on) {
+            [_captureDevice setTorchMode:AVCaptureTorchModeOn];
+        }
+        else {
+            [_captureDevice setTorchMode: AVCaptureTorchModeOff];
+        }
+        
+        [_captureDevice unlockForConfiguration];
+    }
 }
 - (void)setUp{
+    
      [self.view addSubview:self.recodeView];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self StartRecodeView];
     });
 }
+
 - (void )StartRecodeView{
-    _captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    _qrVideoPreviewLayer = [AVCaptureVideoPreviewLayer captureVideoPreviewLayerWithFrame:self.view.bounds rectOfInterest:[ReCodeHelper getReaderViewBoundsWithSize:CGSizeMake(kReaderViewWidth, kReaderViewHeight)] captureDevice:_captureDevice metadataObjectsDelegate:self];
+    if (_captureDevice == nil) {
+        _captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
+    if (_qrVideoPreviewLayer == nil) {
+        _qrVideoPreviewLayer = [AVCaptureVideoPreviewLayer captureVideoPreviewLayerWithFrame:self.view.bounds rectOfInterest:[ReCodeHelper getReaderViewBoundsWithSize:CGSizeMake(kReaderViewWidth, kReaderViewHeight)] captureDevice:_captureDevice metadataObjectsDelegate:self];
+    }
     if (_qrVideoPreviewLayer == nil) {
         return;
     }
@@ -65,7 +115,7 @@
     _qrSession = _qrVideoPreviewLayer.session;
     [self.view.layer insertSublayer:_qrVideoPreviewLayer atIndex:0];
     [self startRecodeWithAnimation];
-    [_qrSession startRunning];
+    [self startSesstionRecode];
 }
 #pragma mark -------- 添加扫码视图的动画显示 ------
 - (void)startRecodeWithAnimation{
@@ -84,7 +134,7 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     [self stopSesstionRecode];
     NSMutableSet *foundBarcodes = [NSMutableSet new];
-    [metadataObjects enumerateObjectsUsingBlock: ^(AVMetadataObject *obj, NSUInteger idx, BOOL *stop) {
+    [metadataObjects enumerateObjectsUsingBlock: ^(AVMetadataObject *obj, NSUInteger idx, BOOL *stop) {////二维码org.iso.QRCode      条形码 org.iso.Code128
         if ([obj isKindOfClass:[AVMetadataMachineReadableCodeObject class]]){
             AVMetadataMachineReadableCodeObject *code = (AVMetadataMachineReadableCodeObject*)
             [_qrVideoPreviewLayer transformedMetadataObjectForMetadataObject:obj];
@@ -146,7 +196,13 @@
 }
 - (void)stopSesstionRecode{
     [_qrSession stopRunning];
-    [self.recodeView dismissReCodeView];  
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];;
+    [self.recodeView dismissReCodeView];
+}
+- (void)startSesstionRecode{
+    [_qrSession startRunning];
+    [[AVAudioSession sharedInstance] setActive:YES withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:0 error:nil];
 }
 - (void)addTestViewWithBouns:(CGRect )bounds{
     CGRect oriFrame = self.recodeView.ScanRect;
@@ -154,7 +210,6 @@
     UIView *testView = [[UIView alloc] initWithFrame:newRect];
     testView.backgroundColor = [UIColor redColor];
     [self.recodeView addSubview:testView];
-    
 }
 #pragma mark ------- CAAnimationDelegate -----
 - (void)animationDidStart:(CAAnimation *)anim{

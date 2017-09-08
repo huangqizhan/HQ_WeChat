@@ -129,6 +129,7 @@ static CGFloat NavigationBarDistance = 100;
 }
 - (void)beginRecodeWhenDidEndAnimation{
     [self.indicatorView removeFromSuperview];
+    self.indicatorView = nil;
     [self showRecodeAniamtionView];
 }
 #pragma mark ------- 显示扫码条 -----
