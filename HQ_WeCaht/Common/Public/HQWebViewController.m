@@ -153,42 +153,42 @@
     NSLog(@"decidePolicyForNavigationAction");
     decisionHandler(WKNavigationActionPolicyAllow);
 }
-//接收到相应数据后，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    NSLog(@"decidePolicyForNavigationResponse");
-    if (!navigationResponse.isForMainFrame){
-        decisionHandler(WKNavigationResponsePolicyCancel);
-    }else{
-        decisionHandler(WKNavigationResponsePolicyAllow);
-    }
-    NSLog(@"2");
-    /*
-
-     */
-    /*
-     if (navigationAction.navigationType == WKNavigationTypeLinkActivated){
-     decisionHandler(WKNavigationActionPolicyCancel);
-     }else{
-     decisionHandler(WKNavigationActionPolicyAllow);
-     }
-     */
-}
-// 主机地址被重定向时调用
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    NSLog(@"didReceiveServerRedirectForProvisionalNavigation");
-}
-// 当内容开始返回时调用
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    NSLog(@"didCommitNavigation");
-}
-// 如果需要证书验证，与使用AFN进行HTTPS证书验证是一样的
-- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *__nullable credential))completionHandler{
-    NSLog(@"didReceiveAuthenticationChallenge");
-}
-//9.0才能使用，web内容处理中断时会触发
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
-    NSLog(@"webViewWebContentProcessDidTerminate");
-}
+////接收到相应数据后，决定是否跳转
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+//    NSLog(@"decidePolicyForNavigationResponse");
+//    if (!navigationResponse.isForMainFrame){
+//        decisionHandler(WKNavigationResponsePolicyCancel);
+//    }else{
+//        decisionHandler(WKNavigationResponsePolicyAllow);
+//    }
+//    NSLog(@"2");
+//    /*
+//
+//     */
+//    /*
+//     if (navigationAction.navigationType == WKNavigationTypeLinkActivated){
+//     decisionHandler(WKNavigationActionPolicyCancel);
+//     }else{
+//     decisionHandler(WKNavigationActionPolicyAllow);
+//     }
+//     */
+//}
+//// 主机地址被重定向时调用
+//- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+//    NSLog(@"didReceiveServerRedirectForProvisionalNavigation");
+//}
+//// 当内容开始返回时调用
+//- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+//    NSLog(@"didCommitNavigation");
+//}
+//// 如果需要证书验证，与使用AFN进行HTTPS证书验证是一样的
+//- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *__nullable credential))completionHandler{
+//    NSLog(@"didReceiveAuthenticationChallenge");
+//}
+////9.0才能使用，web内容处理中断时会触发
+//- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
+//    NSLog(@"webViewWebContentProcessDidTerminate");
+//}
 /*
  */
 - (void)didReceiveMemoryWarning {
@@ -197,3 +197,9 @@
 }
 
 @end
+
+
+/*
+ 注意 ： callHandle 是oc或者js调对方的函数  前提是 对方必须先注册该方法名  
+ 
+ */

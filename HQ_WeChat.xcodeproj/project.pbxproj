@@ -1322,6 +1322,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1A31551F0CBA410017FDBC /* JavaScriptCore.framework in Frameworks */,
+				FDCBB53B1EFBBA9F00D6F573 /* WebKit.framework in Frameworks */,
 				FD0E98EC1F5D211D00B16263 /* libiconv.tbd in Frameworks */,
 				FD8F04FA1F0E0EBF00A2FE35 /* GLKit.framework in Frameworks */,
 				FD1A315D1F0CBB440017FDBC /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -1329,11 +1331,9 @@
 				FD7BC1FE1F0E1575002EB167 /* MAMapKit.framework in Frameworks */,
 				FD1A315B1F0CBB160017FDBC /* libc++.tbd in Frameworks */,
 				FD1A31571F0CBA570017FDBC /* Security.framework in Frameworks */,
-				FD1A31551F0CBA410017FDBC /* JavaScriptCore.framework in Frameworks */,
 				FD1A31531F0CBA250017FDBC /* CoreLocation.framework in Frameworks */,
 				FD1A31511F0CBA180017FDBC /* SystemConfiguration.framework in Frameworks */,
 				FD1A314F1F0CBA090017FDBC /* CoreTelephony.framework in Frameworks */,
-				FDCBB53B1EFBBA9F00D6F573 /* WebKit.framework in Frameworks */,
 				FD66A3BA1EBB1C2400623F34 /* Accelerate.framework in Frameworks */,
 				FD66A3B81EBB1C1000623F34 /* MobileCoreServices.framework in Frameworks */,
 				FD1B09C41E7FB5940090AB82 /* CoreGraphics.framework in Frameworks */,

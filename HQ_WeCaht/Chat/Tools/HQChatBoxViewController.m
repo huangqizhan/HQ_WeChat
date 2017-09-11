@@ -44,6 +44,17 @@
 
 @implementation HQChatBoxViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.chatBox];
@@ -58,8 +69,8 @@
     self.keyboardFrame = CGRectZero;
     if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
 //        [_delegate chatBoxViewController:self didChangeChatBoxHeight:HEIGHT_TABBAR];
-        _chatBox.boxStatus = HQChatBoxStatusNothing;
     }
+    _chatBox.boxStatus = HQChatBoxStatusNothing;
 }
 - (void)keyboardFrameWillChange:(NSNotification *)notification{
     self.keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -192,7 +203,7 @@
             }
         }
     } else if (toStatus == HQChatBoxStatusShowMore) {  ///更多
-        if (fromStatus == HQChatBoxStatusShowVoice || fromStatus == HQChatBoxStatusNothing) {
+        if (fromStatus == HQChatBoxStatusShowVoice) {
             CGRect newRect;
             newRect.size.height = HEIGHT_CHATBOXVIEW;
             self.keyboardFrame = newRect;

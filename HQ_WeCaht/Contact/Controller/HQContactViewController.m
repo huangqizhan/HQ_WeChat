@@ -229,7 +229,7 @@
     self.definesPresentationContext = YES;
     searchController.view.backgroundColor = [UIColor whiteColor];
     searchController.hidesNavigationBarDuringPresentation = YES;
-    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64);
+    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64-49);
 }
 - (void)willPresentSearchController:(UISearchController *)searchController{
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];

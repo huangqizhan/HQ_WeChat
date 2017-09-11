@@ -51,6 +51,7 @@ static const float kReaderViewHeight = 200;
  @param asize 扫码区的宽高
  @return frame
  */
+
 + (CGRect)getReaderViewBoundsWithSize:(CGSize)asize;
 
 

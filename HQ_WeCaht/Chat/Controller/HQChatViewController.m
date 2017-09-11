@@ -67,6 +67,7 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self keyBordViewDidResetOriginStatus];
     [self hq_removeTransitionDelegate];
     [self hiddenMenuController];
 }
@@ -231,7 +232,6 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"didSelectRowAtIndexPath = %ld",indexPath.row);
     if (_messageCellIsEdiating) {
         HQChaRootCell *rootCell = [tableView cellForRowAtIndexPath:indexPath];
         [rootCell didSeleteCellWhenIsEdiating:!rootCell.isSeleted];
@@ -264,6 +264,8 @@
     [UIView animateWithDuration:.25 animations:^{
         self.chatBoxVC.view.top = APP_Frame_Height-HEIGHT_TABBAR-64;
         self.tableView.height = APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
+    } completion:^(BOOL finished) {
+        self.chatBoxVC.chatBox.boxStatus = HQChatBoxStatusNothing;
     }];
 }
 ////选中cell的数据处理
@@ -511,7 +513,8 @@
 ///移除语音文件
 - (void)chatBoxViewControllerRemoveAudioMessage:(HQChatBoxViewController *)chatboxViewController andFilePath:(NSString *)filePath{
     HQRecordingCell *recordCell = [[HQRecordingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MineRecordingCellId];
-    if (recordCell.messageModel && recordCell.indexPath) {        WEAKSELF;
+    if (recordCell.messageModel && recordCell.indexPath) {
+        WEAKSELF;
         [self checkCurrnetMessageIsHasDateMessageWithIndexPath:recordCell.indexPath andComplite:^(ChatMessageModel *msgModel, NSIndexPath *dateIndexPath) {
             if (msgModel != nil && dateIndexPath != nil) {
                 [weakSelf deleteMessageWithModel:@[recordCell.messageModel,msgModel] andIndexPath:@[recordCell.indexPath,dateIndexPath]];

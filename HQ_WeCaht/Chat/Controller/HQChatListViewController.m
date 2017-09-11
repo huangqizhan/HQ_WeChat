@@ -136,7 +136,11 @@
     _searchbar.delegate = self;
     self.tableView.tableHeaderView = _searchbar;
     [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:CANCELBUTTONCOLOR,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64);
+    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64-49);
+    
+
+    
+    
 }
 - (void)loadDataSource{
     [ChatListModel selectChatListShowOnOtherThreadWith:^(NSArray *result) {
