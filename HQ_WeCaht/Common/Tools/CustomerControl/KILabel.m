@@ -299,7 +299,7 @@ NSString * const KILabelLinkKey = @"link";
 {
     if (attributedString.length != 0)
     {
-        attributedString = [KILabel sanitizeAttributedString:attributedString];
+//        attributedString = [KILabel sanitizeAttributedString:attributedString];
     }
     
     if (self.isAutomaticLinkDetectionEnabled && (attributedString.length != 0))
@@ -428,6 +428,18 @@ NSString * const KILabelLinkKey = @"link";
     }
     
     return rangesForUserHandles;
+}
+
++ (NSArray *)matchStringWithPhoneLink:(NSString *)oldString{
+    NSMutableArray *linkArr = [NSMutableArray array];
+    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"(\\(86\\))?(13[0-9]|15[0-35-9]|18[0125-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
+    NSArray *array = [regExp matchesInString:oldString options:0 range:NSMakeRange(0, oldString.length)];
+    for (NSTextCheckingResult *result in array) {
+        NSString *string = [oldString substringWithRange:result.range];
+        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:string,NSStringFromRange(result.range), nil];
+        [linkArr addObject:dic];
+    }
+    return linkArr;
 }
 
 - (NSArray *)getRangesForHashtags:(NSString *)text
@@ -705,14 +717,7 @@ NSString * const KILabelLinkKey = @"link";
 
 + (NSAttributedString *)sanitizeAttributedString:(NSAttributedString *)attributedString
 {
-    // Setup paragraph alignement properly. IB applies the line break style
-    // to the attributed string. The problem is that the text container then
-    // breaks at the first line of text. If we set the line break to wrapping
-    // then the text container defines the break mode and it works.
-    // NOTE: This is either an Apple bug or something I've misunderstood.
-    
-    // Get the current paragraph style. IB only allows a single paragraph so
-    // getting the style of the first char is fine.
+
     NSRange range;
     NSParagraphStyle *paragraphStyle = [attributedString attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:&range];
     

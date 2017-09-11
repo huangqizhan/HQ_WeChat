@@ -352,9 +352,16 @@
 }
 ///双击
 - (void)HQChatDoubleClick:(UITableViewCell *)cell WithChatMessage:(ChatMessageModel *)messageModel{
+    WEAK_SELF;
     HQDisPlayTextController *disPlayVC = [[HQDisPlayTextController alloc] init];
     disPlayVC.messageModel = messageModel;
-    [disPlayVC showInWindown];
+    [disPlayVC showInWindownWithCallBack:^(HQAttrubuteTextData *data) {
+        if (data.type == HQAttrubuteTextTypeURL) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf pushToWebViewControllerWithUrl:data.url];
+            });
+        }
+    }];
 }
 - (HQTextView *)getCurentTextViewWhenShowMenuController{
     return self.chatBoxVC.chatBox.textView.isFirstResponder ? self.chatBoxVC.chatBox.textView : nil;
@@ -364,9 +371,14 @@
 }
 ///超链接
 - (void)HQChatClickLink:(UITableViewCell *)cell withChatMessage:(ChatMessageModel *)message andLinkUrl:(NSURL *)linkUrl{
+    [self pushToWebViewControllerWithUrl:linkUrl];
+}
+#pragma mark ------- 跳转超链接 ------
+- (void)pushToWebViewControllerWithUrl:(NSURL *)url{
     HQWebViewController *webVC = [[HQWebViewController alloc] init];
-    webVC.url = linkUrl;
+    webVC.url = url;
     [self.navigationController pushViewController:webVC animated:YES];
+
 }
 - (void)changeSpeakerStatus{
     if (!self.voiceTipView.superview) {

@@ -46,6 +46,7 @@
 		FD0E98EC1F5D211D00B16263 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0E98EB1F5D211D00B16263 /* libiconv.tbd */; };
 		FD0E98FA1F5D221900B16263 /* HQRQCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E98F01F5D221900B16263 /* HQRQCodeView.m */; };
 		FD0E98FB1F5D221900B16263 /* HQQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */; };
+		FD10C66B1F668A6F00C9857B /* HqChatMessageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD10C66A1F668A6F00C9857B /* HqChatMessageLabel.m */; };
 		FD11AD7F1E8F5AF10060E020 /* HQChatRefershControll.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */; };
 		FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1504A31EEFBE1C000E9DED /* HQChatDateCell.m */; };
 		FD1A314F1F0CBA090017FDBC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1A314E1F0CBA090017FDBC /* CoreTelephony.framework */; };
@@ -584,6 +585,8 @@
 		FD0E98F01F5D221900B16263 /* HQRQCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQRQCodeView.m; sourceTree = "<group>"; };
 		FD0E98F11F5D221900B16263 /* HQQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQQRCodeViewController.h; sourceTree = "<group>"; };
 		FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQQRCodeViewController.m; sourceTree = "<group>"; };
+		FD10C6691F668A6F00C9857B /* HqChatMessageLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HqChatMessageLabel.h; sourceTree = "<group>"; };
+		FD10C66A1F668A6F00C9857B /* HqChatMessageLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HqChatMessageLabel.m; sourceTree = "<group>"; };
 		FD11AD7D1E8F5AF10060E020 /* HQChatRefershControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatRefershControll.h; sourceTree = "<group>"; };
 		FD11AD7E1E8F5AF10060E020 /* HQChatRefershControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatRefershControll.m; sourceTree = "<group>"; };
 		FD1504A21EEFBE1C000E9DED /* HQChatDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatDateCell.h; sourceTree = "<group>"; };
@@ -2390,6 +2393,8 @@
 				FD61A2361F0206D400F0830C /* HQRectButton.m */,
 				FD1D8BE51F0F271F0011A341 /* HQPopover.h */,
 				FD1D8BE61F0F271F0011A341 /* HQPopover.m */,
+				FD10C6691F668A6F00C9857B /* HqChatMessageLabel.h */,
+				FD10C66A1F668A6F00C9857B /* HqChatMessageLabel.m */,
 			);
 			path = CustomerControl;
 			sourceTree = "<group>";
@@ -3347,6 +3352,7 @@
 				FD0661C91F53AB0C005FE459 /* PoperViewController.m in Sources */,
 				FD610B671EF7C58400DCB432 /* HQChatListSecondSearchController.m in Sources */,
 				FD1B09AD1E7FB1500090AB82 /* HQCameraNavigationController.m in Sources */,
+				FD10C66B1F668A6F00C9857B /* HqChatMessageLabel.m in Sources */,
 				FD1A31781F0CCBA90017FDBC /* HQChatMineLocationCell.m in Sources */,
 				FD9408C51E5A72F200634206 /* HQDiscoverViewController.m in Sources */,
 				FD2476E71E6FA2260085A23C /* HQChatOtherVidioCell.m in Sources */,
