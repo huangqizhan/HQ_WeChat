@@ -31,7 +31,7 @@ NSString * const KILabelLinkKey = @"link";
 
 #pragma mark - Private Interface
 
-@interface KILabel()
+@interface KILabel()<UIGestureRecognizerDelegate>
 
 // Used to control layout of glyphs and rendering
 @property (nonatomic, retain) NSLayoutManager *layoutManager;
@@ -51,6 +51,8 @@ NSString * const KILabelLinkKey = @"link";
 // During a touch, range of text that is displayed as selected
 @property (nonatomic, assign) NSRange selectedRange;
 
+
+
 @end
 
 #pragma mark - Implementation
@@ -68,6 +70,9 @@ NSString * const KILabelLinkKey = @"link";
     if (self)
     {
         [self setupTextSystem];
+        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
+        _singalTap.delegate = self;
+        [self addGestureRecognizer:_singalTap];
     }
     
     return self;
@@ -629,98 +634,37 @@ NSString * const KILabelLinkKey = @"link";
     _ignoredKeywords = [set copy];
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if ([UIMenuController sharedMenuController].isMenuVisible) {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+        return NO;
+    }
+    return YES;
+}
 #pragma mark - Interactions
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    _isTouchMoved = NO;
-    
-    // Get the info for the touched link if there is one
-    NSDictionary *touchedLink;
-    CGPoint touchLocation = [[touches anyObject] locationInView:self];
-    touchedLink = [self linkAtPoint:touchLocation];
-    
-    if (touchedLink)
-    {
-        self.selectedRange = [[touchedLink objectForKey:KILabelRangeKey] rangeValue];
-    }
-    else
-    {
-        [super touchesBegan:touches withEvent:event];
-    }
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesMoved:touches withEvent:event];
-    
-    _isTouchMoved = YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    
-    // If the user dragged their finger we ignore the touch
-    if (_isTouchMoved)
-    {
-        self.selectedRange = NSMakeRange(0, 0);
-        
+- (void)singalTapAction:(UITapGestureRecognizer *)tap{
+    if ([tap isKindOfClass:[UILongPressGestureRecognizer class]]) {
         return;
     }
-    
-    // Get the info for the touched link if there is one
-    NSDictionary *touchedLink;
-    CGPoint touchLocation = [[touches anyObject] locationInView:self];
-    touchedLink = [self linkAtPoint:touchLocation];
-    
-    if (touchedLink)
-    {
-        NSRange range = [[touchedLink objectForKey:KILabelRangeKey] rangeValue];
-        NSString *touchedSubstring = [touchedLink objectForKey:KILabelLinkKey];
-        KILinkType linkType = (KILinkType)[[touchedLink objectForKey:KILabelLinkTypeKey] intValue];
-        
-        [self receivedActionForLinkType:linkType string:touchedSubstring range:range];
+    if (tap.state == UIGestureRecognizerStateEnded) {
+        NSDictionary *touchedLink;
+        CGPoint touchLocation = [tap locationInView:self];
+        touchedLink = [self linkAtPoint:touchLocation];
+        if (touchedLink){
+            self.selectedRange = [[touchedLink objectForKey:KILabelRangeKey] rangeValue];
+            NSRange range = [[touchedLink objectForKey:KILabelRangeKey] rangeValue];
+            NSString *touchedSubstring = [touchedLink objectForKey:KILabelLinkKey];
+            KILinkType linkType = (KILinkType)[[touchedLink objectForKey:KILabelLinkTypeKey] intValue];
+            [self receivedActionForLinkType:linkType string:touchedSubstring range:range];
+            [self cancelSeleteRangeWithAnimationWithDelay:0.35];
+        }
     }
-    else
-    {
-        [super touchesBegan:touches withEvent:event];
-    }
-    
-    self.selectedRange = NSMakeRange(0, 0);
 }
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesCancelled:touches withEvent:event];
-    
-    // Make sure we don't leave a selection when the touch is cancelled
-    
-    // If the user dragged their finger we ignore the touch
-//    if (_isTouchMoved)
-//    {
-//        self.selectedRange = NSMakeRange(0, 0);
-//        
-//        return;
-//    }
-    
-    // Get the info for the touched link if there is one
-    NSDictionary *touchedLink;
-    CGPoint touchLocation = [[touches anyObject] locationInView:self];
-    touchedLink = [self linkAtPoint:touchLocation];
-    if (touchedLink){
-        NSRange range = [[touchedLink objectForKey:KILabelRangeKey] rangeValue];
-        NSString *touchedSubstring = [touchedLink objectForKey:KILabelLinkKey];
-        KILinkType linkType = (KILinkType)[[touchedLink objectForKey:KILabelLinkTypeKey] intValue];
-        [self receivedActionForLinkType:linkType string:touchedSubstring range:range];
-    }else{
-        [super touchesBegan:touches withEvent:event];
-    }
-    
-    self.selectedRange = NSMakeRange(0, 0);
-
+- (void)cancelSeleteRangeWithAnimationWithDelay:(CGFloat) delay{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.selectedRange = NSMakeRange(0, 0);
+    });
 }
-
 - (void)receivedActionForLinkType:(KILinkType)linkType string:(NSString*)string range:(NSRange)range
 {
     switch (linkType)

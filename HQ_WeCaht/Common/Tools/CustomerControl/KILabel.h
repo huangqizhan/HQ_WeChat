@@ -176,6 +176,8 @@ IB_DESIGNABLE
  */
 @property (nullable, nonatomic, copy) KILinkTapHandler urlLinkTapHandler;
 
+@property (nonatomic,strong) UITapGestureRecognizer *singalTap;
+
 /** ****************************************************************************************** **
  * @name Geometry
  ** ****************************************************************************************** **/

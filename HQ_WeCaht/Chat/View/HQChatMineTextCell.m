@@ -36,10 +36,9 @@
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.paopaoView addGestureRecognizer:_doubleTap];
-        
-        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
-        [self.paopaoView addGestureRecognizer:_singalTap];
-
+        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
+//        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
+//        [self.paopaoView addGestureRecognizer:_singalTap];
     }
     return self;
 }
@@ -96,12 +95,13 @@
 - (void)attemptOpenURL:(NSURL *)url{
     BOOL safariCompatible = [url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"];
     if (safariCompatible && [[UIApplication sharedApplication] canOpenURL:url]) {
-//        [[UIApplication sharedApplication] openURL:url];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
-            [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
+                [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
+            }
+        });
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"警示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
@@ -124,16 +124,13 @@
     if (self.isEdiating) {
         return NO;
     }
-    if ([UIMenuController sharedMenuController].menuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-        return NO;
-    }
     if (gestureRecognizer == _doubleTap) {
-         return YES;
-//        CGPoint bubblePoint = [touch locationInView:self.paopaoView];
-//        if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint) && ![self.chatLabel shouldReceiveTouchAtPoint:[touch locationInView:self.chatLabel]]) {
-//           
-//        }
+        return YES;
+    }
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        if ([UIMenuController sharedMenuController].menuVisible) {
+            return NO;
+        }
     }
     return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
 }
@@ -254,7 +251,6 @@
         _chatLabel.numberOfLines = 0;
         _chatLabel.font = MessageFont;
         _chatLabel.textColor = ICRGB(0x282724);
-//        _chatLabel.backgroundColor = [UIColor clearColor];
         __weak typeof (self) weekSelf = self;
         _chatLabel.urlLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range){
             [weekSelf attemptOpenURL:[NSURL URLWithString:string]];
