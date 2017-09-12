@@ -8,7 +8,8 @@
 
 #import "HqChatMessageLabel.h"
 
-@interface HqChatMessageLabel (){
+
+@interface HqChatMessageLabel ()<UIGestureRecognizerDelegate>{
     NSMutableDictionary *_linkStyleAttributes;
     NSDictionary *_linkBackGourdColorDict;
     //标记点击link下标
@@ -29,6 +30,27 @@
 //link  array
 @property (nonatomic,strong)NSArray *linkArray;
 
+/**
+ *  可点击link的文本颜色 default blue
+ */
+@property (nonatomic, strong) UIColor *selectedLinkTextColor;
+
+/**
+ *  可点击link背景色  default  gray
+ */
+@property (nonatomic, strong) UIColor *selectedLinkBackGroudColor;
+
+
+/**
+ *  自定义link文字
+ */
+@property (nonatomic,strong)NSArray *linkTextArray;
+
+/**
+ *  link 类型 default ALL
+ */
+@property (nonatomic,assign)ChatLabelLinkStyle labelLinkStyle;
+
 @end
 
 
@@ -39,8 +61,9 @@
     if (self = [super initWithFrame:frame]) {
         [self setConetntAttribute];
         self.linkTextArray = @[@"HQ_WeChar"];
-        UITapGestureRecognizer *tapSender = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [self addGestureRecognizer:tapSender];
+        _tapSender = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        _tapSender.delegate = self;
+        [self addGestureRecognizer:_tapSender];
     }
     return self;
 }
@@ -87,9 +110,6 @@
 
 - (void)updataTextStorageWithAttributedString{
     _CurrentAttributeString = [self.attrubuteString mutableCopy];
-    //    if (_CurrentAttributeString.length != 0) {//美化
-    //        _CurrentAttributeString = [ChatMessageLabel processAttributedString:_CurrentAttributeString];
-    //    }
     //处理link
     if (_CurrentAttributeString.length != 0) {
         self.linkArray = [self regularExpressionManagerWithStr:_CurrentAttributeString.string];
@@ -161,25 +181,36 @@
     }
     return textBounds.origin;
 }
-
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if ([UIMenuController sharedMenuController].isMenuVisible) {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+        return NO;
+    }
+    return YES;
+}
 - (void)tapAction:(UITapGestureRecognizer *)tapSender{
     CGPoint touchLocation = [tapSender locationInView:self];
-    BOOL linkCilcked = [self calculateTouchesRange:touchLocation];
-    if (linkCilcked) {
-        _linkBackGourdColorDict = @{NSBackgroundColorAttributeName  :_selectedLinkBackGroudColor};
-        [self updataTextWithCurrentText];
-        [self performSelector:@selector(upDataSeleteedBackgrround) withObject:nil afterDelay:.2];
-    }else{
-        [self upDataSeleteedBackgrround];
-    }
+    [self calculateTouchesRange:touchLocation andCallBackResult:^(MessageLabelTapResult *resulr) {
+        if (resulr) {
+            _linkBackGourdColorDict = @{NSBackgroundColorAttributeName  :_selectedLinkBackGroudColor};
+            [self updataTextWithCurrentText];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self upDataSeleteedBackgrround];
+                if (_tapCallBackAction) {
+                    if (resulr.linkStyle == ChatLabelLinkStyleIphoneNumber || resulr.linkStyle == ChatLabelLinkStyleWeb) {
+                        _tapCallBackAction(resulr);
+                    }
+                }
+            });
+        }
+    }];
 }
 - (void)upDataSeleteedBackgrround{
     _linkBackGourdColorDict = nil;
     [self updataTextWithCurrentText];
 }
 //计算点击是否在link range内
-- (BOOL)calculateTouchesRange:(CGPoint)location{
+- (void )calculateTouchesRange:(CGPoint)location andCallBackResult:(void (^)(MessageLabelTapResult *resulr))callBack{
     //获取触摸点字符位置
     location.y -= _sapcingTop;
     NSUInteger touchedChar = [_layoutManager glyphIndexForPoint:location inTextContainer:_textContainer];
@@ -191,22 +222,19 @@
             NSArray *valueArray = [self.linkArray[i] allValues];
             _index = i;
             ChatLabelLinkStyle linkStyle = ChatLabelLinkStyleALL;
+            MessageLabelTapResult *resut = [[MessageLabelTapResult alloc] init];
             if (i<_webArray.count&&i>-1) {//点击的是网址
                 linkStyle = ChatLabelLinkStyleWeb;
             }else if (i<_phoneArray.count+_webArray.count&&i>-1) {//点击的是手机号码
                 linkStyle = ChatLabelLinkStyleIphoneNumber;
-            }else if (i>-1)//点击用户自定义文字
-            {
+            }else if (i>-1){//点击用户自定义文字
                 linkStyle = ChatLabelLinkStyleUserText;
             }
-            NSString *valueString = [valueArray firstObject];
-//            if ([self.delegate respondsToSelector:@selector(labelLinkClickedWithLabel:withCilckedText: withLinkStyle:)]) {
-//                [_delegate labelLinkClickedWithLabel:self withCilckedText:valueString withLinkStyle:linkStyle];
-//            }
-            return YES;
+            resut.linkStyle = linkStyle;
+            resut.valueString = [valueArray firstObject];
+            if (callBack) callBack(resut);
         }
     }
-    return NO;
 }
 - (void)setLinkTextArray:(NSArray *)linkTextArray{
     _linkTextArray = linkTextArray;
@@ -300,8 +328,8 @@
 
 + (NSArray *)matchStringWithWebLink:(NSString *)oldString{
     NSMutableArray *linkArr = [NSMutableArray array];
-    
-    NSRegularExpression*regular=[[NSRegularExpression alloc]initWithPattern:@"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
+    ///@"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"
+    NSRegularExpression*regular=[[NSRegularExpression alloc]initWithPattern:@"((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
     
     NSArray* array=[regular matchesInString:oldString options:0 range:NSMakeRange(0, [oldString length])];
     
@@ -313,7 +341,15 @@
         [linkArr addObject:dic];
     }
     return linkArr;
+    
 }
+
+
+@end
+
+
+
+@implementation MessageLabelTapResult
 
 
 @end

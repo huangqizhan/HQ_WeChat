@@ -9,6 +9,8 @@
 #import "HQChatMineTextCell.h"
 #import "UIImage+YYWebImage.h"
 #import "HQTextView.h"
+#import "HqChatMessageLabel.h"
+#import "ApplicationHelper.h"
 
 
 
@@ -19,7 +21,7 @@
 
 @property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
-@property (nonatomic,strong) UITapGestureRecognizer *singalTap;
+@property (nonatomic,strong) HqChatMessageLabel *msgLabel;
 
 @end
 
@@ -30,26 +32,30 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.paopaoView];
-        [self.paopaoView addSubview:self.chatLabel];
+//        [self.paopaoView addSubview:self.chatLabel];
+        [self.paopaoView addSubview:self.msgLabel];
         _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
         _doubleTap.delegate = self;
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.paopaoView addGestureRecognizer:_doubleTap];
-        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
-//        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
-//        [self.paopaoView addGestureRecognizer:_singalTap];
+        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
+//        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
+
     }
     return self;
 }
 - (void)setMessageModel:(ChatMessageModel *)messageModel{
     [super setMessageModel:messageModel];
-    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+//    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
     self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
     self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
     self.paopaoView.right = self.headImageView.left-10;
-    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+//    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
 }
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{
@@ -152,29 +158,17 @@
     if (self.isEdiating) {
         return self.contentView;
     }
-    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
+    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01 || [UIMenuController sharedMenuController].isMenuVisible){
         return nil;
+    }
     
-    if ([self.chatLabel pointInside:[self convertPoint:point toView:self.chatLabel] withEvent:event]) {
-        return self.chatLabel;
+    if ([self.msgLabel  pointInside:[self convertPoint:point toView:self.msgLabel] withEvent:event]) {
+        return self.msgLabel;
     }else if ([self.headImageView pointInside:[self convertPoint:point toView:self.headImageView] withEvent:event]){
         return self.headImageView;
     }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
         return self.contentView;
-    }
-
-//    if (LLMessageCell_isEditing) {
-//        if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-//            return self.contentView;
-//        }
-//    }else {
-//        if ([self.contentLabel pointInside:[self convertPoint:point toView:self.contentLabel] withEvent:event]) {
-//            return self.contentLabel;
-//        }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-//            return self.contentView;
-//        }
-//    }
-    
+    }    
     return nil;
 }
 ///长按手势
@@ -244,6 +238,23 @@
         _paopaoView.userInteractionEnabled = NO;
     }
     return _paopaoView;
+}
+- (HqChatMessageLabel *)msgLabel{
+    if (_msgLabel == nil) {
+        _msgLabel = [[HqChatMessageLabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+        _msgLabel.numberOfLines = 0;
+        _msgLabel.font = MessageFont;
+        _msgLabel.textColor = ICRGB(0x282724);
+        WEAKSELF;
+        [_msgLabel setTapCallBackAction:^(MessageLabelTapResult *result){
+            if (result.linkStyle == ChatLabelLinkStyleWeb) {
+                [weakSelf attemptOpenURL:[NSURL URLWithString:result.valueString]];
+            }else if (result.linkStyle == ChatLabelLinkStyleIphoneNumber){
+                [ApplicationHelper callPhoneNumber:result.valueString];
+            }
+        }];
+    }
+    return _msgLabel;
 }
 - (KILabel *)chatLabel{
     if (nil == _chatLabel) {

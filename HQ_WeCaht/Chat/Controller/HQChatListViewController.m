@@ -15,6 +15,7 @@
 #import "HQPopoverAction.h"
 #import "HQPopoverView.h"
 #import "HQQRCodeViewController.h"
+#import "ApplicationHelper.h"
 
 
 
@@ -99,7 +100,7 @@
 - (NSDictionary *)creatTextNessageWithIndex:(int )index{
     NSTimeInterval timeral = [NSDate returnTheTimeralFrom1970];
     NSDictionary *dic = @{
-                          @"contentString":@"看惊世毒妃v看看惊世毒妃v看计算的报价单上发布就不会接口的宝贝计划快递费看见对方v加上空的返回v圣诞节开发v",
+                          @"contentString":@"新华社呼和浩特9月11日电 《联合国防治荒漠化公约》第十三次缔约方大会高级别会议11日在内蒙古鄂尔多斯市开幕。13969768213国家主席习近平发来贺信，向会议的召开致以热烈的祝贺，向出席会议的各国代表、http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm国际机构负责人和各界人士致以诚挚的欢迎，并预祝大会圆满成功。习近平指出，13969768213土地荒漠化是影响人类生存和发展的全球重大生态问题。公约生效21年来，在各方共同努力下http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm，全球荒漠化防治取得明显成效，但形势依然严峻，世界上仍有许多地方的人民饱受荒漠化之苦。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm这次大会以“携手防治荒漠，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm共谋人类福祉”为主题，共议公约新战略框架13969768213，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm必将对维护全球生态安全产生重大而积极的影响。习近平强调，防治荒漠化是人类面临的共同挑战，需要国际社会携手应对。我们要弘扬尊重自然、保护自然的理念，坚13969768213持生态优先、13969768213预防为主，坚定信心，面向未来，制定广泛合作、目标明确的公约新战略框架，共同推进全球荒漠生态系统治理，让荒漠造福人类。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将坚定不移履行公约义务，按照本次缔约方大会确定的目标，一如既往加强同各成员国13969768213和国际组织的交流合作，共同为建设一个更加美好的世界而努力。国务院副总理汪洋在开幕式上宣读了习近平的贺信并发表主旨演讲。他强调，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将认真履行习近平主席在139697682132015年联合国发展13969768213峰会上的郑重承诺，以落实2030年可持续发展议程为己任，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm以新发展理念为引领，把防治荒漠化作为生态文明建设的重要内容，全面加强国际交流合作，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm努力走出一条中国特色荒漠生态系统治理和民生改善相结合的13969768213道路。联合国秘书长古特雷斯向会议发来视13969768213频致辞。《联合国防治荒漠化公约》是联合国里约可持续发展大会框架下的三大环境公约之一，旨在推动国际社会在防治荒漠化和缓解干旱影响方面加强合作。13969768213缔约方大会是公约的最高决策机构，目前13969768213每两年举行一次，来自196个公约缔约方、20多个国际组织的正式代表约1400人出席本次会议http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm。　相关报道：习近平致《联合国防治荒漠化公约》第十三次缔约方大会高级别会议的贺信　防治荒漠化是人类面临的共同挑战，需要国际社会携手应对。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm我们要弘扬尊重自然、保护自然的理念，坚持生态优13969768213先、预防为主，坚定信心，面向未来，制定广泛合作、目标明确的公约新战略框架，共同推进全球荒漠生态系统治理，让荒漠造福13969768213人类。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将坚定不移履行公约义务，按照本次缔约方大会确定的目标，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm一如既往加强同各成员国和国际组织的交13969768213流合作，共同为建设一个更加美好13969768213的世界而努力！>>http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm",
                           @"contentUrlString":@"",
                           @"fileExtion":@"",
                           @"fileName":@"",
@@ -137,9 +138,6 @@
     self.tableView.tableHeaderView = _searchbar;
     [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:CANCELBUTTONCOLOR,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64-49);
-    
-
-    
     
 }
 - (void)loadDataSource{
