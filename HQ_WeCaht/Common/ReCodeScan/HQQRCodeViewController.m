@@ -10,6 +10,7 @@
 #import "HQRQCodeView.h"
 #import "AVCaptureVideoPreviewLayer+Helper.h"
 #import "HQReCodeResultController.h"
+#import "HQRecodeResultWebController.h"
 
 
 @interface HQQRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,CAAnimationDelegate,HQRQCodeViewPinGestureDelegate>
@@ -161,10 +162,9 @@
 //            cornersPathLayer.strokeColor =  [UIColor colorWithRed:(85.0)/255.0 green:(185.0)/255.0 blue:(50.0)/255.0 alpha:0.5].CGColor;
 //            cornersPathLayer.fillColor =  [UIColor colorWithRed:(85.0)/255.0 green:(185.0)/255.0 blue:(50.0)/255.0 alpha:0.5].CGColor;
 //            [_recodeView.layer addSublayer:cornersPathLayer];
-            
             WEAKSELF;
             [self.recodeView recodeDidFinishAnimationActionWithRect:barcode.codeFrame Complite:^{
-                [weakSelf pushToRecodeResultControllerWith:barcode.codeString];
+                [weakSelf  handleRecodeResultString:barcode.codeString];
             }];
         }];
          ////语音朗读
@@ -175,10 +175,6 @@
 //            utterance.pitchMultiplier = 1.2f;
 //            [_speechSynthesizer speakUtterance:utterance];
 //        }];
-        
-
-        
-        
     });
     /*
      1  创建用于遍历检测到的二维码的NSMutableSet。
@@ -189,10 +185,25 @@
      6 遍历所有检测到的二维码，为它们添加边界路径和角路径。这些layer有着不同的颜色，alpha值也被设置为0.5，这样我们可以透过叠加层看到原始二维码图片。
      */
 }
+
+- (void)handleRecodeResultString:(NSString *)resultString{
+    NSURL *url = [[NSURL alloc] initWithString:resultString];
+    if (([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) || [[UIApplication sharedApplication] canOpenURL:url]) {
+        [self pushToWebControllerWithUrl:url];
+    }else{
+        [self pushToRecodeResultControllerWith:resultString];
+
+    }
+}
 - (void)pushToRecodeResultControllerWith:(NSString *)codeString{
     HQReCodeResultController *resultVC = [[HQReCodeResultController alloc] init];
     resultVC.codeString = codeString;
     [self.navigationController pushViewController:resultVC animated:YES];
+}
+- (void)pushToWebControllerWithUrl:(NSURL *)url{
+    HQRecodeResultWebController *webVC = [[HQRecodeResultWebController alloc] init];
+    webVC.url = url;
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 - (void)stopSesstionRecode{
     [_qrSession stopRunning];

@@ -483,6 +483,11 @@
 		FDDEE3D71E655B7D007E9AF9 /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDEE3CB1E655B7D007E9AF9 /* NSObject+MJProperty.m */; };
 		FDDEE3D81E655B7D007E9AF9 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDEE3CD1E655B7D007E9AF9 /* NSString+MJExtension.m */; };
 		FDDEE3DA1E655E33007E9AF9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDDEE3D91E655E33007E9AF9 /* Info.plist */; };
+		FDE441A81F678A170079BF32 /* HQRecodeResultWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE441A71F678A170079BF32 /* HQRecodeResultWebController.m */; };
+		FDE441B01F67B5CA0079BF32 /* DateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE441AB1F67B5CA0079BF32 /* DateManager.m */; };
+		FDE441B11F67B5CA0079BF32 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE441AD1F67B5CA0079BF32 /* DBManager.m */; };
+		FDE441B21F67B5CA0079BF32 /* DBManagerQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE441AF1F67B5CA0079BF32 /* DBManagerQueue.m */; };
+		FDE441FF1F67DF220079BF32 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = FDE441FE1F67DF220079BF32 /* test.html */; };
 		FDE5CED21ED817C30072882A /* HQActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE5CED11ED817C30072882A /* HQActionSheet.m */; };
 		FDE5CED81ED81C4F0072882A /* UIApplication+HQExtern.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE5CED71ED81C4F0072882A /* UIApplication+HQExtern.m */; };
 		FDE9A4F81ECD8B6C008C2570 /* SDNetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE9A4F61ECD8B6C008C2570 /* SDNetworkActivityIndicator.m */; };
@@ -1303,6 +1308,15 @@
 		FDDEE3CC1E655B7D007E9AF9 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		FDDEE3CD1E655B7D007E9AF9 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		FDDEE3D91E655E33007E9AF9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDE441A61F678A170079BF32 /* HQRecodeResultWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HQRecodeResultWebController.h; path = CodeViews/HQRecodeResultWebController.h; sourceTree = "<group>"; };
+		FDE441A71F678A170079BF32 /* HQRecodeResultWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HQRecodeResultWebController.m; path = CodeViews/HQRecodeResultWebController.m; sourceTree = "<group>"; };
+		FDE441AA1F67B5CA0079BF32 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
+		FDE441AB1F67B5CA0079BF32 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
+		FDE441AC1F67B5CA0079BF32 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		FDE441AD1F67B5CA0079BF32 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		FDE441AE1F67B5CA0079BF32 /* DBManagerQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerQueue.h; sourceTree = "<group>"; };
+		FDE441AF1F67B5CA0079BF32 /* DBManagerQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerQueue.m; sourceTree = "<group>"; };
+		FDE441FE1F67DF220079BF32 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		FDE5CECF1ED8089B0072882A /* HQChatTableViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatTableViewCellDelegate.h; sourceTree = "<group>"; };
 		FDE5CED01ED817C30072882A /* HQActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQActionSheet.h; sourceTree = "<group>"; };
 		FDE5CED11ED817C30072882A /* HQActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQActionSheet.m; sourceTree = "<group>"; };
@@ -1432,6 +1446,7 @@
 		BACB05501E59872E008B676D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FDE441FE1F67DF220079BF32 /* test.html */,
 				FD0E03C81F62408D002C27F2 /* faces5.jpg */,
 				FD6649CA1EBC6EFF005E340B /* gifImages */,
 				FD8DD7711EB81D12002125CD /* tempGifImage */,
@@ -1530,6 +1545,8 @@
 				FD0E98F21F5D221900B16263 /* HQQRCodeViewController.m */,
 				FD33B6881F5FA0D500379642 /* HQReCodeResultController.h */,
 				FD33B6891F5FA0D500379642 /* HQReCodeResultController.m */,
+				FDE441A61F678A170079BF32 /* HQRecodeResultWebController.h */,
+				FDE441A71F678A170079BF32 /* HQRecodeResultWebController.m */,
 			);
 			path = ReCodeScan;
 			sourceTree = "<group>";
@@ -2514,6 +2531,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FDE441A91F67B5B30079BF32 /* sqliteDemo */,
 				FD0E98ED1F5D221900B16263 /* ReCodeScan */,
 				FD9B608A1F4672950089AB96 /* AnimationTools */,
 				FD1DDF6C1F2732FE00AAC89D /* HQEdiateImageTools */,
@@ -3006,6 +3024,19 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		FDE441A91F67B5B30079BF32 /* sqliteDemo */ = {
+			isa = PBXGroup;
+			children = (
+				FDE441AA1F67B5CA0079BF32 /* DateManager.h */,
+				FDE441AB1F67B5CA0079BF32 /* DateManager.m */,
+				FDE441AC1F67B5CA0079BF32 /* DBManager.h */,
+				FDE441AD1F67B5CA0079BF32 /* DBManager.m */,
+				FDE441AE1F67B5CA0079BF32 /* DBManagerQueue.h */,
+				FDE441AF1F67B5CA0079BF32 /* DBManagerQueue.m */,
+			);
+			path = sqliteDemo;
+			sourceTree = "<group>";
+		};
 		FDF2888F1E9474D80078286C /* Refersh */ = {
 			isa = PBXGroup;
 			children = (
@@ -3193,6 +3224,7 @@
 				FD8DD7FD1EB81D54002125CD /* 5.gif in Resources */,
 				FD8DD7D11EB81D54002125CD /* 49.gif in Resources */,
 				FD6649E61EBC6EFF005E340B /* g5.gif in Resources */,
+				FDE441FF1F67DF220079BF32 /* test.html in Resources */,
 				FD2653741EE92030006BAB5E /* Tuzki_13.gif in Resources */,
 				FD77A3451EC467AF0017B41A /* hqz.png in Resources */,
 				FD8DD7C51EB81D54002125CD /* 61.gif in Resources */,
@@ -3296,6 +3328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE441B21F67B5CA0079BF32 /* DBManagerQueue.m in Sources */,
 				FD2CAD3F1EE13CAA00FEEC7A /* interf_dec.h in Sources */,
 				FD2CAD401EE13CAA00FEEC7A /* interf_enc.h in Sources */,
 				FD61A23A1F03387900F0830C /* HQSetChatBegImageController.m in Sources */,
@@ -3338,6 +3371,7 @@
 				FDD18D021F13200700E260BD /* UIImage+GIF.m in Sources */,
 				FD6649971EBC2A62005E340B /* YYFrameImage.m in Sources */,
 				FD66A3A41EBB1A6800623F34 /* YYTextMagnifier.m in Sources */,
+				FDE441A81F678A170079BF32 /* HQRecodeResultWebController.m in Sources */,
 				FD28EA741E7B8E3B0077E009 /* HQPickerImageViewController.m in Sources */,
 				FD1DDF621F26DAA900AAC89D /* HQRefershBaseControll.m in Sources */,
 				FD9B60901F4695550089AB96 /* HQEdiateImageTextView.m in Sources */,
@@ -3445,6 +3479,7 @@
 				BAF4A8051E73F11B00653204 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				FD2ED9001EADA8DA006E585F /* UIImageView+WebCache.m in Sources */,
 				FD2ED8F61EADA8DA006E585F /* SDWebImageDecoder.m in Sources */,
+				FDE441B01F67B5CA0079BF32 /* DateManager.m in Sources */,
 				FD1DDF5F1F26DA7000AAC89D /* UIScrollView+HQRefersh.m in Sources */,
 				FDD18CF71F131EFA00E260BD /* MASLayoutConstraint.m in Sources */,
 				FD5C87601EA07FAC00FEBE01 /* ContractModel+Action.m in Sources */,
@@ -3501,6 +3536,7 @@
 				BAF4A80C1E73F14B00653204 /* HQNetWorkManager.m in Sources */,
 				FD2ED8F91EADA8DA006E585F /* SDWebImageManager.m in Sources */,
 				FD2CAD221EE13A8E00FEEC7A /* HQAudioPlayerManager.m in Sources */,
+				FDE441B11F67B5CA0079BF32 /* DBManager.m in Sources */,
 				FDCEDD071E8CB92600EE24E6 /* HQFileTools.m in Sources */,
 				BAF4A8081E73F11B00653204 /* UIProgressView+AFNetworking.m in Sources */,
 				FD42B5E91F0A149200D6F0C4 /* NSObject+HQCGRectTransform.m in Sources */,

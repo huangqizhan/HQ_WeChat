@@ -315,7 +315,7 @@
 }
 + (NSArray *)matchStringWithPhoneLink:(NSString *)oldString{
     NSMutableArray *linkArr = [NSMutableArray array];
-    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"(\\(86\\))?(13[0-9]|15[0-35-9]|18[0125-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"(\\(86\\))?(13[0-9]|17[0-9]|15[0-35-9]|18[01235-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
     NSArray *array = [regExp matchesInString:oldString options:0 range:NSMakeRange(0, oldString.length)];
     for (NSTextCheckingResult *result in array) {
         NSString *string = [oldString substringWithRange:result.range];

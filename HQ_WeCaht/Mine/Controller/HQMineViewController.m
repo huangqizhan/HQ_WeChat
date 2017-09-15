@@ -7,30 +7,12 @@
 //
 
 #import "HQMineViewController.h"
-#import "TranstionAnimationViewController.h"
-#import "ProcessController.h"
-#import "GifTempViewController.h"
-#import "DynamicTextViewController.h"
-#import "DispachViewController.h"
-#import "NSStreamViewController.h"
-#import "HQWifiViewController.h"
-#import "HQDownLoadFileController.h"
-#import "VisualEffectViewController.h"
-#import "SendMessageTestViewController.h"
-#import "RefershViewController.h"
-#import "HQEdiateImageController.h"
-#import "GestureViewController.h"
-#import "PoperViewController.h"
-#import "ReCodeTestController.h"
-#import "FaceViewController.h"
-
-
-
 
 @interface HQMineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -43,15 +25,12 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
-
-    
-    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 16;
+    return self.dataArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
@@ -62,96 +41,23 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"customer process view";
-    }else if (indexPath.row == 1){
-        cell.textLabel.text = @"customer transitionAnimation";
-    }else if (indexPath.row == 2){
-        cell.textLabel.text = @"giftest";
-    }else if (indexPath.row == 3){
-        cell.textLabel.text = @"imageFuzzy";
-    }else if (indexPath.row == 4){
-        cell.textLabel.text = @"dispach";
-    }else if (indexPath.row == 5){
-        cell.textLabel.text = @"NSStream";
-    }else if (indexPath.row == 6){
-        cell.textLabel.text = @"WIFI";
-    }else if (indexPath.row == 7){
-        cell.textLabel.text = @"downLoadTest";
-    }else if (indexPath.row == 8){
-        cell.textLabel.text = @"visualEffectView";
-    }else if (indexPath.row == 9){
-        cell.textLabel.text = @"distributionMessage";
-    }else if (indexPath.row == 10){
-        cell.textLabel.text = @"RefershViewController";
-    }else if (indexPath.row == 11){
-        cell.textLabel.text = @"HQEdiateImageController";
-    }else if (indexPath.row == 12){
-        cell.textLabel.text = @"gestureView";
-    }else if (indexPath.row == 13){
-        cell.textLabel.text = @"properView";
-    }else if (indexPath.row == 14){
-        cell.textLabel.text = @"ReCodeTestController";
-    }else{
-        cell.textLabel.text = @"FaceViewController";
-    }
+    cell.textLabel.text = self.dataArray[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        ProcessController *processVC = [[ProcessController alloc] init];
-        [self.navigationController pushViewController:processVC animated:YES];
-    }else if (indexPath.row == 1){
-        TranstionAnimationViewController *transVC = [[TranstionAnimationViewController alloc] init];
-        [self.navigationController pushViewController:transVC animated:YES];
-    }else if (indexPath.row == 2){
-        GifTempViewController *gifVC = [[GifTempViewController alloc] init];
-        [self.navigationController pushViewController:gifVC animated:YES];
-    }else if (indexPath.row == 3){
-        DynamicTextViewController *textViewVC = [[DynamicTextViewController alloc] init];
-        [self.navigationController pushViewController:textViewVC animated:YES];
-    }else if (indexPath.row == 4){
-        DispachViewController *disVC  = [[DispachViewController alloc] init];
-        [self.navigationController pushViewController:disVC animated:YES];
-    }else if (indexPath.row == 5){
-        NSStreamViewController *vc = [[NSStreamViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
-        HQWifiViewController *wifiVC = [[HQWifiViewController alloc] init];
-        [self.navigationController pushViewController:wifiVC animated:YES];
-    }else if (indexPath.row == 7){
-        HQDownLoadFileController *downLoadVc =[[HQDownLoadFileController alloc] init];
-        [self.navigationController pushViewController:downLoadVc animated:YES];
-    }else if (indexPath.row == 8){
-        VisualEffectViewController *effectView = [[VisualEffectViewController alloc] init];
-        [self.navigationController pushViewController:effectView animated:YES];
-    }else if (indexPath.row == 9){
-        SendMessageTestViewController *sendMsgVC = [[SendMessageTestViewController alloc] init];
-        [self.navigationController pushViewController:sendMsgVC animated:YES];
-    }else if (indexPath.row == 10){
-        RefershViewController *refershVC  = [[RefershViewController alloc] init];
-        [self.navigationController pushViewController:refershVC animated:YES];
-    }else if (indexPath.row == 11){
-        HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
-        [ediateImageVC setCallBackImageAfterEdiate:^(UIImage *image){
-            
-        }];
-        [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
-    }else if (indexPath.row == 12){
-        GestureViewController *gestureVC = [[GestureViewController alloc] init];
-        [self.navigationController pushViewController:gestureVC animated:YES];
-    }else if (indexPath.row == 13){
-        PoperViewController *properVC = [[PoperViewController alloc] init];
-        [self.navigationController pushViewController:properVC animated:YES];
-    }else if (indexPath.row == 14){
-        ReCodeTestController *recodeVC = [[ReCodeTestController alloc] init];
-        [self.navigationController pushViewController:recodeVC animated:YES];
-    }else{
-        FaceViewController *faceVC = [[FaceViewController alloc] init];
-        [self.navigationController pushViewController:faceVC animated:YES];
+    NSString *className = _dataArray[indexPath.row];
+    Class vcClass = NSClassFromString(className);
+    UIViewController *vc = [[vcClass alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray new];
+        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"SendMessageTestViewController",@"RefershViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"ReCodeTestController",@"FaceViewController"]];
     }
+    return _dataArray;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

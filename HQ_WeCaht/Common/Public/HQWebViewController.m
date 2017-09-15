@@ -15,7 +15,10 @@
 
 @import WebKit;
 
-@interface HQWebViewController () <WKNavigationDelegate>
+@interface HQWebViewController () <WKNavigationDelegate,WKScriptMessageHandler>{
+    UIBarButtonItem *backBarButtonItem;
+    BOOL translucent;
+}
 
 @property (nonatomic) WKWebView *webView;
 @property (nonatomic) HQWebProcessView *webProgressView;
@@ -23,8 +26,7 @@
 @end
 
 @implementation HQWebViewController{
-    UIBarButtonItem *backBarButtonItem;
-    BOOL translucent;
+
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -62,6 +64,29 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    
+    // 设置偏好设置
+    config.preferences = [[WKPreferences alloc] init];
+    // 默认为0
+    config.preferences.minimumFontSize = 10;
+    // 默认认为YES
+    config.preferences.javaScriptEnabled = YES;
+    // 在iOS上默认为NO，表示不能自动通过窗口打开
+    config.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+    
+    // web内容处理池
+    config.processPool = [[WKProcessPool alloc] init];
+    
+    // 通过JS与webview内容交互
+    config.userContentController = [[WKUserContentController alloc] init];
+    // 注入JS对象名称AppModel，当JS通过AppModel来调用时，
+    // 我们可以在WKScriptMessageHandler代理中接收到
+    [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
+
+    
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.webView.navigationDelegate = self;
@@ -152,6 +177,22 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
     NSLog(@"decidePolicyForNavigationAction");
     decisionHandler(WKNavigationActionPolicyAllow);
+    
+    /*
+     WKNavigationTypeLinkActivated 链接的href属性被用户激活。
+     WKNavigationTypeFormSubmitted 一个表单提交。
+     WKNavigationTypeBackForward 回到前面的条目列表请求。
+     WKNavigationTypeReload 网页加载。
+     WKNavigationTypeFormResubmitted 一个表单提交(例如通过前进,后退,或重新加载)。
+     WKNavigationTypeOther 导航是发生一些其他原因。
+
+     
+     // 不允许web内跳转
+     WKNavigationActionPolicyCancel,
+     WKNavigationActionPolicyAllow,
+     
+     
+     */
 }
 ////接收到相应数据后，决定是否跳转
 //- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
@@ -191,6 +232,16 @@
 //}
 /*
  */
+
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController
+      didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.name isEqualToString:@"AppModel"]) {
+        // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,NSDictionary, and NSNull类型
+        NSLog(@"接收到JS端信息：%@", message.body);
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
