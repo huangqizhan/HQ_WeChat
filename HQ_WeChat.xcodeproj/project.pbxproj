@@ -39,6 +39,7 @@
 		FD04841C1EAEEE080042E702 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD04841B1EAEEE080042E702 /* TestTableViewController.m */; };
 		FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD055AA41F412907001850FE /* IMG_2750.jpg */; };
 		FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD055AA71F4135F9001850FE /* HQCutImageController.m */; };
+		FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD057AA71F71104600AE31CF /* ChildBordViewController.m */; };
 		FD0661C91F53AB0C005FE459 /* PoperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0661C71F53AB0C005FE459 /* PoperViewController.m */; };
 		FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C31F623DBA002C27F2 /* FaceViewController.m */; };
 		FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */; };
@@ -578,6 +579,8 @@
 		FD055AA41F412907001850FE /* IMG_2750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_2750.jpg; sourceTree = "<group>"; };
 		FD055AA61F4135F9001850FE /* HQCutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCutImageController.h; sourceTree = "<group>"; };
 		FD055AA71F4135F9001850FE /* HQCutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCutImageController.m; sourceTree = "<group>"; };
+		FD057AA61F71104600AE31CF /* ChildBordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildBordViewController.h; sourceTree = "<group>"; };
+		FD057AA71F71104600AE31CF /* ChildBordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildBordViewController.m; sourceTree = "<group>"; };
 		FD0661C61F53AB0C005FE459 /* PoperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoperViewController.h; sourceTree = "<group>"; };
 		FD0661C71F53AB0C005FE459 /* PoperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoperViewController.m; sourceTree = "<group>"; };
 		FD0E03C21F623DBA002C27F2 /* FaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceViewController.h; sourceTree = "<group>"; };
@@ -2734,6 +2737,8 @@
 				FDD2D8281F5E918D00C2E993 /* ReCodeTestController.m */,
 				FD0E03C21F623DBA002C27F2 /* FaceViewController.h */,
 				FD0E03C31F623DBA002C27F2 /* FaceViewController.m */,
+				FD057AA61F71104600AE31CF /* ChildBordViewController.h */,
+				FD057AA71F71104600AE31CF /* ChildBordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3412,6 +3417,7 @@
 				FD61A2371F0206D400F0830C /* HQRectButton.m in Sources */,
 				BAF4A8071E73F11B00653204 /* UIImageView+AFNetworking.m in Sources */,
 				FD8DD80A1EB824F5002125CD /* GifTempViewController.m in Sources */,
+				FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */,
 				FD9869E61EDE8CA500460E11 /* HQAttrubuteTextLabel.m in Sources */,
 				FDC848221E66AB9F00EF0940 /* HQFacePageView.m in Sources */,
 				FD2ED9081EADC5BE006E585F /* HQPublicManager.m in Sources */,

@@ -55,7 +55,7 @@
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray new];
-        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"SendMessageTestViewController",@"RefershViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"ReCodeTestController",@"FaceViewController"]];
+        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"SendMessageTestViewController",@"RefershViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"ReCodeTestController",@"FaceViewController",@"ChildBordViewController"]];
     }
     return _dataArray;
 }

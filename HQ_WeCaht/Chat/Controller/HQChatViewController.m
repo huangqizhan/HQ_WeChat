@@ -680,7 +680,6 @@
     }
 }
 - (void)didMoveToParentViewController:(UIViewController*)parent{
-    
 }
 - (void)showCustomerActionSheetViewWithTitle:(NSString *)title{
     HQActionSheet *actionSheet = [[HQActionSheet alloc] initWithTitle:title];

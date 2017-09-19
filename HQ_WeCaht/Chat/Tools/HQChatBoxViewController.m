@@ -59,11 +59,14 @@
     [super viewDidLoad];
     [self.view addSubview:self.chatBox];
     self.view.backgroundColor = IColor(237, 237, 246);
-    
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone; //UIRectEdgeAll
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     ////建议使用UIKeyboardWillChangeFrameNotification 而不是 will show  and will Hidden 
     ///UIKeyboardWillChangeFrameNotification
+    
 }
 - (void)keyboardWillHide:(NSNotification *)notification{
     self.keyboardFrame = CGRectZero;
