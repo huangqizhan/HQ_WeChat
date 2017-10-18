@@ -7,10 +7,12 @@
 //
 
 #import "ChildBordViewController.h"
+#import "HQChatBoxViewController.h"
 
-@interface ChildBordViewController ()<BordViewControllerDelegate>
+@interface ChildBordViewController ()<ICChatBoxViewControllerDelegate>
 
-@property (nonatomic,strong) BordViewController *childVC;
+@property (nonatomic,strong) HQChatBoxViewController *childVC;
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -18,25 +20,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.tableView];
     [self addChildViewController:self.childVC];
     [self.view addSubview:self.childVC.view];
 }
-- (void) BordViewController :(BordViewController *)controller andHeight:(CGFloat )height{
-    self.childVC.view.top = APP_Frame_Height-64 - height -50;
+
+#pragma mark ------ UITableViewDelgate ---
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 100;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellId = @"cellId";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
+    return cell;
+}
+#pragma mark -------- 监听键盘高度变化 --------
+- (void)chatBoxViewController:(HQChatBoxViewController *)chatboxViewController
+       didChangeChatBoxHeight:(CGFloat)height{
+    self.childVC.view.top = self.view.bottom-height-64;
+//    self.tableView.height = HEIGHT_SCREEN - height - 64;
+    if (height != HEIGHT_TABBAR) {
+//        [self tableViewScrollToBottomWithAnimated:NO];
+    }
+//    [self.tableView reloadData];
+}
+- (void)chatBoxInputStatusController:(HQChatBoxViewController *)chatboxViewController ChatBoxHeight:(CGFloat)height{
+    self.childVC.view.top = self.view.bottom-height-64;
+//    self.tableView.height = HEIGHT_SCREEN - height - 64;
+    if (height != HEIGHT_TABBAR) {
+//        [self tableViewScrollToBottomWithAnimated:NO];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (BordViewController *)childVC{
+- (HQChatBoxViewController *)childVC{
     if (_childVC == nil) {
-        _childVC = [[BordViewController alloc] init];
+        _childVC = [[HQChatBoxViewController alloc] init];
         [_childVC.view setFrame:CGRectMake(0, APP_Frame_Height-64-50, App_Frame_Width, APP_Frame_Height)];
         _childVC.delegate = self;
     }
     return _childVC;
 }
+- (UITableView *)tableView{
+    if (_tableView == nil) {
+        _tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-64-50) style:UITableViewStyleGrouped];
+        _tableView.delegate  = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -53,7 +95,7 @@
 
 @interface BordViewController ()
 
-@property (nonatomic,strong) UITextView *textView;
+
 
 @end
 
@@ -63,7 +105,6 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.textView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
@@ -92,12 +133,4 @@
 }
 
 
-- (UITextView *)textView{
-    if (_textView == nil) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 10, App_Frame_Width-40, 40)];
-        _textView.backgroundColor  = [UIColor redColor];
-//        [_textView becomeFirstResponder];
-    }
-    return _textView;
-}
 @end

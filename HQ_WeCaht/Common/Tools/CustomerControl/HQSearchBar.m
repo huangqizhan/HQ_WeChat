@@ -20,6 +20,24 @@
 
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 
+
+// icon宽度
+static CGFloat const searchIconW = 20.0;
+// icon与placeholder间距
+static CGFloat const iconSpacing = 10.0;
+// 占位文字的字体大小
+static CGFloat const placeHolderFont = 15.0;
+
+
+
+@interface HQSearchBar ()
+// placeholder 和icon 与间隙的整体宽度
+@property (nonatomic, assign) CGFloat placeholderWidth;
+
+@end
+
+
+
 @implementation HQSearchBar
 + (void)initialize {
     
@@ -29,12 +47,44 @@
     }
 }
 
-+ (instancetype)defaultSearchBar {
-    return [self defaultSearchBarWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, [self defaultSearchBarHeight])];
+-(void) layoutSubviews{
+    [super layoutSubviews];
+    UITextField *searchTextField = nil;
+    // 经测试, 需要设置barTintColor后, 才能拿到UISearchBarTextField对象
+    self.barTintColor = [UIColor whiteColor];
+    searchTextField = [self searchTextField];
+    CGRect newFrame = searchTextField.frame;
+    newFrame.origin.y=7.5;
+    newFrame.size.height = 30;
+    searchTextField.frame = newFrame;
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSTextAlignmentCenter;
+    NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"搜索" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 ], NSParagraphStyleAttributeName:style}];
+    searchTextField.textAlignment = NSTextAlignmentCenter;
+    searchTextField.attributedPlaceholder = attri;
+    if (@available(iOS 11.0, *)) {
+        // 先默认居中placeholder
+        if (!_isActive) {
+            [self setPositionAdjustment:UIOffsetMake((searchTextField.frame.size.width-self.placeholderWidth)/2, 0) forSearchBarIcon:UISearchBarIconSearch];
+        }
+    }
 }
 
-+ (instancetype)defaultSearchBarWithFrame:(CGRect)frame {
+// 计算placeholder、icon、icon和placeholder间距的总宽度
+- (CGFloat)placeholderWidth {
+    if (!_placeholderWidth) {
+        CGSize size = [self.placeholder boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:placeHolderFont]} context:nil].size;
+        _placeholderWidth = size.width + iconSpacing + searchIconW;
+    }
+    return _placeholderWidth;
+}
++ (instancetype)defaultSearchBarWithIsActive:(BOOL)isActive{
+    return [self defaultSearchBarWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, [self defaultSearchBarHeight]) andActive:isActive];
+}
+
++ (instancetype)defaultSearchBarWithFrame:(CGRect)frame andActive:(BOOL)isActive{
     HQSearchBar *searchBar = [[HQSearchBar alloc] initWithFrame:frame];
+    searchBar.isActive = isActive;
     searchBar.placeholder = @"搜索";
     [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
     searchBar.showsCancelButton = NO;
@@ -55,7 +105,9 @@
     
     return searchBar;
 }
-
+- (CGFloat)endEdiateWidth{
+    return  ( [self searchTextField].frame.size.width-self.placeholderWidth);
+}
 + (NSInteger)defaultSearchBarHeight {
     return SEARCH_TEXT_FIELD_HEIGHT + 16;
 }

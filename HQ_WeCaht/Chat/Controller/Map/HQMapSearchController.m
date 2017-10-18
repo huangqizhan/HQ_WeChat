@@ -73,7 +73,7 @@
     [_navigationView addSubview:titleLabel];
 }
 - (void)createSearchBar{
-    _searchBar = [HQSearchBar defaultSearchBar];
+    _searchBar = [HQSearchBar defaultSearchBarWithIsActive:NO];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"搜索地址";
     [_topBegView addSubview:_searchBar];

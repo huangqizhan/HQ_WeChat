@@ -63,11 +63,11 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self keyBordViewDidResetOriginStatus];
+//    [self keyBordViewDidResetOriginStatus];
     [self hq_removeTransitionDelegate];
     [self hiddenMenuController];
 }
@@ -90,8 +90,9 @@
     [butt addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [butt setTitle:@"detail" forState:UIControlStateNormal];;
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:butt],[[UIBarButtonItem alloc] initWithTitle:@"msg" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)]];
-//   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sharemore_friendcard"] style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonAction:)];
     WEAKSELF;
+    [self setUpUI];
+    [self registerChatCells];
     [ChatMessageModel searchChatListModelOnAsyThreadWith:self.listModel andCallBack:^(NSArray *resultList) {
         if (resultList.count == 0) {
             weakSelf.tableView.headerRefersh = nil;
@@ -101,8 +102,6 @@
             [weakSelf tableViewScrollToBottomWithAnimated:NO];
         }
     }];
-    [self setUpUI];
-    [self registerChatCells];
 }
 - (void)rightButtonAction:(UIButton *)sender{
 //    ChatMessageModel *messageModel = [ChatMessageModel createAnReceiveAudioMessageWith:@"/Users/GoodSrc/Library/Developer/CoreSimulator/Devices/22B34738-FD9D-4B15-8356-B80727B56F17/data/Containers/Data/Application/166FC80A-3826-4FD2-B109-8C18DF2AF622/tmp/audioFile/wavAudioTmp/149725646047117" andSpearkerId:self.listModel.chatListId andFileSize:@"8" andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
@@ -155,7 +154,7 @@
     [self.view addSubview:self.chatBoxVC.view];
     [self.view addSubview:self.tableView];
     self.tableView.frame = CGRectMake(0, 0, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
-    __weak typeof (self) weakSelf = self;
+    WEAKSELF;
     self.tableView.headerRefersh = [HQRefershHeaderView headerWithRefreshingBlock:^{
         [weakSelf handleMoreDataFromDb];
     }];
@@ -235,9 +234,9 @@
     if (_messageCellIsEdiating) {
         HQChaRootCell *rootCell = [tableView cellForRowAtIndexPath:indexPath];
         [rootCell didSeleteCellWhenIsEdiating:!rootCell.isSeleted];
-        [self didseleteTableViewCellWithIndexPath:indexPath];
+//        [self didseleteTableViewCellWithIndexPath:indexPath];
     }else{
-//        [self keyBordViewDidResetOriginStatus];
+        [self keyBordViewDidResetOriginStatus];
     }
 }
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -253,12 +252,12 @@
         [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
     }
 }
-////清除聊天数据
+//////清除聊天数据
 - (void)clearCurrnetAllChatMessages{
     [self.dataArray removeAllObjects];
     [self.tableView reloadData];
 }
-////键盘回到底部
+//////键盘回到底部
 - (void)keyBordViewDidResetOriginStatus{
     [self.chatBoxVC.chatBox.textView resignFirstResponder];
     [UIView animateWithDuration:.25 animations:^{
@@ -268,7 +267,7 @@
         self.chatBoxVC.chatBox.boxStatus = HQChatBoxStatusNothing;
     }];
 }
-////选中cell的数据处理
+//////选中cell的数据处理
 - (void)didseleteTableViewCellWithIndexPath:(NSIndexPath *)indexPath{
     ChatMessageModel *model = self.dataArray[indexPath.row];
     if (model && ![self.seletedModelsArray containsObject:model]) {
@@ -299,11 +298,11 @@
     }];
     [self.ediateMoreView setEdiateViewActiveStatusWith:self.seletedModelsArray.count];
 }
-
 #pragma mark -------- 消息分发测试 --------
 - (void)testAction:(UIBarButtonItem *)item{
-    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
+//    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
+    [_tableView reloadData];
 }
 - (NSDictionary *)creatTextNessageWithIndex:(int )index{
     NSTimeInterval timeral = [NSDate returnTheTimeralFrom1970];
@@ -401,7 +400,7 @@
         [self.tableView reloadData];
         [self.dataArray removeObjectsInArray:models];
         [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
         [self.tableView endUpdates];
         if (self.dataArray.count) {
             self.listModel.message = self.dataArray.lastObject;
@@ -442,16 +441,14 @@
         didChangeChatBoxHeight:(CGFloat)height{
     self.chatBoxVC.view.top = self.view.bottom-height-64;
     self.tableView.height = HEIGHT_SCREEN - height - 64;
-    if (height != HEIGHT_TABBAR) {
-        [self tableViewScrollToBottomWithAnimated:NO];
-    }
     [self.tableView reloadData];
+    [self tableViewScrollToBottomWithAnimated:NO];
 }
 - (void)chatBoxInputStatusController:(HQChatBoxViewController *)chatboxViewController ChatBoxHeight:(CGFloat)height{
     self.chatBoxVC.view.top = self.view.bottom-height-64;
     self.tableView.height = HEIGHT_SCREEN - height - 64;
+    [self tableViewScrollToBottomWithAnimated:NO];
     if (height != HEIGHT_TABBAR) {
-        [self tableViewScrollToBottomWithAnimated:NO];
     }
 }
 #pragma mark --------- 发送文本消息 ---------
@@ -460,20 +457,32 @@
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSnedMesssageWith:messageStr andReceiverId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
     [self refershListModelWithMessageModel:messageModel];
     ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
+//    if (dateModel) {
+//        [self.dataArray addObject:dateModel];
+//    }
+//    [self.dataArray addObject:messageModel];
+//    [_tableView reloadData];
+    [self  addNewMessageModel:messageModel andDateModel:dateModel];
+//    [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
+//    [messageModel sendTextMessage:^{
+//        NSLog(@"status = %d",messageModel.messageStatus);
+//    }];
+}
+- (void)addNewMessageModel:(ChatMessageModel *)messageModel andDateModel:(ChatMessageModel *)dateModel{
+    NSMutableArray *indexpaths = [NSMutableArray new];
     if (dateModel) {
+        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count) : (self.dataArray.count + 1) inSection:0]];
         [self.dataArray addObject:dateModel];
+         [self.dataArray addObject:messageModel];
+    }else{
+        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+        [self.dataArray addObject:messageModel];
     }
-    [self.dataArray addObject:messageModel];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:indexpaths withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
-    if (dateModel) {
-        [dateModel saveToDBChatLisModelAsyThread:^{
-        } andError:^{
-        }];
-    }
-    [messageModel sendTextMessage:^{
-        NSLog(@"status = %d",messageModel.messageStatus);
-    }];
 }
 #pragma mark --------- 发送GIF -------
 - (void)chatBoxViewController:(HQChatBoxViewController *)chatboxViewController sendGifMessage:(NSString *)gifFileName{
@@ -588,7 +597,7 @@
     }
     return nil;
 }
-//删除消息时检查是否有时间消息
+////删除消息时检查是否有时间消息
 - (void)checkCurrnetMessageIsHasDateMessageWithIndexPath:(NSIndexPath *)indexPath andComplite:(void (^)(ChatMessageModel *msgModel,NSIndexPath *indexPath))complite{
     if (indexPath.row == 0 || indexPath == nil) {
         if (complite) complite(nil,nil);
@@ -601,7 +610,7 @@
     }
     if (complite) complite(nil,nil);
 }
-///刷新listModel
+/////刷新listModel
 - (void)refershListModelWithMessageModel:(ChatMessageModel *)msgModel{
     [self.listModel refershChatListModelWith:msgModel];
     if (self.listModel.isShow == NO) {
@@ -736,17 +745,15 @@
     }
     return _voiceTipView;
 }
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (nil == _tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
-//        tapGesture.numberOfTapsRequired = 1;
-//        tapGesture.numberOfTouchesRequired = 1;
-//        [_tableView addGestureRecognizer:tapGesture];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+        adjustsScrollViewInsets_NO(_tableView, self);
     }
     return _tableView;
 }

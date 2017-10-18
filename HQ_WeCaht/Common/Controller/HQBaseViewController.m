@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    NSShadow *shadow=[[NSShadow alloc]init];
+    shadow.shadowOffset=CGSizeMake(0, 0);
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName,shadow, NSShadowAttributeName,[UIFont fontWithName:@"Helvetica-Bold" size:18], NSFontAttributeName, nil]];
 }
 - (void)refershCurrnetListViewIsAppear:(BOOL)isAppear{
     

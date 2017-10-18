@@ -71,7 +71,7 @@
     self.toNavigationBarView = [[UIView alloc] init];
     [self.view addSubview:self.toNavigationBarView];
     
-    self.searchBar = [HQSearchBar defaultSearchBar];
+    self.searchBar = [HQSearchBar defaultSearchBarWithIsActive:YES];
     self.searchBar.delegate = self;
     [self.toNavigationBarView addSubview:self.searchBar];
 }
@@ -471,12 +471,18 @@
     [self searchFromLoadDBWithSearchKey:searchBar.text];
 }
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    if (@available(iOS 11.0, *)) {
+        [searchBar setPositionAdjustment:UIOffsetMake(0, 0) forSearchBarIcon:UISearchBarIconSearch];
+    }
     return YES;
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [self searbarDidDisMiss];
 }
-
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    [searchBar setPositionAdjustment:UIOffsetMake(_searchBar.endEdiateWidth/2.0, 0) forSearchBarIcon:UISearchBarIconSearch];
+    return YES;
+}
 - (void)searchFromLoadDBWithSearchKey:(NSString *)searchKey{
     if (searchKey.length <= 0) {
         return;

@@ -10,12 +10,13 @@
 
 @interface HQSearchBar : UISearchBar
 
+@property (nonatomic,assign) BOOL isActive;
+
+@property (nonatomic,assign) CGFloat endEdiateWidth;
 
 + (NSInteger)defaultSearchBarHeight;
 
-+ (instancetype)defaultSearchBar;
-
-+ (instancetype)defaultSearchBarWithFrame:(CGRect)frame;
++ (instancetype)defaultSearchBarWithIsActive:(BOOL)isActive;
 
 - (UITextField *)searchTextField;
 

@@ -85,7 +85,7 @@
     _lastSeleteIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 }
 - (void)createSearchBar{
-    _searchBar = [HQSearchBar defaultSearchBar];
+    _searchBar = [HQSearchBar defaultSearchBarWithIsActive:NO];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"搜索地址";
     [self.view addSubview:_searchBar];

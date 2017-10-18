@@ -8,7 +8,7 @@
 
 #import "HQBaseViewController.h"
 
-@interface ChildBordViewController : HQBaseViewController
+@interface ChildBordViewController : HQBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end
 

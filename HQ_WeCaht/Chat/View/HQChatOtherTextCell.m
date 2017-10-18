@@ -32,18 +32,13 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.paopaoView];
-//        [self.paopaoView addSubview:self.chatLabel];
         [self.paopaoView addSubview:self.msgLabel];
         _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
         _doubleTap.delegate = self;
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.contentView addGestureRecognizer:_doubleTap];
-        
-//        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
-//        [self.paopaoView addGestureRecognizer:_singalTap];
         [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
-
     }
     return self;
 }

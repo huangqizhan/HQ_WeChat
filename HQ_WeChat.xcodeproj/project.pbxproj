@@ -297,6 +297,9 @@
 		FD6CF0241E81FEE2001E5984 /* HQLocalImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6CF0231E81FEE2001E5984 /* HQLocalImageManager.m */; };
 		FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D88841E76306900794E7F /* HQReceiveMessageManager.m */; };
 		FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6D888E1E76743D00794E7F /* HQTextView.m */; };
+		FD73582B1F96F74C0042B44D /* ARTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD73582A1F96F74C0042B44D /* ARTestViewController.m */; };
+		FD73582E1F96FCD70042B44D /* AR2DTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD73582D1F96FCD70042B44D /* AR2DTestViewController.m */; };
+		FD73583C1F9736950042B44D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FD73583B1F9736950042B44D /* art.scnassets */; };
 		FD7570501EFB714D00CA7112 /* HQWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD75704F1EFB714D00CA7112 /* HQWebViewController.m */; };
 		FD7570531EFB721500CA7112 /* HQWebProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7570521EFB721500CA7112 /* HQWebProcessView.m */; };
 		FD77A3431EC460380017B41A /* NSDate+Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = FD77A3411EC460380017B41A /* NSDate+Calendar.m */; };
@@ -1024,6 +1027,11 @@
 		FD6D88861E76308C00794E7F /* HQChatHeaderDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQChatHeaderDefine.h; sourceTree = "<group>"; };
 		FD6D888D1E76743D00794E7F /* HQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQTextView.h; sourceTree = "<group>"; };
 		FD6D888E1E76743D00794E7F /* HQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQTextView.m; sourceTree = "<group>"; };
+		FD7358291F96F74C0042B44D /* ARTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTestViewController.h; sourceTree = "<group>"; };
+		FD73582A1F96F74C0042B44D /* ARTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTestViewController.m; sourceTree = "<group>"; };
+		FD73582C1F96FCD70042B44D /* AR2DTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AR2DTestViewController.h; sourceTree = "<group>"; };
+		FD73582D1F96FCD70042B44D /* AR2DTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AR2DTestViewController.m; sourceTree = "<group>"; };
+		FD73583B1F9736950042B44D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		FD75704E1EFB714D00CA7112 /* HQWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQWebViewController.h; sourceTree = "<group>"; };
 		FD75704F1EFB714D00CA7112 /* HQWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQWebViewController.m; sourceTree = "<group>"; };
 		FD7570511EFB721500CA7112 /* HQWebProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQWebProcessView.h; sourceTree = "<group>"; };
@@ -1440,6 +1448,7 @@
 				FDD8FDAE1EB0411E002D1C44 /* ChatImages.xcassets */,
 				FD7A03E21EA4514A00BE240B /* Contacts.xcassets */,
 				FD42B5EF1F0A2C3000D6F0C4 /* Discover.xcassets */,
+				FD73583B1F9736950042B44D /* art.scnassets */,
 				BACB05501E59872E008B676D /* Supporting Files */,
 			);
 			name = HQ_WeChat;
@@ -2349,6 +2358,17 @@
 			name = ReceiveMessageManager;
 			sourceTree = "<group>";
 		};
+		FD7358281F96F72F0042B44D /* ARTest */ = {
+			isa = PBXGroup;
+			children = (
+				FD7358291F96F74C0042B44D /* ARTestViewController.h */,
+				FD73582A1F96F74C0042B44D /* ARTestViewController.m */,
+				FD73582C1F96FCD70042B44D /* AR2DTestViewController.h */,
+				FD73582D1F96FCD70042B44D /* AR2DTestViewController.m */,
+			);
+			path = ARTest;
+			sourceTree = "<group>";
+		};
 		FD7F8F611E9DC45800B61D63 /* HQBroswer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2534,6 +2554,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD7358281F96F72F0042B44D /* ARTest */,
 				FDE441A91F67B5B30079BF32 /* sqliteDemo */,
 				FD0E98ED1F5D221900B16263 /* ReCodeScan */,
 				FD9B608A1F4672950089AB96 /* AnimationTools */,
@@ -3234,6 +3255,7 @@
 				FD77A3451EC467AF0017B41A /* hqz.png in Resources */,
 				FD8DD7C51EB81D54002125CD /* 61.gif in Resources */,
 				FD37B0C01E67C52300FDD2A4 /* SystemEmoj.plist in Resources */,
+				FD73583C1F9736950042B44D /* art.scnassets in Resources */,
 				FD8DD7FE1EB81D54002125CD /* 4.gif in Resources */,
 				FD37B0BE1E67BF3100FDD2A4 /* CostomerEmoj.plist in Resources */,
 				FD8DD7F01EB81D54002125CD /* 18.gif in Resources */,
@@ -3416,6 +3438,7 @@
 				FD9869E91EDE9D9C00460E11 /* HQDisPlayTextController.m in Sources */,
 				FD61A2371F0206D400F0830C /* HQRectButton.m in Sources */,
 				BAF4A8071E73F11B00653204 /* UIImageView+AFNetworking.m in Sources */,
+				FD73582E1F96FCD70042B44D /* AR2DTestViewController.m in Sources */,
 				FD8DD80A1EB824F5002125CD /* GifTempViewController.m in Sources */,
 				FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */,
 				FD9869E61EDE8CA500460E11 /* HQAttrubuteTextLabel.m in Sources */,
@@ -3639,6 +3662,7 @@
 				BAF4A80A1E73F11B00653204 /* UIWebView+AFNetworking.m in Sources */,
 				FD2ED8F31EADA8DA006E585F /* NSData+ImageContentType.m in Sources */,
 				FDCBB5381EFBBA6C00D6F573 /* WebViewJavascriptBridgeBase.m in Sources */,
+				FD73582B1F96F74C0042B44D /* ARTestViewController.m in Sources */,
 				FD66499A1EBC2A62005E340B /* YYSpriteSheetImage.m in Sources */,
 				FD0E98FB1F5D221900B16263 /* HQQRCodeViewController.m in Sources */,
 				FDDEE3D61E655B7D007E9AF9 /* NSObject+MJKeyValue.m in Sources */,
@@ -3807,7 +3831,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3840,7 +3864,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

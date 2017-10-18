@@ -16,6 +16,8 @@
 #import "HQPopoverView.h"
 #import "HQQRCodeViewController.h"
 #import "ApplicationHelper.h"
+#import "ARTestViewController.h"
+#import "AR2DTestViewController.h"
 
 
 
@@ -36,9 +38,16 @@
     [super viewDidLoad];
     [self setUpUI];
     [self loadDataSource];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testButtonAction)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"msg" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)];
+    UIButton *popBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [popBut setTitle:@"pop" forState:UIControlStateNormal];
+    [popBut addTarget:self action:@selector(testButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:popBut];
     
+    UIButton *msgBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [msgBut setTitle:@"msg" forState:UIControlStateNormal];
+    [msgBut addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msgBut];
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -54,7 +63,6 @@
     }
 }
 - (void)testButtonAction{
-    
 //    ChatListModel *sysList = [ChatListModel customerInit];
 //    sysList.chatListType = 100;
 //    sysList.userName = @"系统消息";
@@ -125,15 +133,7 @@
 }
 - (void)setUpUI{
     self.tableView.backgroundColor = XZRGB(0xf4f1f1);
-    _searchbar = [HQSearchBar defaultSearchBar];;
-//    [_searchbar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
-//    _searchbar.showsBookmarkButton = YES;
-//    _searchbar.tintColor = CANCELBUTTONCOLOR;
-//    [_searchbar.layer setBorderWidth:0.5f];
-//    [_searchbar.layer setBorderColor:BACKGROUNDCOLOR.CGColor];
-//    [_searchbar sizeToFit];
-//    _searchbar.placeholder = @"搜索";
-//    [_searchbar setBarTintColor:BACKGROUNDCOLOR];
+    _searchbar = [HQSearchBar defaultSearchBarWithIsActive:NO];
     _searchbar.delegate = self;
     self.tableView.tableHeaderView = _searchbar;
     [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:CANCELBUTTONCOLOR,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
@@ -299,12 +299,14 @@
 #pragma mark ------- setter and getter --------
 - (NSArray <HQPopoverAction *> *)getQQActions{
     // 发起多人聊天 action
-    HQPopoverAction *multichatAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_multichat"] title:@"发起群聊" handler:^(HQPopoverAction *action) {
-        
+    HQPopoverAction *multichatAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_multichat"] title:@"AR3D" handler:^(HQPopoverAction *action) {
+        ARTestViewController *arVC = [[ARTestViewController alloc] init];
+        [self.navigationController presentViewController:arVC animated:YES completion:nil];
     }];
     // 加好友 action
-    HQPopoverAction *addFriAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_addFri"] title:@"添加好友" handler:^(HQPopoverAction *action) {
-        
+    HQPopoverAction *addFriAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_addFri"] title:@"AR2D" handler:^(HQPopoverAction *action) {
+        AR2DTestViewController *ar2dVC = [AR2DTestViewController new];
+        [self.navigationController presentViewController:ar2dVC animated:YES completion:nil];
     }];
     // 扫一扫 action
     HQPopoverAction *QRAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_QR"] title:@"扫一扫" handler:^(HQPopoverAction *action) {
@@ -315,10 +317,12 @@
     HQPopoverAction *payMoneyAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_payMoney"] title:@"收付款" handler:^(HQPopoverAction *action) {
         
     }];
+//    ///AR
+//    HQPopoverAction *arAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"ar_scan"] title:@"AR" handler:^(HQPopoverAction *action) {
+//
+//    }];
     return @[multichatAction, addFriAction, QRAction, payMoneyAction];
 }
-
-
 - (UITableView *)tableView{
     if (nil == _tableView) {
         UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -326,6 +330,7 @@
         tableView.dataSource = self;
         [self.view addSubview:tableView];
         _tableView = tableView;
+        adjustsScrollViewInsets_NO(_tableView, self);
     }
     return _tableView;
 }
