@@ -79,7 +79,7 @@ static CGFloat const placeHolderFont = 15.0;
     return _placeholderWidth;
 }
 + (instancetype)defaultSearchBarWithIsActive:(BOOL)isActive{
-    return [self defaultSearchBarWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, [self defaultSearchBarHeight]) andActive:isActive];
+    return [self defaultSearchBarWithFrame:CGRectMake(0,0, SCREEN_WIDTH, [self defaultSearchBarHeight]) andActive:isActive];
 }
 
 + (instancetype)defaultSearchBarWithFrame:(CGRect)frame andActive:(BOOL)isActive{

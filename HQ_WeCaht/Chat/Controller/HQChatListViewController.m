@@ -25,7 +25,7 @@
 
 
 @interface HQChatListViewController ()
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) HQSearchBar *searchbar;
@@ -132,13 +132,12 @@
     return dic;
 }
 - (void)setUpUI{
-    self.tableView.backgroundColor = XZRGB(0xf4f1f1);
+    [self.view addSubview:self.tableView];
     _searchbar = [HQSearchBar defaultSearchBarWithIsActive:NO];
     _searchbar.delegate = self;
     self.tableView.tableHeaderView = _searchbar;
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:CANCELBUTTONCOLOR,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
-    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64-49);
-    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:CANCELBUTTONCOLOR,NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
 }
 - (void)loadDataSource{
     [ChatListModel selectChatListShowOnOtherThreadWith:^(NSArray *result) {
@@ -187,6 +186,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return nil;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatListTableViewCell *ChatListcell = [ChatListTableViewCell cellWithTableView:tableView];
     ChatListcell.model = _dataArray[indexPath.row];
@@ -196,7 +201,10 @@
     return 67.0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10.f;
+    return 0.1f;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
 }
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatListModel *currentListModel = self.dataArray[indexPath.row];
@@ -317,25 +325,19 @@
     HQPopoverAction *payMoneyAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_payMoney"] title:@"收付款" handler:^(HQPopoverAction *action) {
         
     }];
-//    ///AR
-//    HQPopoverAction *arAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"ar_scan"] title:@"AR" handler:^(HQPopoverAction *action) {
-//
-//    }];
     return @[multichatAction, addFriAction, QRAction, payMoneyAction];
 }
 - (UITableView *)tableView{
-    if (nil == _tableView) {
-        UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        [self.view addSubview:tableView];
-        _tableView = tableView;
-        adjustsScrollViewInsets_NO(_tableView, self);
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0 ,0, App_Frame_Width, APP_Frame_Height-64- 49 ) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.showsVerticalScrollIndicator = YES;
     }
     return _tableView;
 }
 - (NSMutableArray *)dataArray{
-    if (nil == _dataArray) {
+    if (_dataArray == nil) {
         _dataArray = [NSMutableArray array];
     }
     return  _dataArray;

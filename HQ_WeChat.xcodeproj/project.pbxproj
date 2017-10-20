@@ -213,6 +213,8 @@
 		FD4769381E6679F000CEC7A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4769371E6679F000CEC7A6 /* Images.xcassets */; };
 		FD47693B1E667D7900CEC7A6 /* HQChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD47693A1E667D7900CEC7A6 /* HQChatBoxViewController.m */; };
 		FD47693E1E668F8300CEC7A6 /* HQChatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FD47693D1E668F8300CEC7A6 /* HQChatBox.m */; };
+		FD485C811F98392300BF4EDB /* ARMathHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FD485C801F98392300BF4EDB /* ARMathHelper.m */; };
+		FD485C841F98438E00BF4EDB /* SCANNodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FD485C831F98438E00BF4EDB /* SCANNodeHelper.m */; };
 		FD4939581E6D52120021A55A /* HQFaceMoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4939571E6D52120021A55A /* HQFaceMoreCollectionViewCell.m */; };
 		FD49395A1E6D560E0021A55A /* HQFaceMore.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD4939591E6D560E0021A55A /* HQFaceMore.plist */; };
 		FD562D0B1EFCA00A00E39756 /* HQWebJsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD562D0A1EFCA00A00E39756 /* HQWebJsManager.m */; };
@@ -877,6 +879,10 @@
 		FD47693A1E667D7900CEC7A6 /* HQChatBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatBoxViewController.m; sourceTree = "<group>"; };
 		FD47693C1E668F8300CEC7A6 /* HQChatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatBox.h; sourceTree = "<group>"; };
 		FD47693D1E668F8300CEC7A6 /* HQChatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatBox.m; sourceTree = "<group>"; };
+		FD485C7F1F98392300BF4EDB /* ARMathHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARMathHelper.h; sourceTree = "<group>"; };
+		FD485C801F98392300BF4EDB /* ARMathHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARMathHelper.m; sourceTree = "<group>"; };
+		FD485C821F98438E00BF4EDB /* SCANNodeHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCANNodeHelper.h; sourceTree = "<group>"; };
+		FD485C831F98438E00BF4EDB /* SCANNodeHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCANNodeHelper.m; sourceTree = "<group>"; };
 		FD4939561E6D52120021A55A /* HQFaceMoreCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFaceMoreCollectionViewCell.h; sourceTree = "<group>"; };
 		FD4939571E6D52120021A55A /* HQFaceMoreCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFaceMoreCollectionViewCell.m; sourceTree = "<group>"; };
 		FD4939591E6D560E0021A55A /* HQFaceMore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HQFaceMore.plist; sourceTree = "<group>"; };
@@ -2038,6 +2044,7 @@
 		FD4768FD1E6659B300CEC7A6 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				FD485C7E1F9838F900BF4EDB /* ARTools */,
 				FDD18CD81F131EFA00E260BD /* Masonry */,
 				FD610B5E1EF754F500DCB432 /* TransitionAnimation */,
 				FD8847581E71234F0085B355 /* CustomerControl */,
@@ -2088,6 +2095,17 @@
 				FD6D888E1E76743D00794E7F /* HQTextView.m */,
 			);
 			name = chatBoxView;
+			sourceTree = "<group>";
+		};
+		FD485C7E1F9838F900BF4EDB /* ARTools */ = {
+			isa = PBXGroup;
+			children = (
+				FD485C7F1F98392300BF4EDB /* ARMathHelper.h */,
+				FD485C801F98392300BF4EDB /* ARMathHelper.m */,
+				FD485C821F98438E00BF4EDB /* SCANNodeHelper.h */,
+				FD485C831F98438E00BF4EDB /* SCANNodeHelper.m */,
+			);
+			path = ARTools;
 			sourceTree = "<group>";
 		};
 		FD610B5E1EF754F500DCB432 /* TransitionAnimation */ = {
@@ -3589,6 +3607,7 @@
 				FD80E3521ED6694C00203097 /* UIColor+Extern.m in Sources */,
 				FDD18CF51F131EFA00E260BD /* MASConstraint.m in Sources */,
 				BAF4A8041E73F11B00653204 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				FD485C811F98392300BF4EDB /* ARMathHelper.m in Sources */,
 				FD28EA751E7B8E3B0077E009 /* HQPhotoPickerViewController.m in Sources */,
 				FD1A317B1F0CCBC90017FDBC /* HQChatLocationOtherCell.m in Sources */,
 				BAF4A8001E73F11B00653204 /* AFURLSessionManager.m in Sources */,
@@ -3600,6 +3619,7 @@
 				FD8DD8071EB824E3002125CD /* TranstionAnimationViewController.m in Sources */,
 				FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */,
 				FD2CAD231EE13A8E00FEEC7A /* HQAudioTools.m in Sources */,
+				FD485C841F98438E00BF4EDB /* SCANNodeHelper.m in Sources */,
 				FD3E80A11ECE85F700F3B430 /* HQWifiViewController.m in Sources */,
 				FDD18CF81F131EFA00E260BD /* MASViewAttribute.m in Sources */,
 				FD7A03E61EA45B0C00BE240B /* HQContractSearchController.m in Sources */,

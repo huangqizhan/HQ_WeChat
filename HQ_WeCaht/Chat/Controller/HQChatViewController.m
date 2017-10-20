@@ -753,7 +753,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
-        adjustsScrollViewInsets_NO(_tableView, self);
+//        adjustsScrollViewInsets_NO(_tableView, self);
     }
     return _tableView;
 }
