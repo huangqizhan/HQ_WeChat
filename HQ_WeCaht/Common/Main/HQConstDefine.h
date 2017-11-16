@@ -34,18 +34,6 @@
 #define videwViewH HEIGHT_SCREEN * 0.64 // 录制视频视图高度
 #define videwViewX HEIGHT_SCREEN * 0.36 // 录制视频视图X
 
-#define  adjustsScrollViewInsets_NO(scrollView,vc)\
-do { \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
-if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
-[scrollView   performSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:") withObject:@(2)];\
-} else {\
-vc.automaticallyAdjustsScrollViewInsets = NO;\
-}\
-_Pragma("clang diagnostic pop") \
-} while (0)
-
 
 #define iOS7Later ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f)
 #define iOS8Later ([UIDevice currentDevice].systemVersion.floatValue >= 8.0f)

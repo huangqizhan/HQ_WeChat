@@ -85,7 +85,6 @@ static CGFloat const placeHolderFont = 15.0;
 + (instancetype)defaultSearchBarWithFrame:(CGRect)frame andActive:(BOOL)isActive{
     HQSearchBar *searchBar = [[HQSearchBar alloc] initWithFrame:frame];
     searchBar.isActive = isActive;
-    searchBar.placeholder = @"搜索";
     [searchBar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
     searchBar.showsCancelButton = NO;
     searchBar.barStyle = UISearchBarStyleMinimal;

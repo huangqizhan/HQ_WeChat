@@ -298,6 +298,9 @@
         tableView.sectionIndexColor = [UIColor blackColor];
         tableView.sectionIndexBackgroundColor = [UIColor clearColor];
         [self.view addSubview:tableView];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         _tableView = tableView;
         [_tableView registerClass:[HQContractTableViewCell class] forCellReuseIdentifier:@"HQContractTableViewCellId"];
     }

@@ -238,6 +238,14 @@
     [self.navigationController pushViewController:chatVc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+////缩进
+//- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSLog(@"indentationLevelForRowAtIndexPath = %@",indexPath);
+//    return indexPath.row;
+//}
+- (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
 #pragma mark ------- 取消置顶 --------
 - (void)cancelTopCellRowAction:(NSIndexPath *)indexPath{
     ChatListModel *listModel = self.dataArray[indexPath.row];
@@ -258,7 +266,6 @@
     ChatListModel *listModel = self.dataArray[indexPath.row];
     if (listModel && indexPath) {
         listModel.isShow = NO;
-        [self.tableView reloadData];
         [self.dataArray removeObject:listModel];
         [self.tableView beginUpdates];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -306,12 +313,13 @@
 }
 #pragma mark ------- setter and getter --------
 - (NSArray <HQPopoverAction *> *)getQQActions{
-    // 发起多人聊天 action
+    // AR3D action
     HQPopoverAction *multichatAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_multichat"] title:@"AR3D" handler:^(HQPopoverAction *action) {
         ARTestViewController *arVC = [[ARTestViewController alloc] init];
+        arVC.type = ARTest_Move_Type;
         [self.navigationController presentViewController:arVC animated:YES completion:nil];
     }];
-    // 加好友 action
+    // AR2D action
     HQPopoverAction *addFriAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_addFri"] title:@"AR2D" handler:^(HQPopoverAction *action) {
         AR2DTestViewController *ar2dVC = [AR2DTestViewController new];
         [self.navigationController presentViewController:ar2dVC animated:YES completion:nil];
@@ -323,7 +331,6 @@
     }];
     // 付款 action
     HQPopoverAction *payMoneyAction = [HQPopoverAction actionWithImage:[UIImage imageNamed:@"right_menu_payMoney"] title:@"收付款" handler:^(HQPopoverAction *action) {
-        
     }];
     return @[multichatAction, addFriAction, QRAction, payMoneyAction];
 }
@@ -333,6 +340,9 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = YES;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _tableView;
 }

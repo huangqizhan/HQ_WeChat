@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G1036" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="ChatListModel" representedClassName="ChatListModel" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="chatBegImageFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chatContent" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,6 +63,9 @@
         <attribute name="isFinish" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="originUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="LocalStatusModel" representedClassName="LocalStatusModel" syncable="YES" codeGenerationType="class">
+        <attribute name="isOpenLoaclNotification" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="MessageRectModel" representedClassName="MessageRectModel" syncable="YES" codeGenerationType="class">
         <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -75,5 +78,6 @@
         <element name="ContractModel" positionX="-225" positionY="-45" width="128" height="180"/>
         <element name="DownloadFileModel" positionX="-225" positionY="-45" width="128" height="150"/>
         <element name="MessageRectModel" positionX="-225" positionY="-63" width="128" height="105"/>
+        <element name="LocalStatusModel" positionX="-216" positionY="-36" width="128" height="60"/>
     </elements>
 </model>

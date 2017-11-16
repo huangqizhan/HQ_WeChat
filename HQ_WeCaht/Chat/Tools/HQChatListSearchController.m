@@ -220,7 +220,7 @@
     [self.subSearchController removeFromParentViewController];
     self.subSearchController = nil;
     [_searchBar setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-    _searchBar.placeholder = @"搜索";
+//    _searchBar.placeholder = @"搜索";
 }
 
 - (void)showInViewController:(HQBaseViewController *)controller fromSearchBar:(HQSearchBar *)SearchBar{
@@ -304,6 +304,7 @@
         }
 //        self.searchBackgroundView.alpha = 0;
 //        self.begEffectView.alpha = 0;
+        [_searchBar setPositionAdjustment:UIOffsetMake(_searchBar.endEdiateWidth/2.0+18, 0) forSearchBarIcon:UISearchBarIconSearch];
         _targetStatusBarStyle = UIStatusBarStyleLightContent;
         [self setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
@@ -318,7 +319,7 @@
     _searchBar.width = App_Frame_Width;
     _searchBar.left = 0;
     [self dismissKeyboard];
-    _searchBar.placeholder = @"搜索";
+//    _searchBar.placeholder = @"搜索";
     _searchBar.text = nil;
     [_searchBar setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     if (self.subSearchController) {
@@ -480,7 +481,7 @@
     [self searbarDidDisMiss];
 }
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
-    [searchBar setPositionAdjustment:UIOffsetMake(_searchBar.endEdiateWidth/2.0, 0) forSearchBarIcon:UISearchBarIconSearch];
+
     return YES;
 }
 - (void)searchFromLoadDBWithSearchKey:(NSString *)searchKey{

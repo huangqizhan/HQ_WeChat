@@ -50,6 +50,20 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
 ///刷新  🔄
 @property (nonatomic,strong) UIButton *refershButton;
 
+/// 添加3D模型
+@property (nonatomic,strong) UIButton *add3DButton;
+
+////随相机移动的3d模型
+@property(nonatomic,strong)SCNNode *planeNode;
+
+////测试UISlider
+@property (nonatomic,strong) UISlider *Xslider;
+@property (nonatomic,strong) UISlider *Yslider;
+@property (nonatomic,strong) UISlider *Zslider;
+@property (nonatomic,strong) UISlider *scalSlider;
+
+
+
 @end
 
 @implementation ARTestViewController
@@ -58,13 +72,20 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.arScnView];
-//    [self addPhysics];
     [self.view addSubview:self.backButton];
     [self.view addSubview:self.vaseButton];
     [self.view addSubview:self.candleButton];
     [self.view addSubview:self.chairButton];
     [self.view addSubview:self.lampButton];
     [self.view addSubview:self.refershButton];
+    if (_type == ARTest_Move_Type) {
+        [self.view addSubview:self.add3DButton];
+    }
+    
+    [self.view addSubview:self.Xslider];
+    [self.view addSubview:self.Yslider];
+    [self.view addSubview:self.Zslider];
+    [self.view addSubview:self.scalSlider];
 }
 - (void)backButtonClick:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -84,9 +105,14 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
 }
 #pragma mark     ------  ARSessionDelegate   inherit   ARSessionObserver ------
 - (void)session:(ARSession *)session didUpdateFrame:(ARFrame *)frame{
-    NSLog(@"didUpdateFrame");
+    if (_type == ARTest_Move_Type && self.planeNode != nil) {
+        //捕捉相机的位置，让节点随着相机移动而移动
+        //根据官方文档记录，相机的位置参数在4X4矩阵的第三列
+        self.planeNode.position =SCNVector3Make(frame.camera.transform.columns[3].x,frame.camera.transform.columns[3].y,frame.camera.transform.columns[3].z);
+    }
 }
 - (void)session:(ARSession *)session didAddAnchors:(NSArray<ARAnchor*>*)anchors{
+    ///检测到平面之后 就会添加  ARAnchor 调用此方法
     NSLog(@"didAddAnchors");
 }
 - (void)session:(ARSession *)session didUpdateAnchors:(NSArray<ARAnchor*>*)anchors{
@@ -123,36 +149,8 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
 }
 - (void)renderer:(id <SCNSceneRenderer>)renderer didAddNode:(SCNNode *)node forAnchor:(ARAnchor *)anchor{
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([anchor isMemberOfClass:[ARPlaneAnchor class]]) {
-            [self showMessgaeWith:@"捕捉到平地"];
-              //添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地   来放置3D模型
-            //1.获取捕捉到的平地锚点
-            ARPlaneAnchor *planeAnchor = (ARPlaneAnchor *)anchor;
-            //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里将其变成一个长方形，）
-            //参数分别是长宽高和圆角  创建几何模型
-            SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.extent.x*0.3 height:0 length:planeAnchor.extent.x*0.3 chamferRadius:0];
-            //3.使用Material (材料) 渲染3D模型（默认模型是白色的，这里改成红色）
-            plane.firstMaterial.diffuse.contents = [UIColor redColor];
-            //4.创建一个基于3D物体模型的节点
-            SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
-            //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
-            planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
-            
-            //self.planeNode = planeNode;
-            [node addChildNode:planeNode];
-            
-            /////添加3D模型
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/vase/vase.scn"];
-                //2.获取花瓶节点（一个场景会有多个节点，此处我们只写，花瓶节点则默认是场景子节点的第一个）
-                //所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
-                SCNNode *vaseNode = scene.rootNode.childNodes[0];
-                //4.设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置，也就是相机位置
-                vaseNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
-                //5.将花瓶节点添加到当前屏幕中
-                //!!!此处一定要注意：花瓶节点是添加到代理捕捉到的节点中，而不是AR试图的根节点。因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
-                [node addChildNode:vaseNode];
-            });
+        if ([anchor isMemberOfClass:[ARPlaneAnchor class]] && _type == ARTest_Plane_Type) {
+            [self capturePlaneAndAdd3dWith:node andAnchor:anchor];
         }
     });
 }
@@ -196,6 +194,39 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
 //- (void)physicsWorld:(SCNPhysicsWorld *)world didEndContact:(SCNPhysicsContact *)contact{
 //
 //}
+
+- (void)capturePlaneAndAdd3dWith:(SCNNode *)node andAnchor:(ARAnchor *)anchor{
+    [self showMessgaeWith:@"捕捉到平地"];
+    //添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地   来放置3D模型
+    //1.获取捕捉到的平地锚点
+    ARPlaneAnchor *planeAnchor = (ARPlaneAnchor *)anchor;
+    //2.创建一个3D物体模型    （系统捕捉到的平地是一个不规则大小的长方形，这里将其变成一个长方形，）
+    //参数分别是长宽高和圆角  创建几何模型
+    SCNBox *plane = [SCNBox boxWithWidth:planeAnchor.extent.x*0.3 height:0 length:planeAnchor.extent.x*0.3 chamferRadius:0];
+    //3.使用Material (材料) 渲染3D模型（默认模型是白色的，这里改成红色）
+    plane.firstMaterial.diffuse.contents = [UIColor redColor];
+    //4.创建一个基于3D物体模型的节点
+    SCNNode *planeNode = [SCNNode nodeWithGeometry:plane];
+    //5.设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
+    planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
+    
+    //self.planeNode = planeNode;
+    [node addChildNode:planeNode];
+    
+    /////添加3D模型
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/vase/vase.scn"];
+        //2.获取花瓶节点（一个场景会有多个节点，此处我们只写，花瓶节点则默认是场景子节点的第一个）
+        //所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
+        SCNNode *vaseNode = scene.rootNode.childNodes[0];
+        //4.设置花瓶节点的位置为捕捉到的平地的位置，如果不设置，则默认为原点位置，也就是相机位置
+        vaseNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z);
+        //5.将花瓶节点添加到当前屏幕中
+        //!!!此处一定要注意：花瓶节点是添加到代理捕捉到的节点中，而不是AR试图的根节点。因为捕捉到的平地锚点是一个本地坐标系，而不是世界坐标系
+        [node addChildNode:vaseNode];
+    });
+
+}
 - (void)showMessgaeWith:(NSString *)message{
     self.messageLabel.text = message;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -240,6 +271,22 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
     [self.arScnView.scene.rootNode addChildNode:shipNode];
 }
 #pragma mark ------- button Actions  ------
+- (void)addButtonAction:(UIButton *)sender{
+    [self.planeNode removeFromParentNode];
+    ////一个3D模型就是一个场景
+    SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
+    //获取场景的第一个节点
+    SCNNode *shipnode = [scene.rootNode.childNodes firstObject];
+    shipnode.scale = SCNVector3Make(0.2, 0.2, 0.2);
+    shipnode.position = SCNVector3Make(0, -5, 0);
+    self.planeNode = shipnode;
+    
+    for (SCNNode *node in shipnode.childNodes) {
+        node.scale = SCNVector3Make(0.05, 0.05, 0.05);
+        node.position = SCNVector3Make(0, -5, 0);
+    }
+    [self.arScnView.scene.rootNode addChildNode:shipnode];
+}
 - (void)vaseButtonAction:(UIButton *)sender{
 //    [self addNodeView];
 }
@@ -284,11 +331,13 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
     if (_arSessionConfiguration == nil) {
         //1.创建世界追踪会话配置（使用ARWorldTrackingSessionConfiguration效果更加好），需要A9芯片支持 设备支持在 6s以上
         ARWorldTrackingConfiguration *configration = [[ARWorldTrackingConfiguration alloc] init];
-        //2.设置追踪方向（追踪平面，后面会用到）
+//        //2.设置追踪方向（追踪平面，后面会用到）
         configration.planeDetection =  ARPlaneDetectionHorizontal;
+//        ARFaceTrackingConfiguration *configration = [[ARFaceTrackingConfiguration alloc] init];
         //3.自适应灯光（相机从暗到强光快速过渡效果会平缓一些）
-        _arSessionConfiguration.lightEstimationEnabled = YES;
         _arSessionConfiguration = configration;
+        _arSessionConfiguration.lightEstimationEnabled = YES;
+        _arSessionConfiguration.worldAlignment =  ARWorldAlignmentGravityAndHeading;    
     }
     return _arSessionConfiguration;
 }
@@ -350,15 +399,78 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
     }
     return _refershButton;
 }
+- (UIButton *)add3DButton{
+    if (_add3DButton == nil) {
+        _add3DButton = [[UIButton alloc] initWithFrame:CGRectMake(App_Frame_Width -50, self.refershButton.top, 40, 40)];
+        [_add3DButton setImage:[UIImage imageNamed:@"addActionIcon"] forState:UIControlStateNormal];
+        [_add3DButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _add3DButton;
+}
+- (UISlider *)Xslider{
+    if (_Xslider == nil) {
+        _Xslider = [[UISlider alloc] initWithFrame:CGRectMake(30, 40, App_Frame_Width-60, 30)];
+        [_Xslider addTarget:self action:@selector(XsliderAction:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _Xslider;
+}
+- (UISlider *)Yslider{
+    if (_Yslider == nil) {
+        _Yslider = [[UISlider alloc] initWithFrame:CGRectMake(self.Xslider.left, self.Xslider.bottom, self.Xslider.width, self.Xslider.height)];
+        [_Yslider addTarget:self action:@selector(YsliderAction:) forControlEvents:UIControlEventValueChanged];
+
+    }
+    return _Yslider;
+}
+- (UISlider *)Zslider{
+    if (_Zslider == nil) {
+        _Zslider = [[UISlider alloc] initWithFrame:CGRectMake(self.Xslider.left, self.Yslider.bottom, self.Xslider.width, self.Xslider.height)];
+        [_Zslider addTarget:self action:@selector(ZsliderAction:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _Zslider;
+}
+- (UISlider *)scalSlider{
+    if (_scalSlider == nil) {
+        _scalSlider = [[UISlider alloc] initWithFrame:CGRectMake(0, 200, 100, 30)];
+        _scalSlider.layer.anchorPoint = CGPointMake(0, 1);
+        _scalSlider.backgroundColor = [UIColor redColor];
+        _scalSlider.transform =  CGAffineTransformMakeRotation( M_PI * 0.5 );
+        [_scalSlider addTarget:self action:@selector(scalSliderAction:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _scalSlider;
+}
+- (void)scalSliderAction:(UISlider *)sender{
+    NSLog(@"x = %f",sender.value);
+    //    self.planeNode.position = SCNVector3Make(0, -5, 0);
+    for (SCNNode *node in self.planeNode.childNodes) {
+        node.scale = SCNVector3Make(sender.value/10.0, sender.value/10.0, sender.value/10.0);
+        node.position = SCNVector3Make(0, -5, 0);
+    }
+}
+- (void)XsliderAction:(UISlider *)sender{
+
+}
+- (void)YsliderAction:(UISlider *)sender{
+    NSLog(@"y = %f",sender.value);
+}
+- (void)ZsliderAction:(UISlider *)sender{
+    NSLog(@"z = %f",sender.value);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 @end
 
-
-
 /**
+   ARSessionDelegate   ARSession   监听跟踪状态 一般实现此代理是自定义3DView
+   ARSessionObserver  监听ARSession 的状态
+ 
+ 
+ 
+ 
+ 
  ARKit  框架简介
  1，ARAnchor   表示一个物体在3D空间的位置和方向（ARAnchor通常称为物体的3D锚点，有点像UIKit框架中CALayer的Anchor）
  

@@ -24,6 +24,35 @@
 - (void)refershCurrnetListViewIsAppear:(BOOL)isAppear{
     
 }
+    
+    
+#pragma mark - Orientation
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+    
+}
+- (BOOL)shouldAutorotate {
+    return YES;
+    
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+    
+}
+    
+#pragma mark - Status bar
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+    
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+    
+}
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

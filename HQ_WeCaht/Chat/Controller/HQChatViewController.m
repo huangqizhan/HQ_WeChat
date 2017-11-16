@@ -397,10 +397,9 @@
 ////删除消息
 - (void)deleteMessageWithModel:(NSArray<ChatMessageModel * >*)models andIndexPath:(NSArray<NSIndexPath *> *)indexPaths{
     if (models.count && indexPaths.count) {
-        [self.tableView reloadData];
         [self.dataArray removeObjectsInArray:models];
         [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
         if (self.dataArray.count) {
             self.listModel.message = self.dataArray.lastObject;
@@ -457,33 +456,32 @@
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSnedMesssageWith:messageStr andReceiverId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
     [self refershListModelWithMessageModel:messageModel];
     ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
-//    if (dateModel) {
-//        [self.dataArray addObject:dateModel];
-//    }
-//    [self.dataArray addObject:messageModel];
-//    [_tableView reloadData];
-    [self  addNewMessageModel:messageModel andDateModel:dateModel];
-//    [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
-//    [messageModel sendTextMessage:^{
-//        NSLog(@"status = %d",messageModel.messageStatus);
-//    }];
-}
-- (void)addNewMessageModel:(ChatMessageModel *)messageModel andDateModel:(ChatMessageModel *)dateModel{
-    NSMutableArray *indexpaths = [NSMutableArray new];
     if (dateModel) {
-        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
-        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count) : (self.dataArray.count + 1) inSection:0]];
         [self.dataArray addObject:dateModel];
-         [self.dataArray addObject:messageModel];
-    }else{
-        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
-        [self.dataArray addObject:messageModel];
     }
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:indexpaths withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+    [self.dataArray addObject:messageModel];
+    [_tableView reloadData];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
+    [messageModel sendTextMessage:^{
+        NSLog(@"status = %d",messageModel.messageStatus);
+    }];
 }
+//- (void)addNewMessageModel:(ChatMessageModel *)messageModel andDateModel:(ChatMessageModel *)dateModel{
+//    NSMutableArray *indexpaths = [NSMutableArray new];
+//    if (dateModel) {
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count) : (self.dataArray.count + 1) inSection:0]];
+//        [self.dataArray addObject:dateModel];
+//         [self.dataArray addObject:messageModel];
+//    }else{
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+//        [self.dataArray addObject:messageModel];
+//    }
+//    [self.tableView beginUpdates];
+//    [self.tableView insertRowsAtIndexPaths:indexpaths withRowAnimation:UITableViewRowAnimationFade];
+//    [self.tableView endUpdates];
+//    [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
+//}
 #pragma mark --------- 发送GIF -------
 - (void)chatBoxViewController:(HQChatBoxViewController *)chatboxViewController sendGifMessage:(NSString *)gifFileName{
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSendGifMessageWith:gifFileName andReceiveId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
@@ -603,10 +601,12 @@
         if (complite) complite(nil,nil);
         return;
     }
-    ChatMessageModel *dateModel = self.dataArray[indexPath.row-1];
-    if (dateModel.messageType == 99) {
-        if (complite) complite(dateModel,[NSIndexPath indexPathForRow:indexPath.row-1 inSection:0]);
-        return;
+    if (indexPath.row > 0) {
+        ChatMessageModel *dateModel = self.dataArray[indexPath.row-1];
+        if (dateModel.messageType == 99) {
+            if (complite) complite(dateModel,[NSIndexPath indexPathForRow:indexPath.row-1 inSection:0]);
+            return;
+        }
     }
     if (complite) complite(nil,nil);
 }
@@ -753,7 +753,9 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
-//        adjustsScrollViewInsets_NO(_tableView, self);
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _tableView;
 }
