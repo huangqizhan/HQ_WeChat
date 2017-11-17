@@ -208,6 +208,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
 }
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ChatMessageModel *model = self.dataArray[indexPath.row];
+    return model.cellHeight;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatMessageModel *model = self.dataArray[indexPath.row];
     return model.cellHeight;

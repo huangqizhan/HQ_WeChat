@@ -69,12 +69,11 @@
     }else{
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray new];
-        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"FaceViewController",@"ChildBordViewController",@"RunTimeViewController"]];
+        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"FaceViewController",@"ChildBordViewController",@"RunTimeViewController",@"ApplicationController"]];
     }
     return _dataArray;
 }

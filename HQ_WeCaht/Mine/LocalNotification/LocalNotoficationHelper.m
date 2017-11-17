@@ -45,8 +45,8 @@
     
     ///出发模式2
     NSDateComponents *com = [[NSDateComponents alloc] init];
-    com.hour =  8;
-    com.minute = 30;
+    com.hour =  9;
+    com.minute = 5;
     UNCalendarNotificationTrigger *trigger1 = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:com repeats:YES];
     
       ///出发模式2
@@ -55,10 +55,40 @@
     NSString *requestIdentifier = @"TestRequest";
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:trigger1];
     
+    
+    NSDateComponents *com2 = [[NSDateComponents alloc] init];
+    com2.hour =  11;
+    com2.minute = 50;
+    UNCalendarNotificationTrigger *trigger2 = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:com2 repeats:YES];
+    
+    ///出发模式2
+    //    UNLocationNotificationTrigger
+    // 4、设置UNNotificationRequest
+    NSString *requestIdentifier2 = @"TestRequest2";
+    UNNotificationRequest *request2 = [UNNotificationRequest requestWithIdentifier:requestIdentifier2 content:content trigger:trigger2];
+
+    NSDateComponents *com3 = [[NSDateComponents alloc] init];
+    com3.hour =  10;
+    com3.minute = 0;
+    UNCalendarNotificationTrigger *trigger3 = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:com3 repeats:YES];
+    
+    ///出发模式2
+    //    UNLocationNotificationTrigger
+    // 4、设置UNNotificationRequest
+    NSString *requestIdentifier3 = @"TestRequest3";
+    UNNotificationRequest *request3 = [UNNotificationRequest requestWithIdentifier:requestIdentifier3 content:content trigger:trigger3];
+
     // 5、把通知加到UNUserNotificationCenter，到指定触发点会被触发
     [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
         NSLog(@"通知");
     }];
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request2 withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"2通知");
+    }];
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request3 withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"3通知");
+    }];
+
 
 }
 + (void)removeLoaclnotification{

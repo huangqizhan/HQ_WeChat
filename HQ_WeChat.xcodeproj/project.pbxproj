@@ -36,11 +36,16 @@
 		BAF4A8101E73F4F200653204 /* UIImage+CompressImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A80F1E73F4F200653204 /* UIImage+CompressImage.m */; };
 		FD033B861EF3763600C85B04 /* HQContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD033B851EF3763600C85B04 /* HQContactDetailController.m */; };
 		FD033B891EF3767D00C85B04 /* HQContactHeadDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD033B881EF3767D00C85B04 /* HQContactHeadDetailCell.m */; };
-		FD04841C1EAEEE080042E702 /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD04841B1EAEEE080042E702 /* TestTableViewController.m */; };
 		FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD055AA41F412907001850FE /* IMG_2750.jpg */; };
 		FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD055AA71F4135F9001850FE /* HQCutImageController.m */; };
 		FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD057AA71F71104600AE31CF /* ChildBordViewController.m */; };
 		FD0661C91F53AB0C005FE459 /* PoperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0661C71F53AB0C005FE459 /* PoperViewController.m */; };
+		FD0936191FBE728700B630D9 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936181FBE728700B630D9 /* ApplicationController.m */; };
+		FD0936231FBEB2B400B630D9 /* HQCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936221FBEB2B400B630D9 /* HQCircleViewController.m */; };
+		FD0936261FBEB2EE00B630D9 /* HQCircleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936251FBEB2EE00B630D9 /* HQCircleTableView.m */; };
+		FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */; };
+		FD09362C1FBEB51100B630D9 /* HQCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */; };
+		FD09362F1FBEC0B800B630D9 /* HQCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */; };
 		FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C31F623DBA002C27F2 /* FaceViewController.m */; };
 		FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */; };
 		FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD0E03C81F62408D002C27F2 /* faces5.jpg */; };
@@ -592,8 +597,6 @@
 		FD033B851EF3763600C85B04 /* HQContactDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQContactDetailController.m; sourceTree = "<group>"; };
 		FD033B871EF3767D00C85B04 /* HQContactHeadDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQContactHeadDetailCell.h; sourceTree = "<group>"; };
 		FD033B881EF3767D00C85B04 /* HQContactHeadDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQContactHeadDetailCell.m; sourceTree = "<group>"; };
-		FD04841A1EAEEE080042E702 /* TestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewController.h; sourceTree = "<group>"; };
-		FD04841B1EAEEE080042E702 /* TestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewController.m; sourceTree = "<group>"; };
 		FD055AA41F412907001850FE /* IMG_2750.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_2750.jpg; sourceTree = "<group>"; };
 		FD055AA61F4135F9001850FE /* HQCutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCutImageController.h; sourceTree = "<group>"; };
 		FD055AA71F4135F9001850FE /* HQCutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCutImageController.m; sourceTree = "<group>"; };
@@ -601,6 +604,18 @@
 		FD057AA71F71104600AE31CF /* ChildBordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildBordViewController.m; sourceTree = "<group>"; };
 		FD0661C61F53AB0C005FE459 /* PoperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoperViewController.h; sourceTree = "<group>"; };
 		FD0661C71F53AB0C005FE459 /* PoperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoperViewController.m; sourceTree = "<group>"; };
+		FD0936171FBE728700B630D9 /* ApplicationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
+		FD0936181FBE728700B630D9 /* ApplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
+		FD0936211FBEB2B400B630D9 /* HQCircleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleViewController.h; sourceTree = "<group>"; };
+		FD0936221FBEB2B400B630D9 /* HQCircleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleViewController.m; sourceTree = "<group>"; };
+		FD0936241FBEB2EE00B630D9 /* HQCircleTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleTableView.h; sourceTree = "<group>"; };
+		FD0936251FBEB2EE00B630D9 /* HQCircleTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleTableView.m; sourceTree = "<group>"; };
+		FD0936271FBEB50300B630D9 /* HQCircleBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleBaseTableViewCell.h; sourceTree = "<group>"; };
+		FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleBaseTableViewCell.m; sourceTree = "<group>"; };
+		FD09362A1FBEB51100B630D9 /* HQCircleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleTableViewCell.h; sourceTree = "<group>"; };
+		FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleTableViewCell.m; sourceTree = "<group>"; };
+		FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleModel.h; sourceTree = "<group>"; };
+		FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleModel.m; sourceTree = "<group>"; };
 		FD0E03C21F623DBA002C27F2 /* FaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceViewController.h; sourceTree = "<group>"; };
 		FD0E03C31F623DBA002C27F2 /* FaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceViewController.m; sourceTree = "<group>"; };
 		FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
@@ -1589,6 +1604,54 @@
 				BAF4A7FA1E73F11B00653204 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		FD0936161FBE725E00B630D9 /* UIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				FD0936171FBE728700B630D9 /* ApplicationController.h */,
+				FD0936181FBE728700B630D9 /* ApplicationController.m */,
+			);
+			path = UIApplication;
+			sourceTree = "<group>";
+		};
+		FD09361A1FBEB24500B630D9 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				FD09361B1FBEB24500B630D9 /* Controllers */,
+				FD09361C1FBEB24500B630D9 /* Models */,
+				FD09361D1FBEB24500B630D9 /* View */,
+			);
+			path = Circle;
+			sourceTree = "<group>";
+		};
+		FD09361B1FBEB24500B630D9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FD0936211FBEB2B400B630D9 /* HQCircleViewController.h */,
+				FD0936221FBEB2B400B630D9 /* HQCircleViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FD09361C1FBEB24500B630D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FD09361D1FBEB24500B630D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FD0936241FBEB2EE00B630D9 /* HQCircleTableView.h */,
+				FD0936251FBEB2EE00B630D9 /* HQCircleTableView.m */,
+				FD0936271FBEB50300B630D9 /* HQCircleBaseTableViewCell.h */,
+				FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */,
+				FD09362A1FBEB51100B630D9 /* HQCircleTableViewCell.h */,
+				FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FD0E98ED1F5D221900B16263 /* ReCodeScan */ = {
@@ -2733,6 +2796,7 @@
 		FD94089F1E5A70C300634206 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				FD0936161FBE725E00B630D9 /* UIApplication */,
 				FD8843881FBD3E9A0047C56C /* LocalNotification */,
 				FD8843871FBD3AC20047C56C /* GifTableViewCell */,
 				FD8843861FBD3A8C0047C56C /* ModaPresentAnimation */,
@@ -2761,6 +2825,7 @@
 		FD9408A01E5A70C300634206 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				FD09361A1FBEB24500B630D9 /* Circle */,
 				FD9408B71E5A724800634206 /* View */,
 				FD9408B81E5A724800634206 /* Model */,
 				FD9408B91E5A724800634206 /* Controller */,
@@ -2968,6 +3033,8 @@
 		FD9408B81E5A724800634206 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */,
+				FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2977,8 +3044,6 @@
 			children = (
 				FD9408C31E5A72F200634206 /* HQDiscoverViewController.h */,
 				FD9408C41E5A72F200634206 /* HQDiscoverViewController.m */,
-				FD04841A1EAEEE080042E702 /* TestTableViewController.h */,
-				FD04841B1EAEEE080042E702 /* TestTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3702,6 +3767,7 @@
 				FD7570501EFB714D00CA7112 /* HQWebViewController.m in Sources */,
 				FD3DE7EC1F3BE619002BF6A6 /* HQEdiateImageCutView.m in Sources */,
 				FDA54B0F1FBD6A18003E8EAC /* LocalNotoficationHelper.m in Sources */,
+				FD0936261FBEB2EE00B630D9 /* HQCircleTableView.m in Sources */,
 				FDE5CED81ED81C4F0072882A /* UIApplication+HQExtern.m in Sources */,
 				FD2ED8F41EADA8DA006E585F /* SDImageCache.m in Sources */,
 				FDE5CED21ED817C30072882A /* HQActionSheet.m in Sources */,
@@ -3733,8 +3799,10 @@
 				FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */,
 				FD3E80A51ECE8E3200F3B430 /* HQDownLoadFile.m in Sources */,
 				BAF4A8011E73F11B00653204 /* README.md in Sources */,
+				FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */,
 				FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */,
 				FD6649981EBC2A62005E340B /* YYImage.m in Sources */,
+				FD09362F1FBEC0B800B630D9 /* HQCircleModel.m in Sources */,
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
 				FD42B5E61F09E41C00D6F0C4 /* VisualEffectViewController.m in Sources */,
 				FD28EA731E7B8E3B0077E009 /* HQPickerPreviewController.m in Sources */,
@@ -3836,6 +3904,7 @@
 				FD2476E11E6FA1F20085A23C /* HQChatOtherTextCell.m in Sources */,
 				FD8015B81ED3DBB400BCAFCF /* HQDownLoadTempModel.m in Sources */,
 				BAF4A7FC1E73F11B00653204 /* AFNetworkReachabilityManager.m in Sources */,
+				FD0936231FBEB2B400B630D9 /* HQCircleViewController.m in Sources */,
 				FD80E3521ED6694C00203097 /* UIColor+Extern.m in Sources */,
 				FDD18CF51F131EFA00E260BD /* MASConstraint.m in Sources */,
 				BAF4A8041E73F11B00653204 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -3856,7 +3925,6 @@
 				FDD18CF81F131EFA00E260BD /* MASViewAttribute.m in Sources */,
 				FD7A03E61EA45B0C00BE240B /* HQContractSearchController.m in Sources */,
 				FD7F8F6B1E9DC62500B61D63 /* HQBroswerCollectionViewCell.m in Sources */,
-				FD04841C1EAEEE080042E702 /* TestTableViewController.m in Sources */,
 				FDA1DB9E1E9B776F001A9854 /* DownLoadPercentView.m in Sources */,
 				FD9408A71E5A716500634206 /* HQBaseViewController.m in Sources */,
 				FD61A24C1F0488F500F0830C /* DownLoadBackImageCell.m in Sources */,
@@ -3881,10 +3949,12 @@
 				FD66A3B01EBB1A6900623F34 /* YYTextTransaction.m in Sources */,
 				BAF4A8091E73F11B00653204 /* UIRefreshControl+AFNetworking.m in Sources */,
 				FD1BB10B1EF8CB6A00AEA19B /* HQSearchBar.m in Sources */,
+				FD09362C1FBEB51100B630D9 /* HQCircleTableViewCell.m in Sources */,
 				FD6649A91EBC2A84005E340B /* CALayer+YYWebImage.m in Sources */,
 				FDA54B181FBD6E79003E8EAC /* LocalStatusModel+Action.m in Sources */,
 				FD2476DE1E6FA1D10085A23C /* HQChatMineFileCell.m in Sources */,
 				FD0E98FA1F5D221900B16263 /* HQRQCodeView.m in Sources */,
+				FD0936191FBE728700B630D9 /* ApplicationController.m in Sources */,
 				FD28EA721E7B8E3B0077E009 /* HQVideoPlayerController.m in Sources */,
 				FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */,
 				FD2ED8CF1EAD9780006E585F /* HQChatModel.xcdatamodeld in Sources */,

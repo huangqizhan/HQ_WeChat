@@ -7,7 +7,6 @@
 //
 
 #import "HQDiscoverViewController.h"
-#import "TestTableViewController.h"
 #import "HQTipView.h"
 
 @interface HQDiscoverViewController (){
