@@ -46,6 +46,7 @@
 		FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */; };
 		FD09362C1FBEB51100B630D9 /* HQCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */; };
 		FD09362F1FBEC0B800B630D9 /* HQCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */; };
+		FD0936321FBECA9600B630D9 /* HQCircleContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */; };
 		FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C31F623DBA002C27F2 /* FaceViewController.m */; };
 		FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */; };
 		FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD0E03C81F62408D002C27F2 /* faces5.jpg */; };
@@ -616,6 +617,8 @@
 		FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleTableViewCell.m; sourceTree = "<group>"; };
 		FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleModel.h; sourceTree = "<group>"; };
 		FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleModel.m; sourceTree = "<group>"; };
+		FD0936301FBECA9600B630D9 /* HQCircleContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleContentModel.h; sourceTree = "<group>"; };
+		FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleContentModel.m; sourceTree = "<group>"; };
 		FD0E03C21F623DBA002C27F2 /* FaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceViewController.h; sourceTree = "<group>"; };
 		FD0E03C31F623DBA002C27F2 /* FaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceViewController.m; sourceTree = "<group>"; };
 		FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
@@ -3035,6 +3038,8 @@
 			children = (
 				FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */,
 				FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */,
+				FD0936301FBECA9600B630D9 /* HQCircleContentModel.h */,
+				FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3787,6 +3792,7 @@
 				FD3B4B511EE4E8F800252F92 /* HQRecordingCell.m in Sources */,
 				FD1B09CE1E7FBA150090AB82 /* UIImage+Resize.m in Sources */,
 				FD2CAD3C1EE13C6100FEEC7A /* EMVoiceConverter.mm in Sources */,
+				FD0936321FBECA9600B630D9 /* HQCircleContentModel.m in Sources */,
 				FD66A3A61EBB1A6800623F34 /* YYTextArchiver.m in Sources */,
 				FD1DDF681F26DB0100AAC89D /* HQRefershConst.m in Sources */,
 				FD7570531EFB721500CA7112 /* HQWebProcessView.m in Sources */,
