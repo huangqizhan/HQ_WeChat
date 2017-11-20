@@ -84,17 +84,56 @@
     
 }
 
-
-+ (BOOL)color:(UIColor *)color1 isEqualToColor:(UIColor *)color2 withTolerance:(CGFloat)tolerance {
-    
-    CGFloat r1, g1, b1, a1, r2, g2, b2, a2;
-    [color1 getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
-    [color2 getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
-    return
-    fabs(r1 - r2) <= tolerance &&
-    fabs(g1 - g2) <= tolerance &&
-    fabs(b1 - b2) <= tolerance &&
-    fabs(a1 - a2) <= tolerance;
-}
+//
+//+ (BOOL)color:(UIColor *)color1 isEqualToColor:(UIColor *)color2 withTolerance:(CGFloat)tolerance {
+//    
+//    CGFloat r1, g1, b1, a1, r2, g2, b2, a2;
+//    [color1 getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+//    [color2 getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+//    return
+//    fabs(r1 - r2) <= tolerance &&
+//    fabs(g1 - g2) <= tolerance &&
+//    fabs(b1 - b2) <= tolerance &&
+//    fabs(a1 - a2) <= tolerance;
+//}
+//static BOOL hexStrToRGBA(NSString *str,
+//                         CGFloat *r, CGFloat *g, CGFloat *b, CGFloat *a) {
+//    str = [[str stringByTrim] uppercaseString];
+//    if ([str hasPrefix:@"#"]) {
+//        str = [str substringFromIndex:1];
+//    } else if ([str hasPrefix:@"0X"]) {
+//        str = [str substringFromIndex:2];
+//    }
+//    
+//    NSUInteger length = [str length];
+//    //         RGB            RGBA          RRGGBB        RRGGBBAA
+//    if (length != 3 && length != 4 && length != 6 && length != 8) {
+//        return NO;
+//    }
+//    
+//    //RGB,RGBA,RRGGBB,RRGGBBAA
+//    if (length < 5) {
+//        *r = hexStrToInt([str substringWithRange:NSMakeRange(0, 1)]) / 255.0f;
+//        *g = hexStrToInt([str substringWithRange:NSMakeRange(1, 1)]) / 255.0f;
+//        *b = hexStrToInt([str substringWithRange:NSMakeRange(2, 1)]) / 255.0f;
+//        if (length == 4)  *a = hexStrToInt([str substringWithRange:NSMakeRange(3, 1)]) / 255.0f;
+//        else *a = 1;
+//    } else {
+//        *r = hexStrToInt([str substringWithRange:NSMakeRange(0, 2)]) / 255.0f;
+//        *g = hexStrToInt([str substringWithRange:NSMakeRange(2, 2)]) / 255.0f;
+//        *b = hexStrToInt([str substringWithRange:NSMakeRange(4, 2)]) / 255.0f;
+//        if (length == 8) *a = hexStrToInt([str substringWithRange:NSMakeRange(6, 2)]) / 255.0f;
+//        else *a = 1;
+//    }
+//    return YES;
+//}
+//
+//+ (UIColor *)colorWithHexString:(NSString *)hexStr {
+//    CGFloat r, g, b, a;
+//    if (hexStrToRGBA(hexStr, &r, &g, &b, &a)) {
+//        return [UIColor colorWithRed:r green:g blue:b alpha:a];
+//    }
+//    return nil;
+//}
 
 @end

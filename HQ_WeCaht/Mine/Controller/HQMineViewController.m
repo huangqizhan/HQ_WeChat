@@ -123,7 +123,7 @@
     
     UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(headImage.right +20, 25, App_Frame_Width/2.0, 30)];
     contentLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *content = @"HQ_Wchat  for Study";
+    NSString *content = @"HQ_WeChat  for Study";
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                            [UIFont fontWithName:@"Helvetica-Bold" size:16], NSFontAttributeName, nil];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:content attributes:attrs ];

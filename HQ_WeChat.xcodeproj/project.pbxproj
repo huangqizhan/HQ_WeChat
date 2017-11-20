@@ -45,8 +45,19 @@
 		FD0936261FBEB2EE00B630D9 /* HQCircleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936251FBEB2EE00B630D9 /* HQCircleTableView.m */; };
 		FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */; };
 		FD09362C1FBEB51100B630D9 /* HQCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */; };
-		FD09362F1FBEC0B800B630D9 /* HQCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */; };
-		FD0936321FBECA9600B630D9 /* HQCircleContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */; };
+		FD0936361FC2638200B630D9 /* AsySellTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936351FC2638200B630D9 /* AsySellTicketsViewController.m */; };
+		FD09363B1FC27C8500B630D9 /* HQCircleContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936371FC27C8500B630D9 /* HQCircleContentModel.m */; };
+		FD09363C1FC27C8500B630D9 /* HQCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD09363A1FC27C8500B630D9 /* HQCircleModel.m */; };
+		FD0936471FC2860300B630D9 /* weibo_0.json in Resources */ = {isa = PBXBuildFile; fileRef = FD09363F1FC2860200B630D9 /* weibo_0.json */; };
+		FD0936481FC2860300B630D9 /* weibo_1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936401FC2860200B630D9 /* weibo_1.json */; };
+		FD0936491FC2860300B630D9 /* weibo_2.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936411FC2860300B630D9 /* weibo_2.json */; };
+		FD09364A1FC2860300B630D9 /* weibo_3.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936421FC2860300B630D9 /* weibo_3.json */; };
+		FD09364B1FC2860300B630D9 /* weibo_4.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936431FC2860300B630D9 /* weibo_4.json */; };
+		FD09364C1FC2860300B630D9 /* weibo_5.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936441FC2860300B630D9 /* weibo_5.json */; };
+		FD09364D1FC2860300B630D9 /* weibo_6.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936451FC2860300B630D9 /* weibo_6.json */; };
+		FD09364E1FC2860300B630D9 /* weibo_7.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0936461FC2860300B630D9 /* weibo_7.json */; };
+		FD0936511FC2A0EC00B630D9 /* HQCircleContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936501FC2A0EC00B630D9 /* HQCircleContentView.m */; };
+		FD0936561FC2C28D00B630D9 /* CToolsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0936551FC2C28D00B630D9 /* CToolsHelper.m */; };
 		FD0E03C41F623DBA002C27F2 /* FaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C31F623DBA002C27F2 /* FaceViewController.m */; };
 		FD0E03C71F623F1D002C27F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */; };
 		FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD0E03C81F62408D002C27F2 /* faces5.jpg */; };
@@ -615,10 +626,24 @@
 		FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleBaseTableViewCell.m; sourceTree = "<group>"; };
 		FD09362A1FBEB51100B630D9 /* HQCircleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleTableViewCell.h; sourceTree = "<group>"; };
 		FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleTableViewCell.m; sourceTree = "<group>"; };
-		FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleModel.h; sourceTree = "<group>"; };
-		FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleModel.m; sourceTree = "<group>"; };
-		FD0936301FBECA9600B630D9 /* HQCircleContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleContentModel.h; sourceTree = "<group>"; };
-		FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleContentModel.m; sourceTree = "<group>"; };
+		FD0936341FC2638200B630D9 /* AsySellTicketsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsySellTicketsViewController.h; sourceTree = "<group>"; };
+		FD0936351FC2638200B630D9 /* AsySellTicketsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsySellTicketsViewController.m; sourceTree = "<group>"; };
+		FD0936371FC27C8500B630D9 /* HQCircleContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCircleContentModel.m; sourceTree = "<group>"; };
+		FD0936381FC27C8500B630D9 /* HQCircleContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCircleContentModel.h; sourceTree = "<group>"; };
+		FD0936391FC27C8500B630D9 /* HQCircleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCircleModel.h; sourceTree = "<group>"; };
+		FD09363A1FC27C8500B630D9 /* HQCircleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQCircleModel.m; sourceTree = "<group>"; };
+		FD09363F1FC2860200B630D9 /* weibo_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_0.json; sourceTree = "<group>"; };
+		FD0936401FC2860200B630D9 /* weibo_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_1.json; sourceTree = "<group>"; };
+		FD0936411FC2860300B630D9 /* weibo_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_2.json; sourceTree = "<group>"; };
+		FD0936421FC2860300B630D9 /* weibo_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_3.json; sourceTree = "<group>"; };
+		FD0936431FC2860300B630D9 /* weibo_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_4.json; sourceTree = "<group>"; };
+		FD0936441FC2860300B630D9 /* weibo_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_5.json; sourceTree = "<group>"; };
+		FD0936451FC2860300B630D9 /* weibo_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_6.json; sourceTree = "<group>"; };
+		FD0936461FC2860300B630D9 /* weibo_7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_7.json; sourceTree = "<group>"; };
+		FD09364F1FC2A0EC00B630D9 /* HQCircleContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQCircleContentView.h; sourceTree = "<group>"; };
+		FD0936501FC2A0EC00B630D9 /* HQCircleContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQCircleContentView.m; sourceTree = "<group>"; };
+		FD0936541FC2C28D00B630D9 /* CToolsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CToolsHelper.h; sourceTree = "<group>"; };
+		FD0936551FC2C28D00B630D9 /* CToolsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CToolsHelper.m; sourceTree = "<group>"; };
 		FD0E03C21F623DBA002C27F2 /* FaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceViewController.h; sourceTree = "<group>"; };
 		FD0E03C31F623DBA002C27F2 /* FaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceViewController.m; sourceTree = "<group>"; };
 		FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
@@ -1621,6 +1646,7 @@
 		FD09361A1FBEB24500B630D9 /* Circle */ = {
 			isa = PBXGroup;
 			children = (
+				FD09363E1FC2860200B630D9 /* datas */,
 				FD09361B1FBEB24500B630D9 /* Controllers */,
 				FD09361C1FBEB24500B630D9 /* Models */,
 				FD09361D1FBEB24500B630D9 /* View */,
@@ -1640,6 +1666,10 @@
 		FD09361C1FBEB24500B630D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FD0936381FC27C8500B630D9 /* HQCircleContentModel.h */,
+				FD0936371FC27C8500B630D9 /* HQCircleContentModel.m */,
+				FD0936391FC27C8500B630D9 /* HQCircleModel.h */,
+				FD09363A1FC27C8500B630D9 /* HQCircleModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1653,8 +1683,43 @@
 				FD0936281FBEB50300B630D9 /* HQCircleBaseTableViewCell.m */,
 				FD09362A1FBEB51100B630D9 /* HQCircleTableViewCell.h */,
 				FD09362B1FBEB51100B630D9 /* HQCircleTableViewCell.m */,
+				FD09364F1FC2A0EC00B630D9 /* HQCircleContentView.h */,
+				FD0936501FC2A0EC00B630D9 /* HQCircleContentView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FD0936331FC2633D00B630D9 /* 模拟多线程买票 */ = {
+			isa = PBXGroup;
+			children = (
+				FD0936341FC2638200B630D9 /* AsySellTicketsViewController.h */,
+				FD0936351FC2638200B630D9 /* AsySellTicketsViewController.m */,
+			);
+			path = "模拟多线程买票";
+			sourceTree = "<group>";
+		};
+		FD09363E1FC2860200B630D9 /* datas */ = {
+			isa = PBXGroup;
+			children = (
+				FD09363F1FC2860200B630D9 /* weibo_0.json */,
+				FD0936401FC2860200B630D9 /* weibo_1.json */,
+				FD0936411FC2860300B630D9 /* weibo_2.json */,
+				FD0936421FC2860300B630D9 /* weibo_3.json */,
+				FD0936431FC2860300B630D9 /* weibo_4.json */,
+				FD0936441FC2860300B630D9 /* weibo_5.json */,
+				FD0936451FC2860300B630D9 /* weibo_6.json */,
+				FD0936461FC2860300B630D9 /* weibo_7.json */,
+			);
+			path = datas;
+			sourceTree = "<group>";
+		};
+		FD0936531FC2C22100B630D9 /* CTools */ = {
+			isa = PBXGroup;
+			children = (
+				FD0936541FC2C28D00B630D9 /* CToolsHelper.h */,
+				FD0936551FC2C28D00B630D9 /* CToolsHelper.m */,
+			);
+			path = CTools;
 			sourceTree = "<group>";
 		};
 		FD0E98ED1F5D221900B16263 /* ReCodeScan */ = {
@@ -2799,6 +2864,7 @@
 		FD94089F1E5A70C300634206 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				FD0936331FC2633D00B630D9 /* 模拟多线程买票 */,
 				FD0936161FBE725E00B630D9 /* UIApplication */,
 				FD8843881FBD3E9A0047C56C /* LocalNotification */,
 				FD8843871FBD3AC20047C56C /* GifTableViewCell */,
@@ -2849,6 +2915,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD0936531FC2C22100B630D9 /* CTools */,
 				FD9E33B81FA8235100783F8E /* RunTimeTest */,
 				FD7358281F96F72F0042B44D /* ARTest */,
 				FDE441A91F67B5B30079BF32 /* sqliteDemo */,
@@ -3036,10 +3103,6 @@
 		FD9408B81E5A724800634206 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FD09362D1FBEC0B800B630D9 /* HQCircleModel.h */,
-				FD09362E1FBEC0B800B630D9 /* HQCircleModel.m */,
-				FD0936301FBECA9600B630D9 /* HQCircleContentModel.h */,
-				FD0936311FBECA9600B630D9 /* HQCircleContentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3509,6 +3572,7 @@
 				FD8DD7CD1EB81D54002125CD /* 53.gif in Resources */,
 				FD2653761EE92030006BAB5E /* Tuzki_11.gif in Resources */,
 				FD8DD7D41EB81D54002125CD /* 46.gif in Resources */,
+				FD09364A1FC2860300B630D9 /* weibo_3.json in Resources */,
 				FD8DD7D51EB81D54002125CD /* 45.gif in Resources */,
 				FD6649E21EBC6EFF005E340B /* g16.gif in Resources */,
 				FD8DD7D31EB81D54002125CD /* 47.gif in Resources */,
@@ -3519,11 +3583,13 @@
 				FD8DD7CB1EB81D54002125CD /* 55.gif in Resources */,
 				FD8DD7DA1EB81D54002125CD /* 40.gif in Resources */,
 				FD8DD7D91EB81D54002125CD /* 41.gif in Resources */,
+				FD09364E1FC2860300B630D9 /* weibo_7.json in Resources */,
 				FD8DD7DC1EB81D54002125CD /* 38.gif in Resources */,
 				FDD8FDAF1EB0411E002D1C44 /* ChatImages.xcassets in Resources */,
 				FD42B5EE1F0A2AEE00D6F0C4 /* loading.gif in Resources */,
 				FD42B5F01F0A2C3000D6F0C4 /* Discover.xcassets in Resources */,
 				FD4769051E665DF400CEC7A6 /* mayun.jpg in Resources */,
+				FD0936471FC2860300B630D9 /* weibo_0.json in Resources */,
 				FD26537D1EE92030006BAB5E /* Tuzki_4.gif in Resources */,
 				FDD18CD71F131D4300E260BD /* MBProgressHUD.bundle in Resources */,
 				FD8DD7E01EB81D54002125CD /* 34.gif in Resources */,
@@ -3543,6 +3609,7 @@
 				FD77A34B1EC58F0A0017B41A /* 005@2x.gif in Resources */,
 				FD8DD7CE1EB81D54002125CD /* 52.gif in Resources */,
 				FD3E809A1ECE7E9800F3B430 /* m1.mp4 in Resources */,
+				FD0936491FC2860300B630D9 /* weibo_2.json in Resources */,
 				FD2653721EE92030006BAB5E /* Tuzki_15.gif in Resources */,
 				FD8DD7BC1EB81D54002125CD /* 70.gif in Resources */,
 				FD77A34F1EC58F0A0017B41A /* 001@2x.gif in Resources */,
@@ -3551,6 +3618,7 @@
 				FDD18CF31F131EFA00E260BD /* Info.plist in Resources */,
 				FD6649DD1EBC6EFF005E340B /* g11.gif in Resources */,
 				FD20EEE81F428E5A0067152E /* TestView.xib in Resources */,
+				FD09364D1FC2860300B630D9 /* weibo_6.json in Resources */,
 				FD2653771EE92030006BAB5E /* Tuzki_10.gif in Resources */,
 				FD8DD7C01EB81D54002125CD /* 66.gif in Resources */,
 				FD8DD7D01EB81D54002125CD /* 50.gif in Resources */,
@@ -3571,6 +3639,7 @@
 				FD8DD7F01EB81D54002125CD /* 18.gif in Resources */,
 				FD7A03E31EA4514A00BE240B /* Contacts.xcassets in Resources */,
 				FD8DD7E11EB81D54002125CD /* 33.gif in Resources */,
+				FD09364C1FC2860300B630D9 /* weibo_5.json in Resources */,
 				FDD18D081F13218800E260BD /* 2.gif in Resources */,
 				FD8DD7EA1EB81D54002125CD /* 24.gif in Resources */,
 				FD8DD7D71EB81D54002125CD /* 43.gif in Resources */,
@@ -3589,6 +3658,7 @@
 				FD0E03C91F62408D002C27F2 /* faces5.jpg in Resources */,
 				FD8DD7CA1EB81D54002125CD /* 56.gif in Resources */,
 				FD8DD7CC1EB81D54002125CD /* 54.gif in Resources */,
+				FD09364B1FC2860300B630D9 /* weibo_4.json in Resources */,
 				FD26537F1EE92030006BAB5E /* Tuzki_2.gif in Resources */,
 				FD8DD7F21EB81D54002125CD /* 16.gif in Resources */,
 				FD8DD7D61EB81D54002125CD /* 44.gif in Resources */,
@@ -3608,6 +3678,7 @@
 				FD8DD7BB1EB81D54002125CD /* 71.gif in Resources */,
 				FD055AA51F412907001850FE /* IMG_2750.jpg in Resources */,
 				FD8DD7BA1EB81D54002125CD /* 72.gif in Resources */,
+				FD0936481FC2860300B630D9 /* weibo_1.json in Resources */,
 				FD8DD7E41EB81D54002125CD /* 30.gif in Resources */,
 				FD2653781EE92030006BAB5E /* Tuzki_9.gif in Resources */,
 				FD8DD7C91EB81D54002125CD /* 57.gif in Resources */,
@@ -3790,9 +3861,10 @@
 				FDDEE3D81E655B7D007E9AF9 /* NSString+MJExtension.m in Sources */,
 				FDA54B0C1FBD5D2C003E8EAC /* StudyViewController.m in Sources */,
 				FD3B4B511EE4E8F800252F92 /* HQRecordingCell.m in Sources */,
+				FD0936561FC2C28D00B630D9 /* CToolsHelper.m in Sources */,
 				FD1B09CE1E7FBA150090AB82 /* UIImage+Resize.m in Sources */,
 				FD2CAD3C1EE13C6100FEEC7A /* EMVoiceConverter.mm in Sources */,
-				FD0936321FBECA9600B630D9 /* HQCircleContentModel.m in Sources */,
+				FD09363B1FC27C8500B630D9 /* HQCircleContentModel.m in Sources */,
 				FD66A3A61EBB1A6800623F34 /* YYTextArchiver.m in Sources */,
 				FD1DDF681F26DB0100AAC89D /* HQRefershConst.m in Sources */,
 				FD7570531EFB721500CA7112 /* HQWebProcessView.m in Sources */,
@@ -3801,6 +3873,7 @@
 				FDCBB5371EFBBA6C00D6F573 /* WebViewJavascriptBridge_JS.m in Sources */,
 				FD9408E81E5A789A00634206 /* AppDelegate.m in Sources */,
 				FD2ED9011EADA8DA006E585F /* UIView+WebCacheOperation.m in Sources */,
+				FD0936361FC2638200B630D9 /* AsySellTicketsViewController.m in Sources */,
 				FD66A39E1EBB1A6800623F34 /* YYTextDebugOption.m in Sources */,
 				FD6D888F1E76743D00794E7F /* HQTextView.m in Sources */,
 				FD3E80A51ECE8E3200F3B430 /* HQDownLoadFile.m in Sources */,
@@ -3808,7 +3881,6 @@
 				FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */,
 				FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */,
 				FD6649981EBC2A62005E340B /* YYImage.m in Sources */,
-				FD09362F1FBEC0B800B630D9 /* HQCircleModel.m in Sources */,
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
 				FD42B5E61F09E41C00D6F0C4 /* VisualEffectViewController.m in Sources */,
 				FD28EA731E7B8E3B0077E009 /* HQPickerPreviewController.m in Sources */,
@@ -3909,6 +3981,7 @@
 				FDDEE3D51E655B7D007E9AF9 /* NSObject+MJCoding.m in Sources */,
 				FD2476E11E6FA1F20085A23C /* HQChatOtherTextCell.m in Sources */,
 				FD8015B81ED3DBB400BCAFCF /* HQDownLoadTempModel.m in Sources */,
+				FD09363C1FC27C8500B630D9 /* HQCircleModel.m in Sources */,
 				BAF4A7FC1E73F11B00653204 /* AFNetworkReachabilityManager.m in Sources */,
 				FD0936231FBEB2B400B630D9 /* HQCircleViewController.m in Sources */,
 				FD80E3521ED6694C00203097 /* UIColor+Extern.m in Sources */,
@@ -3933,6 +4006,7 @@
 				FD7F8F6B1E9DC62500B61D63 /* HQBroswerCollectionViewCell.m in Sources */,
 				FDA1DB9E1E9B776F001A9854 /* DownLoadPercentView.m in Sources */,
 				FD9408A71E5A716500634206 /* HQBaseViewController.m in Sources */,
+				FD0936511FC2A0EC00B630D9 /* HQCircleContentView.m in Sources */,
 				FD61A24C1F0488F500F0830C /* DownLoadBackImageCell.m in Sources */,
 				FDA1DB8E1E9B24F0001A9854 /* UIViewController+HQTranstion.m in Sources */,
 				FD9409081E5A7D0C00634206 /* UIGestureRecognizer+YYAdd.m in Sources */,
