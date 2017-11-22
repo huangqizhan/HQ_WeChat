@@ -522,6 +522,7 @@
 		FDE9A4FB1ECD9C45008C2570 /* NSStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE9A4FA1ECD9C45008C2570 /* NSStreamViewController.m */; };
 		FDEE9E9C1F14A8AA008E04CB /* HQMapSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDEE9E9B1F14A8AA008E04CB /* HQMapSearchController.m */; };
 		FDF144D21E8D005800A6B94C /* UIMenuController+LongPress.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF144D11E8D005800A6B94C /* UIMenuController+LongPress.m */; };
+		FDFCA3F41FC522CF002E531A /* HQImageStretchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFCA3F31FC522CF002E531A /* HQImageStretchController.m */; };
 		FDFCB3ED1EFA57C3008B7F07 /* HQSearchResultContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFCB3EC1EFA57C3008B7F07 /* HQSearchResultContentCell.m */; };
 		FDFF3B611FAFEF39001B2231 /* HQConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF3B601FAFEF39001B2231 /* HQConstant.m */; };
 /* End PBXBuildFile section */
@@ -1414,6 +1415,8 @@
 		FDEE9E9B1F14A8AA008E04CB /* HQMapSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQMapSearchController.m; sourceTree = "<group>"; };
 		FDF144D01E8D005800A6B94C /* UIMenuController+LongPress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIMenuController+LongPress.h"; sourceTree = "<group>"; };
 		FDF144D11E8D005800A6B94C /* UIMenuController+LongPress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+LongPress.m"; sourceTree = "<group>"; };
+		FDFCA3F21FC522CF002E531A /* HQImageStretchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQImageStretchController.h; sourceTree = "<group>"; };
+		FDFCA3F31FC522CF002E531A /* HQImageStretchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQImageStretchController.m; sourceTree = "<group>"; };
 		FDFCB3EB1EFA57C3008B7F07 /* HQSearchResultContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQSearchResultContentCell.h; sourceTree = "<group>"; };
 		FDFCB3EC1EFA57C3008B7F07 /* HQSearchResultContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQSearchResultContentCell.m; sourceTree = "<group>"; };
 		FDFF3B5F1FAFEF39001B2231 /* HQConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQConstant.h; sourceTree = "<group>"; };
@@ -1689,13 +1692,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		FD0936331FC2633D00B630D9 /* 模拟多线程买票 */ = {
+		FD0936331FC2633D00B630D9 /* simlateSellStoket */ = {
 			isa = PBXGroup;
 			children = (
 				FD0936341FC2638200B630D9 /* AsySellTicketsViewController.h */,
 				FD0936351FC2638200B630D9 /* AsySellTicketsViewController.m */,
 			);
-			path = "模拟多线程买票";
+			path = simlateSellStoket;
 			sourceTree = "<group>";
 		};
 		FD09363E1FC2860200B630D9 /* datas */ = {
@@ -2864,7 +2867,8 @@
 		FD94089F1E5A70C300634206 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				FD0936331FC2633D00B630D9 /* 模拟多线程买票 */,
+				FDFCA3F11FC522A0002E531A /* stretchImage */,
+				FD0936331FC2633D00B630D9 /* simlateSellStoket */,
 				FD0936161FBE725E00B630D9 /* UIApplication */,
 				FD8843881FBD3E9A0047C56C /* LocalNotification */,
 				FD8843871FBD3AC20047C56C /* GifTableViewCell */,
@@ -3420,6 +3424,15 @@
 			path = Refersh;
 			sourceTree = "<group>";
 		};
+		FDFCA3F11FC522A0002E531A /* stretchImage */ = {
+			isa = PBXGroup;
+			children = (
+				FDFCA3F21FC522CF002E531A /* HQImageStretchController.h */,
+				FDFCA3F31FC522CF002E531A /* HQImageStretchController.m */,
+			);
+			path = stretchImage;
+			sourceTree = "<group>";
+		};
 		FDFCB3EA1EFA5790008B7F07 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3912,6 +3925,7 @@
 				FD2476E41E6FA2100085A23C /* HQChatOtherImageCell.m in Sources */,
 				FD6649961EBC2A62005E340B /* YYAnimatedImageView.m in Sources */,
 				FD2476CA1E6F9D260085A23C /* HQChatMineBaseCell.m in Sources */,
+				FDFCA3F41FC522CF002E531A /* HQImageStretchController.m in Sources */,
 				FDDEE3D21E655B7D007E9AF9 /* MJPropertyKey.m in Sources */,
 				FDDEE3D71E655B7D007E9AF9 /* NSObject+MJProperty.m in Sources */,
 				FD449DFC1ECAE4760083FE1F /* DispachViewController.m in Sources */,
