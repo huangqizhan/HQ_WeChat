@@ -10,4 +10,5 @@
 
 @interface RunTimeViewController : UIViewController
 
+- (void)test;
 @end

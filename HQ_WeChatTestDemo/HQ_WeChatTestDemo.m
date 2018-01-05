@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+//#import "RunTimeViewController.h"
+
 
 @interface HQ_WeChatTestDemo : XCTestCase
 
@@ -17,6 +19,8 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+//    RunTimeViewController *vc = [RunTimeViewController new];
+//    [vc test];
 }
 
 - (void)tearDown {

@@ -7,6 +7,7 @@
 //
 
 #import "StudyViewController.h"
+#import "RunTimeModel.h"
 
 @interface StudyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -29,7 +30,12 @@
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     [self.view addSubview:_tableView];
-
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ceshi" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)];
+}
+- (void)testAction:(UIBarButtonItem *)sender{
+    RunTimeModel *model = [RunTimeModel new];
+    NSLog(@"first = %@",[model firstSay]);
+    NSLog(@"second = %@",[model secondSay]);
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

@@ -56,6 +56,7 @@
             NSData *data = [NSData dataWithBytes:(void *)buf length:blength];
             
 //            NSString *string = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"thread = %@",[NSThread currentThread]);
             NSLog(@"%ld",data.length);
         }
             break;

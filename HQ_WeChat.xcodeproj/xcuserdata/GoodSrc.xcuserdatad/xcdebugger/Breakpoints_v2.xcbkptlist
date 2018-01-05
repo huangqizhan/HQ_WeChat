@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HQ_WeChatTestDemo/HQ_WeChatTestDemo.m"
-            timestampString = "531124459.624696"
+            filePath = "HQ_WeCaht/Common/RunTimeTest/Message.m"
+            timestampString = "533203910.985683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "-setUp"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-forwardingTargetForSelector:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HQ_WeChatTestDemo/HQ_WeChatTestDemo.m"
-            timestampString = "531124459.62489"
+            filePath = "HQ_WeCaht/Common/RunTimeTest/Message.m"
+            timestampString = "533203910.990352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "-tearDown"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-methodSignatureForSelector:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,29 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HQ_WeChatTestDemo/HQ_WeChatTestDemo.m"
-            timestampString = "531124459.625001"
+            filePath = "HQ_WeCaht/Common/RunTimeTest/Message.m"
+            timestampString = "533203910.990766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-testPerformanceExample"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HQ_WeChatTestDemo/HQ_WeChatTestDemo.m"
-            timestampString = "531124459.625089"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-testExample"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-forwardInvocation:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
