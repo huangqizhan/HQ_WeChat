@@ -22,7 +22,7 @@
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:16.0];
     [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
-    self.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,NSFontAttributeName,[UIFont fontWithName:@"Arial" size:18], nil];
+//    self.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,NSFontAttributeName,[UIFont fontWithName:@"Arial" size:18], nil];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage gxz_imageWithColor:XZColor(43, 45, 40)] forBarMetrics:UIBarMetricsDefault];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
