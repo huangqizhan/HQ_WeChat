@@ -47,6 +47,8 @@
     [msgBut setTitle:@"msg" forState:UIControlStateNormal];
     [msgBut addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msgBut];
+    
+    /////1234342546
 
 }
 - (void)viewWillAppear:(BOOL)animated{
