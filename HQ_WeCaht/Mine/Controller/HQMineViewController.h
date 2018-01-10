@@ -11,3 +11,10 @@
 @interface HQMineViewController : HQBaseViewController
 
 @end
+
+
+
+
+@interface MineHeadCell : UITableViewCell
+
+@end

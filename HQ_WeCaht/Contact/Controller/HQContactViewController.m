@@ -36,10 +36,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton *butt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [butt addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [butt setTitle:@"test" forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:butt];
+//    UIButton *butt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+//    [butt addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [butt setTitle:@"test" forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:butt];
     [self creatSubViews];
 }
 - (void)loadDataFromDB{
@@ -229,7 +229,7 @@
     self.definesPresentationContext = YES;
     searchController.view.backgroundColor = [UIColor whiteColor];
     searchController.hidesNavigationBarDuringPresentation = YES;
-    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64);
+    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-64-49);
 }
 - (void)willPresentSearchController:(UISearchController *)searchController{
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
@@ -298,6 +298,9 @@
         tableView.sectionIndexColor = [UIColor blackColor];
         tableView.sectionIndexBackgroundColor = [UIColor clearColor];
         [self.view addSubview:tableView];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         _tableView = tableView;
         [_tableView registerClass:[HQContractTableViewCell class] forCellReuseIdentifier:@"HQContractTableViewCellId"];
     }

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HQAttrubuteTextLabel.h"
+
 
 @class  ChatMessageModel ;
 
@@ -15,7 +17,7 @@
 @property (nonatomic,strong) ChatMessageModel *messageModel;
 
 
-- (void)showInWindown;
+- (void)showInWindownWithCallBack:(void(^)(HQAttrubuteTextData *data))tapAction;
 
 
 @end

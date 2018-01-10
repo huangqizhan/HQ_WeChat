@@ -34,7 +34,7 @@
             [imageView performSelector:@selector(playCurrnetGifAnnimation)];
         }
     } @catch (NSException *exception) {
-        
+        NSLog(@"exception = %@",exception);
     }
 }
 - (void)stopDisplayLink{

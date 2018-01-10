@@ -7,29 +7,15 @@
 //
 
 #import "HQMineViewController.h"
-#import "TranstionAnimationViewController.h"
-#import "ProcessController.h"
-#import "GifTempViewController.h"
-#import "DynamicTextViewController.h"
-#import "DispachViewController.h"
-#import "NSStreamViewController.h"
-#import "HQWifiViewController.h"
-#import "HQDownLoadFileController.h"
-#import "VisualEffectViewController.h"
-#import "SendMessageTestViewController.h"
-#import "RefershViewController.h"
-#import "HQEdiateImageController.h"
-#import "GestureViewController.h"
-#import "PoperViewController.h"
-#import "ReCodeTestController.h"
-
-
+#import "SetViewController.h"
+#import "StudyViewController.h"
 
 
 @interface HQMineViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
 }
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -37,119 +23,114 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-64) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-64-49) style:UITableViewStyleGrouped];
+    [_tableView registerClass:[MineHeadCell class] forCellReuseIdentifier:@"MineHeadCell"];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self.view addSubview:_tableView];
-    
-
-    
     
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 15;
+    if (section == 0) {
+        return 1;
+    }else{
+        return 2;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        return 80;
+    }else{
+        return 44;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10.0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return CGFLOAT_MIN;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return nil;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        MineHeadCell *headCell = [tableView dequeueReusableCellWithIdentifier:@"MineHeadCell"];
+        return headCell;
+    }
     static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"customer process view";
-    }else if (indexPath.row == 1){
-        cell.textLabel.text = @"customer transitionAnimation";
-    }else if (indexPath.row == 2){
-        cell.textLabel.text = @"giftest";
-    }else if (indexPath.row == 3){
-        cell.textLabel.text = @"imageFuzzy";
-    }else if (indexPath.row == 4){
-        cell.textLabel.text = @"dispach";
-    }else if (indexPath.row == 5){
-        cell.textLabel.text = @"NSStream";
-    }else if (indexPath.row == 6){
-        cell.textLabel.text = @"WIFI";
-    }else if (indexPath.row == 7){
-        cell.textLabel.text = @"downLoadTest";
-    }else if (indexPath.row == 8){
-        cell.textLabel.text = @"visualEffectView";
-    }else if (indexPath.row == 9){
-        cell.textLabel.text = @"distributionMessage";
-    }else if (indexPath.row == 10){
-        cell.textLabel.text = @"RefershViewController";
-    }else if (indexPath.row == 11){
-        cell.textLabel.text = @"HQEdiateImageController";
-    }else if (indexPath.row == 12){
-        cell.textLabel.text = @"gestureView";
-    }else if (indexPath.row == 13){
-        cell.textLabel.text = @"properView";
+        cell.textLabel.text = @"Set";
     }else{
-        cell.textLabel.text = @"ReCodeTestController";
+        cell.textLabel.text = @"Study";
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        ProcessController *processVC = [[ProcessController alloc] init];
-        [self.navigationController pushViewController:processVC animated:YES];
-    }else if (indexPath.row == 1){
-        TranstionAnimationViewController *transVC = [[TranstionAnimationViewController alloc] init];
-        [self.navigationController pushViewController:transVC animated:YES];
-    }else if (indexPath.row == 2){
-        GifTempViewController *gifVC = [[GifTempViewController alloc] init];
-        [self.navigationController pushViewController:gifVC animated:YES];
-    }else if (indexPath.row == 3){
-        DynamicTextViewController *textViewVC = [[DynamicTextViewController alloc] init];
-        [self.navigationController pushViewController:textViewVC animated:YES];
-    }else if (indexPath.row == 4){
-        DispachViewController *disVC  = [[DispachViewController alloc] init];
-        [self.navigationController pushViewController:disVC animated:YES];
-    }else if (indexPath.row == 5){
-        NSStreamViewController *vc = [[NSStreamViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
-        HQWifiViewController *wifiVC = [[HQWifiViewController alloc] init];
-        [self.navigationController pushViewController:wifiVC animated:YES];
-    }else if (indexPath.row == 7){
-        HQDownLoadFileController *downLoadVc =[[HQDownLoadFileController alloc] init];
-        [self.navigationController pushViewController:downLoadVc animated:YES];
-    }else if (indexPath.row == 8){
-        VisualEffectViewController *effectView = [[VisualEffectViewController alloc] init];
-        [self.navigationController pushViewController:effectView animated:YES];
-    }else if (indexPath.row == 9){
-        SendMessageTestViewController *sendMsgVC = [[SendMessageTestViewController alloc] init];
-        [self.navigationController pushViewController:sendMsgVC animated:YES];
-    }else if (indexPath.row == 10){
-        RefershViewController *refershVC  = [[RefershViewController alloc] init];
-        [self.navigationController pushViewController:refershVC animated:YES];
-    }else if (indexPath.row == 11){
-        HQEdiateImageController *ediateImageVC = [[HQEdiateImageController alloc] init];
-        [ediateImageVC setCallBackImageAfterEdiate:^(UIImage *image){
-            
-        }];
-        [self.navigationController presentViewController:ediateImageVC animated:NO completion:nil];
-    }else if (indexPath.row == 12){
-        GestureViewController *gestureVC = [[GestureViewController alloc] init];
-        [self.navigationController pushViewController:gestureVC animated:YES];
-    }else if (indexPath.row == 13){
-        PoperViewController *properVC = [[PoperViewController alloc] init];
-        [self.navigationController pushViewController:properVC animated:YES];
-    }else{
-        ReCodeTestController *recodeVC = [[ReCodeTestController alloc] init];
-        [self.navigationController pushViewController:recodeVC animated:YES];
+    if (indexPath.section) {
+        if (indexPath.row == 0) {
+            SetViewController *setvc = [SetViewController new];
+            [self.navigationController pushViewController:setvc animated:YES];
+        }else{
+            StudyViewController *studyVC = [StudyViewController new];
+            [self.navigationController pushViewController:studyVC animated:YES];
+        }
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+@end
+
+
+@implementation  MineHeadCell
+
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.selectionStyle  = UITableViewCellSelectionStyleNone;
+        [self createSubViews];
+    }
+    return self;
+}
+- (void)createSubViews{
+    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
+    headImage.layer.masksToBounds = YES;
+    headImage.layer.cornerRadius = 5.0;
+    headImage.backgroundColor = [UIColor blackColor];
+    [self.contentView addSubview:headImage];
+    
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(headImage.right +20, 25, App_Frame_Width/2.0, 30)];
+    contentLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *content = @"HQ_WeChat  for Study";
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [UIFont fontWithName:@"Helvetica-Bold" size:16], NSFontAttributeName, nil];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:content attributes:attrs ];
+    contentLabel.attributedText = attStr;
+    [self.contentView addSubview:contentLabel];
+    
+}
+
 
 @end

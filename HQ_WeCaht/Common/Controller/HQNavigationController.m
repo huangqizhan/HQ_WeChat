@@ -8,12 +8,19 @@
 
 #import "HQNavigationController.h"
 
-@interface HQNavigationController ()
+@interface HQNavigationController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @end
 
 @implementation HQNavigationController
 
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        self.interactivePopGestureRecognizer.delegate   = self;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -63,7 +70,9 @@
     }
     [super pushViewController:viewController animated:animated];
 }
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

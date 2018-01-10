@@ -17,7 +17,6 @@
                                           metadataObjectsDelegate:(id<AVCaptureMetadataOutputObjectsDelegate>)metadataObjectsDelegate {
     NSError *error = nil;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
-    
     if (error){
         NSLog(@"摄像头不可用-%@", error.localizedDescription);
         return nil;
@@ -76,7 +75,10 @@
     }
     //识别二维码
     if (availableQRCodeType) {
-        [output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
+        [output setMetadataObjectTypes:@[AVMetadataObjectTypeEAN13Code,
+                                         AVMetadataObjectTypeEAN8Code,
+                                         AVMetadataObjectTypeCode128Code,
+                                         AVMetadataObjectTypeQRCode]];   ////二维码
     }else {
         return nil;
     }

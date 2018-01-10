@@ -33,5 +33,6 @@ green:((_green)/255.0) blue:((_blue)/255.0) alpha:(_alpha)]
 
 + (BOOL)color:(UIColor *)color1 isEqualToColor:(UIColor *)color2 withTolerance:(CGFloat)tolerance;
 
+//+ (UIColor *)colorWithHexString:(NSString *)hexStr;
 
 @end

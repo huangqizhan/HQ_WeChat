@@ -7,6 +7,7 @@
 //
 
 #import "HQChatOtherTextCell.h"
+#import "HqChatMessageLabel.h"
 
 
 
@@ -17,6 +18,8 @@
 @property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
 @property (nonatomic,strong) UITapGestureRecognizer *singalTap;
+
+@property (nonatomic,strong) HqChatMessageLabel *msgLabel;
 
 
 
@@ -29,26 +32,26 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.paopaoView];
-        [self.paopaoView addSubview:self.chatLabel];
+        [self.paopaoView addSubview:self.msgLabel];
         _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
         _doubleTap.delegate = self;
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.contentView addGestureRecognizer:_doubleTap];
-        
-        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
-        [self.paopaoView addGestureRecognizer:_singalTap];
-
+        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
     }
     return self;
 }
 - (void)setMessageModel:(ChatMessageModel *)messageModel{
     [super setMessageModel:messageModel];
-    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+//    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
     self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
     self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
-    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+//    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
 }
 
 #pragma mark -------- 编辑 ------
@@ -86,9 +89,13 @@
 - (void)attemptOpenURL:(NSURL *)url{
     BOOL safariCompatible = [url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"];
     if (safariCompatible && [[UIApplication sharedApplication] canOpenURL:url]) {
-        [[UIApplication sharedApplication] openURL:url];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
+                [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
+            }
+        });
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"警示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
@@ -130,8 +137,8 @@
     if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
         return nil;
     
-    if ([self.chatLabel pointInside:[self convertPoint:point toView:self.chatLabel] withEvent:event]) {
-        return self.chatLabel;
+    if ([self.msgLabel pointInside:[self convertPoint:point toView:self.msgLabel] withEvent:event]) {
+        return self.msgLabel;
     }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
         return self.contentView;
     }
@@ -239,6 +246,23 @@
         _paopaoView.userInteractionEnabled = NO;
     }
     return _paopaoView;
+}
+- (HqChatMessageLabel *)msgLabel{
+    if (_msgLabel == nil) {
+        _msgLabel = [[HqChatMessageLabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+        _msgLabel.numberOfLines = 0;
+        _msgLabel.font = MessageFont;
+        _msgLabel.textColor = ICRGB(0x282724);
+        WEAKSELF;
+        [_msgLabel setTapCallBackAction:^(MessageLabelTapResult *result){
+            if (result.linkStyle == ChatLabelLinkStyleWeb) {
+                [weakSelf attemptOpenURL:[NSURL URLWithString:result.valueString]];
+            }else if (result.linkStyle == ChatLabelLinkStyleIphoneNumber){
+                [ApplicationHelper callPhoneNumber:result.valueString];
+            }
+        }];
+    }
+    return _msgLabel;
 }
 - (KILabel *)chatLabel{
     if (nil == _chatLabel) {

@@ -7,7 +7,7 @@
 //
 
 #import "HQDisPlayTextController.h"
-#import "HQAttrubuteTextLabel.h"
+
 
 @interface HQDisPlayTextController () <UIGestureRecognizerDelegate>{
     UIFont *labelFont;
@@ -18,6 +18,7 @@
 @property (nonatomic) HQAttrubuteTextLabel *contentLabel;
 @property (nonatomic) UIView *screenSnapshot;
 @property (nonatomic) UIWindow *targetWindow;
+@property (nonatomic,copy) void (^tapAction)(HQAttrubuteTextData *data);
 
 
 @end
@@ -54,32 +55,27 @@
     WEAK_SELF;
     self.contentLabel.longPressAction = ^(HQAttrubuteTextData *data,UIGestureRecognizerState state) {
         if (!data)return;
-        
         if (state == UIGestureRecognizerStateEnded) {
             if (data.type == HQAttrubuteTextTypeURL) {
                 NSLog(@"url = %@",data.url.absoluteString);
             }else if (data.type == HQAttrubuteTextTypePhoneNumber) {
                 NSLog(@"number = %@",data.phoneNumber);
             }
-            
             [weakSelf exit];
         }
-        
     };
-    
     self.contentLabel.tapAction = ^(HQAttrubuteTextData *data) {
         if (!data)return;
-        
         if (data.type == HQAttrubuteTextTypeURL) {
-            NSLog(@"url = %@",data.url.absoluteString);
+            if (weakSelf.tapAction) weakSelf.tapAction(data);
         }else if (data.type == HQAttrubuteTextTypePhoneNumber) {
-            NSLog(@"number = %@",data.phoneNumber);
+            if (weakSelf.tapAction) weakSelf.tapAction(data);
         }
         [weakSelf exit];
     };
 }
-- (void)showInWindown{
-    
+- (void)showInWindownWithCallBack:(void (^)(HQAttrubuteTextData *data))tapAction{
+    _tapAction = tapAction;
     NSArray *windows = [UIApplication sharedApplication].windows;
     NSInteger maxWindowLevel = 0;
     for (UIWindow *window in windows) {

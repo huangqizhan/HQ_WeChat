@@ -19,6 +19,7 @@
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone; //UIRectEdgeAll
     }
+
 }
 
 - (void)messageHandleWith:(ChatMessageModel *)messageModel{

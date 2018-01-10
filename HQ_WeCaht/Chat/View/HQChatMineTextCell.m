@@ -9,6 +9,8 @@
 #import "HQChatMineTextCell.h"
 #import "UIImage+YYWebImage.h"
 #import "HQTextView.h"
+#import "HqChatMessageLabel.h"
+#import "ApplicationHelper.h"
 
 
 
@@ -19,7 +21,7 @@
 
 @property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
-@property (nonatomic,strong) UITapGestureRecognizer *singalTap;
+@property (nonatomic,strong) HqChatMessageLabel *msgLabel;
 
 @end
 
@@ -30,27 +32,30 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.paopaoView];
-        [self.paopaoView addSubview:self.chatLabel];
+//        [self.paopaoView addSubview:self.chatLabel];
+        [self.paopaoView addSubview:self.msgLabel];
         _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
         _doubleTap.delegate = self;
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.paopaoView addGestureRecognizer:_doubleTap];
-        
-        _singalTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singalTapAction:)];
-        [self.paopaoView addGestureRecognizer:_singalTap];
+        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
+//        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
 
     }
     return self;
 }
 - (void)setMessageModel:(ChatMessageModel *)messageModel{
     [super setMessageModel:messageModel];
-    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+//    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
     self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
     self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
     self.paopaoView.right = self.headImageView.left-10;
-    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+//    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
 }
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{
@@ -96,12 +101,13 @@
 - (void)attemptOpenURL:(NSURL *)url{
     BOOL safariCompatible = [url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"];
     if (safariCompatible && [[UIApplication sharedApplication] canOpenURL:url]) {
-//        [[UIApplication sharedApplication] openURL:url];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
-            [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
+                [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
+            }
+        });
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"警示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
@@ -124,16 +130,13 @@
     if (self.isEdiating) {
         return NO;
     }
-    if ([UIMenuController sharedMenuController].menuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-        return NO;
-    }
     if (gestureRecognizer == _doubleTap) {
-         return YES;
-//        CGPoint bubblePoint = [touch locationInView:self.paopaoView];
-//        if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint) && ![self.chatLabel shouldReceiveTouchAtPoint:[touch locationInView:self.chatLabel]]) {
-//           
-//        }
+        return YES;
+    }
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        if ([UIMenuController sharedMenuController].menuVisible) {
+            return NO;
+        }
     }
     return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
 }
@@ -155,29 +158,17 @@
     if (self.isEdiating) {
         return self.contentView;
     }
-    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
+    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01 || [UIMenuController sharedMenuController].isMenuVisible){
         return nil;
+    }
     
-    if ([self.chatLabel pointInside:[self convertPoint:point toView:self.chatLabel] withEvent:event]) {
-        return self.chatLabel;
+    if ([self.msgLabel  pointInside:[self convertPoint:point toView:self.msgLabel] withEvent:event]) {
+        return self.msgLabel;
     }else if ([self.headImageView pointInside:[self convertPoint:point toView:self.headImageView] withEvent:event]){
         return self.headImageView;
     }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
         return self.contentView;
-    }
-
-//    if (LLMessageCell_isEditing) {
-//        if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-//            return self.contentView;
-//        }
-//    }else {
-//        if ([self.contentLabel pointInside:[self convertPoint:point toView:self.contentLabel] withEvent:event]) {
-//            return self.contentLabel;
-//        }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-//            return self.contentView;
-//        }
-//    }
-    
+    }    
     return nil;
 }
 ///长按手势
@@ -248,13 +239,29 @@
     }
     return _paopaoView;
 }
+- (HqChatMessageLabel *)msgLabel{
+    if (_msgLabel == nil) {
+        _msgLabel = [[HqChatMessageLabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+        _msgLabel.numberOfLines = 0;
+        _msgLabel.font = MessageFont;
+        _msgLabel.textColor = ICRGB(0x282724);
+        WEAKSELF;
+        [_msgLabel setTapCallBackAction:^(MessageLabelTapResult *result){
+            if (result.linkStyle == ChatLabelLinkStyleWeb) {
+                [weakSelf attemptOpenURL:[NSURL URLWithString:result.valueString]];
+            }else if (result.linkStyle == ChatLabelLinkStyleIphoneNumber){
+                [ApplicationHelper callPhoneNumber:result.valueString];
+            }
+        }];
+    }
+    return _msgLabel;
+}
 - (KILabel *)chatLabel{
     if (nil == _chatLabel) {
         _chatLabel = [[KILabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
         _chatLabel.numberOfLines = 0;
         _chatLabel.font = MessageFont;
         _chatLabel.textColor = ICRGB(0x282724);
-//        _chatLabel.backgroundColor = [UIColor clearColor];
         __weak typeof (self) weekSelf = self;
         _chatLabel.urlLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range){
             [weekSelf attemptOpenURL:[NSURL URLWithString:string]];

@@ -13,11 +13,13 @@ static CGFloat ScabRentangleHeight = 200.0;
 ////距离导航栏的距离
 static CGFloat NavigationBarDistance = 100;
 
-@interface HQRQCodeView ()
+@interface HQRQCodeView ()<CAAnimationDelegate>
 
 @property (nonatomic,strong) ReCodeIndicatorView *indicatorView;
 @property (nonatomic,strong) UIImageView *recodeLineView;
 @property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,strong) AnimationShapeLayer *animationLayer;
+@property (nonatomic,copy) void (^endComplition)();
 
 @end
 
@@ -28,7 +30,7 @@ static CGFloat NavigationBarDistance = 100;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        ////scanAnimationImage
+        [self addPinGesture];
     }
     return self;
 }
@@ -99,11 +101,35 @@ static CGFloat NavigationBarDistance = 100;
       CGContextStrokePath(context);
 }
 
+- (void)addPinGesture{
+    UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(pinGestureAction:)];
+    [self addGestureRecognizer:gesture];
+}
+
+- (void)pinGestureAction:(UIPinchGestureRecognizer *)pingesture{
+    if (pingesture.state == UIGestureRecognizerStateBegan) {
+        if (_delegate && [_delegate respondsToSelector:@selector(HQRQCodeView:gestureDidBegin:)]) {
+            [_delegate HQRQCodeView:self gestureDidBegin:pingesture];
+        }
+    }
+    if (pingesture.state == UIGestureRecognizerStateChanged) {
+        if (_delegate && [_delegate respondsToSelector:@selector(HQRQCodeView:gestureDidChange:)]) {
+            [_delegate HQRQCodeView:self gestureDidChange:pingesture];
+        }
+    }
+    if (pingesture.state == UIGestureRecognizerStateEnded) {
+        if (_delegate && [_delegate respondsToSelector:@selector(HQRQCodeView:gestureDidEnd:)]) {
+            [_delegate HQRQCodeView:self gestureDidEnd:pingesture];
+        }
+    }
+}
 - (void)startRecodeWithContent:(NSString *)content{
     [self.indicatorView startRecodeWithContent:content];
 }
 - (void)beginRecodeWhenDidEndAnimation{
     [self.indicatorView removeFromSuperview];
+    self.indicatorView = nil;
     [self showRecodeAniamtionView];
 }
 #pragma mark ------- 显示扫码条 -----
@@ -122,7 +148,7 @@ static CGFloat NavigationBarDistance = 100;
 }
 - (void)showRecodeViewTimerAction{
     if (self.recodeLineView.origin.y > self.ScanRect.origin.y + self.ScanRect.size.height-10) {
-        self.recodeLineView.top = self.ScanRect.origin.x;
+        self.recodeLineView.top = self.ScanRect.origin.y;
     }
     [UIView animateWithDuration:0.01 animations:^{
         self.recodeLineView.top += 0.5;
@@ -142,8 +168,137 @@ static CGFloat NavigationBarDistance = 100;
     }
     return _recodeLineView;
 }
+- (AnimationShapeLayer *)animationLayer{
+    if (_animationLayer == nil) {
+        _animationLayer = [[AnimationShapeLayer alloc] initWithFrame:CGRectMake(self.ScanRect.origin.x-5, self.ScanRect.origin.y-5, self.ScanRect.size.width+10, self.ScanRect.size.height+10)];
+    }
+    return _animationLayer;
+}
+
+- (Barcode *)processMetadataObject:(AVMetadataMachineReadableCodeObject *)code{
+    Barcode *barcode =  [Barcode new];
+    barcode.metadataObject = code;
+    barcode.codeString = code.stringValue;
+    CGMutablePathRef cornersPath = CGPathCreateMutable();
+    CGPoint point;
+    CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)code.corners[0], &point);
+//     NSLog(@"point = %@",NSStringFromCGPoint(point));
+    CGPathMoveToPoint(cornersPath, nil, point.x, point.y);
+    for (int i = 1; i < code.corners.count; i++) {
+        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)code.corners[i], &point);
+        CGPathAddLineToPoint(cornersPath, nil, point.x, point.y);
+//        NSLog(@"point = %@",NSStringFromCGPoint(point));
+    }
+    CGPathCloseSubpath(cornersPath);
+    barcode.cornersPath = [UIBezierPath bezierPathWithCGPath:cornersPath];
+    CGPathRelease(cornersPath);
+    barcode.boundingBoxPath = [UIBezierPath bezierPathWithRect:code.bounds];
+    barcode.codeFrame = code.bounds;
+    return barcode;
+    
+    /*
+     1 查询Barcode对象字典，看是否有相同内容的Barcode已经存在。
+     2 如果没有，创建一个Barcode对象并将其加入到字典中。
+     3 存储二维码的元数据到新创建的Barcode对象中。
+     4 创建用于存储绘制二维码四个角路径的cornersPath。
+     5 使用CoreGraphics转换第一个角的坐标为CGPoint实例。
+     6 从第五步构造的角开始绘制路径。
+     7 循环遍历其它三个角，创建相应的路径。
+     8 绘制第四个点到第一个点路径后，关闭路径。
+     9 通过cornersPath创建UIBezierPath对象并将其存储到Barcode对象中。
+     10 通过bezierPathWithRect:方法创建边框块。
+     11 返回Barcode对象。
+     */
+}
+- (void)recodeDidFinishAnimationActionWithRect:(CGRect)rect  Complite:(void (^)())complite{
+    _endComplition = complite;
+    [self addSubview:self.animationLayer];
+     AudioServicesPlaySystemSound(1360);
+    [self startRecodeWithAnimationWithRect:rect];
+}
+- (void)startRecodeWithAnimationWithRect:(CGRect )rect{
+    
+    [UIView animateWithDuration:0.15 animations:^{
+        self.animationLayer.frame = rect;
+    } completion:^(BOOL finished) {
+        self.animationLayer.backgroundColor = [UIColor colorWithRed:(85.0)/255.0 green:(185.0)/255.0 blue:(50.0)/255.0 alpha:0.5];
+        if (_endComplition) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 _endComplition();
+            });
+        }
+    }];
+//    CAKeyframeAnimation *animationLayer = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+//    animationLayer.duration = 0.35;
+//    animationLayer.fillMode = kCAFillModeForwards;
+//    animationLayer.removedOnCompletion=NO;
+//    animationLayer.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    NSMutableArray *values = [NSMutableArray array];
+//    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+//    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(rect.size.width/self.width, rect.size.height/self.height, 1.0)]];
+//    animationLayer.values = values;
+//    [self.animationLayer.layer addAnimation:animationLayer forKey:nil];
+}
+- (void)animationDidStart:(CAAnimation *)anim{
+    
+}
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    if (_endComplition) {
+        _endComplition();
+    }
+}
+
+
 @end
 
+
+@implementation AnimationShapeLayer
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
+
+- (void)drawRect:(CGRect)rect{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetRGBFillColor(context, 0, 0, 0, 0.6);
+    
+    ////四个拐角
+    CGContextSetStrokeColorWithColor(context, CANCELBUTTONCOLOR.CGColor);
+    CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0);
+    
+    CGContextSetLineWidth(context, 2);
+    
+    //左上角线
+    CGContextMoveToPoint(context, ScanRentangleWidth/20.0, 1);
+    CGContextAddLineToPoint(context, 1, 1);
+    CGContextAddLineToPoint(context, 1, ScanRentangleWidth/20.0);
+    
+    //左下角线
+    
+    CGContextMoveToPoint(context, 1,  self.frame.size.height - ScanRentangleWidth/20.0);
+    CGContextAddLineToPoint(context, 1, self.frame.size.height - 1);
+    CGContextAddLineToPoint(context, ScanRentangleWidth/20.0, self.frame.size.height - 1);
+    
+    
+    ////右下角线
+    CGContextMoveToPoint(context, self.frame.size.width - ScanRentangleWidth/20.0, self.frame.size.height  - 2);
+    CGContextAddLineToPoint(context,  self.frame.size.width - 1,   self.frame.size.width - 1);
+    CGContextAddLineToPoint(context, self.frame.size.width - 1 , self.frame.size.height  - ScanRentangleWidth/20.0);
+    
+    ///右上角线
+    CGContextMoveToPoint(context, self.frame.size.width - 1 , ScanRentangleWidth/20.0);
+    CGContextAddLineToPoint(context, self.frame.size.width - 1 , 1);
+    CGContextAddLineToPoint(context, self.frame.size.width-ScanRentangleWidth/20.0, 1);
+    
+    CGContextStrokePath(context);
+
+}
+@end
 
 
 
@@ -192,5 +347,11 @@ static CGFloat NavigationBarDistance = 100;
     return _contentLabel;
 }
 
+
+@end
+
+
+
+@implementation Barcode
 
 @end

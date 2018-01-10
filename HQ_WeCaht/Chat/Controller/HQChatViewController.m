@@ -63,10 +63,11 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+//    [self keyBordViewDidResetOriginStatus];
     [self hq_removeTransitionDelegate];
     [self hiddenMenuController];
 }
@@ -89,8 +90,9 @@
     [butt addTarget:self action:@selector(rightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [butt setTitle:@"detail" forState:UIControlStateNormal];;
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:butt],[[UIBarButtonItem alloc] initWithTitle:@"msg" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)]];
-//   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sharemore_friendcard"] style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonAction:)];
     WEAKSELF;
+    [self setUpUI];
+    [self registerChatCells];
     [ChatMessageModel searchChatListModelOnAsyThreadWith:self.listModel andCallBack:^(NSArray *resultList) {
         if (resultList.count == 0) {
             weakSelf.tableView.headerRefersh = nil;
@@ -100,8 +102,6 @@
             [weakSelf tableViewScrollToBottomWithAnimated:NO];
         }
     }];
-    [self setUpUI];
-    [self registerChatCells];
 }
 - (void)rightButtonAction:(UIButton *)sender{
 //    ChatMessageModel *messageModel = [ChatMessageModel createAnReceiveAudioMessageWith:@"/Users/GoodSrc/Library/Developer/CoreSimulator/Devices/22B34738-FD9D-4B15-8356-B80727B56F17/data/Containers/Data/Application/166FC80A-3826-4FD2-B109-8C18DF2AF622/tmp/audioFile/wavAudioTmp/149725646047117" andSpearkerId:self.listModel.chatListId andFileSize:@"8" andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
@@ -154,7 +154,7 @@
     [self.view addSubview:self.chatBoxVC.view];
     [self.view addSubview:self.tableView];
     self.tableView.frame = CGRectMake(0, 0, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
-    __weak typeof (self) weakSelf = self;
+    WEAKSELF;
     self.tableView.headerRefersh = [HQRefershHeaderView headerWithRefreshingBlock:^{
         [weakSelf handleMoreDataFromDb];
     }];
@@ -208,6 +208,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return CGFLOAT_MIN;
 }
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ChatMessageModel *model = self.dataArray[indexPath.row];
+    return model.cellHeight;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatMessageModel *model = self.dataArray[indexPath.row];
     return model.cellHeight;
@@ -231,11 +235,10 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"didSelectRowAtIndexPath = %ld",indexPath.row);
     if (_messageCellIsEdiating) {
         HQChaRootCell *rootCell = [tableView cellForRowAtIndexPath:indexPath];
         [rootCell didSeleteCellWhenIsEdiating:!rootCell.isSeleted];
-        [self didseleteTableViewCellWithIndexPath:indexPath];
+//        [self didseleteTableViewCellWithIndexPath:indexPath];
     }else{
         [self keyBordViewDidResetOriginStatus];
     }
@@ -253,20 +256,22 @@
         [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
     }
 }
-////清除聊天数据
+//////清除聊天数据
 - (void)clearCurrnetAllChatMessages{
     [self.dataArray removeAllObjects];
     [self.tableView reloadData];
 }
-////键盘回到底部
+//////键盘回到底部
 - (void)keyBordViewDidResetOriginStatus{
     [self.chatBoxVC.chatBox.textView resignFirstResponder];
     [UIView animateWithDuration:.25 animations:^{
         self.chatBoxVC.view.top = APP_Frame_Height-HEIGHT_TABBAR-64;
         self.tableView.height = APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
+    } completion:^(BOOL finished) {
+        self.chatBoxVC.chatBox.boxStatus = HQChatBoxStatusNothing;
     }];
 }
-////选中cell的数据处理
+//////选中cell的数据处理
 - (void)didseleteTableViewCellWithIndexPath:(NSIndexPath *)indexPath{
     ChatMessageModel *model = self.dataArray[indexPath.row];
     if (model && ![self.seletedModelsArray containsObject:model]) {
@@ -297,16 +302,16 @@
     }];
     [self.ediateMoreView setEdiateViewActiveStatusWith:self.seletedModelsArray.count];
 }
-
 #pragma mark -------- 消息分发测试 --------
 - (void)testAction:(UIBarButtonItem *)item{
-    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
+//    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
+    [_tableView reloadData];
 }
 - (NSDictionary *)creatTextNessageWithIndex:(int )index{
     NSTimeInterval timeral = [NSDate returnTheTimeralFrom1970];
     NSDictionary *dic = @{
-                          @"contentString":@"看惊世毒妃v你收快递费v 是考虑对方v是考虑对方v是考虑对方v 克里斯多夫v是考虑对方v是考虑到局开始对方即可是说说看老地方v刷卡机代理费v 思考劳动局会计师对方即可 是李开复女卡萨丁女会计师快乐圣诞节饭v看似简单风景女士 抗联世纪东方女生肯德基抗联世纪东方v杀戮空间的妇女看似简单  抗联收到v就卡萨丁",
+                          @"contentString":@"新华社呼和浩特9月11日电 《联合国防治荒漠化公约》第十三次缔约方大会高级别会议11日在内蒙古鄂尔多斯市开幕。13969768213国家主席习近平发来贺信，向会议的召开致以热烈的祝贺，向出席会议的各国代表、http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm国际机构负责人和各界人士致以诚挚的欢迎，并预祝大会圆满成功。习近平指出，13969768213土地荒漠化是影响人类生存和发展的全球重大生态问题。公约生效21年来，在各方共同努力下http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm，全球荒漠化防治取得明显成效，但形势依然严峻，世界上仍有许多地方的人民饱受荒漠化之苦。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm这次大会以“携手防治荒漠，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm共谋人类福祉”为主题，共议公约新战略框架13969768213，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm必将对维护全球生态安全产生重大而积极的影响。习近平强调，防治荒漠化是人类面临的共同挑战，需要国际社会携手应对。我们要弘扬尊重自然、保护自然的理念，坚13969768213持生态优先、13969768213预防为主，坚定信心，面向未来，制定广泛合作、目标明确的公约新战略框架，共同推进全球荒漠生态系统治理，让荒漠造福人类。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将坚定不移履行公约义务，按照本次缔约方大会确定的目标，一如既往加强同各成员国13969768213和国际组织的交流合作，共同为建设一个更加美好的世界而努力。国务院副总理汪洋在开幕式上宣读了习近平的贺信并发表主旨演讲。他强调，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将认真履行习近平主席在139697682132015年联合国发展13969768213峰会上的郑重承诺，以落实2030年可持续发展议程为己任，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm以新发展理念为引领，把防治荒漠化作为生态文明建设的重要内容，全面加强国际交流合作，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm努力走出一条中国特色荒漠生态系统治理和民生改善相结合的13969768213道路。联合国秘书长古特雷斯向会议发来视13969768213频致辞。《联合国防治荒漠化公约》是联合国里约可持续发展大会框架下的三大环境公约之一，旨在推动国际社会在防治荒漠化和缓解干旱影响方面加强合作。13969768213缔约方大会是公约的最高决策机构，目前13969768213每两年举行一次，来自196个公约缔约方、20多个国际组织的正式代表约1400人出席本次会议http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm。　相关报道：习近平致《联合国防治荒漠化公约》第十三次缔约方大会高级别会议的贺信　防治荒漠化是人类面临的共同挑战，需要国际社会携手应对。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm我们要弘扬尊重自然、保护自然的理念，坚持生态优13969768213先、预防为主，坚定信心，面向未来，制定广泛合作、目标明确的公约新战略框架，共同推进全球荒漠生态系统治理，让荒漠造福13969768213人类。http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm中国将坚定不移履行公约义务，按照本次缔约方大会确定的目标，http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm一如既往加强同各成员国和国际组织的交13969768213流合作，共同为建设一个更加美好13969768213的世界而努力！>>http://news.xinhuanet.com/politics/2017-09/11/c_1121644248.htm",
                           @"contentUrlString":@"",
                           @"fileExtion":@"",
                           @"fileName":@"",
@@ -350,9 +355,16 @@
 }
 ///双击
 - (void)HQChatDoubleClick:(UITableViewCell *)cell WithChatMessage:(ChatMessageModel *)messageModel{
+    WEAK_SELF;
     HQDisPlayTextController *disPlayVC = [[HQDisPlayTextController alloc] init];
     disPlayVC.messageModel = messageModel;
-    [disPlayVC showInWindown];
+    [disPlayVC showInWindownWithCallBack:^(HQAttrubuteTextData *data) {
+        if (data.type == HQAttrubuteTextTypeURL) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf pushToWebViewControllerWithUrl:data.url];
+            });
+        }
+    }];
 }
 - (HQTextView *)getCurentTextViewWhenShowMenuController{
     return self.chatBoxVC.chatBox.textView.isFirstResponder ? self.chatBoxVC.chatBox.textView : nil;
@@ -362,9 +374,14 @@
 }
 ///超链接
 - (void)HQChatClickLink:(UITableViewCell *)cell withChatMessage:(ChatMessageModel *)message andLinkUrl:(NSURL *)linkUrl{
+    [self pushToWebViewControllerWithUrl:linkUrl];
+}
+#pragma mark ------- 跳转超链接 ------
+- (void)pushToWebViewControllerWithUrl:(NSURL *)url{
     HQWebViewController *webVC = [[HQWebViewController alloc] init];
-    webVC.url = linkUrl;
+    webVC.url = url;
     [self.navigationController pushViewController:webVC animated:YES];
+
 }
 - (void)changeSpeakerStatus{
     if (!self.voiceTipView.superview) {
@@ -384,7 +401,6 @@
 ////删除消息
 - (void)deleteMessageWithModel:(NSArray<ChatMessageModel * >*)models andIndexPath:(NSArray<NSIndexPath *> *)indexPaths{
     if (models.count && indexPaths.count) {
-        [self.tableView reloadData];
         [self.dataArray removeObjectsInArray:models];
         [self.tableView beginUpdates];
         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
@@ -428,16 +444,14 @@
         didChangeChatBoxHeight:(CGFloat)height{
     self.chatBoxVC.view.top = self.view.bottom-height-64;
     self.tableView.height = HEIGHT_SCREEN - height - 64;
-    if (height != HEIGHT_TABBAR) {
-        [self tableViewScrollToBottomWithAnimated:NO];
-    }
     [self.tableView reloadData];
+    [self tableViewScrollToBottomWithAnimated:NO];
 }
 - (void)chatBoxInputStatusController:(HQChatBoxViewController *)chatboxViewController ChatBoxHeight:(CGFloat)height{
     self.chatBoxVC.view.top = self.view.bottom-height-64;
     self.tableView.height = HEIGHT_SCREEN - height - 64;
+    [self tableViewScrollToBottomWithAnimated:NO];
     if (height != HEIGHT_TABBAR) {
-        [self tableViewScrollToBottomWithAnimated:NO];
     }
 }
 #pragma mark --------- 发送文本消息 ---------
@@ -450,17 +464,28 @@
         [self.dataArray addObject:dateModel];
     }
     [self.dataArray addObject:messageModel];
-    [self.tableView reloadData];
+    [_tableView reloadData];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
-    if (dateModel) {
-        [dateModel saveToDBChatLisModelAsyThread:^{
-        } andError:^{
-        }];
-    }
     [messageModel sendTextMessage:^{
         NSLog(@"status = %d",messageModel.messageStatus);
     }];
 }
+//- (void)addNewMessageModel:(ChatMessageModel *)messageModel andDateModel:(ChatMessageModel *)dateModel{
+//    NSMutableArray *indexpaths = [NSMutableArray new];
+//    if (dateModel) {
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count) : (self.dataArray.count + 1) inSection:0]];
+//        [self.dataArray addObject:dateModel];
+//         [self.dataArray addObject:messageModel];
+//    }else{
+//        [indexpaths addObject:[NSIndexPath indexPathForRow:self.dataArray.count?(self.dataArray.count-1) : (self.dataArray.count) inSection:0]];
+//        [self.dataArray addObject:messageModel];
+//    }
+//    [self.tableView beginUpdates];
+//    [self.tableView insertRowsAtIndexPaths:indexpaths withRowAnimation:UITableViewRowAnimationFade];
+//    [self.tableView endUpdates];
+//    [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
+//}
 #pragma mark --------- 发送GIF -------
 - (void)chatBoxViewController:(HQChatBoxViewController *)chatboxViewController sendGifMessage:(NSString *)gifFileName{
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSendGifMessageWith:gifFileName andReceiveId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
@@ -511,7 +536,8 @@
 ///移除语音文件
 - (void)chatBoxViewControllerRemoveAudioMessage:(HQChatBoxViewController *)chatboxViewController andFilePath:(NSString *)filePath{
     HQRecordingCell *recordCell = [[HQRecordingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MineRecordingCellId];
-    if (recordCell.messageModel && recordCell.indexPath) {        WEAKSELF;
+    if (recordCell.messageModel && recordCell.indexPath) {
+        WEAKSELF;
         [self checkCurrnetMessageIsHasDateMessageWithIndexPath:recordCell.indexPath andComplite:^(ChatMessageModel *msgModel, NSIndexPath *dateIndexPath) {
             if (msgModel != nil && dateIndexPath != nil) {
                 [weakSelf deleteMessageWithModel:@[recordCell.messageModel,msgModel] andIndexPath:@[recordCell.indexPath,dateIndexPath]];
@@ -573,20 +599,22 @@
     }
     return nil;
 }
-//删除消息时检查是否有时间消息
+////删除消息时检查是否有时间消息
 - (void)checkCurrnetMessageIsHasDateMessageWithIndexPath:(NSIndexPath *)indexPath andComplite:(void (^)(ChatMessageModel *msgModel,NSIndexPath *indexPath))complite{
     if (indexPath.row == 0 || indexPath == nil) {
         if (complite) complite(nil,nil);
         return;
     }
-    ChatMessageModel *dateModel = self.dataArray[indexPath.row-1];
-    if (dateModel.messageType == 99) {
-        if (complite) complite(dateModel,[NSIndexPath indexPathForRow:indexPath.row-1 inSection:0]);
-        return;
+    if (indexPath.row > 0) {
+        ChatMessageModel *dateModel = self.dataArray[indexPath.row-1];
+        if (dateModel.messageType == 99) {
+            if (complite) complite(dateModel,[NSIndexPath indexPathForRow:indexPath.row-1 inSection:0]);
+            return;
+        }
     }
     if (complite) complite(nil,nil);
 }
-///刷新listModel
+/////刷新listModel
 - (void)refershListModelWithMessageModel:(ChatMessageModel *)msgModel{
     [self.listModel refershChatListModelWith:msgModel];
     if (self.listModel.isShow == NO) {
@@ -665,7 +693,6 @@
     }
 }
 - (void)didMoveToParentViewController:(UIViewController*)parent{
-    
 }
 - (void)showCustomerActionSheetViewWithTitle:(NSString *)title{
     HQActionSheet *actionSheet = [[HQActionSheet alloc] initWithTitle:title];
@@ -722,17 +749,17 @@
     }
     return _voiceTipView;
 }
--(UITableView *)tableView{
+- (UITableView *)tableView{
     if (nil == _tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
-//        tapGesture.numberOfTapsRequired = 1;
-//        tapGesture.numberOfTouchesRequired = 1;
-//        [_tableView addGestureRecognizer:tapGesture];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _tableView;
 }

@@ -196,6 +196,9 @@
         _tableView.backgroundColor = [UIColor clearColor];
         [_tableView registerClass:[DownLoadBackImageCell class] forCellReuseIdentifier:@"DownLoadBackImageCell"];
         _tableView.separatorColor = [UIColor clearColor];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _tableView;
 }
