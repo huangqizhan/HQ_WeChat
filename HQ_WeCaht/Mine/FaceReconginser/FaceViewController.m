@@ -56,7 +56,7 @@
     _recognitionFacesNumLabel.font = [UIFont systemFontOfSize:18];
     [self.view addSubview:_recognitionFacesNumLabel];
 }
-
+/////此方法是使用CorweImage 框架的人的脸部识别   
 -(void)recognitionFaces{
     CIContext * context = [CIContext contextWithOptions:nil];
     

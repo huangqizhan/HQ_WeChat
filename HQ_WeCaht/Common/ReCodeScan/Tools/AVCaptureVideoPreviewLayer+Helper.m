@@ -47,7 +47,7 @@
     }else {
         return nil;
     }
-    
+    ///输出元数据  
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
     dispatch_queue_t metadataQueue = dispatch_queue_create("com.yaming.ColloQR.metadata", 0);
     ///dispatch_get_main_queue()
@@ -68,7 +68,6 @@
         if (availableType && [availableType isKindOfClass:AVMetadataObjectTypeQRCode.class]) {
             if ([[availableType lowercaseString] containsString:@"qrcode"]) {
                 availableQRCodeType = YES;
-                //                AMLog(@"availableType==%@",availableType);
                 break;
             }
         }
