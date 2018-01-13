@@ -134,6 +134,7 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     [self stopSesstionRecode];
+    ///用 AVCaptureMetadataOutput输出的数据已经进行了处理 
     NSMutableSet *foundBarcodes = [NSMutableSet new];
     [metadataObjects enumerateObjectsUsingBlock: ^(AVMetadataObject *obj, NSUInteger idx, BOOL *stop) {////二维码org.iso.QRCode      条形码 org.iso.Code128
         if ([obj isKindOfClass:[AVMetadataMachineReadableCodeObject class]]){
@@ -144,7 +145,6 @@
         }
     }];
     dispatch_sync(dispatch_get_main_queue(), ^{
-
         [foundBarcodes enumerateObjectsUsingBlock: ^(Barcode *barcode, BOOL *stop) {
             /*
              [_recodeView.layer addSublayer:boundingBoxLayer];

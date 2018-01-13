@@ -24,6 +24,9 @@ typedef NS_OPTIONS(NSUInteger, CollisionCategory) {
 ///AR 视图    显示3D界面
 @property (nonatomic,strong) ARSCNView *arScnView;
 
+//@property (nonatomic,strong) SCNView *ScnView;
+
+
 //AR会话，负责管理相机追踪配置及3D相机坐标
 @property (nonatomic,strong) ARSession *arSesstion;
 
