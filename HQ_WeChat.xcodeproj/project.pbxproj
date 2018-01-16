@@ -15,6 +15,8 @@
 		BACB055B1E59872E008B676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB05591E59872E008B676D /* Main.storyboard */; };
 		BACB055D1E59872E008B676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACB055C1E59872E008B676D /* Assets.xcassets */; };
 		BACB05601E59872E008B676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB055E1E59872E008B676D /* LaunchScreen.storyboard */; };
+		BAD273B6200B71EA00A26BBC /* WKWebView+Ad.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */; };
+		BAD273BA200B74D500A26BBC /* MySetiewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273B9200B74D500A26BBC /* MySetiewCell.m */; };
 		BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */; };
 		BAF4A7FB1E73F11B00653204 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7D91E73F11B00653204 /* AFHTTPSessionManager.m */; };
 		BAF4A7FC1E73F11B00653204 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7DC1E73F11B00653204 /* AFNetworkReachabilityManager.m */; };
@@ -541,6 +543,10 @@
 		BACB055A1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BACB055C1E59872E008B676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
 		BACB055F1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BAD273B4200B71EA00A26BBC /* WKWebView+Ad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Ad.h"; sourceTree = "<group>"; };
+		BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Ad.m"; sourceTree = "<group>"; };
+		BAD273B8200B74D500A26BBC /* MySetiewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySetiewCell.h; sourceTree = "<group>"; };
+		BAD273B9200B74D500A26BBC /* MySetiewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySetiewCell.m; sourceTree = "<group>"; };
 		BAE3E0E21F39F9BE0010ACED /* HQEdiateImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImgView.h; sourceTree = "<group>"; };
 		BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateImgView.m; sourceTree = "<group>"; };
 		BAF4A7D81E73F11B00653204 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -1514,6 +1520,15 @@
 				FD9408E91E5A78A600634206 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BAD273B7200B74A900A26BBC /* setCell */ = {
+			isa = PBXGroup;
+			children = (
+				BAD273B8200B74D500A26BBC /* MySetiewCell.h */,
+				BAD273B9200B74D500A26BBC /* MySetiewCell.m */,
+			);
+			path = setCell;
 			sourceTree = "<group>";
 		};
 		BAF4A7D41E73F0C700653204 /* NetWorkingTools */ = {
@@ -3051,6 +3066,7 @@
 		FD9408B61E5A723F00634206 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BAD273B7200B74A900A26BBC /* setCell */,
 				BAB31B7C1F5301AA0055D5FE /* PorperView */,
 				FD6649C61EBC2D7B005E340B /* Views */,
 				FD9408C61E5A730C00634206 /* HQMineViewController.h */,
@@ -3144,6 +3160,8 @@
 				FD42B5EB1F0A16DD00D6F0C4 /* UIImage+Gallop.m */,
 				FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */,
 				FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */,
+				BAD273B4200B71EA00A26BBC /* WKWebView+Ad.h */,
+				BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3439,7 +3457,7 @@
 				TargetAttributes = {
 					BACB054C1E59872E008B676D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = S748494QV4;
+						DevelopmentTeam = B5HHUXE3SK;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -3693,6 +3711,7 @@
 				FD2476E71E6FA2260085A23C /* HQChatOtherVidioCell.m in Sources */,
 				FD6649C51EBC2B0F005E340B /* YYWebImageOperation.m in Sources */,
 				FD1DDF651F26DACE00AAC89D /* HQRefershHeaderView.m in Sources */,
+				BAD273BA200B74D500A26BBC /* MySetiewCell.m in Sources */,
 				FD61A22D1F01FB7000F0830C /* HQChatDetailController.m in Sources */,
 				FD66A3A81EBB1A6800623F34 /* YYTextParser.m in Sources */,
 				FD3BEDB51EE694DB00A74F69 /* HQDeviceVoiceTipView.m in Sources */,
@@ -3937,6 +3956,7 @@
 				FDD18CFF1F131F9F00E260BD /* SDWebImageDownloader.m in Sources */,
 				FDCBB5361EFBBA6C00D6F573 /* WebViewJavascriptBridge.m in Sources */,
 				FD4769011E6659F400CEC7A6 /* HQ_WeChatConst.m in Sources */,
+				BAD273B6200B71EA00A26BBC /* WKWebView+Ad.m in Sources */,
 				FD4769091E665E2300CEC7A6 /* ChatListTableViewCell.m in Sources */,
 				FD11AD7F1E8F5AF10060E020 /* HQChatRefershControll.m in Sources */,
 				FD9408AA1E5A718A00634206 /* HQTabBarViewController.m in Sources */,
@@ -4095,7 +4115,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = S748494QV4;
+				DEVELOPMENT_TEAM = B5HHUXE3SK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4103,7 +4123,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4128,7 +4148,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = S748494QV4;
+				DEVELOPMENT_TEAM = B5HHUXE3SK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4136,7 +4156,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

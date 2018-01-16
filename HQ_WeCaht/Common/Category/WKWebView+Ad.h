@@ -10,4 +10,9 @@
 
 @interface WKWebView (Ad)
 
+/**
+ 清空webview 的缓存
+ */
++ (void)cleanCacheAndCookie;
+
 @end

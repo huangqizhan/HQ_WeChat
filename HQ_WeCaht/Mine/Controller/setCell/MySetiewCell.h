@@ -8,6 +8,43 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSUInteger,MysetCellType) {
+    MysetCellSwitchType = 1,
+    MysetCellOtherType
+};
+
+
+@interface MySetModel :NSObject
+
+@property (nonatomic,assign)MysetCellType cellType;
+@property (nonatomic,copy) NSString *name;
+@end
+
+
+
+
+
 @interface MySetiewCell : UITableViewCell
 
+@property(nonatomic,strong) MySetModel *typeModel;
+
 @end
+
+
+@interface MySetSwitchCell : MySetiewCell
+
+@property (nonatomic,strong)UISwitch *sw;
+
+@end
+
+
+
+
+
+
+
+
+
+
+
