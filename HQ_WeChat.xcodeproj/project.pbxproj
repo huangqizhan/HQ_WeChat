@@ -203,6 +203,8 @@
 		FD37B0BE1E67BF3100FDD2A4 /* CostomerEmoj.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD37B0BD1E67BF3100FDD2A4 /* CostomerEmoj.plist */; };
 		FD37B0C01E67C52300FDD2A4 /* SystemEmoj.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD37B0BF1E67C52300FDD2A4 /* SystemEmoj.plist */; };
 		FD39535F1FE7B69300B52EBB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD39535E1FE7B69300B52EBB /* Info.plist */; };
+		FD39F494200DD0CB006992DB /* UINavigationController+FullScreenGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = FD39F493200DD0CB006992DB /* UINavigationController+FullScreenGesture.m */; };
+		FD39F497200DD612006992DB /* TestPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD39F496200DD612006992DB /* TestPopViewController.m */; };
 		FD3B33531ECBF5C600A9075E /* DownLoadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3B33521ECBF5C600A9075E /* DownLoadTest.m */; };
 		FD3B33591ECBFD9A00A9075E /* DownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3B33581ECBFD9A00A9075E /* DownLoadOperation.m */; };
 		FD3B4B511EE4E8F800252F92 /* HQRecordingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4B501EE4E8F800252F92 /* HQRecordingCell.m */; };
@@ -862,6 +864,10 @@
 		FD37B0BD1E67BF3100FDD2A4 /* CostomerEmoj.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CostomerEmoj.plist; sourceTree = "<group>"; };
 		FD37B0BF1E67C52300FDD2A4 /* SystemEmoj.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SystemEmoj.plist; sourceTree = "<group>"; };
 		FD39535E1FE7B69300B52EBB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HQ_WeCaht/Info.plist; sourceTree = SOURCE_ROOT; };
+		FD39F492200DD0CB006992DB /* UINavigationController+FullScreenGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FullScreenGesture.h"; sourceTree = "<group>"; };
+		FD39F493200DD0CB006992DB /* UINavigationController+FullScreenGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FullScreenGesture.m"; sourceTree = "<group>"; };
+		FD39F495200DD612006992DB /* TestPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestPopViewController.h; sourceTree = "<group>"; };
+		FD39F496200DD612006992DB /* TestPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestPopViewController.m; sourceTree = "<group>"; };
 		FD3B33511ECBF5C600A9075E /* DownLoadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadTest.h; sourceTree = "<group>"; };
 		FD3B33521ECBF5C600A9075E /* DownLoadTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadTest.m; sourceTree = "<group>"; };
 		FD3B33571ECBFD9A00A9075E /* DownLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadOperation.h; sourceTree = "<group>"; };
@@ -2146,6 +2152,17 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		FD39F491200DD083006992DB /* poporpush */ = {
+			isa = PBXGroup;
+			children = (
+				FD39F492200DD0CB006992DB /* UINavigationController+FullScreenGesture.h */,
+				FD39F493200DD0CB006992DB /* UINavigationController+FullScreenGesture.m */,
+				FD39F495200DD612006992DB /* TestPopViewController.h */,
+				FD39F496200DD612006992DB /* TestPopViewController.m */,
+			);
+			path = poporpush;
+			sourceTree = "<group>";
+		};
 		FD3E80981ECE7E9800F3B430 /* files */ = {
 			isa = PBXGroup;
 			children = (
@@ -2832,6 +2849,7 @@
 		FD94089F1E5A70C300634206 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				FD39F491200DD083006992DB /* poporpush */,
 				FD11AFE21FCCFEDF00E057A3 /* ColorGredient */,
 				FDFCA3F11FC522A0002E531A /* stretchImage */,
 				FD0936331FC2633D00B630D9 /* simlateSellStoket */,
@@ -3713,6 +3731,7 @@
 				FD61A2371F0206D400F0830C /* HQRectButton.m in Sources */,
 				BAF4A8071E73F11B00653204 /* UIImageView+AFNetworking.m in Sources */,
 				FD73582E1F96FCD70042B44D /* AR2DTestViewController.m in Sources */,
+				FD39F494200DD0CB006992DB /* UINavigationController+FullScreenGesture.m in Sources */,
 				FD8DD80A1EB824F5002125CD /* GifTempViewController.m in Sources */,
 				FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */,
 				FD9869E61EDE8CA500460E11 /* HQAttrubuteTextLabel.m in Sources */,
@@ -3924,6 +3943,7 @@
 				FD0936191FBE728700B630D9 /* ApplicationController.m in Sources */,
 				FD28EA721E7B8E3B0077E009 /* HQVideoPlayerController.m in Sources */,
 				FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */,
+				FD39F497200DD612006992DB /* TestPopViewController.m in Sources */,
 				FD2ED8CF1EAD9780006E585F /* HQChatModel.xcdatamodeld in Sources */,
 				FD66A39F1EBB1A6800623F34 /* YYTextEffectWindow.m in Sources */,
 				FD66A3521EBABFF400623F34 /* HttpReDefine.m in Sources */,
