@@ -35,7 +35,9 @@
     }];
     [self.view addSubview:self.tableView];
 }
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
 }

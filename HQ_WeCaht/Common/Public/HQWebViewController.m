@@ -9,6 +9,7 @@
 #import "HQWebViewController.h"
 #import "HQWebProcessView.h"
 #import "HQWebJsManager.h"
+#import "WKWebView+Ad.h"
 
 #define kLLTextColor_green [UIColor colorWithRed:29/255.0 green:185/255.0 blue:14/255.0 alpha:1]
 
@@ -47,8 +48,16 @@
     self.navigationController.navigationBar.translucent = NO;
     //    backBarButtonItem = self.fromViewController.navigationItem.backBarButtonItem;
     //    self.fromViewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:nil action:nil];
-}
+    
+    UIButton *popBut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [popBut setTitle:@"cle" forState:UIControlStateNormal];
+    [popBut addTarget:self action:@selector(clearButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:popBut];
 
+}
+- (void)clearButtonAction:(UIButton *)sender{
+    [WKWebView cleanCacheAndCookie];
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
