@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UINavigationController (FullScreenGesture)
-
+/**自定义返回手势*/
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *fullscreenPopGestureRecognizer;
-
+/**显示控制器时 是否可以设置导航栏 */
 @property (nonatomic, assign) BOOL viewControllerBasedNavigationBarAppearanceEnabled;
 
 
@@ -24,17 +24,13 @@
 
 
 
-/// Whether the interactive pop gesture is disabled when contained in a navigation
-/// stack.
+/**  是否禁止使用手势返回     */
 @property (nonatomic, assign) BOOL interactivePopDisabled;
 
-/// Indicate this view controller prefers its navigation bar hidden or not,
-/// checked when view controller based navigation bar's appearance is enabled.
-/// Default to NO, bars are more likely to show.
+/** 是否隐藏导航栏          */
 @property (nonatomic, assign) BOOL prefersNavigationBarHidden;
 
-/// Max allowed initial distance to left edge when you begin the interactive pop
-/// gesture. 0 by default, which means it will ignore this limit.
+/** 右滑返回手势的距左边的距离   */
 @property (nonatomic, assign) CGFloat interactivePopMaxAllowedInitialDistanceToLeftEdge;
 
 @end

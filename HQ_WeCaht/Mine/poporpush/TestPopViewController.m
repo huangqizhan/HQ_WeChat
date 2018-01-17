@@ -51,13 +51,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         Pop1Controller *pop1 = [Pop1Controller new];
-//        pop1.navigationController.viewControllerBasedNavigationBarAppearanceEnabled = YES;
+        pop1.interactivePopMaxAllowedInitialDistanceToLeftEdge = 300;
         [self.navigationController pushViewController:pop1 animated:YES];
     }else if (indexPath.row == 1){
         Pop2Controller *pop2 = [Pop2Controller new];
+        pop2.prefersNavigationBarHidden = YES;
+        pop2.interactivePopMaxAllowedInitialDistanceToLeftEdge = 300;
         [self.navigationController pushViewController:pop2 animated:YES];
     }else if (indexPath.row == 2){
         Pop3Controller *pop3 = [Pop3Controller new];
+        pop3.interactivePopMaxAllowedInitialDistanceToLeftEdge = 100;
+        pop3.interactivePopDisabled  = YES;
         [self.navigationController pushViewController:pop3 animated:YES];
     }
 }
@@ -96,9 +100,22 @@
     [super viewDidLoad];
     self.title = @"pop2";
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 50, 50)];
+    [but setTitle:@"push" forState:UIControlStateNormal];
+    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(buttonAciton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:but];
+
     
 }
+
+- (void)buttonAciton:(UIButton *)sender{
+    Pop4Controller *pop4 = [Pop4Controller new];
+    pop4.prefersNavigationBarHidden = NO;
+    pop4.interactivePopMaxAllowedInitialDistanceToLeftEdge = 200;
+    [self.navigationController pushViewController:pop4 animated:YES];
+}
+
 
 @end
 
@@ -110,5 +127,18 @@
     
     
 }
+
+@end
+
+@implementation  Pop4Controller
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"pop4";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+}
+
+
 
 @end
