@@ -10,6 +10,12 @@
 #import "HQWebProcessView.h"
 #import "HQWebJsManager.h"
 #import "WKWebView+Ad.h"
+#import "HqJsCore.h"
+#import <JavaScriptCore/JavaScriptCore.h>
+
+
+
+
 
 #define kLLTextColor_green [UIColor colorWithRed:29/255.0 green:185/255.0 blue:14/255.0 alpha:1]
 
@@ -23,12 +29,14 @@
 
 @property (nonatomic) WKWebView *webView;
 @property (nonatomic) HQWebProcessView *webProgressView;
+@property (nonatomic,strong) JSContext *jscontext;
 
 @end
 
 @implementation HQWebViewController{
 
 }
+//
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -54,9 +62,19 @@
     [popBut addTarget:self action:@selector(clearButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:popBut];
 
+    
+    UIButton *But = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [But setTitle:@"cle" forState:UIControlStateNormal];
+    [But addTarget:self action:@selector(jsAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:But];
 }
 - (void)clearButtonAction:(UIButton *)sender{
     [WKWebView cleanCacheAndCookie];
+}
+- (void)jsAction:(UIButton *)sender{
+    self.jscontext = [[JSContext alloc] init];
+//    NSString *js = @"function addAction(a,b) {return a+b}";
+    [self.jscontext[@""] callWithArguments:@[]];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
