@@ -10,6 +10,7 @@
 #import "HQTabBarViewController.h"
 #import "HQReceiveMessageManager.h"
 #import <UserNotifications/UserNotifications.h>
+#import "HQURLProticol.h"
 
 
 
@@ -20,6 +21,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    [NSURLProtocol registerClass:[HQURLProticol class]];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[HQTabBarViewController alloc] init];
     [self.window makeKeyAndVisible];

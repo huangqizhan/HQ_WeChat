@@ -10,6 +10,7 @@
 #define HQChatHeaderDefine_h
 
 
+#import "HttpReDefine.h"
 #import "HQFaceTools.h"
 #import "HQChatMineBaseCell.h"
 #import "HQChatMineTextCell.h"

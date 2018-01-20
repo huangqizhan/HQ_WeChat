@@ -7,7 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
 
-@interface WKWebViewDelegate : NSObject
+@class WKWebViewDelegate;
+
+@protocol  WKUserDelegate <NSObject>
+
+@optional
+
+////注入的JS回调
+- (void)WKUserDelegate:(WKWebViewDelegate *)wkDelegate userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message;
+
+///保存图片
+- (void)WKUserDelegate:(WKWebViewDelegate *)wkDeleaget saveImg:(UIImage *)image;
+
+///识别出的二维码
+- (void)WKWebViewDelegate:(WKWebViewDelegate *)wkDelegate codeImage:(UIImage *)image codeStr:(NSString *)string;
+
+
+@end
+
+
+@interface WKWebViewDelegate : NSObject<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithDelegate:(UIViewController <WKUserDelegate> *)delegate webView:(WKWebView *)webView NS_DESIGNATED_INITIALIZER;
+
+
+
 
 @end

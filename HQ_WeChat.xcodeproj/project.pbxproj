@@ -15,8 +15,11 @@
 		BACB055B1E59872E008B676D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB05591E59872E008B676D /* Main.storyboard */; };
 		BACB055D1E59872E008B676D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACB055C1E59872E008B676D /* Assets.xcassets */; };
 		BACB05601E59872E008B676D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACB055E1E59872E008B676D /* LaunchScreen.storyboard */; };
-		BAD273B6200B71EA00A26BBC /* WKWebView+Ad.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */; };
 		BAD273BA200B74D500A26BBC /* MySetiewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273B9200B74D500A26BBC /* MySetiewCell.m */; };
+		BAD273F1201229FA00A26BBC /* HQURLProticol.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F0201229FA00A26BBC /* HQURLProticol.m */; };
+		BAD273F420122EB900A26BBC /* WKWebView+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F320122EB900A26BBC /* WKWebView+Add.m */; };
+		BAD273F72012391C00A26BBC /* WKWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */; };
+		BAE15FBA2012E41600B1ED76 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE15FB92012E41600B1ED76 /* libc++abi.tbd */; };
 		BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */; };
 		BAF4A7FB1E73F11B00653204 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7D91E73F11B00653204 /* AFHTTPSessionManager.m */; };
 		BAF4A7FC1E73F11B00653204 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A7DC1E73F11B00653204 /* AFNetworkReachabilityManager.m */; };
@@ -238,7 +241,6 @@
 		FD485C841F98438E00BF4EDB /* SCANNodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FD485C831F98438E00BF4EDB /* SCANNodeHelper.m */; };
 		FD4939581E6D52120021A55A /* HQFaceMoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4939571E6D52120021A55A /* HQFaceMoreCollectionViewCell.m */; };
 		FD49395A1E6D560E0021A55A /* HQFaceMore.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD4939591E6D560E0021A55A /* HQFaceMore.plist */; };
-		FD562D0B1EFCA00A00E39756 /* HQWebJsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD562D0A1EFCA00A00E39756 /* HQWebJsManager.m */; };
 		FD5C87601EA07FAC00FEBE01 /* ContractModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5C875F1EA07FAC00FEBE01 /* ContractModel+Action.m */; };
 		FD610B671EF7C58400DCB432 /* HQChatListSecondSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD610B661EF7C58400DCB432 /* HQChatListSecondSearchController.m */; };
 		FD61A22A1F00A74900F0830C /* IMG_0373.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD61A2291F00A74900F0830C /* IMG_0373.jpg */; };
@@ -545,10 +547,15 @@
 		BACB055A1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BACB055C1E59872E008B676D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Assets.xcassets; sourceTree = "<group>"; };
 		BACB055F1E59872E008B676D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BAD273B4200B71EA00A26BBC /* WKWebView+Ad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Ad.h"; sourceTree = "<group>"; };
-		BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Ad.m"; sourceTree = "<group>"; };
 		BAD273B8200B74D500A26BBC /* MySetiewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySetiewCell.h; sourceTree = "<group>"; };
 		BAD273B9200B74D500A26BBC /* MySetiewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySetiewCell.m; sourceTree = "<group>"; };
+		BAD273EF201229FA00A26BBC /* HQURLProticol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQURLProticol.h; sourceTree = "<group>"; };
+		BAD273F0201229FA00A26BBC /* HQURLProticol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQURLProticol.m; sourceTree = "<group>"; };
+		BAD273F220122EB900A26BBC /* WKWebView+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Add.h"; sourceTree = "<group>"; };
+		BAD273F320122EB900A26BBC /* WKWebView+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Add.m"; sourceTree = "<group>"; };
+		BAD273F52012391C00A26BBC /* WKWebViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewDelegate.h; sourceTree = "<group>"; };
+		BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewDelegate.m; sourceTree = "<group>"; };
+		BAE15FB92012E41600B1ED76 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		BAE3E0E21F39F9BE0010ACED /* HQEdiateImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQEdiateImgView.h; sourceTree = "<group>"; };
 		BAE3E0E31F39F9BE0010ACED /* HQEdiateImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateImgView.m; sourceTree = "<group>"; };
 		BAF4A7D81E73F11B00653204 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -929,8 +936,6 @@
 		FD4939561E6D52120021A55A /* HQFaceMoreCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQFaceMoreCollectionViewCell.h; sourceTree = "<group>"; };
 		FD4939571E6D52120021A55A /* HQFaceMoreCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQFaceMoreCollectionViewCell.m; sourceTree = "<group>"; };
 		FD4939591E6D560E0021A55A /* HQFaceMore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HQFaceMore.plist; sourceTree = "<group>"; };
-		FD562D091EFCA00A00E39756 /* HQWebJsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQWebJsManager.h; sourceTree = "<group>"; };
-		FD562D0A1EFCA00A00E39756 /* HQWebJsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQWebJsManager.m; sourceTree = "<group>"; };
 		FD5C875E1EA07FAC00FEBE01 /* ContractModel+Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContractModel+Action.h"; sourceTree = "<group>"; };
 		FD5C875F1EA07FAC00FEBE01 /* ContractModel+Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ContractModel+Action.m"; sourceTree = "<group>"; };
 		FD610B651EF7C58400DCB432 /* HQChatListSecondSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatListSecondSearchController.h; sourceTree = "<group>"; };
@@ -1418,6 +1423,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE15FBA2012E41600B1ED76 /* libc++abi.tbd in Frameworks */,
 				FD1A31551F0CBA410017FDBC /* JavaScriptCore.framework in Frameworks */,
 				FDCBB53B1EFBBA9F00D6F573 /* WebKit.framework in Frameworks */,
 				FD0E98EC1F5D211D00B16263 /* libiconv.tbd in Frameworks */,
@@ -1535,6 +1541,23 @@
 				BAD273B9200B74D500A26BBC /* MySetiewCell.m */,
 			);
 			path = setCell;
+			sourceTree = "<group>";
+		};
+		BAD273BB200F6D2600A26BBC /* webjscore */ = {
+			isa = PBXGroup;
+			children = (
+				FD75704E1EFB714D00CA7112 /* HQWebViewController.h */,
+				FD75704F1EFB714D00CA7112 /* HQWebViewController.m */,
+				FD7570511EFB721500CA7112 /* HQWebProcessView.h */,
+				FD7570521EFB721500CA7112 /* HQWebProcessView.m */,
+				BAD273EF201229FA00A26BBC /* HQURLProticol.h */,
+				BAD273F0201229FA00A26BBC /* HQURLProticol.m */,
+				BAD273F220122EB900A26BBC /* WKWebView+Add.h */,
+				BAD273F320122EB900A26BBC /* WKWebView+Add.m */,
+				BAD273F52012391C00A26BBC /* WKWebViewDelegate.h */,
+				BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */,
+			);
+			path = webjscore;
 			sourceTree = "<group>";
 		};
 		BAF4A7D41E73F0C700653204 /* NetWorkingTools */ = {
@@ -2159,10 +2182,6 @@
 				FD2ED9041EADC5AA006E585F /* HQUserInfoModel.m */,
 				FD2ED9061EADC5BE006E585F /* HQPublicManager.h */,
 				FD2ED9071EADC5BE006E585F /* HQPublicManager.m */,
-				FD75704E1EFB714D00CA7112 /* HQWebViewController.h */,
-				FD75704F1EFB714D00CA7112 /* HQWebViewController.m */,
-				FD7570511EFB721500CA7112 /* HQWebProcessView.h */,
-				FD7570521EFB721500CA7112 /* HQWebProcessView.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -2918,6 +2937,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BAD273BB200F6D2600A26BBC /* webjscore */,
 				FD0936531FC2C22100B630D9 /* CTools */,
 				FD9E33B81FA8235100783F8E /* RunTimeTest */,
 				FD7358281F96F72F0042B44D /* ARTest */,
@@ -3178,8 +3198,6 @@
 				FD42B5EB1F0A16DD00D6F0C4 /* UIImage+Gallop.m */,
 				FD0E03C51F623F1D002C27F2 /* UIImage+Face.h */,
 				FD0E03C61F623F1D002C27F2 /* UIImage+Face.m */,
-				BAD273B4200B71EA00A26BBC /* WKWebView+Ad.h */,
-				BAD273B5200B71EA00A26BBC /* WKWebView+Ad.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3187,6 +3205,7 @@
 		FD94090C1E5A7DE300634206 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BAE15FB92012E41600B1ED76 /* libc++abi.tbd */,
 				FD0E98EB1F5D211D00B16263 /* libiconv.tbd */,
 				FDD18D141F134D6900E260BD /* AMapSearchKit.framework */,
 				FD7BC1FB1F0E1575002EB167 /* MAMapKit.framework */,
@@ -3282,8 +3301,6 @@
 			children = (
 				FDCEDD051E8CB92600EE24E6 /* HQFileTools.h */,
 				FDCEDD061E8CB92600EE24E6 /* HQFileTools.m */,
-				FD562D091EFCA00A00E39756 /* HQWebJsManager.h */,
-				FD562D0A1EFCA00A00E39756 /* HQWebJsManager.m */,
 			);
 			path = FileTools;
 			sourceTree = "<group>";
@@ -3665,6 +3682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD273F72012391C00A26BBC /* WKWebViewDelegate.m in Sources */,
 				FDE441B21F67B5CA0079BF32 /* DBManagerQueue.m in Sources */,
 				FD2CAD3F1EE13CAA00FEEC7A /* interf_dec.h in Sources */,
 				FD2CAD401EE13CAA00FEEC7A /* interf_enc.h in Sources */,
@@ -3734,6 +3752,7 @@
 				FD66A3A81EBB1A6800623F34 /* YYTextParser.m in Sources */,
 				FD3BEDB51EE694DB00A74F69 /* HQDeviceVoiceTipView.m in Sources */,
 				FD6649991EBC2A62005E340B /* YYImageCoder.m in Sources */,
+				BAD273F420122EB900A26BBC /* WKWebView+Add.m in Sources */,
 				FD7F8F5D1E9DB9A700B61D63 /* ControllerPresentTranstionAnimation.m in Sources */,
 				FD1A31611F0CBC360017FDBC /* HQLocationMapController.m in Sources */,
 				FDF144D21E8D005800A6B94C /* UIMenuController+LongPress.m in Sources */,
@@ -3775,7 +3794,6 @@
 				FD9408C21E5A72C400634206 /* HQContactViewController.m in Sources */,
 				BAF4A8061E73F11B00653204 /* UIButton+AFNetworking.m in Sources */,
 				FD47693B1E667D7900CEC7A6 /* HQChatBoxViewController.m in Sources */,
-				FD562D0B1EFCA00A00E39756 /* HQWebJsManager.m in Sources */,
 				FDA1DB951E9B2755001A9854 /* ControllerTranstionAnimation.m in Sources */,
 				FD28EA501E7B8C000077E009 /* NSBundle+TZImagePicker.m in Sources */,
 				FD66A3B11EBB1A6900623F34 /* YYTextUtilities.m in Sources */,
@@ -3805,6 +3823,7 @@
 				FD0936291FBEB50300B630D9 /* HQCircleBaseTableViewCell.m in Sources */,
 				FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */,
 				FD6649981EBC2A62005E340B /* YYImage.m in Sources */,
+				BAD273F1201229FA00A26BBC /* HQURLProticol.m in Sources */,
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
 				FD42B5E61F09E41C00D6F0C4 /* VisualEffectViewController.m in Sources */,
 				FD28EA731E7B8E3B0077E009 /* HQPickerPreviewController.m in Sources */,
@@ -3976,7 +3995,6 @@
 				FDD18CFF1F131F9F00E260BD /* SDWebImageDownloader.m in Sources */,
 				FDCBB5361EFBBA6C00D6F573 /* WebViewJavascriptBridge.m in Sources */,
 				FD4769011E6659F400CEC7A6 /* HQ_WeChatConst.m in Sources */,
-				BAD273B6200B71EA00A26BBC /* WKWebView+Ad.m in Sources */,
 				FD4769091E665E2300CEC7A6 /* ChatListTableViewCell.m in Sources */,
 				FD11AD7F1E8F5AF10060E020 /* HQChatRefershControll.m in Sources */,
 				FD9408AA1E5A718A00634206 /* HQTabBarViewController.m in Sources */,
@@ -4152,7 +4170,10 @@
 					"$(PROJECT_DIR)/HQ_WeCaht/Common/ReCodeScan/ZBarSDK",
 					"$(PROJECT_DIR)/HQ_WeCaht/Common/ReCodeScan",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "huangqizhan.com.HQ-WeCaht";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HQ_WeChat-Bridging-Header.h";
@@ -4185,7 +4206,10 @@
 					"$(PROJECT_DIR)/HQ_WeCaht/Common/ReCodeScan/ZBarSDK",
 					"$(PROJECT_DIR)/HQ_WeCaht/Common/ReCodeScan",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "huangqizhan.com.HQ-WeCaht";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HQ_WeChat-Bridging-Header.h";

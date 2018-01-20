@@ -8,7 +8,7 @@
 
 #import "HQRecodeResultWebController.h"
 #import "HQWebProcessView.h"
-#import "HQWebJsManager.h"
+
 
 @import WebKit;
 
@@ -49,8 +49,6 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:request];
     [self.webView setNeedsUpdateConstraints];
-    [[HQWebJsManager shareInstanceJSManager] registerJsHandlsWithWkWebVieW:self.webView];
-    [[HQWebJsManager shareInstanceJSManager].bridge setWebViewDelegate:self];
     CGFloat progressBarHeight = 2.f;
     _webProgressView = [[HQWebProcessView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, progressBarHeight)];
     _webProgressView.progressBarColor = [UIColor colorWithRed:29/255.0 green:185/255.0 blue:14/255.0 alpha:1];

@@ -10,4 +10,34 @@
 
 @interface WKWebView (Add)
 
+/**
+ 清楚webview缓存
+ */
++ (void)cleanCacheAndCookie;
+
+
+
+/**
+ 给WebView注入JS code
+
+ @param userController userController
+ */
+- (void)addCustomerJavaScriptWith:(WKUserContentController *)userController;
+
+
+
+/**
+ 添加JS互调方法
+
+ @param delegate 签了 WKScriptMessageHandler  的 obj  
+ */
+- (void)addJavaScriptMessageHandlerWithDelegate:(id)delegate;
+
+/**
+ 移除所有的js互调方法
+ */
+- (void)removeAllJavaScriptMessageHandler;
+
 @end
+
+
