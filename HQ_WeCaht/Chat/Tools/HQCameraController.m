@@ -414,7 +414,6 @@
     WEAKSELF_SC
     [_cameraManager takePicture:^(UIImage *stillImage) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            [UIImage saveImageToPhotoAlbum:stillImage];//存至本机
             [[HQImageManager manager] NewSavePhotoWithImage:stillImage completion:^(UIImage *photo, NSDictionary *info, NSString *identifier) {
                 _currentCameraImage = photo;
                 _currentImageInfo = info;

@@ -16,5 +16,7 @@
 ////获取头像个数
 +(NSInteger)totalNumberOfFacesByFaceRecognitionWithImage:(UIImage *)image;
 
+///检测二维码
++ (NSString *)detactErCodeWithImage:(UIImage *)image;
 
 @end

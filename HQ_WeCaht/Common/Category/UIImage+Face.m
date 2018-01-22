@@ -50,4 +50,24 @@
 }
 
 
++ (NSString *)detactErCodeWithImage:(UIImage *)image{
+    
+    NSDictionary *options = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                          @"CIDetectorAccuracy", @"CIDetectorAccuracyHigh",nil];
+    CIDetector *detector = nil;
+    // 宏定义在pct文件中，这里用[[UIDevice currentDevice].systemVersion floatValue] >= 8.0替换
+    detector = [CIDetector detectorOfType:CIDetectorTypeQRCode
+                                               context:nil
+                                               options:options];
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    if (features.count >= 1) {
+        CIQRCodeFeature *feature = [features objectAtIndex:0];
+        NSString *scannedResult = feature.messageString;
+        return scannedResult;
+    }else{
+        return nil;
+    }
+
+}
+
 @end
