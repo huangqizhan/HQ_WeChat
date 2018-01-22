@@ -83,25 +83,25 @@
 //    } andError:^{
 //        NSLog(@"work save faild");
 //    }];
-    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
-        for (ContractModel *con in resultList) {
-            ChatListModel *list = [ChatListModel customerInit];
-            list.messageUser = con;
-            list.chatListType = 1;
-            list.chatListId = con.userId;
-            list.isShow = NO;
-            list.userName = con.userName;
-            [list saveToDBChatLisModelAsyThread:^{
-                NSLog(@" user save success");
-            } andError:^{
-                NSLog(@" user save error");
-            }];
-        }
-    }];
+//    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
+//        for (ContractModel *con in resultList) {
+//            ChatListModel *list = [ChatListModel customerInit];
+//            list.messageUser = con;
+//            list.chatListType = 1;
+//            list.chatListId = con.userId;
+//            list.isShow = NO;
+//            list.userName = con.userName;
+//            [list saveToDBChatLisModelAsyThread:^{
+//                NSLog(@" user save success");
+//            } andError:^{
+//                NSLog(@" user save error");
+//            }];
+//        }
+//    }];
 
-//    HQPopoverView *popoverView = [HQPopoverView popoverView];
-//    popoverView.style = HQHQPopoverActionDarkStyle;
-//    [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];
+    HQPopoverView *popoverView = [HQPopoverView popoverView];
+    popoverView.style = HQHQPopoverActionDarkStyle;
+    [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];
 }
 - (void)testAction:(UIBarButtonItem *)item{
     NSDictionary *diction = [self  creatTextNessageWithIndex:1];
