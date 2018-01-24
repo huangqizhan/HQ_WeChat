@@ -96,6 +96,7 @@
         if (error != nil) {
             NSLog(@"WebViewJavascriptBridge: WARNING: Error when trying to fetch data from WKWebView: %@", error);
         }
+        ///从JS端获取数据
         [_base flushMessageQueue:result];
     }];
 }
@@ -137,15 +138,20 @@
     if (webView != _webView) { return; }
     NSURL *url = navigationAction.request.URL;
     __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+
     if ([_base isWebViewJavascriptBridgeURL:url]) {
+        ///加载JS文件
         if ([_base isBridgeLoadedURL:url]) {
             [_base injectJavascriptFile];
+        ///注册的方法
         } else if ([_base isQueueMessageURL:url]) {
+        ///从JS端获取数据
             [self WKFlushMessageQueue];
         } else {
             [_base logUnkownMessage:url];
         }
         decisionHandler(WKNavigationActionPolicyCancel);
+        return;
     }
     
     if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
@@ -188,9 +194,7 @@
     return NULL;
 }
 
-
-
 @end
 
-
 #endif
+
