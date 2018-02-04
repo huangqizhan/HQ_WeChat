@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <!-- head -->
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+	<style type='text/css'>
+		html { font-family:Helvetica; color:#222; }
+		h1 { color:steelblue; font-size:24px; margin-top:24px; }
+		button { margin:0 3px 10px; font-size:12px; }
+		.logLine { border-bottom:1px solid #ccc; padding:4px 2px; font-family:courier; font-size:11px; }
+	</style>
+</head>
+<body>
+	<h1>UIWebView与iOS交互</h1>
+	<script>
+	window.onerror = function(err) {
+		log('window.onerror: ' + err)
+	}
+
+    <!--创建一个虚拟的iframe (以便调用webview的代理方法 ) 之后会立即注入JS  给window添加属性  WebViewJavascriptBridge   文件 “WebViewJavascriptBridge_JS”   -->
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        ///创建装回调函数的数组
+        window.WVJBCallbacks = [callback];
+        ///创建虚拟的iframe
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'https://__bridge_loaded__';
+        document.documentElement.appendChild(WVJBIframe);
+        ///立即删除虚拟的iframe
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+
+    <!-- 处理交互  方法名要和ios内定义的对应-->
+    setupWebViewJavascriptBridge(callBackAction);
+    
+    function callBackAction(bridge){
+        <!--注册OC调用的方法   -->
+        bridge.registerHandler('registerAction', function(data, responseCallback) {
+           //处理oc给的传参
+           alert('oc请求js  传值参数是：'+data)
+           var responseData = { 'result':'handle success' }
+           //处理完，回调传值给oc
+           responseCallback(responseData)
+      })
+      ///创建button
+       var callbackButton = document.getElementById('buttons').appendChild(document.createElement('button'))
+       callbackButton.innerHTML = '点击我，我会调用oc的方法'
+       callbackButton.onclick = function(e) {
+           e.preventDefault()
+       <!--调用OC注册的方法  -->
+       bridge.callHandler('loginAction', {'userId':'zhangsan','name': '章三'}, function(response) {
+          //处理oc过来的回调
+          alert('收到oc过来的回调:'+response)
+         })
+       }
+    }
+	</script>
+	<div id='buttons'></div> <div id='log'></div>
+</body>
+</html>

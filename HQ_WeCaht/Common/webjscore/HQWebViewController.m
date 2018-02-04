@@ -75,8 +75,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [NSURLProtocol registerClass:[HQURLProticol class]];
-    NSString *str = LOCAIOTNACTION;
-    NSLog(@"str = %@",str);
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     
     // 设置偏好设置
