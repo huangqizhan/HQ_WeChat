@@ -28,6 +28,8 @@
     [HQReceiveMessageManager shareInstance];
     [self configureAPIKey];
     [self registerLoclRegister:application];
+ 
+    
     return YES;
 }
 

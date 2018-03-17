@@ -28,7 +28,7 @@
  */
 
 
-#pragma mark ----- 同步保存  ----context
+#pragma mark -----  异步保存  ----context
 - (NSManagedObjectContext *)asyManagerSaveObjextContext{
     if (_asyManagerSaveObjextContext == nil) {
         _asyManagerSaveObjextContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -36,7 +36,7 @@
     }
     return _asyManagerSaveObjextContext;
 }
-#pragma mark ------ 异步保存 ---- context
+#pragma mark ------  同步保存  ---- context
 - (NSManagedObjectContext *)syManagerSaveObjectContext{
     if (_syManagerSaveObjectContext == nil) {
         _syManagerSaveObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];

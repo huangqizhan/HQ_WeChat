@@ -191,7 +191,7 @@
 ///同步保存
 - (void)saveToDBChatListModelOnMainThread:(void (^)())success andError:(void (^)())errorCallBack{
     
-    [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlockAndWait:^{
+    [[HQCoreDataManager shareCoreDataManager].syManagerSaveObjectContext performBlockAndWait:^{
         NSError *error;
         [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext save:&error];
         dispatch_sync(dispatch_get_main_queue(), ^{

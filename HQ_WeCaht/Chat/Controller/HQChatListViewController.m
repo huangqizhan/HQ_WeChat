@@ -47,10 +47,6 @@
     [msgBut setTitle:@"msg" forState:UIControlStateNormal];
     [msgBut addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msgBut];
-    
-    /////1234342546
-    
-
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -60,53 +56,31 @@
     [super viewWillDisappear:animated];
     [self removeTranstionDelegate];
 }
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList, NSArray *locaArr) {
+        if (resultList.count == 0 && locaArr.count == 0) {
+            [HQHUDHelper showHUDForView:self.view];
+            [ContractModel applicationDidFinishLaunchedComplite:^{
+                [self loadDataSource];
+                [HQHUDHelper hiddenHUD];
+            }];
+        }
+    }];
+}
 - (void)saveUIDataWhenApplicationWillDissmiss{
     for (ChatListModel *list in self.dataArray) {
         [list UPDateFromDBOnOtherThread:nil andError:nil];
     }
 }
 - (void)testButtonAction{
-//    ChatListModel *sysList = [ChatListModel customerInit];
-//    sysList.chatListType = 100;
-//    sysList.userName = @"系统消息";
-//    sysList.isShow = NO;
-//    [sysList saveToDBChatLisModelAsyThread:^{
-//        NSLog(@"sys save success");
-//    } andError:^{
-//        NSLog(@"sys save faild");
-//    }];
-//    ChatListModel *workList = [ChatListModel customerInit];
-//    workList.chatListType = 101;
-//    workList.userName = @"工作通知";
-//    workList.isShow = NO;
-//    [workList saveToDBChatLisModelAsyThread:^{
-//        NSLog(@"work save success");
-//    } andError:^{
-//        NSLog(@"work save faild");
-//    }];
-    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
-        for (ContractModel *con in resultList) {
-            ChatListModel *list = [ChatListModel customerInit];
-            list.messageUser = con;
-            list.chatListType = 1;
-            list.chatListId = con.userId;
-            list.isShow = NO;
-            list.userName = con.userName;
-            [list saveToDBChatLisModelAsyThread:^{
-                NSLog(@" user save success");
-            } andError:^{
-                NSLog(@" user save error");
-            }];
-        }
-    }];
-//
-//    HQPopoverView *popoverView = [HQPopoverView popoverView];
-//    popoverView.style = HQHQPopoverActionDarkStyle;
-//    [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];
+    HQPopoverView *popoverView = [HQPopoverView popoverView];
+    popoverView.style = HQHQPopoverActionDarkStyle;
+    [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];
 }
 - (void)testAction:(UIBarButtonItem *)item{
-    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
+//    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
 }
 - (NSDictionary *)creatTextNessageWithIndex:(int )index{
     NSTimeInterval timeral = [NSDate returnTheTimeralFrom1970];
@@ -246,9 +220,9 @@
 //    NSLog(@"indentationLevelForRowAtIndexPath = %@",indexPath);
 //    return indexPath.row;
 //}
-- (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath{
-    return nil;
-}
+//- (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath{
+//    return nil;
+//}
 #pragma mark ------- 取消置顶 --------
 - (void)cancelTopCellRowAction:(NSIndexPath *)indexPath{
     ChatListModel *listModel = self.dataArray[indexPath.row];
