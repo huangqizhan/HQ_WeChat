@@ -113,7 +113,6 @@
         [self.dataArray addObjectsFromArray:result];
         [self customerReloadTableView];
     }];
-
 }
 - (void)refershCurrnetListViewIsAppear:(BOOL)isAppear{
     if (isAppear) {
