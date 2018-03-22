@@ -11,6 +11,7 @@
 #import "HQReceiveMessageManager.h"
 #import <UserNotifications/UserNotifications.h>
 #import "HQURLProticol.h"
+#import "HQFirstConfigViewController.h"
 
 
 
@@ -23,14 +24,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [NSURLProtocol registerClass:[HQURLProticol class]];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[HQTabBarViewController alloc] init];
+    if (![[HQFileTools GetUserDefaultWithKey:HQ_WeIsFirstInstallKey] boolValue]) {
+        [HQFileTools SetUserDefault:@1 forKey:HQ_WeIsFirstInstallKey];
+        HQFirstConfigViewController *firstVC = [[HQFirstConfigViewController alloc] init];
+        self.window.rootViewController = firstVC;
+    }else{
+        [self registerLoclRegister:application];
+        [self configerUI];
+    }
     [self.window makeKeyAndVisible];
+    return YES;
+}
+- (void)configerUI{
     [HQReceiveMessageManager shareInstance];
     [self configureAPIKey];
-    [self registerLoclRegister:application];
- 
-    
-    return YES;
+    self.window.rootViewController = [[HQTabBarViewController alloc] init];
 }
 
 /////注册本地通知

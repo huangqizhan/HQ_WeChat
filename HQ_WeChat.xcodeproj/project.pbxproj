@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2872B7C6205D0A3200CD283F /* HQHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872B7C5205D0A3200CD283F /* HQHUDHelper.m */; };
+		28930F7A20638D28005AEDF3 /* HQFirstConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */; };
 		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
 		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
 		BAB31B7F1F5302150055D5FE /* HQPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B7E1F5302150055D5FE /* HQPopoverView.m */; };
@@ -539,6 +540,8 @@
 /* Begin PBXFileReference section */
 		2872B7C4205D0A3200CD283F /* HQHUDHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQHUDHelper.h; sourceTree = "<group>"; };
 		2872B7C5205D0A3200CD283F /* HQHUDHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQHUDHelper.m; sourceTree = "<group>"; };
+		28930F7820638D28005AEDF3 /* HQFirstConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQFirstConfigViewController.h; sourceTree = "<group>"; };
+		28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQFirstConfigViewController.m; sourceTree = "<group>"; };
 		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
 		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
 		BAB31B7D1F5302150055D5FE /* HQPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPopoverView.h; sourceTree = "<group>"; };
@@ -3164,6 +3167,8 @@
 				FD9408E51E5A789A00634206 /* AppDelegate.m */,
 				FD7A03EA1EA469D900BE240B /* PublicCaculateManager.h */,
 				FD7A03EB1EA469D900BE240B /* PublicCaculateManager.m */,
+				28930F7820638D28005AEDF3 /* HQFirstConfigViewController.h */,
+				28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */,
 				FD39535E1FE7B69300B52EBB /* Info.plist */,
 				BACB05591E59872E008B676D /* Main.storyboard */,
 				BACB055C1E59872E008B676D /* Assets.xcassets */,
@@ -4025,6 +4030,7 @@
 				FD6649AA1EBC2A84005E340B /* MKAnnotationView+YYWebImage.m in Sources */,
 				FDDEE3D11E655B7D007E9AF9 /* MJProperty.m in Sources */,
 				FD28EA5E1E7B8D9F0077E009 /* HQImageManager.m in Sources */,
+				28930F7A20638D28005AEDF3 /* HQFirstConfigViewController.m in Sources */,
 				FD3B33531ECBF5C600A9075E /* DownLoadTest.m in Sources */,
 				FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */,
 				FD2CAD3B1EE13C6100FEEC7A /* wav.mm in Sources */,

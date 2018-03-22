@@ -14,6 +14,7 @@
 
 + (NSString *)cacheDirectory{
     return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    
 }
 
 + (NSString *)creatSubDirectoryWith:(NSString *)subDirectory{
@@ -95,7 +96,16 @@
     }
     return result;
 }
-
++ (void)SetUserDefault:(id)value forKey:(NSString *)key{
+    if (value == nil || key == nil) {
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (id)GetUserDefaultWithKey:(NSString *)key{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
 
 + (NSString *)homeDirectory {
     return NSHomeDirectory();

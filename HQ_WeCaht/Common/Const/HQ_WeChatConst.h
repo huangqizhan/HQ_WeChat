@@ -98,6 +98,7 @@ extern NSString *const ICShareBackOtherAppNotification;
 
 
 extern NSString *const HQ_WeChatAMapKey;
+extern NSString *const HQ_WeIsFirstInstallKey;
 extern NSString *const allPOISearchTypes;
 
 

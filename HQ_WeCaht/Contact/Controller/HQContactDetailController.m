@@ -68,6 +68,9 @@
     }
     return 44;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section == 2) {
         HQContactFooterView *fotterView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HQContactFooterView"];
@@ -105,6 +108,14 @@
 }
 - (void)pushToChatViewController{
     [ChatListModel searchAnUserChatListOnMainThreadWith:self.contactModel.userId complite:^(ChatListModel *listModel) {
+        if (listModel == nil) {
+            listModel = [ChatListModel customerInit];
+            listModel.messageUser = self.contactModel;
+            listModel.chatListType = 1;
+            listModel.chatListId = (int64_t)self.contactModel.userId;
+            listModel.isShow = NO;
+            listModel.userName = self.contactModel.userName;
+        }
         HQChatViewController *chatVc = [[HQChatViewController alloc] init];
         HQChatViewController *chatVc1 = [[HQChatViewController alloc] init];
         HQNavigationController *navi1 = self.tabBarController.viewControllers[0];

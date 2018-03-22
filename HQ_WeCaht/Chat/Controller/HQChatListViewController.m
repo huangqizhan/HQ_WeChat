@@ -58,15 +58,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList, NSArray *locaArr) {
-        if (resultList.count == 0 && locaArr.count == 0) {
-            [HQHUDHelper showHUDForView:self.view];
-            [ContractModel applicationDidFinishLaunchedComplite:^{
-                [self loadDataSource];
-                [HQHUDHelper hiddenHUD];
-            }];
-        }
-    }];
 }
 - (void)saveUIDataWhenApplicationWillDissmiss{
     for (ChatListModel *list in self.dataArray) {
@@ -122,6 +113,7 @@
         [self.dataArray addObjectsFromArray:result];
         [self customerReloadTableView];
     }];
+
 }
 - (void)refershCurrnetListViewIsAppear:(BOOL)isAppear{
     if (isAppear) {

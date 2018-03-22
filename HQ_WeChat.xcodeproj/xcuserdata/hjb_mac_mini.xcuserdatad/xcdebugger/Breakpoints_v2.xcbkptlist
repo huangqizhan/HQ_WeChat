@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HQ_WeCaht/Chat/Model/ChatListModel+Action.m"
-            timestampString = "542972692.577167"
+            timestampString = "543397487.901034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-saveToDBChatLisModelAsyThread:andError:"
             landmarkType = "7">
             <Locations>
@@ -26,11 +26,11 @@
                   moduleName = "HQ_WeChat"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hjb_mac_mini/Desktop/%E5%AE%9E%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9/HQ_WeChat/HQ_WeCaht/Chat/Model/ChatListModel+Action.m"
-                  timestampString = "542972692.640415"
+                  timestampString = "543397488.049858"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
                   offsetFromSymbolStart = "96">
                </Location>
                <Location
@@ -41,30 +41,14 @@
                   moduleName = "HQ_WeChat"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hjb_mac_mini/Desktop/%E5%AE%9E%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9/HQ_WeChat/HQ_WeCaht/Chat/Model/ChatListModel+Action.m"
-                  timestampString = "542972692.643788"
+                  timestampString = "543397488.051746"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HQ_WeCaht/Chat/Model/ContractModel+Action.m"
-            timestampString = "542972692.5777791"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
-            landmarkName = "+applicationDidFinishLaunchedComplite:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -106,6 +106,8 @@
         NSArray *result = [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext executeFetchRequest:request error:&error];
         if (result.count) {
             if (complite) complite(result.firstObject);
+        }else{
+            if (complite) complite(nil);
         }
     }];
 }
