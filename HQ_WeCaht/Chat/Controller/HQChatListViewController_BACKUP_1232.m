@@ -65,6 +65,43 @@
     }
 }
 - (void)testButtonAction{
+<<<<<<< HEAD
+//    ChatListModel *sysList = [ChatListModel customerInit];
+//    sysList.chatListType = 100;
+//    sysList.userName = @"系统消息";
+//    sysList.isShow = NO;
+//    [sysList saveToDBChatLisModelAsyThread:^{
+//        NSLog(@"sys save success");
+//    } andError:^{
+//        NSLog(@"sys save faild");
+//    }];
+//    ChatListModel *workList = [ChatListModel customerInit];
+//    workList.chatListType = 101;
+//    workList.userName = @"工作通知";
+//    workList.isShow = NO;
+//    [workList saveToDBChatLisModelAsyThread:^{
+//        NSLog(@"work save success");
+//    } andError:^{
+//        NSLog(@"work save faild");
+//    }];
+//    [ContractModel searchUserModelOnAsyThread:^(NSArray *resultList,NSArray *locaArr) {
+//        for (ContractModel *con in resultList) {
+//            ChatListModel *list = [ChatListModel customerInit];
+//            list.messageUser = con;
+//            list.chatListType = 1;
+//            list.chatListId = con.userId;
+//            list.isShow = NO;
+//            list.userName = con.userName;
+//            [list saveToDBChatLisModelAsyThread:^{
+//                NSLog(@" user save success");
+//            } andError:^{
+//                NSLog(@" user save error");
+//            }];
+//        }
+//    }];
+
+=======
+>>>>>>> 144bdd275ee8c5886a649294eee09cf4c0a84318
     HQPopoverView *popoverView = [HQPopoverView popoverView];
     popoverView.style = HQHQPopoverActionDarkStyle;
     [popoverView showToPoint:CGPointMake(App_Frame_Width, 64) withActions:[self  getQQActions]];

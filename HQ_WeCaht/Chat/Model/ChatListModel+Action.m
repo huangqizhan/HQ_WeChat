@@ -106,6 +106,8 @@
         NSArray *result = [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext executeFetchRequest:request error:&error];
         if (result.count) {
             if (complite) complite(result.firstObject);
+        }else{
+            if (complite) complite(nil);
         }
     }];
 }
@@ -191,7 +193,7 @@
 ///同步保存
 - (void)saveToDBChatListModelOnMainThread:(void (^)())success andError:(void (^)())errorCallBack{
     
-    [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlockAndWait:^{
+    [[HQCoreDataManager shareCoreDataManager].syManagerSaveObjectContext performBlockAndWait:^{
         NSError *error;
         [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext save:&error];
         dispatch_sync(dispatch_get_main_queue(), ^{

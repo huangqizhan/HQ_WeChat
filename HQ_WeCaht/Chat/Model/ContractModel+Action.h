@@ -51,7 +51,7 @@
 
 ////异步修改
 - (void)UPDateFromDBOnOtherThread:(void(^)())success andError:(void (^)())faild;
-
-
+///程序起来之后检测
++ (void)applicationDidFinishLaunchedComplite:(void(^)(void))complite;
 
 @end

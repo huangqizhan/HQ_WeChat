@@ -58,6 +58,8 @@
  */
 + (unsigned long long)getFileSize:(NSString *)path;
 
++ (void)SetUserDefault:(id)value forKey:(NSString *)key;
++ (id)GetUserDefaultWithKey:(NSString *)key;
 
 
 

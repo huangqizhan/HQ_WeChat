@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2872B7C6205D0A3200CD283F /* HQHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872B7C5205D0A3200CD283F /* HQHUDHelper.m */; };
+		28930F7A20638D28005AEDF3 /* HQFirstConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */; };
 		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
 		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
 		BAB31B7F1F5302150055D5FE /* HQPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB31B7E1F5302150055D5FE /* HQPopoverView.m */; };
@@ -85,7 +87,6 @@
 		FD1A31611F0CBC360017FDBC /* HQLocationMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1A31601F0CBC360017FDBC /* HQLocationMapController.m */; };
 		FD1A31781F0CCBA90017FDBC /* HQChatMineLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1A31771F0CCBA90017FDBC /* HQChatMineLocationCell.m */; };
 		FD1A317B1F0CCBC90017FDBC /* HQChatLocationOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1A317A1F0CCBC90017FDBC /* HQChatLocationOtherCell.m */; };
-		FD1A422C1F1C99590096D3C2 /* HQHUDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1A422B1F1C99590096D3C2 /* HQHUDTools.m */; };
 		FD1B09AD1E7FB1500090AB82 /* HQCameraNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B09AC1E7FB1500090AB82 /* HQCameraNavigationController.m */; };
 		FD1B09B01E7FB4200090AB82 /* HQCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B09AF1E7FB4200090AB82 /* HQCameraController.m */; };
 		FD1B09B21E7FB50B0090AB82 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1B09B11E7FB50B0090AB82 /* CoreAudio.framework */; };
@@ -537,6 +538,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2872B7C4205D0A3200CD283F /* HQHUDHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQHUDHelper.h; sourceTree = "<group>"; };
+		2872B7C5205D0A3200CD283F /* HQHUDHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQHUDHelper.m; sourceTree = "<group>"; };
+		28930F7820638D28005AEDF3 /* HQFirstConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQFirstConfigViewController.h; sourceTree = "<group>"; };
+		28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQFirstConfigViewController.m; sourceTree = "<group>"; };
 		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
 		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
 		BAB31B7D1F5302150055D5FE /* HQPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPopoverView.h; sourceTree = "<group>"; };
@@ -671,8 +676,6 @@
 		FD1A31771F0CCBA90017FDBC /* HQChatMineLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatMineLocationCell.m; sourceTree = "<group>"; };
 		FD1A31791F0CCBC90017FDBC /* HQChatLocationOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQChatLocationOtherCell.h; sourceTree = "<group>"; };
 		FD1A317A1F0CCBC90017FDBC /* HQChatLocationOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQChatLocationOtherCell.m; sourceTree = "<group>"; };
-		FD1A422A1F1C99590096D3C2 /* HQHUDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQHUDTools.h; sourceTree = "<group>"; };
-		FD1A422B1F1C99590096D3C2 /* HQHUDTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQHUDTools.m; sourceTree = "<group>"; };
 		FD1B09AB1E7FB1500090AB82 /* HQCameraNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HQCameraNavigationController.h; path = ../../Common/Controller/HQCameraNavigationController.h; sourceTree = "<group>"; };
 		FD1B09AC1E7FB1500090AB82 /* HQCameraNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HQCameraNavigationController.m; path = ../../Common/Controller/HQCameraNavigationController.m; sourceTree = "<group>"; };
 		FD1B09AE1E7FB4200090AB82 /* HQCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQCameraController.h; sourceTree = "<group>"; };
@@ -2608,11 +2611,11 @@
 		FD831D041EDFC4D50038E7DA /* HUD */ = {
 			isa = PBXGroup;
 			children = (
-				FDD18CD31F131D4300E260BD /* MBProgressHUD.m */,
 				FDD18CD41F131D4300E260BD /* MBProgressHUD.h */,
+				FDD18CD31F131D4300E260BD /* MBProgressHUD.m */,
 				FDD18CD51F131D4300E260BD /* MBProgressHUD.bundle */,
-				FD1A422A1F1C99590096D3C2 /* HQHUDTools.h */,
-				FD1A422B1F1C99590096D3C2 /* HQHUDTools.m */,
+				2872B7C4205D0A3200CD283F /* HQHUDHelper.h */,
+				2872B7C5205D0A3200CD283F /* HQHUDHelper.m */,
 			);
 			path = HUD;
 			sourceTree = "<group>";
@@ -3164,6 +3167,8 @@
 				FD9408E51E5A789A00634206 /* AppDelegate.m */,
 				FD7A03EA1EA469D900BE240B /* PublicCaculateManager.h */,
 				FD7A03EB1EA469D900BE240B /* PublicCaculateManager.m */,
+				28930F7820638D28005AEDF3 /* HQFirstConfigViewController.h */,
+				28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */,
 				FD39535E1FE7B69300B52EBB /* Info.plist */,
 				BACB05591E59872E008B676D /* Main.storyboard */,
 				BACB055C1E59872E008B676D /* Assets.xcassets */,
@@ -3508,7 +3513,7 @@
 				TargetAttributes = {
 					BACB054C1E59872E008B676D = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = B5HHUXE3SK;
+						DevelopmentTeam = UGE5C8L29T;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -3724,7 +3729,6 @@
 				FD2ED8FE1EADA8DA006E585F /* UIImage+WebP.m in Sources */,
 				FD2476D21E6FA16F0085A23C /* HQChatMineTextCell.m in Sources */,
 				FD66A3B31EBB1A6900623F34 /* YYLabel.m in Sources */,
-				FD1A422C1F1C99590096D3C2 /* HQHUDTools.m in Sources */,
 				FD61A2311F0200A200F0830C /* HQChatDetailCell.m in Sources */,
 				FDA1DB9B1E9B6F49001A9854 /* PercentLabel.m in Sources */,
 				FD211C321EC143DB0040771A /* HQPlayGifImageView.m in Sources */,
@@ -3787,6 +3791,7 @@
 				BAF4A8071E73F11B00653204 /* UIImageView+AFNetworking.m in Sources */,
 				FD73582E1F96FCD70042B44D /* AR2DTestViewController.m in Sources */,
 				FD39F494200DD0CB006992DB /* UINavigationController+FullScreenGesture.m in Sources */,
+				2872B7C6205D0A3200CD283F /* HQHUDHelper.m in Sources */,
 				FD8DD80A1EB824F5002125CD /* GifTempViewController.m in Sources */,
 				FD057AA81F71104600AE31CF /* ChildBordViewController.m in Sources */,
 				FD9869E61EDE8CA500460E11 /* HQAttrubuteTextLabel.m in Sources */,
@@ -4025,6 +4030,7 @@
 				FD6649AA1EBC2A84005E340B /* MKAnnotationView+YYWebImage.m in Sources */,
 				FDDEE3D11E655B7D007E9AF9 /* MJProperty.m in Sources */,
 				FD28EA5E1E7B8D9F0077E009 /* HQImageManager.m in Sources */,
+				28930F7A20638D28005AEDF3 /* HQFirstConfigViewController.m in Sources */,
 				FD3B33531ECBF5C600A9075E /* DownLoadTest.m in Sources */,
 				FD1504A41EEFBE1C000E9DED /* HQChatDateCell.m in Sources */,
 				FD2CAD3B1EE13C6100FEEC7A /* wav.mm in Sources */,
@@ -4171,7 +4177,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = UGE5C8L29T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4207,7 +4213,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = B5HHUXE3SK;
+				DEVELOPMENT_TEAM = UGE5C8L29T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
