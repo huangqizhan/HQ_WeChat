@@ -498,6 +498,10 @@
     int val;
     return[scan scanInt:&val] && [scan isAtEnd];
 }
-
+- (NSString *)Trim{
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *str = [self stringByTrimmingCharactersInSet:set];
+    return str;
+}
 
 @end

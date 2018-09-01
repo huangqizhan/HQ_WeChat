@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>在使用期间访问地理位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>访问相册</string>
 	<key>NSCameraUsageDescription</key>
@@ -10,10 +12,6 @@
 	<string>访问麦克风</string>
 	<key>NSLocationUsageDescription</key>
 	<string>访问位置</string>
-	<key>NSLocationWhenInUseUsageDescription - 2</key>
-	<string></string>
-	<key>NSLocationAlwaysUsageDescription - 2</key>
-	<string>始终访问位置</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>访问日历</string>
 	<key>NSRemindersUsageDescription</key>
@@ -60,8 +58,6 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>

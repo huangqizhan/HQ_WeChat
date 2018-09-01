@@ -296,4 +296,6 @@
 ////判断字符串是否全是数字
 + (BOOL)isPureInt:(NSString *_Nullable)string;
 
+/// 去掉空格
+- (NSString *)Trim;
 @end
