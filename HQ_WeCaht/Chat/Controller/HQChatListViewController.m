@@ -113,7 +113,7 @@
     [ChatListModel selectChatListShowOnOtherThreadWith:^(NSArray *result) {
         [self.dataArray removeAllObjects];
         [self.dataArray addObjectsFromArray:result];
-        [self customerReloadTableView]; 
+        [self customerReloadTableView];
     }];
 }
 - (void)refershCurrnetListViewIsAppear:(BOOL)isAppear{

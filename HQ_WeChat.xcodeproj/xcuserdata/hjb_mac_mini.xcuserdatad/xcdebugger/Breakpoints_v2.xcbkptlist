@@ -26,12 +26,12 @@
                   moduleName = "HQ_WeChat"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hjb_mac_mini/Desktop/%E5%AE%9E%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9/HQ_WeChat/HQ_WeCaht/Chat/Model/ChatListModel+Action.m"
-                  timestampString = "543397488.049858"
+                  timestampString = "544354052.278487"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
                   endingLineNumber = "210"
-                  offsetFromSymbolStart = "96">
+                  offsetFromSymbolStart = "77">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,12 +41,12 @@
                   moduleName = "HQ_WeChat"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hjb_mac_mini/Desktop/%E5%AE%9E%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9/HQ_WeChat/HQ_WeCaht/Chat/Model/ChatListModel+Action.m"
-                  timestampString = "543397488.051746"
+                  timestampString = "544354052.281633"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
                   endingLineNumber = "210"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "15">
                </Location>
             </Locations>
          </BreakpointContent>
