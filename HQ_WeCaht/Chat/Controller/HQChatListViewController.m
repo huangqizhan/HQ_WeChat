@@ -24,7 +24,9 @@
 
 
 
-@interface HQChatListViewController ()
+@interface HQChatListViewController (){
+    UIView *_testView;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISearchController *searchController;
