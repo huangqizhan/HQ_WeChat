@@ -106,7 +106,7 @@
 
 - (void)setListModel:(ChatListModel *)listModel{
     _listModel = listModel;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_listModel.messageUser.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"mayun.jpg"]];
+//    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_listModel.messageUser.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"mayun.jpg"]];
     _nameLabel.text = _listModel.userName;
     _contentLabel.text = _listModel.chatContent;
 }
@@ -162,7 +162,7 @@
 }
 - (void)setMessageModel:(ChatMessageModel *)messageModel{
     _messageModel = messageModel;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_messageModel.userHeadImageString] placeholderImage:[UIImage imageNamed:@"mayun.jpg"]];
+//    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_messageModel.userHeadImageString] placeholderImage:[UIImage imageNamed:@"mayun.jpg"]];
     _nameLabel.text = _messageModel.userName;
     _contentLabel.text = _messageModel.contentString;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "HQChatDetailCell.h"
-#import "UIButton+WebCache.h"
+
 
 @interface HQChatDetailCell ()
 
@@ -43,7 +43,7 @@
 }
 - (void)setListModel:(ChatListModel *)listModel{
     _listModel = listModel;
-    [_button sd_setImageWithURL:[NSURL URLWithString:self.listModel.messageUser.userHeadImaeUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"icon_album_picture_fail_big"]];
+//    [_button sd_setImageWithURL:[NSURL URLWithString:self.listModel.messageUser.userHeadImaeUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"icon_album_picture_fail_big"]];
     [_button setTitle:self.listModel.userName forState:UIControlStateNormal];
 }
 - (void)headButtonDidClick{

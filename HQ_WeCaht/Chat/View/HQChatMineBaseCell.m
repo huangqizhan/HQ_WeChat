@@ -7,7 +7,7 @@
 //
 
 #import "HQChatMineBaseCell.h"
-#import "HQTextView.h"
+#import "HQChatTextView.h"
 #import "HQActionSheet.h"
 #import "UIApplication+HQExtern.h"
 
@@ -158,7 +158,7 @@
     return YES;
 }
 - (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
-    HQTextView *textView;
+    HQChatTextView *textView;
     if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
         textView = [self.delegate getCurentTextViewWhenShowMenuController];
     }

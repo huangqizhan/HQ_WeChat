@@ -7,7 +7,6 @@
 //
 
 #import "HQChatMineTextCell.h"
-#import "UIImage+YYWebImage.h"
 #import "HQTextView.h"
 #import "HqChatMessageLabel.h"
 #import "ApplicationHelper.h"

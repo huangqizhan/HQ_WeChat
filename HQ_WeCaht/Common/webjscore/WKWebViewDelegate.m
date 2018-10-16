@@ -10,7 +10,6 @@
 #import "HQActionSheet.h"
 #import "UIApplication+HQExtern.h"
 #import "WKWebView+Add.h"
-#import "SDWebImageDownloader.h"
 #import "UIImage+Face.h"
 
 
@@ -163,13 +162,13 @@
 - (void)handleImgLongPress:(NSString *)urlStr{
     ///判断URL 是否正确
     WEAKSELF;
-    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlStr] options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-        if (image == nil) {
-            return ;
-        }
-        NSString *result = [UIImage detactErCodeWithImage:image];
-        [weakSelf showActionSheetWith:result?YES:NO image:image codeStr:result];
-    }];
+//    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlStr] options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//        if (image == nil) {
+//            return ;
+//        }
+//        NSString *result = [UIImage detactErCodeWithImage:image];
+//        [weakSelf showActionSheetWith:result?YES:NO image:image codeStr:result];
+//    }];
 }
 
 - (void)showActionSheetWith:(BOOL)erCode image:(UIImage *)image codeStr:(NSString *)codeStr{

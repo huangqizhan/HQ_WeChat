@@ -7,7 +7,7 @@
 //
 
 #import "HQChatOtherBaseCell.h"
-#import "HQTextView.h"
+#import "HQChatTextView.h"
 #import "HQActionSheet.h"
 #import "UIApplication+HQExtern.h"
 
@@ -47,7 +47,7 @@
 }
 - (void)setMessageModel:(ChatMessageModel *)messageModel{
     _messageModel = messageModel;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_messageModel.userHeadImageString] placeholderImage:[UIImage imageNamed:@"sharemore_friendcard"]];
+//    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_messageModel.userHeadImageString] placeholderImage:[UIImage imageNamed:@"sharemore_friendcard"]];
     self.selectControl.image = [UIImage imageNamed:messageModel.isSeleted ? @"CellBlueSelected": @"CellNotSelected"];
     switch (_messageModel.deliverStatus) { // 发送状态
         case HQMessageDeliveryState_Delivering:{
@@ -143,7 +143,7 @@
     return YES;
 }
 - (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
-    HQTextView *textView;
+    HQChatTextView *textView;
     if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
         textView = [self.delegate getCurentTextViewWhenShowMenuController];
     }

@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YYAnimatedImageView.h"
 
 
 @interface LoadGifImageCell : UITableViewCell
 
-@property (nonatomic,copy) NSString *urlString;
-
-@property (nonatomic,strong) YYAnimatedImageView *webImageView;
 
 @end

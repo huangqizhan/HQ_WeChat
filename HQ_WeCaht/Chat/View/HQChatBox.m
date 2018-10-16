@@ -97,7 +97,7 @@
 - (UITextView *) textView
 {
     if (_textView == nil) {
-        _textView = [[HQTextView alloc] initWithFrame:self.talkButton.frame];
+        _textView = [[HQChatTextView alloc] initWithFrame:self.talkButton.frame];
         [_textView setFont:[UIFont systemFontOfSize:16.0f]];
         [_textView.layer setMasksToBounds:YES];
         [_textView.layer setCornerRadius:4.0f];

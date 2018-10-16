@@ -10,7 +10,6 @@
 #import "UIImage+Resize.h"
 #import "HQFileTools.h"
 #import "UIImage+CompressImage.h"
-#import "UIImage+YYWebImage.h"
 
 
 static UIImage *_failedImage;
@@ -325,8 +324,8 @@ static UIImage *_failedImage;
 - (UIImage *)loadlocalGifImageWith:(NSString *)fileName andScal:(CGFloat)scal{
     NSString *path = [[NSBundle mainBundle]pathForResource:fileName ofType:@"gif"];
     NSData *data = [NSData dataWithContentsOfFile:path];
-    UIImage *image = [UIImage yy_imageWithSmallGIFData:data scale:2];
-    return image;
+//    UIImage *image = [UIImage yy_imageWithSmallGIFData:data scale:2];
+    return nil;
 }
 - (NSData *)loadLocalGifImageDataWith:(NSString *)fileName{
     NSString *path = [[NSBundle mainBundle]pathForResource:fileName ofType:@"gif"];

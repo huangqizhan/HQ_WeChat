@@ -36,7 +36,7 @@
 
 - (void)setContactModel:(ContractModel *)contactModel{
     _contactModel = contactModel;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_contactModel.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
+//    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_contactModel.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
     _nameLabel.text = _contactModel.userName;
     _contentLabel.text = @"I donnot know";
 }

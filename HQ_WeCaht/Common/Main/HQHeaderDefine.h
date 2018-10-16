@@ -43,7 +43,6 @@
 #import "PublicCaculateManager.h"
 #import "NSString+Extension.h"
 #import "HQChaRootCell.h"
-#import "UIImageView+WebCache.h"
 #import "HQSearchBar.h"
 #import "HQWebViewController.h"
 #import "ReCodeHelper.h"

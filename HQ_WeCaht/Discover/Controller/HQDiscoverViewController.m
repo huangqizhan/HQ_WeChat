@@ -7,6 +7,7 @@
 //
 
 #import "HQDiscoverViewController.h"
+#import "WBTimelineViewController.h"
 #import "HQTipView.h"
 
 @interface HQDiscoverViewController (){
@@ -93,6 +94,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        WBTimelineViewController *weiboVC = [WBTimelineViewController new];
+        [self.navigationController pushViewController:weiboVC animated:YES];
+    }
 }
 - (void)messageHandleWith:(ChatMessageModel *)messageModel{
     NSLog(@" faxian contentString = %@",messageModel.contentString);

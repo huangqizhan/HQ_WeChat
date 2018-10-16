@@ -93,7 +93,7 @@ static const CGFloat leftPadding = 9;
     if (_model.chatListType == 100 || _model.chatListType  == 101) {
         _avatarImageView.image = [UIImage imageNamed:@"mayun.jpg"];
     }else{
-        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.messageUser.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
+//        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.messageUser.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
     }
     
     

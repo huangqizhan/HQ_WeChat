@@ -7,7 +7,6 @@
 //
 
 #import "DownLoadBackImageCell.h"
-#import "SDWebImageDownloader.h"
 #import "HQLocalImageManager.h"
 
 
@@ -145,7 +144,7 @@
 }
 - (void)setModel:(DownloadFileModel *)model{
     _model = model;
-    [self sd_setImageWithURL:[NSURL URLWithString:_model.contentUrl] placeholderImage:HeadPlaceImage];
+//    [self sd_setImageWithURL:[NSURL URLWithString:_model.contentUrl] placeholderImage:HeadPlaceImage];
     _processView.downLoadModel = _model;
 }
 - (void)tapDownloadAction:(UITapGestureRecognizer *)tap{
@@ -156,22 +155,22 @@
         }
     }else{
         WEAKSELF;
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:_model.contentUrl] options:SDWebImageDownloaderProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-            _model.downLoadProcess = receivedSize/expectedSize;
-            _processView.downLoadModel = _model;
-        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-            if (image) {
-                NSString *fileName = [NSString stringWithFormat:@"ChatBegImageName_%lld",self.listModel.chatListId];
-                _model.downLoadProcess = 1;
-                _model.isFinish = YES;
-                _processView.downLoadModel = _model;
-                _model.downLoadName = fileName;
-                [_model saveToDBChatLisModelAsyThread:^(BOOL result) {
-                    NSLog(@"result = %d",result);
-                }];
-                [weakSelf saveImageToSandBoxWith:image andFileName:fileName];
-            }
-        }];
+//        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:_model.contentUrl] options:SDWebImageDownloaderProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//            _model.downLoadProcess = receivedSize/expectedSize;
+//            _processView.downLoadModel = _model;
+//        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//            if (image) {
+//                NSString *fileName = [NSString stringWithFormat:@"ChatBegImageName_%lld",self.listModel.chatListId];
+//                _model.downLoadProcess = 1;
+//                _model.isFinish = YES;
+//                _processView.downLoadModel = _model;
+//                _model.downLoadName = fileName;
+//                [_model saveToDBChatLisModelAsyThread:^(BOOL result) {
+//                    NSLog(@"result = %d",result);
+//                }];
+//                [weakSelf saveImageToSandBoxWith:image andFileName:fileName];
+//            }
+//        }];
     }
 }
 - (void)saveImageToSandBoxWith:(UIImage *)imaage andFileName:(NSString *)fileName{

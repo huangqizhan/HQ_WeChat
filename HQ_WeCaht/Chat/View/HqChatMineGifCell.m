@@ -7,7 +7,7 @@
 //
 
 #import "HqChatMineGifCell.h"
-#import "YYAnimatedImageView.h"
+
 #import "HQPlayGifImageView.h"
 #import "HQActionSheet.h"
 #import "UIApplication+HQExtern.h"

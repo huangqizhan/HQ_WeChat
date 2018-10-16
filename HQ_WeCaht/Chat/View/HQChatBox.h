@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HQTextView.h"
+#import "HQChatTextView.h"
 
 
 
@@ -86,7 +86,7 @@
 @property (nonatomic,assign) HQChatBoxStatus boxStatus;
 
 ///输入框
-@property (nonatomic,strong) HQTextView *textView;
+@property (nonatomic,strong) HQChatTextView *textView;
 
 //当录音时间过长时，由APP主动取消录音按钮的按压事件，结束录音
 
