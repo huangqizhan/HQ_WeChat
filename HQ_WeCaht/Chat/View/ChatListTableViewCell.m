@@ -55,27 +55,16 @@ static const CGFloat leftPadding = 9;
     [super layoutSubviews];
     
     [_avatarImageView setFrame:CGRectMake(leftPadding, topPadding, imageWidth, imageWidth)];
-    [_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-9);
-        make.top.equalTo(self.mas_top).offset(13);
-        make.width.mas_equalTo(70);
-    }];
+    _dateLabel.top = 13;
+    _dateLabel.width = 70;
     
-    [_usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(13);
-        make.left.equalTo(_avatarImageView.mas_right).offset(8);
-        make.right.equalTo(_dateLabel.mas_left).offset(-5);
-    }];
-    [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_usernameLabel.mas_bottom).offset(4);
-        make.left.equalTo(_avatarImageView.mas_right).offset(8);
-        make.right.equalTo(_dateLabel.mas_left).offset(-5);
-    }];
+    _usernameLabel.top = 13;
+    _usernameLabel.left = 8;
+    _usernameLabel.right = _dateLabel.left + 8;
+    _messageLabel.top = _usernameLabel.bottom + 4;
+    _messageLabel.left = _avatarImageView.right + 8;
     
-    [_unreadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_messageLabel.mas_centerY);
-        make.right.mas_equalTo(-9);
-    }];
+    _unreadLabel.centerY = _messageLabel.centerY;
 }
 
 - (void)setModel:(ChatListModel *)model{

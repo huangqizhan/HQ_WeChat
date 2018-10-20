@@ -35,7 +35,6 @@
 #import "HQ_WeChatConst.h"
 #import "MJExtension.h"
 #import "HQChatHeaderDefine.h"
-#import "Masonry.h"
 #import "HQNetWorkManager.h"
 #import "HQImageManager.h"
 #import "NSDate+Extension.h"

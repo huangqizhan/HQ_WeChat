@@ -148,12 +148,10 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [self.menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(0);
-        make.left.equalTo(self.contentView.mas_left).offset(0);
-        make.right.equalTo(self.contentView.mas_right).offset(0);
-        make.height.equalTo(self.contentView.mas_height).offset(0);
-    }];
+    _menuButton.top = 0;
+    _menuButton.left = 0;
+    _menuButton.width = self.contentView.width;
+    _menuButton.height = self.contentView.height;
 }
 
 - (HQMenuButton *)menuButton{

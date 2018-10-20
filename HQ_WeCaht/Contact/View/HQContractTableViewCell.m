@@ -46,7 +46,7 @@
 
 - (UIButton *)headImageBut{
     if (_headImageBut == nil) {
-        _headImageBut = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 40,40)];
+        _headImageBut = [[UIButton alloc] initWithFrame:CGRectMake(10, 7, 30,30)];
         _headImageBut.userInteractionEnabled = NO;
     }
     return _headImageBut;
@@ -54,8 +54,8 @@
 
 - (UILabel *)nameLabel{
     if (_nameLabel == nil) {
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 20, App_Frame_Width-120, 20)];
-        _nameLabel.font = [UIFont systemFontOfSize:16];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 12, App_Frame_Width-120, 20)];
+        _nameLabel.font = [UIFont systemFontOfSize:15];
     }
     return _nameLabel;
 }
