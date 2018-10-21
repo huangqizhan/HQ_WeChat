@@ -50,23 +50,6 @@ static const CGFloat leftPadding = 9;
     }
     return cell;
 }
-- (void)layoutSubviews{
-    CGFloat imageWidth = self.height - topPadding*2;
-    [super layoutSubviews];
-    
-    [_avatarImageView setFrame:CGRectMake(leftPadding, topPadding, imageWidth, imageWidth)];
-    _dateLabel.top = 13;
-    _dateLabel.width = 70;
-    
-    _usernameLabel.top = 13;
-    _usernameLabel.left = 8;
-    _usernameLabel.right = _dateLabel.left + 8;
-    _messageLabel.top = _usernameLabel.bottom + 4;
-    _messageLabel.left = _avatarImageView.right + 8;
-    
-    _unreadLabel.centerY = _messageLabel.centerY;
-}
-
 - (void)setModel:(ChatListModel *)model{
     _model = model;
     if (_model.unReadCount > 0) {
@@ -76,8 +59,6 @@ static const CGFloat leftPadding = 9;
         [self.unreadLabel setTitle:@" " forState:UIControlStateNormal];
         [self.unreadLabel setBackgroundImage:[UIImage gxz_imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
     }
-    
-    
     
     if (_model.chatListType == 100 || _model.chatListType  == 101) {
         _avatarImageView.image = [UIImage imageNamed:@"mayun.jpg"];
@@ -102,26 +83,27 @@ static const CGFloat leftPadding = 9;
 #pragma mark - Getter and Setter
 - (UIImageView *) avatarImageView{
     if (_avatarImageView == nil) {
-        UIImageView *imageV = [[UIImageView alloc] init];
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
         [self.contentView addSubview:imageV];
         _avatarImageView = imageV;
         _avatarImageView.layer.masksToBounds = YES;
         _avatarImageView.layer.cornerRadius = 3.0;
+        _avatarImageView.image = [UIImage imageNamed:@"icon_avatar"];
     }
     return _avatarImageView;
 }
 - (UILabel *) usernameLabel{
     if (_usernameLabel == nil) {
-        UILabel *label = [[UILabel alloc] init];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, App_Frame_Width*0.6, 20)];
         [self.contentView addSubview:label];
-        _usernameLabel.font = [UIFont systemFontOfSize:16.0];
+        _usernameLabel.font = [UIFont systemFontOfSize:15.0];
         _usernameLabel = label;
     }
     return _usernameLabel;
 }
 - (UILabel *) dateLabel{
     if (_dateLabel == nil) {
-        UILabel *label = [[UILabel alloc] init];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(App_Frame_Width - 120, 10, 100, 20)];
         [label setTextAlignment:NSTextAlignmentRight];
         [label setTextColor:XZRGB(0xadadad)];
         label.font = [UIFont systemFontOfSize:12.0];
@@ -141,7 +123,7 @@ static const CGFloat leftPadding = 9;
 }
 - (UILabel *) messageLabel{
     if (_messageLabel == nil) {
-        UILabel *label = [[UILabel alloc] init];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 30, App_Frame_Width*0.6, 20)];
         [label setTextColor:XZRGB(0x9a9a9a)];
         label.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:label];

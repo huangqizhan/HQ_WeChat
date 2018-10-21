@@ -69,19 +69,19 @@ typedef void (^ViewControllerWillAppearInjectBlock)(UIViewController *viewContro
 
 @implementation UIViewController (FDFullscreenPopGesturePrivate)
 
-+ (void)load
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Method viewWillAppear_originalMethod = class_getInstanceMethod(self, @selector(viewWillAppear:));
-        Method viewWillAppear_swizzledMethod = class_getInstanceMethod(self, @selector(fd_viewWillAppear:));
-        method_exchangeImplementations(viewWillAppear_originalMethod, viewWillAppear_swizzledMethod);
-        
-        Method viewWillDisappear_originalMethod = class_getInstanceMethod(self, @selector(viewWillDisappear:));
-        Method viewWillDisappear_swizzledMethod = class_getInstanceMethod(self, @selector(fd_viewWillDisappear:));
-        method_exchangeImplementations(viewWillDisappear_originalMethod, viewWillDisappear_swizzledMethod);
-    });
-}
+//+ (void)load
+//{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        Method viewWillAppear_originalMethod = class_getInstanceMethod(self, @selector(viewWillAppear:));
+//        Method viewWillAppear_swizzledMethod = class_getInstanceMethod(self, @selector(fd_viewWillAppear:));
+//        method_exchangeImplementations(viewWillAppear_originalMethod, viewWillAppear_swizzledMethod);
+//
+//        Method viewWillDisappear_originalMethod = class_getInstanceMethod(self, @selector(viewWillDisappear:));
+//        Method viewWillDisappear_swizzledMethod = class_getInstanceMethod(self, @selector(fd_viewWillDisappear:));
+//        method_exchangeImplementations(viewWillDisappear_originalMethod, viewWillDisappear_swizzledMethod);
+//    });
+//}
 
 - (void)fd_viewWillAppear:(BOOL)animated
 {
@@ -120,27 +120,27 @@ typedef void (^ViewControllerWillAppearInjectBlock)(UIViewController *viewContro
 
 @implementation UINavigationController (FDFullscreenPopGesture)
 
-+ (void)load
-{
-    // Inject "-pushViewController:animated:"
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = [self class];
-        
-        SEL originalSelector = @selector(pushViewController:animated:);
-        SEL swizzledSelector = @selector(fd_pushViewController:animated:);
-        
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-        
-        BOOL success = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
-        if (success) {
-            class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
-}
+//+ (void)load
+//{
+//    // Inject "-pushViewController:animated:"
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        Class class = [self class];
+//
+//        SEL originalSelector = @selector(pushViewController:animated:);
+//        SEL swizzledSelector = @selector(fd_pushViewController:animated:);
+//
+//        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+//        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+//
+//        BOOL success = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+//        if (success) {
+//            class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+//        } else {
+//            method_exchangeImplementations(originalMethod, swizzledMethod);
+//        }
+//    });
+//}
 
 - (void)fd_pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {

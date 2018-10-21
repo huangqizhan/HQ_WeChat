@@ -56,6 +56,7 @@
 		BAD273F72012391C00A26BBC /* WKWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */; };
 		BADCFA4421761CE0009B488D /* LabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4321761CE0009B488D /* LabelViewController.m */; };
 		BADCFA4721761CF1009B488D /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4621761CF1009B488D /* TextViewController.m */; };
+		BADCFA4C217B5BC4009B488D /* CellTextLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4B217B5BC4009B488D /* CellTextLayout.m */; };
 		BAE15FBA2012E41600B1ED76 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE15FB92012E41600B1ED76 /* libc++abi.tbd */; };
 		BAE15FE82018B1D100B1ED76 /* JSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE15FE72018B1D100B1ED76 /* JSWebViewController.m */; };
 		BAE15FEA2018B1EA00B1ED76 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = BAE15FE92018B1EA00B1ED76 /* ExampleApp.html */; };
@@ -618,6 +619,9 @@
 		BADCFA4321761CE0009B488D /* LabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelViewController.m; sourceTree = "<group>"; };
 		BADCFA4521761CF1009B488D /* TextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
 		BADCFA4621761CF1009B488D /* TextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
+		BADCFA4A217B5BC4009B488D /* CellTextLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellTextLayout.h; sourceTree = "<group>"; };
+		BADCFA4B217B5BC4009B488D /* CellTextLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellTextLayout.m; sourceTree = "<group>"; };
+		BADCFA4D217B5C5A009B488D /* TextCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextCore.h; sourceTree = "<group>"; };
 		BAE15FB92012E41600B1ED76 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		BAE15FE62018B1D100B1ED76 /* JSWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSWebViewController.h; sourceTree = "<group>"; };
 		BAE15FE72018B1D100B1ED76 /* JSWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSWebViewController.m; sourceTree = "<group>"; };
@@ -1474,9 +1478,9 @@
 		BA59BFE6216CF210005D6D79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BA59BFE7216CF211005D6D79 /* NSObject+Model.h */,
 				BA59BFE8216CF211005D6D79 /* ClassInfo.h */,
 				BA59BFE9216CF211005D6D79 /* ClassInfo.m */,
+				BA59BFE7216CF211005D6D79 /* NSObject+Model.h */,
 				BA59BFEA216CF211005D6D79 /* NSObject+Model.m */,
 			);
 			path = Model;
@@ -1710,6 +1714,15 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
+		BADCFA49217B5B8C009B488D /* CellTexrLayout */ = {
+			isa = PBXGroup;
+			children = (
+				BADCFA4A217B5BC4009B488D /* CellTextLayout.h */,
+				BADCFA4B217B5BC4009B488D /* CellTextLayout.m */,
+			);
+			name = CellTexrLayout;
+			sourceTree = "<group>";
+		};
 		BAE15FE52018B1A600B1ED76 /* jshanfler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1907,6 +1920,7 @@
 				BAF76505216CEA0C00525D8D /* Comonent */,
 				BAF76518216CEA0C00525D8D /* Utilities */,
 				BAF76527216CEA0C00525D8D /* String */,
+				BADCFA4D217B5C5A009B488D /* TextCore.h */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -1925,24 +1939,24 @@
 		BAF76505216CEA0C00525D8D /* Comonent */ = {
 			isa = PBXGroup;
 			children = (
-				BAF76506216CEA0C00525D8D /* TextEffectWindow.m */,
-				BAF76507216CEA0C00525D8D /* TextKeybordManager.m */,
-				BAF76508216CEA0C00525D8D /* TextContainerView.m */,
-				BAF76509216CEA0C00525D8D /* TextDebugOption.m */,
-				BAF7650A216CEA0C00525D8D /* TextLayout.h */,
-				BAF7650B216CEA0C00525D8D /* TextSelecttionView.m */,
-				BAF7650C216CEA0C00525D8D /* TextLine.h */,
-				BAF7650D216CEA0C00525D8D /* TextMagnifierView.h */,
-				BAF7650E216CEA0C00525D8D /* TextInput.m */,
-				BAF7650F216CEA0C00525D8D /* TextKeybordManager.h */,
 				BAF76510216CEA0C00525D8D /* TextEffectWindow.h */,
+				BAF76506216CEA0C00525D8D /* TextEffectWindow.m */,
+				BAF7650F216CEA0C00525D8D /* TextKeybordManager.h */,
+				BAF76507216CEA0C00525D8D /* TextKeybordManager.m */,
 				BAF76511216CEA0C00525D8D /* TextDebugOption.h */,
-				BAF76512216CEA0C00525D8D /* TextContainerView.h */,
+				BAF76509216CEA0C00525D8D /* TextDebugOption.m */,
+				BAF7650D216CEA0C00525D8D /* TextMagnifierView.h */,
 				BAF76513216CEA0C00525D8D /* TextMagnifierView.m */,
+				BAF76512216CEA0C00525D8D /* TextContainerView.h */,
+				BAF76508216CEA0C00525D8D /* TextContainerView.m */,
+				BAF7650C216CEA0C00525D8D /* TextLine.h */,
 				BAF76514216CEA0C00525D8D /* TextLine.m */,
 				BAF76515216CEA0C00525D8D /* TextSelecttionView.h */,
+				BAF7650B216CEA0C00525D8D /* TextSelecttionView.m */,
+				BAF7650A216CEA0C00525D8D /* TextLayout.h */,
 				BAF76516216CEA0C00525D8D /* TextLayout.m */,
 				BAF76517216CEA0C00525D8D /* TextInput.h */,
+				BAF7650E216CEA0C00525D8D /* TextInput.m */,
 			);
 			path = Comonent;
 			sourceTree = "<group>";
@@ -1950,20 +1964,20 @@
 		BAF76518216CEA0C00525D8D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				BAF76519216CEA0C00525D8D /* TextTransaction.m */,
 				BAF7651A216CEA0C00525D8D /* UIPasteboard+Add.h */,
-				BAF7651B216CEA0C00525D8D /* TextUtilites.m */,
-				BAF7651C216CEA0C00525D8D /* NSParagraphStyle+Add.m */,
-				BAF7651D216CEA0C00525D8D /* TextAsyncLayer.m */,
-				BAF7651E216CEA0C00525D8D /* TextWeakProxy.h */,
-				BAF7651F216CEA0C00525D8D /* CGutilies.m */,
-				BAF76520216CEA0C00525D8D /* TextTransaction.h */,
-				BAF76521216CEA0C00525D8D /* TextUtilites.h */,
 				BAF76522216CEA0C00525D8D /* UIPasteboard+Add.m */,
-				BAF76523216CEA0C00525D8D /* NSParagraphStyle+Add.h */,
-				BAF76524216CEA0C00525D8D /* CGutilies.h */,
-				BAF76525216CEA0C00525D8D /* TextWeakProxy.m */,
+				BAF76521216CEA0C00525D8D /* TextUtilites.h */,
+				BAF7651B216CEA0C00525D8D /* TextUtilites.m */,
 				BAF76526216CEA0C00525D8D /* TextAsyncLayer.h */,
+				BAF7651D216CEA0C00525D8D /* TextAsyncLayer.m */,
+				BAF76520216CEA0C00525D8D /* TextTransaction.h */,
+				BAF76519216CEA0C00525D8D /* TextTransaction.m */,
+				BAF76523216CEA0C00525D8D /* NSParagraphStyle+Add.h */,
+				BAF7651C216CEA0C00525D8D /* NSParagraphStyle+Add.m */,
+				BAF76524216CEA0C00525D8D /* CGutilies.h */,
+				BAF7651F216CEA0C00525D8D /* CGutilies.m */,
+				BAF7651E216CEA0C00525D8D /* TextWeakProxy.h */,
+				BAF76525216CEA0C00525D8D /* TextWeakProxy.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1971,15 +1985,15 @@
 		BAF76527216CEA0C00525D8D /* String */ = {
 			isa = PBXGroup;
 			children = (
-				BAF76528216CEA0C00525D8D /* TextParser.m */,
+				BAF7652F216CEA0C00525D8D /* TextRubyAnnotation.m */,
 				BAF76529216CEA0C00525D8D /* TextRubyAnnotation.h */,
 				BAF7652A216CEA0C00525D8D /* TextAttribute.h */,
-				BAF7652B216CEA0C00525D8D /* TextArchive.m */,
-				BAF7652C216CEA0C00525D8D /* TextRunDelegate.h */,
-				BAF7652D216CEA0C00525D8D /* TextParser.h */,
 				BAF7652E216CEA0C00525D8D /* TextAttribute.m */,
-				BAF7652F216CEA0C00525D8D /* TextRubyAnnotation.m */,
 				BAF76530216CEA0C00525D8D /* TextArchive.h */,
+				BAF7652B216CEA0C00525D8D /* TextArchive.m */,
+				BAF7652D216CEA0C00525D8D /* TextParser.h */,
+				BAF76528216CEA0C00525D8D /* TextParser.m */,
+				BAF7652C216CEA0C00525D8D /* TextRunDelegate.h */,
 				BAF76531216CEA0C00525D8D /* TextRunDelegate.m */,
 			);
 			path = String;
@@ -2168,6 +2182,7 @@
 		FD2476C71E6F9CE40085A23C /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
+				BADCFA49217B5B8C009B488D /* CellTexrLayout */,
 				FD2476CF1E6FA1150085A23C /* OtherCells */,
 				FD2476CE1E6FA1030085A23C /* MineCells */,
 				FDE5CECF1ED8089B0072882A /* HQChatTableViewCellDelegate.h */,
@@ -3763,6 +3778,7 @@
 				FD1B09CA1E7FB6690090AB82 /* HQCameraSlider.m in Sources */,
 				FDCBB5391EFBBA6C00D6F573 /* WKWebViewJavascriptBridge.m in Sources */,
 				BA59BFF0216CF211005D6D79 /* NSObject+Model.m in Sources */,
+				BADCFA4C217B5BC4009B488D /* CellTextLayout.m in Sources */,
 				BA59C03C216CF81C005D6D79 /* WBTableViewCell.m in Sources */,
 				FDDEE3AF1E655644007E9AF9 /* HQFaceTools.m in Sources */,
 				FD1B09C71E7FB5FA0090AB82 /* HQCameraManager.m in Sources */,
