@@ -174,7 +174,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 - (void)_trackDidLongPress{
     [self _endLongPressTimer];
-    if (_state.isToutchEnd ||_state.touchMoved) {
+    if (_state.isToutchEnd ||_state.touchMoved || !self.isLongPressShowSelectionView) {
         return;
     }
     if (_state.hasLongPressAction && self.textLongPressAction) {
@@ -321,6 +321,12 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 - (CGRect)_convertRectFromLayout:(CGRect)rect{
     rect.origin = [self _convertPointFromLayout:rect.origin];
+    return rect;
+}
+- (CGRect)_convertSelectionViewRectFromLayout:(CGRect)rect{
+    CGPoint point = rect.origin;
+    point = [self convertPoint:point toView:_selectionView];
+    rect.origin = point;
     return rect;
 }
 ///分词器(tokenizer)通过 词粒度（granularity） 获取焦点最近的词的范围
@@ -510,7 +516,8 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     NSArray *rects = [_innerLayout selectionRectsForRange:range];
     if (rects) [allRects addObjectsFromArray:rects];
     [allRects enumerateObjectsUsingBlock:^(TextSelectionRect *rect, NSUInteger idx, BOOL *stop) {
-        rect.rect = [self _convertRectFromLayout:rect.rect];
+        CGRect re = [self _convertSelectionViewRectFromLayout:rect.rect];
+        rect.rect = re;
     }];
     _state.isHiddenSelectedView = NO;
     _selectionView.selectionRects = allRects;
@@ -535,7 +542,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     NSArray *rects = [_innerLayout selectionRectsForRange:selectedRange];;
     if (rects) [allRects addObjectsFromArray:rects];
     [allRects enumerateObjectsUsingBlock:^(TextSelectionRect *selectionRect, NSUInteger idx, BOOL * _Nonnull stop) {
-        selectionRect.rect = [self _convertRectFromLayout:selectionRect.rect];
+        selectionRect.rect = [self _convertSelectionViewRectFromLayout:selectionRect.rect];
     }];
     _selectionView.selectionRects = allRects;
 }
@@ -722,6 +729,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         if (!_state.isHiddenSelectedView){
             _state.trackingTouch = YES;
             _state.swallowTouch = YES;
+            point = [self convertPoint:point toView:_selectionView];
             if ([_selectionView isStartGrabberContainsPoint:point]) {
                 _state.trackingGrabber = kStart;
             }else if ([_selectionView isEndGrabberContainsPoint:point]){
@@ -732,7 +740,9 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         }else{
             ///选中视图
             _state.trackingTouch = YES;
-            [self _startLongPressTimer];
+            if (self.isLongPressShowSelectionView) {
+                [self _startLongPressTimer];
+            }
         }
         _state.touchMoved = NO;
     }
@@ -1256,7 +1266,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     task.willDisplay = ^(CALayer * _Nonnull layer) {
         [layer removeAnimationForKey:@"contents"];
         for (UIView *view in attachViews) {
-            if (layoutNeedUpdate && [textLayout.attachmentContentsSet containsObject:view]) {
+            if (layoutNeedUpdate || ![textLayout.attachmentContentsSet containsObject:view]) {
                 if (view.superview == self ) {
                     [view removeFromSuperview];
                 }
@@ -1264,7 +1274,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         }
         
         for (CALayer *layer in attachLayers) {
-            if (layoutNeedUpdate && [textLayout.attachmentContentsSet containsObject:layer]) {
+            if (layoutNeedUpdate || ![textLayout.attachmentContentsSet containsObject:layer]) {
                 if (layer.superlayer == self.layer) {
                     [layer removeFromSuperlayer];
                 }
@@ -1347,7 +1357,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         point = TextCGPointPixelRound(point);
         [drawLayout drawInContext:nil size:size point:point view:view layer:layer debug:nil cancel:NULL];
         for (TextAttachment *a in drawLayout.attachments) {
-            if ([a.content isKindOfClass:[UIView class]]) [attachLayers addObject:a.content];
+            if ([a.content isKindOfClass:[UIView class]]) [attachViews addObject:a.content];
             else if ([a.content isKindOfClass:[CALayer class]]) [attachLayers addObject:a.content];
         }
         if (contentNeedFade) {

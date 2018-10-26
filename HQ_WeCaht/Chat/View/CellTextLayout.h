@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "TextCore.h"
+#import "BaseCore.h"
+
+
+
+// Link 点击背景色
+#define kChatCellTextHighlightBackgroundColor UIColorHex(bfdffe)
+
+// 一般文本色
+#define kChatCellTextNormalColor UIColorHex(333333)
+
+// Link 文本色
+#define kWBCellTextHighlightColor UIColorHex(527ead)
+
+
+#define kChatCellTextFontSize 16
+
+#define kChatCellPaddingText 10
 
 
 @interface CellTextModifier : NSObject<TextLinePositionModifier>

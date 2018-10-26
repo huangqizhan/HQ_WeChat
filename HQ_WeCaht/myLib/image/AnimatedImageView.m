@@ -462,7 +462,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
     if (type == YYAnimatedImageTypeImages || type == YYAnimatedImageTypeHighlightedImages) {
         NSArray *images = [self imageForType:type];
         if (images.count) {
-            [self startAnimating];
+            [super startAnimating];
             self.currentIsPlayingAnimation = YES;
         }
     }else{

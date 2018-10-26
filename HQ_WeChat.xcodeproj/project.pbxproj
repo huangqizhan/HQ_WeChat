@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2872B7C6205D0A3200CD283F /* HQHUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872B7C5205D0A3200CD283F /* HQHUDHelper.m */; };
 		28930F7A20638D28005AEDF3 /* HQFirstConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */; };
+		BA46ABA1217CA09A007C28C3 /* HQChatRegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BA46ABA0217CA09A007C28C3 /* HQChatRegexHelper.m */; };
+		BA46ABA9217E01F1007C28C3 /* HQImageIOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BA46ABA8217E01F1007C28C3 /* HQImageIOHelper.m */; };
 		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
 		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
 		BA59BFDC216CF1BA005D6D79 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA59BFDB216CF1BA005D6D79 /* WebP.framework */; };
@@ -539,6 +541,14 @@
 		2872B7C5205D0A3200CD283F /* HQHUDHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQHUDHelper.m; sourceTree = "<group>"; };
 		28930F7820638D28005AEDF3 /* HQFirstConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQFirstConfigViewController.h; sourceTree = "<group>"; };
 		28930F7920638D28005AEDF3 /* HQFirstConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQFirstConfigViewController.m; sourceTree = "<group>"; };
+		BA46AB9F217CA09A007C28C3 /* HQChatRegexHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQChatRegexHelper.h; sourceTree = "<group>"; };
+		BA46ABA0217CA09A007C28C3 /* HQChatRegexHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQChatRegexHelper.m; sourceTree = "<group>"; };
+		BA46ABA3217CBC43007C28C3 /* BaseCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCore.h; sourceTree = "<group>"; };
+		BA46ABA4217CBDBF007C28C3 /* CacheCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CacheCore.h; sourceTree = "<group>"; };
+		BA46ABA5217CBE3D007C28C3 /* WebImageCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebImageCore.h; sourceTree = "<group>"; };
+		BA46ABA7217E01F1007C28C3 /* HQImageIOHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQImageIOHelper.h; sourceTree = "<group>"; };
+		BA46ABA8217E01F1007C28C3 /* HQImageIOHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQImageIOHelper.m; sourceTree = "<group>"; };
+		BA46ABAA217E0A2E007C28C3 /* ImageCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCore.h; sourceTree = "<group>"; };
 		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
 		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
 		BA59BFDB216CF1BA005D6D79 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebP.framework; path = FramWorks/WebP.framework; sourceTree = "<group>"; };
@@ -1460,17 +1470,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA46AB9E217CA065007C28C3 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				BA46AB9F217CA09A007C28C3 /* HQChatRegexHelper.h */,
+				BA46ABA0217CA09A007C28C3 /* HQChatRegexHelper.m */,
+			);
+			name = helper;
+			sourceTree = "<group>";
+		};
+		BA46ABA6217E01B3007C28C3 /* ImageTools */ = {
+			isa = PBXGroup;
+			children = (
+				BA46ABA7217E01F1007C28C3 /* HQImageIOHelper.h */,
+				BA46ABA8217E01F1007C28C3 /* HQImageIOHelper.m */,
+			);
+			path = ImageTools;
+			sourceTree = "<group>";
+		};
 		BA59BFDD216CF210005D6D79 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				BA59BFDE216CF210005D6D79 /* DiskCache.m */,
 				BA59BFDF216CF210005D6D79 /* KVStorage.h */,
-				BA59BFE0216CF210005D6D79 /* MemoryCache.m */,
-				BA59BFE1216CF210005D6D79 /* Cache.h */,
-				BA59BFE2216CF210005D6D79 /* DiskCache.h */,
-				BA59BFE3216CF210005D6D79 /* MemoryCache.h */,
 				BA59BFE4216CF210005D6D79 /* KVStorage.m */,
+				BA59BFE1216CF210005D6D79 /* Cache.h */,
 				BA59BFE5216CF210005D6D79 /* Cache.m */,
+				BA59BFE2216CF210005D6D79 /* DiskCache.h */,
+				BA59BFDE216CF210005D6D79 /* DiskCache.m */,
+				BA59BFE3216CF210005D6D79 /* MemoryCache.h */,
+				BA59BFE0216CF210005D6D79 /* MemoryCache.m */,
+				BA46ABA4217CBDBF007C28C3 /* CacheCore.h */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -1499,12 +1528,13 @@
 			isa = PBXGroup;
 			children = (
 				BA59BFFF216CF39F005D6D79 /* categegry */,
+				BA59BFF8216CF33C005D6D79 /* WebImageOperation.h */,
+				BA59BFFA216CF33C005D6D79 /* WebImageOperation.m */,
+				BA59BFF9216CF33C005D6D79 /* WebImageCache.h */,
 				BA59BFF6216CF33C005D6D79 /* WebImageCache.m */,
 				BA59BFF7216CF33C005D6D79 /* WebImageManager.h */,
-				BA59BFF8216CF33C005D6D79 /* WebImageOperation.h */,
-				BA59BFF9216CF33C005D6D79 /* WebImageCache.h */,
-				BA59BFFA216CF33C005D6D79 /* WebImageOperation.m */,
 				BA59BFFB216CF33C005D6D79 /* WebImageManager.m */,
+				BA46ABA5217CBE3D007C28C3 /* WebImageCore.h */,
 			);
 			path = webImage;
 			sourceTree = "<group>";
@@ -1512,18 +1542,18 @@
 		BA59BFFF216CF39F005D6D79 /* categegry */ = {
 			isa = PBXGroup;
 			children = (
-				BA59C000216CF39F005D6D79 /* UIImageView+WebImage.m */,
-				BA59C001216CF39F005D6D79 /* WebImageSetter.h */,
-				BA59C002216CF39F005D6D79 /* CALayer+WebImage.m */,
-				BA59C003216CF39F005D6D79 /* MKAnnotationView+WebImage.h */,
-				BA59C004216CF39F005D6D79 /* UIButton+WebImage.m */,
 				BA59C005216CF39F005D6D79 /* UIImage+YYWebImage.h */,
+				BA59C00B216CF39F005D6D79 /* UIImage+YYWebImage.m */,
+				BA59C003216CF39F005D6D79 /* MKAnnotationView+WebImage.h */,
+				BA59C009216CF39F005D6D79 /* MKAnnotationView+WebImage.m */,
 				BA59C006216CF39F005D6D79 /* CALayer+WebImage.h */,
+				BA59C002216CF39F005D6D79 /* CALayer+WebImage.m */,
+				BA59C001216CF39F005D6D79 /* WebImageSetter.h */,
 				BA59C007216CF39F005D6D79 /* WebImageSetter.m */,
 				BA59C008216CF39F005D6D79 /* UIImageView+WebImage.h */,
-				BA59C009216CF39F005D6D79 /* MKAnnotationView+WebImage.m */,
+				BA59C000216CF39F005D6D79 /* UIImageView+WebImage.m */,
 				BA59C00A216CF39F005D6D79 /* UIButton+WebImage.h */,
-				BA59C00B216CF39F005D6D79 /* UIImage+YYWebImage.m */,
+				BA59C004216CF39F005D6D79 /* UIButton+WebImage.m */,
 			);
 			path = categegry;
 			sourceTree = "<group>";
@@ -1714,13 +1744,13 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
-		BADCFA49217B5B8C009B488D /* CellTexrLayout */ = {
+		BADCFA49217B5B8C009B488D /* CellLayout */ = {
 			isa = PBXGroup;
 			children = (
 				BADCFA4A217B5BC4009B488D /* CellTextLayout.h */,
 				BADCFA4B217B5BC4009B488D /* CellTextLayout.m */,
 			);
-			name = CellTexrLayout;
+			name = CellLayout;
 			sourceTree = "<group>";
 		};
 		BAE15FE52018B1A600B1ED76 /* jshanfler */ = {
@@ -1811,6 +1841,7 @@
 		BAF764C4216CE9CF00525D8D /* myLib */ = {
 			isa = PBXGroup;
 			children = (
+				BA46ABA6217E01B3007C28C3 /* ImageTools */,
 				BA59BFF5216CF33C005D6D79 /* webImage */,
 				BA59BFF1216CF28F005D6D79 /* Utility */,
 				BA59BFDD216CF210005D6D79 /* Cache */,
@@ -1825,16 +1856,17 @@
 		BAF764C5216CEA0B00525D8D /* image */ = {
 			isa = PBXGroup;
 			children = (
-				BAF764C6216CEA0B00525D8D /* MyImage.h */,
-				BAF764C7216CEA0B00525D8D /* ImageControll.m */,
+				BAF764CD216CEA0B00525D8D /* SpriteSheetImage.h */,
 				BAF764C8216CEA0B00525D8D /* SpriteSheetImage.m */,
-				BAF764C9216CEA0B00525D8D /* AnimatedImageView.h */,
+				BAF764CE216CEA0B00525D8D /* ImageDeCode.h */,
 				BAF764CA216CEA0B00525D8D /* ImageDeCode.m */,
 				BAF764CB216CEA0B00525D8D /* ImageControll.h */,
+				BAF764C7216CEA0B00525D8D /* ImageControll.m */,
+				BAF764C6216CEA0B00525D8D /* MyImage.h */,
 				BAF764CC216CEA0B00525D8D /* MyImage.m */,
-				BAF764CD216CEA0B00525D8D /* SpriteSheetImage.h */,
-				BAF764CE216CEA0B00525D8D /* ImageDeCode.h */,
+				BAF764C9216CEA0B00525D8D /* AnimatedImageView.h */,
 				BAF764CF216CEA0B00525D8D /* AnimatedImageView.m */,
+				BA46ABAA217E0A2E007C28C3 /* ImageCore.h */,
 			);
 			path = image;
 			sourceTree = "<group>";
@@ -1846,6 +1878,7 @@
 				BAF764D2216CEA0B00525D8D /* UIKit */,
 				BAF764E5216CEA0B00525D8D /* Fundation */,
 				BAF764FA216CEA0B00525D8D /* Quartz */,
+				BA46ABA3217CBC43007C28C3 /* BaseCore.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1853,24 +1886,24 @@
 		BAF764D2216CEA0B00525D8D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				BAF764D3216CEA0B00525D8D /* UIFont+Add.m */,
+				BAF764DC216CEA0B00525D8D /* UIApplication+Add.h */,
 				BAF764D4216CEA0B00525D8D /* UIApplication+Add.m */,
+				BAF764E0216CEA0B00525D8D /* UITableView+Add.h */,
 				BAF764D5216CEA0B00525D8D /* UITableView+Add.m */,
+				BAF764E1216CEA0B00525D8D /* UIDevice+Add.h */,
 				BAF764D6216CEA0B00525D8D /* UIDevice+Add.m */,
 				BAF764D7216CEA0B00525D8D /* UIView+Add.h */,
-				BAF764D8216CEA0B00525D8D /* UIScrollView+Add.h */,
+				BAF764DF216CEA0B00525D8D /* UIView+Add.m */,
+				BAF764E4216CEA0B00525D8D /* UIBezierPath+Add.h */,
 				BAF764D9216CEA0B00525D8D /* UIBezierPath+Add.m */,
 				BAF764DA216CEA0B00525D8D /* UIColor+Add.h */,
-				BAF764DB216CEA0B00525D8D /* UIImage+Add.m */,
-				BAF764DC216CEA0B00525D8D /* UIApplication+Add.h */,
-				BAF764DD216CEA0B00525D8D /* UIFont+Add.h */,
-				BAF764DE216CEA0B00525D8D /* UIScrollView+Add.m */,
-				BAF764DF216CEA0B00525D8D /* UIView+Add.m */,
-				BAF764E0216CEA0B00525D8D /* UITableView+Add.h */,
-				BAF764E1216CEA0B00525D8D /* UIDevice+Add.h */,
-				BAF764E2216CEA0B00525D8D /* UIImage+Add.h */,
 				BAF764E3216CEA0B00525D8D /* UIColor+Add.m */,
-				BAF764E4216CEA0B00525D8D /* UIBezierPath+Add.h */,
+				BAF764E2216CEA0B00525D8D /* UIImage+Add.h */,
+				BAF764DB216CEA0B00525D8D /* UIImage+Add.m */,
+				BAF764D3216CEA0B00525D8D /* UIFont+Add.m */,
+				BAF764DD216CEA0B00525D8D /* UIFont+Add.h */,
+				BAF764D8216CEA0B00525D8D /* UIScrollView+Add.h */,
+				BAF764DE216CEA0B00525D8D /* UIScrollView+Add.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1878,26 +1911,26 @@
 		BAF764E5216CEA0B00525D8D /* Fundation */ = {
 			isa = PBXGroup;
 			children = (
-				BAF764E6216CEA0B00525D8D /* NSNumber+Add.m */,
-				BAF764E7216CEA0B00525D8D /* NSThread+Add.m */,
+				BAF764F5216CEA0B00525D8D /* NSArray+Add.h */,
 				BAF764E8216CEA0B00525D8D /* NSArray+Add.m */,
 				BAF764E9216CEA0B00525D8D /* NSObject+Add.h */,
+				BAF764F3216CEA0B00525D8D /* NSObject+Add.m */,
 				BAF764EA216CEA0B00525D8D /* NSAttributedString+Add.h */,
-				BAF764EB216CEA0B00525D8D /* NSBundle+Add.h */,
-				BAF764EC216CEA0B00525D8D /* NSString+Add.h */,
-				BAF764ED216CEA0B00525D8D /* NSData+Add.m */,
+				BAF764F4216CEA0B00525D8D /* NSAttributedString+Add.m */,
+				BAF764F9216CEA0B00525D8D /* NSDate+Add.h */,
 				BAF764EE216CEA0B00525D8D /* NSDate+Add.m */,
 				BAF764EF216CEA0B00525D8D /* NSObject+KVO.h */,
+				BAF764F8216CEA0B00525D8D /* NSObject+KVO.m */,
 				BAF764F0216CEA0B00525D8D /* NSThread+Add.h */,
+				BAF764E7216CEA0B00525D8D /* NSThread+Add.m */,
 				BAF764F1216CEA0B00525D8D /* NSNumber+Add.h */,
+				BAF764E6216CEA0B00525D8D /* NSNumber+Add.m */,
+				BAF764EB216CEA0B00525D8D /* NSBundle+Add.h */,
 				BAF764F2216CEA0B00525D8D /* NSBundle+Add.m */,
-				BAF764F3216CEA0B00525D8D /* NSObject+Add.m */,
-				BAF764F4216CEA0B00525D8D /* NSAttributedString+Add.m */,
-				BAF764F5216CEA0B00525D8D /* NSArray+Add.h */,
+				BAF764EC216CEA0B00525D8D /* NSString+Add.h */,
 				BAF764F6216CEA0B00525D8D /* NSString+Add.m */,
 				BAF764F7216CEA0B00525D8D /* NSData+Add.h */,
-				BAF764F8216CEA0B00525D8D /* NSObject+KVO.m */,
-				BAF764F9216CEA0B00525D8D /* NSDate+Add.h */,
+				BAF764ED216CEA0B00525D8D /* NSData+Add.m */,
 			);
 			path = Fundation;
 			sourceTree = "<group>";
@@ -1905,10 +1938,10 @@
 		BAF764FA216CEA0B00525D8D /* Quartz */ = {
 			isa = PBXGroup;
 			children = (
+				BAF764FE216CEA0B00525D8D /* CDUitities.h */,
 				BAF764FB216CEA0B00525D8D /* CDUitities.m */,
 				BAF764FC216CEA0B00525D8D /* CALayer+Add.h */,
 				BAF764FD216CEA0B00525D8D /* CALayer+Add.m */,
-				BAF764FE216CEA0B00525D8D /* CDUitities.h */,
 			);
 			path = Quartz;
 			sourceTree = "<group>";
@@ -2182,7 +2215,7 @@
 		FD2476C71E6F9CE40085A23C /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
-				BADCFA49217B5B8C009B488D /* CellTexrLayout */,
+				BADCFA49217B5B8C009B488D /* CellLayout */,
 				FD2476CF1E6FA1150085A23C /* OtherCells */,
 				FD2476CE1E6FA1030085A23C /* MineCells */,
 				FDE5CECF1ED8089B0072882A /* HQChatTableViewCellDelegate.h */,
@@ -2517,6 +2550,7 @@
 		FD47690A1E665F4F00CEC7A6 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BA46AB9E217CA065007C28C3 /* helper */,
 				FD2CAD0B1EE13A8E00FEEC7A /* Audio */,
 				FD211C2C1EC143DB0040771A /* PlayGifManager */,
 				FD28A4A91E80A93500147D77 /* Camera */,
@@ -3832,6 +3866,7 @@
 				FD1DDF681F26DB0100AAC89D /* HQRefershConst.m in Sources */,
 				FD7570531EFB721500CA7112 /* HQWebProcessView.m in Sources */,
 				FD253DEA1E5A99AA00ACA282 /* HQCoreDataManager.m in Sources */,
+				BA46ABA9217E01F1007C28C3 /* HQImageIOHelper.m in Sources */,
 				BA59C039216CF81C005D6D79 /* WBTimelineViewController.m in Sources */,
 				FD28EA4F1E7B8C000077E009 /* UIImage+MyBundle.m in Sources */,
 				FDCBB5371EFBBA6C00D6F573 /* WebViewJavascriptBridge_JS.m in Sources */,
@@ -3916,6 +3951,7 @@
 				BAF76550216CEA0C00525D8D /* TextContainerView.m in Sources */,
 				FDDEE3D01E655B7D007E9AF9 /* MJFoundation.m in Sources */,
 				FD1DDF7A1F2735A100AAC89D /* HQMosaicEdiateImage.m in Sources */,
+				BA46ABA1217CA09A007C28C3 /* HQChatRegexHelper.m in Sources */,
 				BAF4A8101E73F4F200653204 /* UIImage+CompressImage.m in Sources */,
 				FD2476F61E6FB6C50085A23C /* ChatMessageModel+Action.m in Sources */,
 				FD9409091E5A7D0C00634206 /* NSString+Extension.m in Sources */,

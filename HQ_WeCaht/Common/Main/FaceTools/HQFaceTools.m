@@ -15,7 +15,6 @@
 static NSArray * _normalEmotions,*_custumEmotions,*_gifEmotions,*_moreFaceItems;
 
 @implementation HQFaceTools
-
 + (NSArray *)getNormalEmotions{
     if (_normalEmotions) {
         return _normalEmotions;
@@ -65,9 +64,10 @@ static NSArray * _normalEmotions,*_custumEmotions,*_gifEmotions,*_moreFaceItems;
                                           lineHeight:(CGFloat)lineHeight{
     message =  message?message:@"";
     NSMutableAttributedString *mutableAttribute = [[NSMutableAttributedString alloc] initWithString:message?message:@""];
-    NSString *remojStr = @"\\[[a-zA-Z0-9\\/\\u4e00-\\u9fa5]+\\]";
-    NSError *error;
-    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:remojStr options:NSRegularExpressionCaseInsensitive error:&error];
+//    NSString *remojStr = @"\\[[a-zA-Z0-9\\/\\u4e00-\\u9fa5]+\\]";
+//    NSError *error;
+    NSRegularExpression *expression = [self regexEmoticon];
+//    [NSRegularExpression regularExpressionWithPattern:remojStr options:NSRegularExpressionCaseInsensitive error:&error];
     if (expression == nil) {
         return mutableAttribute;
     }
@@ -137,6 +137,16 @@ static NSArray * _normalEmotions,*_custumEmotions,*_gifEmotions,*_moreFaceItems;
     
     return attributedString;
 }
+///表情正则
++ (NSRegularExpression *)regexEmoticon {
+    static NSRegularExpression *regex;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[a-zA-Z0-9\\/\\u4e00-\\u9fa5]+\\]" options:kNilOptions error:NULL];
+    });
+    return regex;
+}
+
 
 
 

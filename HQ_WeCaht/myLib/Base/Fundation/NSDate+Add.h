@@ -173,6 +173,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSDate *)dateWithISOFormatString:(NSString *)dateString;
 
+/**
+ Return a string from date
+
+ @param date date
+ @return string 
+ */
++ (NSString *)stringWithTimelineDate:(NSDate *)date;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -33,7 +33,9 @@
 #import "TextInput.h" 
 #import "ClassInfo.h"
 #import "NSObject+Model.h"
-
+#import "UIDevice+Add.h"
+#import "HQ_WeChatConst.h"  
+#import "NSAttributedString+Add.h"
 
 
 #endif /* TextCore_h */

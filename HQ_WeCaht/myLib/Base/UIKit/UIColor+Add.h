@@ -11,6 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
+#ifndef UIColorHex
+#define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
+#endif
+
+
 extern void YY_RGB2HSL(CGFloat r, CGFloat g, CGFloat b,
                        CGFloat *h, CGFloat *s, CGFloat *l);
 
@@ -38,10 +43,6 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
 ////十六进制字符串转 RGB
 extern BOOL hexStrToRGBA(NSString *str,
                          CGFloat *r, CGFloat *g, CGFloat *b, CGFloat *a) ;
-
-#ifndef UIColorHex
-#define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
-#endif
 
 
 @interface UIColor (Add)

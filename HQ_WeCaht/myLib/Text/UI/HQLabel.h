@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable,nonatomic,copy) id<TextLinePositionModifier>linePositionModifier;
 ///测试
 @property (nonatomic,nullable,copy) TextDebugOption *debugOption;
+///是否长按显示选中视图
+@property (nonatomic,assign) BOOL isLongPressShowSelectionView;
 
 #pragma mark --- Constraints
 
