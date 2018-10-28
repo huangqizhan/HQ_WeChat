@@ -9,7 +9,7 @@
 //#import <UIKit/UIKit.h>
 #import "HQChaRootCell.h"
 #import "HQChatTableViewCellDelegate.h"
-
+#import "HQBaseCellLayout.h"
 
 
 
@@ -19,12 +19,14 @@
 
 ///消息模型
 @property (nonatomic,strong)ChatMessageModel *messageModel;
+///layout
+@property (nonatomic,strong) HQBaseCellLayout *layout;
 // 头像
 @property (nonatomic, strong) UIImageView *headImageView;
 // 菊花视图所在的view
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 //选择按钮
-@property (nonatomic) UIImageView *selectControl;
+@property (nonatomic,strong) UIImageView *selectControl;
 
 @property (nonatomic,strong) NSIndexPath *indexPath;
 

@@ -11,7 +11,7 @@
 @interface HQChatOtherTextCell : HQChatOtherBaseCell
 
 
-@property (nonatomic, strong) KILabel *chatLabel;
+//@property (nonatomic, strong) KILabel *chatLabel;
 
 
 @end

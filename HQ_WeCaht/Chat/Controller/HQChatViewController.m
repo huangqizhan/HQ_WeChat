@@ -21,8 +21,7 @@
 #import "ContractModel+Action.h"
 #import "HQChatDetailController.h"
 #import "HQRefershHeaderView.h"
-
-
+#import "HQChatViewController+UIHandler.h"
 
 
 
@@ -34,16 +33,16 @@
 }
 ////键盘控制器
 @property (nonatomic) HQChatBoxViewController *chatBoxVC;
+@property (nonatomic, strong,readwrite) HQChatTableView *tableView;
+@property (nonatomic,strong,readwrite) NSMutableArray <HQBaseCellLayout *> *dataArray;
 ////语音播放提示视图
 @property (nonatomic,strong) HQDeviceVoiceTipView *voiceTipView;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic,strong) NSMutableArray *dataArray;
 ///底部更多视图
 @property (nonatomic,strong) HQChatEdiateMoreView *ediateMoreView;
 ///选中的cell的indexPath数组
 @property (nonatomic,strong) NSMutableArray *seletedIndexPathsArray;
 ///选中的model数组
-@property (nonatomic,strong) NSMutableArray *seletedModelsArray;
+@property (nonatomic,strong) NSMutableArray <HQBaseCellLayout *> *seletedModelsArray;
 @property (nonatomic,assign) BOOL presentFlag;
 ///背景图片
 @property (nonatomic,strong) UIImageView *begImageView;
@@ -145,7 +144,7 @@
         for (ChatMessageModel *model in self.dataArray) {
             model.isSeleted = NO;
         }
-        [self.tableView reloadData];
+        [self syncDispalyTableViewReload];
     }];
 }
 - (void)setUpUI{
@@ -163,11 +162,11 @@
 - (void)handleMoreDataFromDb{
     if (self.dataArray.count) {
         WEAKSELF;
-        [ChatMessageModel searchMoreChatListModelOnAsyThreadWith:self.listModel WithModel:[self.dataArray firstObject] andCallBack:^(NSArray *resultList) {
+        [ChatMessageModel searchMoreChatListModelOnAsyThreadWith:self.listModel WithModel:[self.dataArray firstObject].modle andCallBack:^(NSArray *resultList) {
             if (resultList.count) {
-                [weakSelf.dataArray insertObjects:resultList atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, resultList.count)]];
                 [weakSelf.tableView.headerRefersh endRefreshingWithCallBack:^{
-                    [weakSelf.tableView reloadData];
+                    [weakSelf.dataArray insertObjects:resultList atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, resultList.count)]];
+                    [weakSelf syncDispalyTableViewReload];
                     [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:resultList.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }];
             }else{
@@ -196,9 +195,6 @@
     [self.tableView registerClass:[HQChatLocationOtherCell class] forCellReuseIdentifier:OtherLocationCellId];
 }
 #pragma mark ------ UITableViewDelegate -----
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
@@ -209,30 +205,37 @@
     return CGFLOAT_MIN;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChatMessageModel *model = self.dataArray[indexPath.row];
-    return model.cellHeight;
+    HQBaseCellLayout *layout = self.dataArray[indexPath.row];
+    return layout.cellHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChatMessageModel *model = self.dataArray[indexPath.row];
-    return model.cellHeight;
+    HQBaseCellLayout *layout = self.dataArray[indexPath.row];
+    return layout.cellHeight;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChatMessageModel *model = self.dataArray[indexPath.row];
-    if (model.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId) {
-        HQChatMineBaseCell *mineBaseCell = [tableView dequeueReusableCellWithIdentifier:model.messageCellTypeId];
-        mineBaseCell.delegate = self;
-        mineBaseCell.indexPath = indexPath;
-        mineBaseCell.messageModel = model;
-        mineBaseCell.isEdiating = _messageCellIsEdiating;
-        return mineBaseCell;
-    }else{
-        HQChatOtherBaseCell *otherCell = [tableView dequeueReusableCellWithIdentifier:model.messageCellTypeId];
-        otherCell.delegate = self;
-        otherCell.messageModel = model;
-        otherCell.indexPath = indexPath;
-        otherCell.isEdiating = _messageCellIsEdiating;
-        return otherCell;
-    }
+    HQBaseCellLayout *layout = self.dataArray[indexPath.row];
+    HQChatMineBaseCell *mineBaseCell = [tableView dequeueReusableCellWithIdentifier:layout.messageCellTypeId];
+    mineBaseCell.delegate = self;
+    mineBaseCell.indexPath = indexPath;
+    mineBaseCell.layout = layout;
+    mineBaseCell.isEdiating = _messageCellIsEdiating;
+    return mineBaseCell;
+
+//    if (model.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId) {
+//        HQChatMineBaseCell *mineBaseCell = [tableView dequeueReusableCellWithIdentifier:model.messageCellTypeId];
+//        mineBaseCell.delegate = self;
+//        mineBaseCell.indexPath = indexPath;
+//        mineBaseCell.messageModel = model;
+//        mineBaseCell.isEdiating = _messageCellIsEdiating;
+//        return mineBaseCell;
+//    }else{
+//        HQChatOtherBaseCell *otherCell = [tableView dequeueReusableCellWithIdentifier:model.messageCellTypeId];
+//        otherCell.delegate = self;
+//        otherCell.messageModel = model;
+//        otherCell.indexPath = indexPath;
+//        otherCell.isEdiating = _messageCellIsEdiating;
+//        return otherCell;
+//    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_messageCellIsEdiating) {
@@ -273,40 +276,41 @@
 }
 //////选中cell的数据处理
 - (void)didseleteTableViewCellWithIndexPath:(NSIndexPath *)indexPath{
-    ChatMessageModel *model = self.dataArray[indexPath.row];
-    if (model && ![self.seletedModelsArray containsObject:model]) {
-        [self.seletedModelsArray addObject:model];
+    HQBaseCellLayout *layout = self.dataArray[indexPath.row];
+    if (layout && ![self.seletedModelsArray containsObject:layout]) {
+        [self.seletedModelsArray addObject:layout];
     }else{
-        [self.seletedModelsArray removeObject:model];
+        [self.seletedModelsArray removeObject:layout];
     }
     if (![self.seletedIndexPathsArray containsObject:indexPath]) {
         [self.seletedIndexPathsArray addObject:indexPath];
     }else{
         [self.seletedIndexPathsArray removeObject:indexPath];
     }
-    WEAKSELF;
-    [self checkCurrnetMessageIsHasDateMessageWithIndexPath:indexPath andComplite:^(ChatMessageModel *msgModel, NSIndexPath *dateIndexPath) {
-        if (msgModel == nil || dateIndexPath == nil) {
-            return ;
-        }
-        if (msgModel && ![self.seletedModelsArray containsObject:msgModel]) {
-            [weakSelf.seletedModelsArray addObject:msgModel];
-        }else{
-            [weakSelf.seletedModelsArray removeObject:msgModel];
-        }
-        if (![weakSelf.seletedIndexPathsArray containsObject:dateIndexPath]) {
-            [weakSelf.seletedIndexPathsArray addObject:dateIndexPath];
-        }else{
-            [weakSelf.seletedIndexPathsArray removeObject:dateIndexPath];
-        }
-    }];
-    [self.ediateMoreView setEdiateViewActiveStatusWith:self.seletedModelsArray.count];
+//    WEAKSELF;
+//    [self checkCurrnetMessageIsHasDateMessageWithIndexPath:indexPath andComplite:^(ChatMessageModel *msgModel, NSIndexPath *dateIndexPath) {
+//        if (msgModel == nil || dateIndexPath == nil) {
+//            return ;
+//        }
+//        if (msgModel && ![self.seletedModelsArray containsObject:msgModel]) {
+//            [weakSelf.seletedModelsArray addObject:msgModel];
+//        }else{
+//            [weakSelf.seletedModelsArray removeObject:msgModel];
+//        }
+//        if (![weakSelf.seletedIndexPathsArray containsObject:dateIndexPath]) {
+//            [weakSelf.seletedIndexPathsArray addObject:dateIndexPath];
+//        }else{
+//            [weakSelf.seletedIndexPathsArray removeObject:dateIndexPath];
+//        }
+//    }];
+//    [self.ediateMoreView setEdiateViewActiveStatusWith:self.seletedModelsArray.count];
 }
 #pragma mark -------- 消息分发测试 --------
 - (void)testAction:(UIBarButtonItem *)item{
 //    NSDictionary *diction = [self  creatTextNessageWithIndex:1];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationReceiveNewMessageNotification object:diction];
-    [_tableView reloadData];
+//    [_tableView reloadData];
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 - (NSDictionary *)creatTextNessageWithIndex:(int )index{
     NSTimeInterval timeral = [NSDate returnTheTimeralFrom1970];
@@ -366,7 +370,7 @@
         }
     }];
 }
-- (HQTextView *)getCurentTextViewWhenShowMenuController{
+- (UITextView *)getCurentTextViewWhenShowMenuController{
     return self.chatBoxVC.chatBox.textView.isFirstResponder ? self.chatBoxVC.chatBox.textView : nil;
 }
 - (void)MenuViewControllerDidHidden{
@@ -435,7 +439,7 @@
         self.ediateMoreView.top =  APP_Frame_Height-64-HEIGHT_TABBAR;
         self.chatBoxVC.view.top =  APP_Frame_Height-64;
     } completion:^(BOOL finished) {
-        [self.tableView reloadData];
+        [self syncDispalyTableViewReload];
         [self didseleteTableViewCellWithIndexPath:indexPath];
     }];
 }
@@ -444,7 +448,7 @@
         didChangeChatBoxHeight:(CGFloat)height{
     self.chatBoxVC.view.top = self.view.bottom-height-64;
     self.tableView.height = HEIGHT_SCREEN - height - 64;
-    [self.tableView reloadData];
+    [self syncDispalyTableViewReload];
     [self tableViewScrollToBottomWithAnimated:NO];
 }
 - (void)chatBoxInputStatusController:(HQChatBoxViewController *)chatboxViewController ChatBoxHeight:(CGFloat)height{
@@ -459,12 +463,13 @@
                sendTextMessage:(NSString *)messageStr{
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSnedMesssageWith:messageStr andReceiverId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
     [self refershListModelWithMessageModel:messageModel];
-    ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
-    if (dateModel) {
-        [self.dataArray addObject:dateModel];
-    }
-    [self.dataArray addObject:messageModel];
-    [_tableView reloadData];
+//    ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
+//    if (dateModel) {
+//        [self.dataArray addObject:dateModel];
+//    }
+    HQBaseCellLayout *lauout = [HQBaseCellLayout layoutWithMessageModel:messageModel];
+    [self.dataArray addObject:lauout];
+    [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
     [messageModel sendTextMessage:^{
         NSLog(@"status = %d",messageModel.messageStatus);
@@ -495,7 +500,7 @@
         [self.dataArray addObject:dateModel];
     }
     [self.dataArray addObject:messageModel];
-    [self.tableView reloadData];
+    [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
     [messageModel sendTextMessage:^{
         NSLog(@"status = %d",messageModel.messageStatus);
@@ -518,7 +523,7 @@
             NSLog(@"status = %d",messageModel.messageStatus);
         }];
     }
-    [self.tableView reloadData];
+    [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
 }
 #pragma mark ------ 语音 -------
@@ -530,7 +535,7 @@
         [self.dataArray addObject:dateModel];
     }
     [self.dataArray addObject:msgModel];
-    [self.tableView reloadData];
+    [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
 }
 ///移除语音文件
@@ -562,7 +567,7 @@
         [recordCell.messageModel setValue:@4 forKey:@"messageType"];
         [recordCell.messageModel setValue:@"config" forKey:@"modelConfig"];
         [self.listModel refershChatListModelWith:recordCell.messageModel];
-        [self.tableView reloadData];
+        [self syncDispalyTableViewReload];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [recordCell updateDurationLabel:1];
             [recordCell resetRecordingOrigeStatus];
@@ -581,7 +586,7 @@
         [self.dataArray addObject:dateModel];
     }
     [self.dataArray addObject:messageModel];
-    [self.tableView reloadData];
+    [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
     [messageModel sendTextMessage:^{
         NSLog(@"status = %d",messageModel.messageStatus);
@@ -749,9 +754,9 @@
     }
     return _voiceTipView;
 }
-- (UITableView *)tableView{
+- (HQChatTableView *)tableView{
     if (nil == _tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[HQChatTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -760,6 +765,7 @@
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
+        _tableView.scrollsToTop = NO;
     }
     return _tableView;
 }

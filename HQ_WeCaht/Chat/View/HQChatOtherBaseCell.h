@@ -32,9 +32,9 @@
 
 
 
-@property (nonatomic) NSArray<NSString *> *menuItemActionNames;
+@property (nonatomic,strong) NSArray<NSString *> *menuItemActionNames;
 
-@property (nonatomic) NSArray<NSString *> *menuItemNames;
+@property (nonatomic,strong) NSArray<NSString *> *menuItemNames;
 
 ////长按开始
 - (void)contentLongPressedBeganInView:(UIView *)view;

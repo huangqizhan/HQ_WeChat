@@ -7,14 +7,14 @@
 //
 
 #import "HQChatMineBaseCell.h"
-#import "KILabel.h"
+#import "HQLabel.h"
 
 
 
 
 @interface HQChatMineTextCell : HQChatMineBaseCell
 
-@property (nonatomic, strong) KILabel *chatLabel;
+
 
 
 @end

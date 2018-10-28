@@ -13,6 +13,11 @@
 		BA46ABA9217E01F1007C28C3 /* HQImageIOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BA46ABA8217E01F1007C28C3 /* HQImageIOHelper.m */; };
 		BA4CCDA31F4D9A360086BA15 /* test2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA21F4D9A360086BA15 /* test2.jpg */; };
 		BA4CCDA51F4D9A3A0086BA15 /* test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */; };
+		BA56AAF52183574B00D7FD31 /* HQBaseCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BA56AAF42183574B00D7FD31 /* HQBaseCellLayout.m */; };
+		BA56AAF8218357AE00D7FD31 /* CellImageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BA56AAF7218357AE00D7FD31 /* CellImageLayout.m */; };
+		BA56AAFB218357C500D7FD31 /* CellGifLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BA56AAFA218357C500D7FD31 /* CellGifLayout.m */; };
+		BA56AAFF2185E86E00D7FD31 /* HQChatViewController+UIHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BA56AAFE2185E86E00D7FD31 /* HQChatViewController+UIHandler.m */; };
+		BA56AB022185E9AF00D7FD31 /* HQChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA56AB012185E9AF00D7FD31 /* HQChatTableView.m */; };
 		BA59BFDC216CF1BA005D6D79 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA59BFDB216CF1BA005D6D79 /* WebP.framework */; };
 		BA59BFEB216CF211005D6D79 /* DiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BA59BFDE216CF210005D6D79 /* DiskCache.m */; };
 		BA59BFEC216CF211005D6D79 /* MemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BA59BFE0216CF210005D6D79 /* MemoryCache.m */; };
@@ -374,7 +379,6 @@
 		FD86F9CC1F305A9800011DAA /* NSObject+SubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CB1F305A9800011DAA /* NSObject+SubClass.m */; };
 		FD86F9D01F306F2500011DAA /* HQEdiateToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */; };
 		FD88438B1FBD57920047C56C /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD88438A1FBD57920047C56C /* SetViewController.m */; };
-		FD88475B1E71236B0085B355 /* KILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8847591E71236B0085B355 /* KILabel.m */; };
 		FD88476A1E7126180085B355 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847681E7126180085B355 /* libsqlite3.0.tbd */; };
 		FD88476B1E7126180085B355 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8847691E7126180085B355 /* libsqlite3.tbd */; };
 		FD8847891E713AE80085B355 /* MessageRectModel+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8847881E713AE80085B355 /* MessageRectModel+Action.m */; };
@@ -551,6 +555,16 @@
 		BA46ABAA217E0A2E007C28C3 /* ImageCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCore.h; sourceTree = "<group>"; };
 		BA4CCDA21F4D9A360086BA15 /* test2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test2.jpg; sourceTree = "<group>"; };
 		BA4CCDA41F4D9A3A0086BA15 /* test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1.jpg; sourceTree = "<group>"; };
+		BA56AAF32183574B00D7FD31 /* HQBaseCellLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQBaseCellLayout.h; sourceTree = "<group>"; };
+		BA56AAF42183574B00D7FD31 /* HQBaseCellLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQBaseCellLayout.m; sourceTree = "<group>"; };
+		BA56AAF6218357AE00D7FD31 /* CellImageLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellImageLayout.h; sourceTree = "<group>"; };
+		BA56AAF7218357AE00D7FD31 /* CellImageLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellImageLayout.m; sourceTree = "<group>"; };
+		BA56AAF9218357C500D7FD31 /* CellGifLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellGifLayout.h; sourceTree = "<group>"; };
+		BA56AAFA218357C500D7FD31 /* CellGifLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellGifLayout.m; sourceTree = "<group>"; };
+		BA56AAFD2185E86E00D7FD31 /* HQChatViewController+UIHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HQChatViewController+UIHandler.h"; sourceTree = "<group>"; };
+		BA56AAFE2185E86E00D7FD31 /* HQChatViewController+UIHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "HQChatViewController+UIHandler.m"; sourceTree = "<group>"; };
+		BA56AB002185E9AF00D7FD31 /* HQChatTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HQChatTableView.h; sourceTree = "<group>"; };
+		BA56AB012185E9AF00D7FD31 /* HQChatTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HQChatTableView.m; sourceTree = "<group>"; };
 		BA59BFDB216CF1BA005D6D79 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebP.framework; path = FramWorks/WebP.framework; sourceTree = "<group>"; };
 		BA59BFDE216CF210005D6D79 /* DiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiskCache.m; sourceTree = "<group>"; };
 		BA59BFDF216CF210005D6D79 /* KVStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVStorage.h; sourceTree = "<group>"; };
@@ -1179,8 +1193,6 @@
 		FD86F9CF1F306F2500011DAA /* HQEdiateToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQEdiateToolInfo.m; sourceTree = "<group>"; };
 		FD8843891FBD57920047C56C /* SetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
 		FD88438A1FBD57920047C56C /* SetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
-		FD8847591E71236B0085B355 /* KILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KILabel.m; sourceTree = "<group>"; };
-		FD88475A1E71236B0085B355 /* KILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KILabel.h; sourceTree = "<group>"; };
 		FD8847681E7126180085B355 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		FD8847691E7126180085B355 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FD8847871E713AE80085B355 /* MessageRectModel+Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageRectModel+Action.h"; sourceTree = "<group>"; };
@@ -1747,8 +1759,14 @@
 		BADCFA49217B5B8C009B488D /* CellLayout */ = {
 			isa = PBXGroup;
 			children = (
+				BA56AAF32183574B00D7FD31 /* HQBaseCellLayout.h */,
+				BA56AAF42183574B00D7FD31 /* HQBaseCellLayout.m */,
 				BADCFA4A217B5BC4009B488D /* CellTextLayout.h */,
 				BADCFA4B217B5BC4009B488D /* CellTextLayout.m */,
+				BA56AAF6218357AE00D7FD31 /* CellImageLayout.h */,
+				BA56AAF7218357AE00D7FD31 /* CellImageLayout.m */,
+				BA56AAF9218357C500D7FD31 /* CellGifLayout.h */,
+				BA56AAFA218357C500D7FD31 /* CellGifLayout.m */,
 			);
 			name = CellLayout;
 			sourceTree = "<group>";
@@ -2900,8 +2918,6 @@
 				FD61A2361F0206D400F0830C /* HQRectButton.m */,
 				FD1D8BE51F0F271F0011A341 /* HQPopover.h */,
 				FD1D8BE61F0F271F0011A341 /* HQPopover.m */,
-				FD88475A1E71236B0085B355 /* KILabel.h */,
-				FD8847591E71236B0085B355 /* KILabel.m */,
 				FD10C6691F668A6F00C9857B /* HqChatMessageLabel.h */,
 				FD10C66A1F668A6F00C9857B /* HqChatMessageLabel.m */,
 			);
@@ -3144,6 +3160,8 @@
 				FD9408BB1E5A728B00634206 /* HQChatListViewController.m */,
 				FD9408BD1E5A72A000634206 /* HQChatViewController.h */,
 				FD9408BE1E5A72A000634206 /* HQChatViewController.m */,
+				BA56AAFD2185E86E00D7FD31 /* HQChatViewController+UIHandler.h */,
+				BA56AAFE2185E86E00D7FD31 /* HQChatViewController+UIHandler.m */,
 				FD61A22B1F01FB7000F0830C /* HQChatDetailController.h */,
 				FD61A22C1F01FB7000F0830C /* HQChatDetailController.m */,
 				FD61A2381F03387900F0830C /* HQSetChatBegImageController.h */,
@@ -3408,6 +3426,8 @@
 				FD2653811EE9385C006BAB5E /* HQChatEdiateMoreView.xib */,
 				FD2653831EE93B7A006BAB5E /* HQChatEdiateMoreView.h */,
 				FD2653841EE93B7A006BAB5E /* HQChatEdiateMoreView.m */,
+				BA56AB002185E9AF00D7FD31 /* HQChatTableView.h */,
+				BA56AB012185E9AF00D7FD31 /* HQChatTableView.m */,
 			);
 			name = CustomerView;
 			sourceTree = "<group>";
@@ -3793,6 +3813,7 @@
 				BA59BFEE216CF211005D6D79 /* Cache.m in Sources */,
 				FD1B09AD1E7FB1500090AB82 /* HQCameraNavigationController.m in Sources */,
 				BA59BFEF216CF211005D6D79 /* ClassInfo.m in Sources */,
+				BA56AAF52183574B00D7FD31 /* HQBaseCellLayout.m in Sources */,
 				FD10C66B1F668A6F00C9857B /* HqChatMessageLabel.m in Sources */,
 				FD1A31781F0CCBA90017FDBC /* HQChatMineLocationCell.m in Sources */,
 				FD9408C51E5A72F200634206 /* HQDiscoverViewController.m in Sources */,
@@ -3881,7 +3902,9 @@
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
 				FD42B5E61F09E41C00D6F0C4 /* VisualEffectViewController.m in Sources */,
 				FD28EA731E7B8E3B0077E009 /* HQPickerPreviewController.m in Sources */,
+				BA56AAFF2185E86E00D7FD31 /* HQChatViewController+UIHandler.m in Sources */,
 				FD6649F31EBC722E005E340B /* HqChatOtherGifCell.m in Sources */,
+				BA56AB022185E9AF00D7FD31 /* HQChatTableView.m in Sources */,
 				FD1DDF7D1F2735EB00AAC89D /* HQEmotionEdiateImageTools.m in Sources */,
 				BAE3E0E41F39F9BE0010ACED /* HQEdiateImgView.m in Sources */,
 				FD33B68A1F5FA0D500379642 /* HQReCodeResultController.m in Sources */,
@@ -4010,8 +4033,8 @@
 				BA59C03E216CF81C005D6D79 /* WBHelper.m in Sources */,
 				BA59BFEB216CF211005D6D79 /* DiskCache.m in Sources */,
 				FD9408C81E5A730C00634206 /* HQMineViewController.m in Sources */,
+				BA56AAF8218357AE00D7FD31 /* CellImageLayout.m in Sources */,
 				FD9E33BD1FA8237400783F8E /* MessageForwarding.m in Sources */,
-				FD88475B1E71236B0085B355 /* KILabel.m in Sources */,
 				FD033B891EF3767D00C85B04 /* HQContactHeadDetailCell.m in Sources */,
 				BAF7655E216CEA0C00525D8D /* TextParser.m in Sources */,
 				FD61A23D1F047F0900F0830C /* HQDownLoadChatBegImagController.m in Sources */,
@@ -4039,6 +4062,7 @@
 				BAF4A7FF1E73F11B00653204 /* AFURLResponseSerialization.m in Sources */,
 				FD47693E1E668F8300CEC7A6 /* HQChatBox.m in Sources */,
 				FD3BEDB01EE685F500A74F69 /* HQDeviceVoiceManager.m in Sources */,
+				BA56AAFB218357C500D7FD31 /* CellGifLayout.m in Sources */,
 				FD11AFE51FCCFF0A00E057A3 /* ColorDredientController.m in Sources */,
 				FDCBB5361EFBBA6C00D6F573 /* WebViewJavascriptBridge.m in Sources */,
 				BAF76559216CEA0C00525D8D /* NSParagraphStyle+Add.m in Sources */,

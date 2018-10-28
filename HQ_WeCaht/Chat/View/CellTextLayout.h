@@ -6,7 +6,7 @@
 //  Copyright © 2018年 黄麒展. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "HQBaseCellLayout.h"
 #import "TextCore.h"
 #import "BaseCore.h"
 
@@ -38,17 +38,15 @@
 
 
 
-@interface CellTextLayout : NSObject
+@interface CellTextLayout : HQBaseCellLayout
 
-- (instancetype)initWith:(ChatMessageModel *)model;
-
-///数据
-@property (nonatomic,strong)ChatMessageModel *messageModel;
-
-///
+///  layout
 @property (nonatomic,strong) TextLayout *textLayout;
 
+///文本高度
 @property (nonatomic,assign) CGFloat textHeight;
+///文本宽度
+@property (nonatomic,assign) CGFloat textWidth;
 
 @end
 

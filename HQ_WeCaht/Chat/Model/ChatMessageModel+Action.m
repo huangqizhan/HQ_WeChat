@@ -11,7 +11,7 @@
 #import "HQLocalImageManager.h"
 #import "HQRecordManager.h"
 #import "NSDate+Extension.h"
-
+#import "HQBaseCellLayout.h"
 
 
 
@@ -251,81 +251,81 @@ static const char ChatMessageCallBackKey = '\0';
    }
     return @"";
 }
-- (void)setModelConfig:(NSString *)modelConfig{
-    if (self.muAttributeString == nil && self.messageType == 1) {
-        self.muAttributeString = [HQFaceTools transferMessageString:self.contentString font:MessageFont lineHeight:17];
-    }
-    if (self.chatLabelRect == nil && self.messageType == 1) {
-        self.chatLabelRect = [MessageRectModel customerInita];
-        CGSize size = [self.muAttributeString boundingRectWithSize:CGSizeMake(CONTENTLABELWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
-        self.chatLabelRect.width = size.width;
-        self.chatLabelRect.height = size.height;
-        self.cellHeight = self.chatLabelRect.height+40;
-    }
-    if (self.messageType == 2  && self.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId) {
-        if (self.tempImage == nil) {
-            self.tempImage = [[HQLocalImageManager shareImageManager]  getChatMineMessageImageWtihImageName:self.fileName withImageSize:CGSizeMake( self.chatImageRect.width, self.chatImageRect.height)];
-        }else{
-            if (self.chatImageRect == nil ) {
-                self.chatImageRect = [MessageRectModel customerInita];
-                CGSize size = [self handleImage:self.tempImage.size];
-                self.chatImageRect.xx = App_Frame_Width-size.width-65;
-                self.chatImageRect.yy = 10;
-                self.chatImageRect.width = size.width;
-                self.chatImageRect.height = size.height;
-                self.tempImage = [[HQLocalImageManager shareImageManager] compocessImageWithImage:self.tempImage andImageSize:CGSizeMake( self.chatImageRect.width*2, self.chatImageRect.height*2) andIsSender:YES];
-            }
-        }
-        self.cellHeight = self.chatImageRect.height+25;
-    }else if (self.messageType == 3  && self.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId){
-        if (self.tempImage == nil) {
-            self.tempImage = [[HQLocalImageManager shareImageManager] loadlocalGifImageWith:self.fileName andScal:2];
-            self.gifImageData = [[HQLocalImageManager shareImageManager] loadLocalGifImageDataWith:self.fileName];
-            self.chatImageRect = [MessageRectModel customerInita];
-            CGSize size = [self handleImage:self.tempImage.size];
-            self.chatImageRect.xx = App_Frame_Width-size.width-65;
-            self.chatImageRect.yy = 10;
-            self.chatImageRect.width = size.width;
-            self.chatImageRect.height = size.height;
-        }
-        self.cellHeight = self.chatImageRect.height+25;
-    }else if (self.messageType == 3  && self.speakerId != [HQPublicManager shareManagerInstance].userinfoModel.userId){
-        if (self.tempImage == nil) {
-            self.tempImage = [[HQLocalImageManager shareImageManager] loadlocalGifImageWith:self.fileName andScal:2];
-            self.gifImageData = [[HQLocalImageManager shareImageManager] loadLocalGifImageDataWith:self.fileName];
-            self.chatImageRect = [MessageRectModel customerInita];
-            CGSize size = [self handleImage:self.tempImage.size];
-            self.chatImageRect.xx = 65;
-            self.chatImageRect.yy = 10;
-            self.chatImageRect.width = size.width;
-            self.chatImageRect.height = size.height;
-        }
-        self.cellHeight = self.chatImageRect.height+25;
-    }else if (self.messageType == 4 || self.messageType == 5){
-        if (self.chatImageRect == nil && self.messageType == 4) {
-            self.chatImageRect = [MessageRectModel customerInita];
-            self.chatImageRect.width = [self caculateVoiceViewWidth:self.fileSize];
-        }
-        self.cellHeight = 60;
-    }else if (self.messageType == 8){
-        if (self.tempImage == nil) {
-            self.tempImage = [[HQLocalImageManager shareImageManager]  getChatMineMessageImageWtihImageName:self.fileName withImageSize:CGSizeMake( self.chatImageRect.width, self.chatImageRect.height)];
-        }
-        if (self.chatImageRect == nil) {
-            self.chatImageRect = [MessageRectModel customerInita];
-            self.chatImageRect.width = App_Frame_Width*3.0/5.0;
-            self.chatImageRect.height = (APP_Frame_Height)/4.0;
-            self.chatImageRect.xx = App_Frame_Width-App_Frame_Width*3.0/5.0-65;
-            self.chatImageRect.yy = 10;
-            self.cellHeight = self.chatImageRect.height+20;
-        }
-    }else if (self.messageType == 99){
-        self.cellHeight = 30;
-        self.contentString = [NSDate currentTimevalDescriptionWith:self.messageTime];
-        if (self.chatLabelRect == nil) {
-        }
-    }
-}
+//- (void)setModelConfig:(NSString *)modelConfig{
+//    if (self.muAttributeString == nil && self.messageType == 1) {
+//        self.muAttributeString = [HQFaceTools transferMessageString:self.contentString font:MessageFont lineHeight:17];
+//    }
+//    if (self.chatLabelRect == nil && self.messageType == 1) {
+//        self.chatLabelRect = [MessageRectModel customerInita];
+//        CGSize size = [self.muAttributeString boundingRectWithSize:CGSizeMake(CONTENTLABELWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+//        self.chatLabelRect.width = size.width;
+//        self.chatLabelRect.height = size.height;
+//        self.cellHeight = self.chatLabelRect.height+40;
+//    }
+//    if (self.messageType == 2  && self.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId) {
+//        if (self.tempImage == nil) {
+//            self.tempImage = [[HQLocalImageManager shareImageManager]  getChatMineMessageImageWtihImageName:self.fileName withImageSize:CGSizeMake( self.chatImageRect.width, self.chatImageRect.height)];
+//        }else{
+//            if (self.chatImageRect == nil ) {
+//                self.chatImageRect = [MessageRectModel customerInita];
+//                CGSize size = [self handleImage:self.tempImage.size];
+//                self.chatImageRect.xx = App_Frame_Width-size.width-65;
+//                self.chatImageRect.yy = 10;
+//                self.chatImageRect.width = size.width;
+//                self.chatImageRect.height = size.height;
+//                self.tempImage = [[HQLocalImageManager shareImageManager] compocessImageWithImage:self.tempImage andImageSize:CGSizeMake( self.chatImageRect.width*2, self.chatImageRect.height*2) andIsSender:YES];
+//            }
+//        }
+//        self.cellHeight = self.chatImageRect.height+25;
+//    }else if (self.messageType == 3  && self.speakerId == [HQPublicManager shareManagerInstance].userinfoModel.userId){
+//        if (self.tempImage == nil) {
+//            self.tempImage = [[HQLocalImageManager shareImageManager] loadlocalGifImageWith:self.fileName andScal:2];
+//            self.gifImageData = [[HQLocalImageManager shareImageManager] loadLocalGifImageDataWith:self.fileName];
+//            self.chatImageRect = [MessageRectModel customerInita];
+//            CGSize size = [self handleImage:self.tempImage.size];
+//            self.chatImageRect.xx = App_Frame_Width-size.width-65;
+//            self.chatImageRect.yy = 10;
+//            self.chatImageRect.width = size.width;
+//            self.chatImageRect.height = size.height;
+//        }
+//        self.cellHeight = self.chatImageRect.height+25;
+//    }else if (self.messageType == 3  && self.speakerId != [HQPublicManager shareManagerInstance].userinfoModel.userId){
+//        if (self.tempImage == nil) {
+//            self.tempImage = [[HQLocalImageManager shareImageManager] loadlocalGifImageWith:self.fileName andScal:2];
+//            self.gifImageData = [[HQLocalImageManager shareImageManager] loadLocalGifImageDataWith:self.fileName];
+//            self.chatImageRect = [MessageRectModel customerInita];
+//            CGSize size = [self handleImage:self.tempImage.size];
+//            self.chatImageRect.xx = 65;
+//            self.chatImageRect.yy = 10;
+//            self.chatImageRect.width = size.width;
+//            self.chatImageRect.height = size.height;
+//        }
+//        self.cellHeight = self.chatImageRect.height+25;
+//    }else if (self.messageType == 4 || self.messageType == 5){
+//        if (self.chatImageRect == nil && self.messageType == 4) {
+//            self.chatImageRect = [MessageRectModel customerInita];
+//            self.chatImageRect.width = [self caculateVoiceViewWidth:self.fileSize];
+//        }
+//        self.cellHeight = 60;
+//    }else if (self.messageType == 8){
+//        if (self.tempImage == nil) {
+//            self.tempImage = [[HQLocalImageManager shareImageManager]  getChatMineMessageImageWtihImageName:self.fileName withImageSize:CGSizeMake( self.chatImageRect.width, self.chatImageRect.height)];
+//        }
+//        if (self.chatImageRect == nil) {
+//            self.chatImageRect = [MessageRectModel customerInita];
+//            self.chatImageRect.width = App_Frame_Width*3.0/5.0;
+//            self.chatImageRect.height = (APP_Frame_Height)/4.0;
+//            self.chatImageRect.xx = App_Frame_Width-App_Frame_Width*3.0/5.0-65;
+//            self.chatImageRect.yy = 10;
+//            self.cellHeight = self.chatImageRect.height+20;
+//        }
+//    }else if (self.messageType == 99){
+//        self.cellHeight = 30;
+//        self.contentString = [NSDate currentTimevalDescriptionWith:self.messageTime];
+//        if (self.chatLabelRect == nil) {
+//        }
+//    }
+//}
 // 缩放，临时的方法
 - (CGSize)handleImage:(CGSize)retSize{
     CGFloat scaleH = 0.22;
@@ -673,15 +673,22 @@ static const char ChatMessageCallBackKey = '\0';
     [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlock:^{
         NSError *error;
         NSArray *arrays = [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext executeFetchRequest:request error:&error];
-        for (ChatMessageModel *model in arrays) {
-            model.modelConfig = @"config";
-        }
+//        for (ChatMessageModel *model in arrays) {
+//            model.modelConfig = @"config";
+//        }
         if (arrays.count) {
             NSSortDescriptor *sorft = [[NSSortDescriptor alloc] initWithKey:@"messageTime" ascending:YES];
           arrays = [arrays sortedArrayUsingDescriptors:@[sorft]];
         }
+        NSMutableArray *layouts = [NSMutableArray new];
+        for (ChatMessageModel *model in arrays) {
+           HQBaseCellLayout *layout = [HQBaseCellLayout layoutWithMessageModel:model];
+            if (layout) {
+                [layouts addObject:layout];
+            }
+        }
         dispatch_sync(dispatch_get_main_queue(), ^{
-            if (resultBack) resultBack(arrays);
+            if (resultBack) resultBack(layouts);
         });
     }];
 }
@@ -704,16 +711,22 @@ static const char ChatMessageCallBackKey = '\0';
     [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlock:^{
         NSError *error;
         NSArray *arrays = [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext executeFetchRequest:request error:&error];
-        for (ChatMessageModel *model in arrays) {
-            model.modelConfig = @"config";
-        }
+//        for (ChatMessageModel *model in arrays) {
+//            model.modelConfig = @"config";
+//        }
         if (arrays.count) {
             NSSortDescriptor *sorft = [[NSSortDescriptor alloc] initWithKey:@"messageTime" ascending:YES];
             arrays = [arrays sortedArrayUsingDescriptors:@[sorft]];
         }
+        NSMutableArray *layouts = [NSMutableArray new];
+        for (ChatMessageModel *model in arrays) {
+            HQBaseCellLayout *layout = [HQBaseCellLayout layoutWithMessageModel:model];
+            if (layout) {
+                [layouts addObject:layout];
+            }
+        }
         dispatch_sync(dispatch_get_main_queue(), ^{
-            
-            if (resultBack) resultBack(arrays);
+            if (resultBack) resultBack(layouts);
         });
     }];
 }

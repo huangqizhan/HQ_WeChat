@@ -56,6 +56,7 @@
 #import "HQPopover.h"
 #import "NSObject+SubClass.h"
 #import "HQMessageBaseController.h"
+#import "HQChatTableView.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 

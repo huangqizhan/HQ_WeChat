@@ -10,6 +10,7 @@
 #import "HQTextView.h"
 #import "HqChatMessageLabel.h"
 #import "ApplicationHelper.h"
+#import "CellTextLayout.h"
 
 
 
@@ -20,7 +21,7 @@
 
 @property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
-@property (nonatomic,strong) HqChatMessageLabel *msgLabel;
+@property (nonatomic,strong) HQLabel *msgLabel;
 
 @end
 
@@ -38,23 +39,34 @@
         _doubleTap.numberOfTapsRequired = 2;
         _doubleTap.numberOfTouchesRequired = 1;
         [self.paopaoView addGestureRecognizer:_doubleTap];
-        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
+//        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
 //        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
 
     }
     return self;
 }
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    [super setMessageModel:messageModel];
-//    self.chatLabel.attributedText = self.messageModel.muAttributeString;
-    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
-    self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
-    self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    [super setMessageModel:messageModel];
+////    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+//    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
+//    self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
+//    self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
+//    self.paopaoView.right = self.headImageView.left-10;
+////    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+////    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+//    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//}
+- (void)setLayout:(HQBaseCellLayout *)layout{
+    CellTextLayout *textLayout = (CellTextLayout *)layout;
+    [super setLayout:layout];
+    self.msgLabel.displaysAsynchronously = textLayout.isAsyncDisplay;
+    self.msgLabel.width = textLayout.textWidth;
+    self.paopaoView.width = self.msgLabel.width + 30;
+    self.paopaoView.height = textLayout.textHeight + 30;
     self.paopaoView.right = self.headImageView.left-10;
-//    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-//    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
-    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+    self.msgLabel.height = textLayout.textHeight;
+    self.msgLabel.textLayout = textLayout.textLayout;
 }
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{
@@ -152,24 +164,24 @@
 }
 - (void)contentLongPressedEndedInView:(UIView *)view {
 }
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-//    [super hitTest:point withEvent:event];
-    if (self.isEdiating) {
-        return self.contentView;
-    }
-    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01 || [UIMenuController sharedMenuController].isMenuVisible){
-        return nil;
-    }
-    
-    if ([self.msgLabel  pointInside:[self convertPoint:point toView:self.msgLabel] withEvent:event]) {
-        return self.msgLabel;
-    }else if ([self.headImageView pointInside:[self convertPoint:point toView:self.headImageView] withEvent:event]){
-        return self.headImageView;
-    }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-        return self.contentView;
-    }    
-    return nil;
-}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+////    [super hitTest:point withEvent:event];
+//    if (self.isEdiating) {
+//        return self.contentView;
+//    }
+//    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01 || [UIMenuController sharedMenuController].isMenuVisible){
+//        return nil;
+//    }
+//    
+//    if ([self.msgLabel  pointInside:[self convertPoint:point toView:self.msgLabel] withEvent:event]) {
+//        return self.msgLabel;
+//    }else if ([self.headImageView pointInside:[self convertPoint:point toView:self.headImageView] withEvent:event]){
+//        return self.headImageView;
+//    }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
+//        return self.contentView;
+//    }    
+//    return nil;
+//}
 ///长按手势
 - (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
     return [self hitTestForTapGestureRecognizer:aPoint];
@@ -238,34 +250,15 @@
     }
     return _paopaoView;
 }
-- (HqChatMessageLabel *)msgLabel{
+- (HQLabel *)msgLabel{
     if (_msgLabel == nil) {
-        _msgLabel = [[HqChatMessageLabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+        _msgLabel = [[HQLabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+        _msgLabel.textVerticalAlignment = TextVerticalAlignmentTop;
+        _msgLabel.textAlignment = NSTextAlignmentCenter;
         _msgLabel.numberOfLines = 0;
-        _msgLabel.font = MessageFont;
-        _msgLabel.textColor = ICRGB(0x282724);
-        WEAKSELF;
-        [_msgLabel setTapCallBackAction:^(MessageLabelTapResult *result){
-            if (result.linkStyle == ChatLabelLinkStyleWeb) {
-                [weakSelf attemptOpenURL:[NSURL URLWithString:result.valueString]];
-            }else if (result.linkStyle == ChatLabelLinkStyleIphoneNumber){
-                [ApplicationHelper callPhoneNumber:result.valueString];
-            }
-        }];
+        _msgLabel.displaysAsynchronously = YES;
+//        _msgLabel.clearContentsBeforeAsynchronouslyDisplay = NO;
     }
     return _msgLabel;
-}
-- (KILabel *)chatLabel{
-    if (nil == _chatLabel) {
-        _chatLabel = [[KILabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
-        _chatLabel.numberOfLines = 0;
-        _chatLabel.font = MessageFont;
-        _chatLabel.textColor = ICRGB(0x282724);
-        __weak typeof (self) weekSelf = self;
-        _chatLabel.urlLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range){
-            [weekSelf attemptOpenURL:[NSURL URLWithString:string]];
-        };
-    }
-    return _chatLabel;
 }
 @end

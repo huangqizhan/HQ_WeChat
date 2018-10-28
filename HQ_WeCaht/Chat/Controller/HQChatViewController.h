@@ -12,6 +12,10 @@
 
 @interface HQChatViewController : HQMessageBaseController<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic, strong,readonly) HQChatTableView *tableView;
+@property (nonatomic,strong,readonly) NSMutableArray <HQBaseCellLayout *> *dataArray;
+
+
 @property (nonatomic,strong) ChatListModel *listModel;
 
 @property (nonatomic,copy) void (^reloadChatListFromDBCallBack)();

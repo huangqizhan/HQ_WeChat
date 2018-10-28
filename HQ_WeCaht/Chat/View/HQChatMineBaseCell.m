@@ -46,29 +46,33 @@
     [self.contentView addSubview:self.activityView];
     [self.contentView addSubview:self.selectControl];
 }
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    _messageModel = messageModel;
-    self.selectControl.image = [UIImage imageNamed:_messageModel.isSeleted ? @"CellBlueSelected": @"CellNotSelected"];
-    switch (_messageModel.deliverStatus) { // 发送状态
-        case HQMessageDeliveryState_Delivering:{
-            [self.activityView setHidden:NO];
-            [self.activityView startAnimating];
-        }
-            break;
-        case HQMessageDeliveryState_Delivered:{
-            [self.activityView stopAnimating];
-            [self.activityView setHidden:YES];
-            
-        }
-            break;
-        case HQMessageDeliveryState_Failure:{
-            [self.activityView stopAnimating];
-            [self.activityView setHidden:YES];
-        }
-            break;
-        default:
-            break;
-    }
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    _messageModel = messageModel;
+//    self.selectControl.image = [UIImage imageNamed:_messageModel.isSeleted ? @"CellBlueSelected": @"CellNotSelected"];
+//    switch (_messageModel.deliverStatus) { // 发送状态
+//        case HQMessageDeliveryState_Delivering:{
+//            [self.activityView setHidden:NO];
+//            [self.activityView startAnimating];
+//        }
+//            break;
+//        case HQMessageDeliveryState_Delivered:{
+//            [self.activityView stopAnimating];
+//            [self.activityView setHidden:YES];
+//
+//        }
+//            break;
+//        case HQMessageDeliveryState_Failure:{
+//            [self.activityView stopAnimating];
+//            [self.activityView setHidden:YES];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//}
+
+- (void)setLayout:(HQBaseCellLayout *)layout{
+    _layout = layout;
 }
 - (void)setIndexPath:(NSIndexPath *)indexPath{
     _indexPath = indexPath;
@@ -255,7 +259,7 @@
 - (void)contentLongPressedEndedInView:(UIView *)view {
 }
 - (void)copyAction:(id)sender{
-    [ApplicationHelper copyToPasteboard:self.messageModel.contentString];
+    [ApplicationHelper copyToPasteboard:self.layout.modle.contentString];
 }
 - (void)transforAction:(id)sender{
 

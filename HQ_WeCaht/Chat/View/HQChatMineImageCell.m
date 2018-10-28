@@ -28,10 +28,13 @@
     return self;
 }
 
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    [super setMessageModel:messageModel];
-    [self.imageBtn setBackgroundImage:self.messageModel.tempImage forState:UIControlStateNormal];
-    self.imageBtn.frame = CGRectMake(self.messageModel.chatImageRect.xx, self.messageModel.chatImageRect.yy, self.messageModel.chatImageRect.width, self.messageModel.chatImageRect.height);
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    [super setMessageModel:messageModel];
+//    [self.imageBtn setBackgroundImage:self.messageModel.tempImage forState:UIControlStateNormal];
+//    self.imageBtn.frame = CGRectMake(self.messageModel.chatImageRect.xx, self.messageModel.chatImageRect.yy, self.messageModel.chatImageRect.width, self.messageModel.chatImageRect.height);
+//}
+- (void)setLayout:(HQBaseCellLayout *)layout{
+    
 }
 - (void)imageBtnClick:(UIButton *)btn{
     if ([UIMenuController sharedMenuController].menuVisible) {

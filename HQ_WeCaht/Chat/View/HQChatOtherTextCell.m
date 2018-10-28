@@ -264,19 +264,19 @@
     }
     return _msgLabel;
 }
-- (KILabel *)chatLabel{
-    if (nil == _chatLabel) {
-        _chatLabel = [[KILabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
-        _chatLabel.numberOfLines = 0;
-        _chatLabel.font = MessageFont;
-        _chatLabel.textColor = ICRGB(0x282724);
-        //        _chatLabel.backgroundColor = [UIColor lightGrayColor];
-        __weak typeof (self) weekSelf = self;
-        _chatLabel.urlLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range){
-            [weekSelf attemptOpenURL:[NSURL URLWithString:string]];
-        };
-    }
-    return _chatLabel;
-}
+//- (KILabel *)chatLabel{
+//    if (nil == _chatLabel) {
+//        _chatLabel = [[KILabel alloc] initWithFrame:CGRectMake(15, 10,CONTENTLABELWIDTH , 10)];
+//        _chatLabel.numberOfLines = 0;
+//        _chatLabel.font = MessageFont;
+//        _chatLabel.textColor = ICRGB(0x282724);
+//        //        _chatLabel.backgroundColor = [UIColor lightGrayColor];
+//        __weak typeof (self) weekSelf = self;
+//        _chatLabel.urlLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range){
+//            [weekSelf attemptOpenURL:[NSURL URLWithString:string]];
+//        };
+//    }
+//    return _chatLabel;
+//}
 
 @end

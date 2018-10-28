@@ -59,26 +59,31 @@
 - (instancetype)initWith:(ChatMessageModel *)model{
     self = [super init];
     if (self) {
-        _messageModel = model;
-        [self _layoutText];
+        [self _layoutText:model.contentString];
     }
     return self;
 }
-- (void)_layoutText{
+- (void)_layoutText:(NSString *)text{
     CellTextModifier *modifier = [CellTextModifier new];
     modifier.font = [UIFont fontWithName:@"Heiti SC" size:kChatCellTextFontSize];
-    modifier.paddingTop = kChatCellPaddingText;
-    modifier.paddingBottom = kChatCellPaddingText;
+    modifier.paddingTop = 0;
+    modifier.paddingBottom = 2;
     TextContainer *container = [TextContainer new];
-    container.size = CGSizeMake(250, CGFLOAT_MAX);
+    container.size = CGSizeMake(CONTENTLABELWIDTH, CGFLOAT_MAX);
 //    container.insets = UIEdgeInsetsMake(0, 0, 0, 0);
     container.linePositionModifier = modifier;
-    _textLayout = [TextLayout layoutWithContainer:container text:[self _getAttText]];
+    _textLayout = [TextLayout layoutWithContainer:container text:[self _getAttText:text]];
     _textHeight = [modifier heightForLineCount:_textLayout.lines.count] +  0;
+    if (_textLayout.textBoundingRect.size.width < CONTENTLABELWIDTH) {
+        _textWidth = _textLayout.textBoundingRect.size.width;
+    }else{
+        _textWidth = CONTENTLABELWIDTH;
+    }
+    self.cellHeight = _textHeight + 40;
 //    _textLayout = [TextLayout layoutWithContainerSize:CGSizeMake(App_Frame_Width- 40, 200) text:[self _getAttText]];
 }
-- (NSMutableAttributedString *)_getAttText{
-    NSString *content = _messageModel.contentString ? _messageModel.contentString : @"";
+- (NSMutableAttributedString *)_getAttText:(NSString *)text{
+    NSString *content = text?:@"";
 
     // 高亮状态的背景
     TextBorder *highlightBorder = [TextBorder new];
@@ -139,18 +144,5 @@
 }
 
 
-+ (UIImage *)_getEmotionImageWith:(NSString *)title{
-    if (!title || title.length ==0 ) return nil;
-    NSArray *faceArr = [HQFaceTools getNormalEmotions];
-    UIImage *image;
-    for (NSArray *modelArray in  faceArr) {
-        for (HQFaceModel *model in modelArray){
-            if([model.face_name isEqualToString:title]){
-//                image = [HQImageIOHelper imageWithNamed:imageName];
-            }
-        }
-    }
-    return image;
-}
 @end
 

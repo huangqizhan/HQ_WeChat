@@ -61,8 +61,12 @@
     }
    [_layouts addObjectsFromArray:_layouts];
     [_tableView reloadData];
+    
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"msg" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)]];
 }
-
+- (void)testAction:(UIButton *)sender{
+    [_tableView reloadData];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _layouts.count;
 }
