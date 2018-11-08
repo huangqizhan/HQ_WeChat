@@ -165,11 +165,10 @@ static void diskCacheSetGlobal(DiskCache *cache){
 }
 - (instancetype)initWithPath:(NSString *)path
              inlineThreshold:(NSUInteger)threshold {
-    self = [super init];
-    if (!self) return nil;
-    
     DiskCache *globalCache = diskCacheGetGlobal(path);
     if (globalCache) return globalCache;
+    self = [super init];
+    if (!self) return nil;
     
     KVStorageType type;
     if (threshold == 0) {

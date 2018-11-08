@@ -122,15 +122,16 @@
 - (void)saveChatBegImageWith:(UIImage *)imaage{
     NSString *fileName = [NSString stringWithFormat:@"ChatBegImageName_%lld",self.listModel.chatListId];
     self.listModel.chatBegImageFilePath = fileName;
-    [[HQLocalImageManager shareImageManager] saveChatBegImage:imaage withFileName:fileName andScale:0.5 andComplite:^(BOOL result){
-        if (_chatDetailCallBack) {
-            if (result) {
-                _chatDetailCallBack(@"设置背景图片");
-            }else{
-                NSLog(@"图片保存失败 请重试!");
-            }
-        }
-    }];
+    [HQLocalImageManager saveImage:imaage iamgeName:fileName];
+//    [HQLocalImageManager saveChatBegImage:imaage withFileName:fileName andScale:0.5 andComplite:^(BOOL result){
+//        if (_chatDetailCallBack) {
+//            if (result) {
+//                _chatDetailCallBack(@"设置背景图片");
+//            }else{
+//                NSLog(@"图片保存失败 请重试!");
+//            }
+//        }
+//    }];
 }
 
 #pragma mark ------- 清除聊天背景 -------
@@ -146,7 +147,7 @@
 ////清除聊天背景
 - (void)removeChatBegImage{
     self.listModel.chatBegImageFilePath = nil;
-    [[HQLocalImageManager shareImageManager] removeChatBegImageWith:self.listModel.chatBegImageFilePath];
+    [HQLocalImageManager  removeImageWithImageName:self.listModel.chatBegImageFilePath];
     if (_chatDetailCallBack) {
         _chatDetailCallBack(@"设置背景图片");
     }

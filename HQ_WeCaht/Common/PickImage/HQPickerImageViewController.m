@@ -9,7 +9,6 @@
 #import "HQPickerImageViewController.h"
 #import "HQPhotoPickerViewController.h"
 #import "HQPickerPreviewController.h"
-#import "HQAssetModel.h"
 #import "HQAssetCell.h"
 
 
@@ -51,12 +50,7 @@
         self.navigationBar.tintColor = [UIColor whiteColor];
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-//    self.naviBgColor = [UIColor redColor];
-//    self.naviTitleColor = [UIColor yellowColor];
-//    self.naviTitleFont = [UIFont systemFontOfSize:20];
-//    self.barItemTextFont = [UIFont systemFontOfSize:22];
 }
-
 - (void)setNaviBgColor:(UIColor *)naviBgColor {
     _naviBgColor = naviBgColor;
     self.navigationBar.barTintColor = naviBgColor;

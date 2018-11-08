@@ -8,17 +8,25 @@
 
 #import "CellImageLayout.h"
 
+
 @implementation CellImageLayout
 - (instancetype)initWith:(ChatMessageModel *)model{
     self = [super init];
     if (self) {
-        _image = model.tempImage;
+        self.modle = model;
         [self _layoutImage];
     }
     return self;
 }
 
 - (void)_layoutImage{
+    //cacheImageAndImageCode
+    _image = self.modle.tempImage;
+    if (!_image) {
+        _image = [HQLocalImageManager getImageWithImageName:self.modle.fileName];
+    }else{
+        _image = [HQLocalImageManager saveAndCodeImage:_image fileName:self.modle.fileName];
+    }
     CGSize size = [self handleImage:_image.size];
     _imageFrame.size = size;
     _imageFrame.origin.x = App_Frame_Width-size.width-65;

@@ -10,10 +10,7 @@
 #import "HQChaRootCell.h"
 #import "HQChatTableViewCellDelegate.h"
 #import "HQBaseCellLayout.h"
-
-
-
-
+#import "ImageControll.h"
 
 @interface HQChatMineBaseCell : HQChaRootCell
 
@@ -22,7 +19,7 @@
 ///layout
 @property (nonatomic,strong) HQBaseCellLayout *layout;
 // 头像
-@property (nonatomic, strong) UIImageView *headImageView;
+@property (nonatomic, strong) ImageControll *headImageView;
 // 菊花视图所在的view
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 //选择按钮
@@ -31,14 +28,14 @@
 @property (nonatomic,strong) NSIndexPath *indexPath;
 
 @property (nonatomic,assign) id <HQChatTableViewCellDelegate>delegate;
+//
+//- (void)longPressRecognizer:(UILongPressGestureRecognizer *)sender;
 
-- (void)longPressRecognizer:(UILongPressGestureRecognizer *)sender;
 
 
+@property (nonatomic,strong) NSArray<NSString *> *menuItemActionNames;
 
-@property (nonatomic) NSArray<NSString *> *menuItemActionNames;
-
-@property (nonatomic) NSArray<NSString *> *menuItemNames;
+@property (nonatomic,strong) NSArray<NSString *> *menuItemNames;
 
 ////长按开始
 - (void)contentLongPressedBeganInView:(UIView *)view;

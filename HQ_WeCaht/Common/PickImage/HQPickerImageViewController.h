@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HQNavigationController.h"
-
+#import "HQAssetModel.h"
 
 
 @class HQAssetModel;
@@ -159,6 +159,11 @@
 @optional
 
 
+
+
+- (void)imagePickerController:(HQPickerImageViewController *)picker didFinishPickingImages:(NSArray<TempModle *> *)photos;
+
+
 - (void)imagePickerController:(HQPickerImageViewController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceImageUuids:(NSArray *)imageUuids ;
 
 - (void)imagePickerpPhotoControllerDidCancel:(HQPickerImageViewController *)picker;
@@ -168,6 +173,8 @@
 
 // 如果用户选择了一个gif图片，下面的handle会被执行
 - (void)imagePickerController:(HQPickerImageViewController *)picker didFinishPickingGifImage:(UIImage *)animatedImage sourceAssets:(id)asset;
+
+
 
 @end
 

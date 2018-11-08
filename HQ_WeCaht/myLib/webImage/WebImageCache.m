@@ -119,10 +119,12 @@ static inline dispatch_queue_t YYImageCacheDecodeQueue() {
     }
     if (type & YYImageCacheTypeDisk) { // add to disk cache
         if (imageData) {
-            if (image) {
-                [DiskCache setExtendedData:[NSKeyedArchiver archivedDataWithRootObject:@(image.scale)] toObject:imageData];
-            }
-            [_diskCache setObject:imageData forKey:key];
+            dispatch_async(YYImageCacheIOQueue(), ^{
+                if (image) {
+                    [DiskCache setExtendedData:[NSKeyedArchiver archivedDataWithRootObject:@(image.scale)] toObject:imageData];
+                }
+                [_diskCache setObject:imageData forKey:key];
+            });
         } else if (image) {
             dispatch_async(YYImageCacheIOQueue(), ^{
                 __strong typeof(_self) self = _self;

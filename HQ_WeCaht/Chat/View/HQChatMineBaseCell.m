@@ -15,7 +15,7 @@
 
 @interface HQChatMineBaseCell (){
     
-    UIView *_longPressView;
+//    UIView *_longPressView;
 }
 
 @property (nonatomic) NSMutableArray <UIMenuItem *> *menuItems;
@@ -30,13 +30,13 @@
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UILongPressGestureRecognizer *longRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognizer:)];
-        longRecognizer.minimumPressDuration = 0.6;
-        longRecognizer.delegate=self;
-        longRecognizer.cancelsTouchesInView=YES;
-        ////可移动范围
-        longRecognizer.allowableMovement = 1000;
-        [self.contentView addGestureRecognizer:longRecognizer];
+//        UILongPressGestureRecognizer *longRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressRecognizer:)];
+//        longRecognizer.minimumPressDuration = 0.6;
+//        longRecognizer.delegate=self;
+//        longRecognizer.cancelsTouchesInView=YES;
+//        ////可移动范围
+//        longRecognizer.allowableMovement = 1000;
+//        [self.contentView addGestureRecognizer:longRecognizer];
         
     }
     return self;
@@ -95,92 +95,92 @@
     self.selectControl.image = [UIImage imageNamed:isSeleted ? @"CellBlueSelected": @"CellNotSelected"];
 }
 #pragma mark ----- 长按  ----
-- (void)longPressRecognizer:(UILongPressGestureRecognizer *)sender{
-    if (self.isEdiating) {
-        return;
-    }
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        [self contentLongPressedBeganInView:_longPressView];
-    }else if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateCancelled){
-        [self contentLongPressedEndedInView:_longPressView];
-    }
-}
-- (BOOL)canBecomeFirstResponder{
-    if (self.isEdiating) {
-        return NO;
-    }
-    return YES;
-}
+//- (void)longPressRecognizer:(UILongPressGestureRecognizer *)sender{
+//    if (self.isEdiating) {
+//        return;
+//    }
+//    if (sender.state == UIGestureRecognizerStateBegan) {
+//        [self contentLongPressedBeganInView:_longPressView];
+//    }else if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateCancelled){
+//        [self contentLongPressedEndedInView:_longPressView];
+//    }
+//}
+//- (BOOL)canBecomeFirstResponder{
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    return YES;
+//}
 
--(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    if (self.isEdiating) {
-        return NO;
-    }
-    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
-        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
-            return YES;
-        }
-    }
-    return NO;//隐藏系统默认的菜单项
-}
+//-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
+//        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
+//            return YES;
+//        }
+//    }
+//    return NO;//隐藏系统默认的菜单项
+//}
 
 #pragma mark ------- UIGestureDelegate -----
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if (self.isEdiating) {
-        return NO;
-    }
-    if (self.hidden || !self.userInteractionEnabled || self.alpha < 0.01) {
-        return NO;
-    }
-    CGPoint point;
-    BOOL isTapGesture = [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]];
-    BOOL isMenuControlShow = [UIMenuController sharedMenuController].menuVisible;
-    if (isTapGesture && isMenuControlShow) {
-        [self performSelectorOnMainThread:@selector(hideMenuController) withObject:nil waitUntilDone:NO];
-    }
-    ////获取手势事件响应的视图
-    UIView *hitView;
-    point = [touch locationInView:self.contentView];
-    if (isTapGesture) {
-        
-    }else{
-        _longPressView = hitView = [self hitTestForlongPressedGestureRecognizer:point];
-    }
-    if (isTapGesture) {
-        if (hitView) {
-            __weak typeof(self) weakSelf = self;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf delayCallBack:touch];
-            });
-            return YES;
-        }else{
-            return isMenuControlShow;
-        }
-    }else{
-        return hitView != nil;
-    }
-    return YES;
-}
-- (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
-    HQChatTextView *textView;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
-        textView = [self.delegate getCurentTextViewWhenShowMenuController];
-    }
-    UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setMenuItems:self.menuItems];
-    [menu setTargetRect:rect inView:contentView];
-    menu.arrowDirection = UIMenuControllerArrowDefault;
-    if (textView == nil) {
-        [self becomeFirstResponder];
-    }else{
-        textView.textCell = self;
-    }
-    [menu setMenuVisible:YES animated:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHideCallback:) name:UIMenuControllerDidHideMenuNotification object:menu];
-}
-- (void)hideMenuController {
-    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    if (self.hidden || !self.userInteractionEnabled || self.alpha < 0.01) {
+//        return NO;
+//    }
+//    CGPoint point;
+//    BOOL isTapGesture = [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]];
+//    BOOL isMenuControlShow = [UIMenuController sharedMenuController].menuVisible;
+//    if (isTapGesture && isMenuControlShow) {
+//        [self performSelectorOnMainThread:@selector(hideMenuController) withObject:nil waitUntilDone:NO];
+//    }
+//    ////获取手势事件响应的视图
+//    UIView *hitView;
+//    point = [touch locationInView:self.contentView];
+//    if (isTapGesture) {
+//
+//    }else{
+//        _longPressView = hitView = [self hitTestForlongPressedGestureRecognizer:point];
+//    }
+//    if (isTapGesture) {
+//        if (hitView) {
+//            __weak typeof(self) weakSelf = self;
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [weakSelf delayCallBack:touch];
+//            });
+//            return YES;
+//        }else{
+//            return isMenuControlShow;
+//        }
+//    }else{
+//        return hitView != nil;
+//    }
+//    return YES;
+//}
+//- (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
+//    HQChatTextView *textView;
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
+//        textView = [self.delegate getCurentTextViewWhenShowMenuController];
+//    }
+//    UIMenuController *menu = [UIMenuController sharedMenuController];
+//    [menu setMenuItems:self.menuItems];
+//    [menu setTargetRect:rect inView:contentView];
+//    menu.arrowDirection = UIMenuControllerArrowDefault;
+//    if (textView == nil) {
+//        [self becomeFirstResponder];
+//    }else{
+//        textView.textCell = self;
+//    }
+//    [menu setMenuVisible:YES animated:YES];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHideCallback:) name:UIMenuControllerDidHideMenuNotification object:menu];
+//}
+//- (void)hideMenuController {
+//    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+//}
 
 - (void)menuDidHideCallback:(NSNotification *)notify {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerDidHideMenuNotification object:nil];
@@ -204,9 +204,9 @@
 //}
 
 #pragma mark - Getter and Setter
-- (UIImageView *)headImageView {
+- (ImageControll *)headImageView {
     if (_headImageView == nil) {
-        _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(App_Frame_Width-10-CHATHEADIMAGEWIDTH, 10, CHATHEADIMAGEWIDTH, CHATHEADIMAGEWIDTH)];
+        _headImageView = [[ImageControll alloc] initWithFrame:CGRectMake(App_Frame_Width-10-CHATHEADIMAGEWIDTH, 10, CHATHEADIMAGEWIDTH, CHATHEADIMAGEWIDTH)];
         _headImageView.backgroundColor = [UIColor blackColor];
         _headImageView.image = [UIImage imageNamed:@"hqz"];
         _headImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -225,16 +225,16 @@
     
     return _selectControl;
 }
-- (NSArray<UIMenuItem *> *)menuItems{
-    if (_menuItems == nil) {
-        self.menuItems = [NSMutableArray arrayWithCapacity:self.menuItemNames.count];
-        for (NSInteger i =0; i < self.menuItemNames.count; i++) {
-            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:self.menuItemNames[i] action:NSSelectorFromString(self.menuItemActionNames[i])];
-            [self.menuItems addObject:item];
-        }
-    }
-    return _menuItems;
-}
+//- (NSArray<UIMenuItem *> *)menuItems{
+//    if (_menuItems == nil) {
+//        self.menuItems = [NSMutableArray arrayWithCapacity:self.menuItemNames.count];
+//        for (NSInteger i =0; i < self.menuItemNames.count; i++) {
+//            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:self.menuItemNames[i] action:NSSelectorFromString(self.menuItemActionNames[i])];
+//            [self.menuItems addObject:item];
+//        }
+//    }
+//    return _menuItems;
+//}
 - (UIActivityIndicatorView *)activityView {
     if (_activityView == nil) {
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -306,13 +306,13 @@
 }
 - (void)translateToWordsAction:(id)sender{
 }
-- (void)willDisplayCell{
-    
-}
-///cell将要结束呈现
-- (void)didEndDisplayingCell{
-    
-}
+//- (void)willDisplayCell{
+//    
+//}
+/////cell将要结束呈现
+//- (void)didEndDisplayingCell{
+//    
+//}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

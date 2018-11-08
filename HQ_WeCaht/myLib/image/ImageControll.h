@@ -11,9 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageControll : UIView
+/// 数据
 @property (nonatomic, strong) UIImage *image;
+#pragma mark ----- 事件 ---
+/// 点击
 @property (nonatomic, copy) void (^touchBlock)(ImageControll *view, UIGestureRecognizerState state, NSSet *touches, UIEvent *event);
+///长按
 @property (nonatomic, copy) void (^longPressBlock)(ImageControll *view, CGPoint point);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -514,11 +514,12 @@
     for (int i = 0 ; i < image.count ; i++) {
         ChatMessageModel *messageModel = [ChatMessageModel creatAnSendImageMessageWith:image[i] andImagePath:fileName[i] andImageName:fileName[i] andReceiverId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
         [self refershListModelWithMessageModel :messageModel];
-        ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
-        if (dateModel) {
-            [self.dataArray addObject:dateModel];
-        }
-        [self.dataArray addObject:messageModel];
+        HQBaseCellLayout *layout = [HQBaseCellLayout layoutWithMessageModel:messageModel];
+//        ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
+//        if (dateModel) {
+//            [self.dataArray addObject:dateModel];
+//        }
+        [self.dataArray addObject:layout];
         [messageModel sendTextMessage:^{
             NSLog(@"status = %d",messageModel.messageStatus);
         }];
@@ -630,42 +631,42 @@
 }
 #pragma mark ------- 查看大图  -----
 - (void)HQChatMineBaseCell:(HQChatMineBaseCell *)cell didScanOriginePictureWith:(ChatMessageModel *)messageModel andPicBtn:(UIButton *)picButton{
-    [self searchCurrentChatImageMessageWith:messageModel callBackResult:^(NSMutableArray *resultArr, NSInteger index) {
-        [self hq_addTransitionDelegate:self];
-        [self hq_popTransitionAnimationWithCurrentScrollView:nil  animationDuration:0.25 isInteractiveTransition:YES];
-        _currntSeletedImageBut = picButton;
-        HQBroswerViewController *broswerVC = [[HQBroswerViewController alloc] init];
-        broswerVC.currnetImageIndex = index;
-        broswerVC.broswerArray = resultArr;
-        broswerVC.navigationController.delegate = self;
-        [broswerVC setCurrentScanImageIndexCallBack:^(HQBroswerModel *model) {
-            UITableViewCell *imageCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:model.origineIndex inSection:0]];
-            if (imageCell) {
-                if ([imageCell isKindOfClass:[HQChatMineImageCell class]]) {
-                    HQChatMineImageCell  *mineImageCell = (HQChatMineImageCell *)imageCell;
-                    NSArray *visbleCellss = [_tableView indexPathsForVisibleRows];
-                    if ([visbleCellss containsObject:mineImageCell.indexPath]) {
-                        _currntSeletedImageBut = mineImageCell.imageBtn;
-                    }else{
-                        _currntSeletedImageBut = nil;
-                    }
-                }else{
-                    HQChatOtherImageCell  *otherImageCell = (HQChatOtherImageCell *)imageCell;
-                    NSArray *visbleCellss = [_tableView indexPathsForVisibleRows];
-                    if ([visbleCellss containsObject:otherImageCell.indexPath]) {
-                        _currntSeletedImageBut = otherImageCell.imageBtn;
-                    }else{
-                        _currntSeletedImageBut = nil;
-                    }
-                }
-            }else if ([imageCell isKindOfClass:[HQChatOtherImageCell class]]){
-                
-            }else{
-                _currntSeletedImageBut = nil;
-            }
-        }];
-        [self.navigationController pushViewController:broswerVC animated:YES];
-    }];
+//    [self searchCurrentChatImageMessageWith:messageModel callBackResult:^(NSMutableArray *resultArr, NSInteger index) {
+//        [self hq_addTransitionDelegate:self];
+//        [self hq_popTransitionAnimationWithCurrentScrollView:nil  animationDuration:0.25 isInteractiveTransition:YES];
+//        _currntSeletedImageBut = picButton;
+//        HQBroswerViewController *broswerVC = [[HQBroswerViewController alloc] init];
+//        broswerVC.currnetImageIndex = index;
+//        broswerVC.broswerArray = resultArr;
+//        broswerVC.navigationController.delegate = self;
+//        [broswerVC setCurrentScanImageIndexCallBack:^(HQBroswerModel *model) {
+//            UITableViewCell *imageCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:model.origineIndex inSection:0]];
+//            if (imageCell) {
+//                if ([imageCell isKindOfClass:[HQChatMineImageCell class]]) {
+//                    HQChatMineImageCell  *mineImageCell = (HQChatMineImageCell *)imageCell;
+//                    NSArray *visbleCellss = [_tableView indexPathsForVisibleRows];
+//                    if ([visbleCellss containsObject:mineImageCell.indexPath]) {
+//                        _currntSeletedImageBut = mineImageCell.imageBtn;
+//                    }else{
+//                        _currntSeletedImageBut = nil;
+//                    }
+//                }else{
+//                    HQChatOtherImageCell  *otherImageCell = (HQChatOtherImageCell *)imageCell;
+//                    NSArray *visbleCellss = [_tableView indexPathsForVisibleRows];
+//                    if ([visbleCellss containsObject:otherImageCell.indexPath]) {
+//                        _currntSeletedImageBut = otherImageCell.imageBtn;
+//                    }else{
+//                        _currntSeletedImageBut = nil;
+//                    }
+//                }
+//            }else if ([imageCell isKindOfClass:[HQChatOtherImageCell class]]){
+//
+//            }else{
+//                _currntSeletedImageBut = nil;
+//            }
+//        }];
+//        [self.navigationController pushViewController:broswerVC animated:YES];
+//    }];
 }
 #pragma mark ------- 查看大图时检索界面的图片数据  -------
 - (void)searchCurrentChatImageMessageWith:(ChatMessageModel *)msgModel callBackResult:(void (^)(NSMutableArray *resultArr ,NSInteger index))callBackResult{
@@ -721,7 +722,7 @@
     });
 }
 - (void)setChatBegGroundImage{
-    self.begImageView.image = [[HQLocalImageManager shareImageManager] getChatBegImageWith:self.listModel.chatBegImageFilePath];
+    self.begImageView.image = [HQLocalImageManager getImageWithImageName:self.listModel.chatBegImageFilePath];
     self.begImageView.clipsToBounds = YES;
     self.begImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.begImageView.backgroundColor = IColor(240, 237, 237);
@@ -772,7 +773,7 @@
 - (UIImageView *)begImageView{
     if (_begImageView == nil) {
         _begImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, APP_Frame_Height-64)];
-        _begImageView.image = [[HQLocalImageManager shareImageManager] getChatBegImageWith:self.listModel.chatBegImageFilePath];
+        _begImageView.image = [HQLocalImageManager getImageWithImageName:self.listModel.chatBegImageFilePath];
         _begImageView.clipsToBounds = YES;
         _begImageView.contentMode = UIViewContentModeScaleAspectFill;
         _begImageView.backgroundColor = IColor(240, 237, 237);

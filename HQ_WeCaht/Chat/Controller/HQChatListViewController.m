@@ -49,6 +49,7 @@
     [msgBut setTitle:@"msg" forState:UIControlStateNormal];
     [msgBut addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msgBut];
+    NSLog(@"home = %@",NSHomeDirectory());
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

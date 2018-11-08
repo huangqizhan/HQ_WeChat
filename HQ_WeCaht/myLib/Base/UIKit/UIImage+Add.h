@@ -10,6 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, HQImageCombineType) {
+    HQImageCombineHorizental,
+    HQImageCombineVertical
+};
+
 @interface UIImage (Add)
 
 ///根据data 创建 gif Image
@@ -77,6 +82,12 @@ NS_ASSUME_NONNULL_BEGIN
                       tintMode:(CGBlendMode)tintBlendMode
                     saturation:(CGFloat)saturation
                      maskImage:(UIImage *)maskImage;
+//拼接图片
++(UIImage *)combineWithImages:(NSArray *)images orientation:(HQImageCombineType)orientation;
+
+//局部收缩
+- (UIImage *)shrinkImageWithCapInsets:(UIEdgeInsets)capInsets actualSize:(CGSize)actualSize;
+
 @end
 
 

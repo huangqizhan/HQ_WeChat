@@ -12,7 +12,7 @@
 #import <Photos/Photos.h>
 
 
-@class HQAlbumModel,HQAssetModel;
+@class HQAlbumModel,HQAssetModel,TempModle;
 
 
 @class ALAsset;
@@ -88,6 +88,10 @@
 /// Get photo bytes 获得一组照片的大小
 - (void)getPhotosBytesWithArray:(NSArray *)photos completion:(void (^)(NSString *totalBytes))completion;
 
+///根据 identifer 获取图片 
+- (void)getImageWithIdentifer:(NSArray <NSString *> *)identifers andWidth:(CGFloat)width complite:(void (^)(UIImage *iamge))complition;
+
+- (void)getImagesWith:(NSArray <HQAssetModel *> *)asserts complition:(void (^)(NSArray <TempModle *> *))complition;
 /// Judge is a assets array contain the asset 判断一个assets数组是否包含这个asset
 - (BOOL)isAssetsArray:(NSArray *)assets containAsset:(id)asset;
 
@@ -102,5 +106,8 @@
 /// 检查照片大小是否满足最小要求
 - (BOOL)isPhotoSelectableWithAsset:(id)asset;
 - (CGSize)photoSizeWithAsset:(id)asset;
+
+// 缩放，临时的方法
++ (CGSize)handleImage:(CGSize)retSize;
 
 @end

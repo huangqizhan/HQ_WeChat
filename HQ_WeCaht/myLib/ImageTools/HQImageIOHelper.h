@@ -17,12 +17,6 @@
  */
 @interface HQImageIOHelper : NSObject
 
-////头像处理的webimageManager
-+ (WebImageManager *)avatarImageManager;
-///获取本地图片  保存到缓存中  自动配置scale 
-+ (UIImage *)imageWithNamed:(NSString *)name;
-///根据路径获取图片  保存到缓存中 自动配置scale 
-+ (UIImage *)imageWithPath:(NSString *)path;
 @end
 
 

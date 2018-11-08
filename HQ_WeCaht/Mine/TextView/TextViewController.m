@@ -7,6 +7,7 @@
 //
 
 #import "TextViewController.h"
+#import "UIImage+Resize.h"
 
 @interface TextViewController ()
 
@@ -16,7 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    ImageControll *imageView = [[ImageControll alloc] initWithFrame:CGRectMake(50, 100, 120, 400)];
+    UIImage *image = [UIImage imageNamed:@"SenderTextNodeBkg"];
+    image = [image resizedImage:CGSizeMake(120, 400) interpolationQuality:kCGInterpolationNone];
+    imageView.image = image;
+    
+    [self.view addSubview:imageView];
 }
 
 /*

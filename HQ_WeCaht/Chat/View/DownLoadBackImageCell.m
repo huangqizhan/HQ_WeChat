@@ -175,15 +175,16 @@
 }
 - (void)saveImageToSandBoxWith:(UIImage *)imaage andFileName:(NSString *)fileName{
     self.listModel.chatBegImageFilePath = fileName;
-    [[HQLocalImageManager shareImageManager] saveChatBegImage:imaage withFileName:fileName andScale:1.0 andComplite:^(BOOL result){
-        if (_chatDetailCallBack) {
-            if (result) {
-                _chatDetailCallBack(@"设置背景图片");
-            }else{
-                NSLog(@"图片保存失败 请重试!");
-            }
-        }
-    }];
+    [HQLocalImageManager saveImage:imaage iamgeName:fileName];
+//    [HQLocalImageManager saveChatBegImage:imaage withFileName:fileName andScale:1.0 andComplite:^(BOOL result){
+//        if (_chatDetailCallBack) {
+//            if (result) {
+//                _chatDetailCallBack(@"设置背景图片");
+//            }else{
+//                NSLog(@"图片保存失败 请重试!");
+//            }
+//        }
+//    }];
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     return YES;

@@ -311,7 +311,9 @@ static NSString *const kTrashDirectoryName = @"trash";
     
     KVStorageItem *item = [KVStorageItem new];
     item.key = [NSString stringWithUTF8String:key];
-    item.filename = [NSString stringWithUTF8String:fileName];
+    if (fileName) {
+        item.filename = [NSString stringWithUTF8String:fileName];
+    }
     item.size = size;
     if (inlineDataSize > 0 && inlineData) item.value = [NSData dataWithBytes:inlineData length:inlineDataSize];
     item.accessTime = lastAccessTime;
@@ -651,7 +653,7 @@ static NSString *const kTrashDirectoryName = @"trash";
     return [self saveItemWithKey:key value:value filename:nil extendedData:nil];
 }
 - (BOOL)saveItemWithKey:(NSString *)key value:(NSData *)value filename:(NSString *)filename extendedData:(NSData *)extendedData{
-    if (key.length == 0 || filename.length == 0) return NO;
+    if (key.length == 0 || value.length == 0) return NO;
     if (_type == KVStorageTypeFile && filename.length == 0) return NO;
     if (filename.length) {
         if (![self fileWriteWithName:filename data:value]) {

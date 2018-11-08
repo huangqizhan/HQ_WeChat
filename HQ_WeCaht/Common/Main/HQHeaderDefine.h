@@ -48,8 +48,8 @@
 #import "ReCodeHelper.h"
 #import "HQHUDHelper.h"
 #import "HQFileTools.h"
-
-
+#import "ImageControll.h" 
+#import "HQImageIOHelper.h" 
 
 #endif
 

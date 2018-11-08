@@ -10,6 +10,6 @@
 
 @interface HQChatMineImageCell : HQChatMineBaseCell
 
-@property (nonatomic, strong) UIButton *imageBtn;
+@property (nonatomic, strong) ImageControll *imageControll;
 
 @end

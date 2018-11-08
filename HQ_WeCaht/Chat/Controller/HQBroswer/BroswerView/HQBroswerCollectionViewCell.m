@@ -119,12 +119,12 @@
     }
     [self resizeSubviews];
     if (_broswerModel.origineImage == nil) {
-        WEAKSELF;
-        [[HQLocalImageManager shareImageManager] getChatMineMessageImageWtihImageName:_broswerModel.fileName withImageSize:CGSizeMake(_broswerModel.tempImage.size.width*5, _broswerModel.tempImage.size.height*5) andComplite:^(UIImage *image) {
-            _broswerModel.origineImage = image;
-            [weakSelf setDataWith:image];
-            [weakSelf resizeSubviews];
-        }];
+//        WEAKSELF;
+//        [HQLocalImageManager getChatMineMessageImageWtihImageName:_broswerModel.fileName withImageSize:CGSizeMake(_broswerModel.tempImage.size.width*5, _broswerModel.tempImage.size.height*5) andComplite:^(UIImage *image) {
+//            _broswerModel.origineImage = image;
+//            [weakSelf setDataWith:image];
+//            [weakSelf resizeSubviews];
+//        }];
     }
 }
 

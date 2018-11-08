@@ -633,11 +633,10 @@ static const char ChatMessageCallBackKey = '\0';
 - (void)saveToDBChatLisModelAsyThread:(void (^)())success andError:(void (^)())faild{
     [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlock:^{
         if (self.messageType == 2 && self.tempImage != nil) {
-//              [[HQLocalImageManager shareImageManager] saveArrowMeToSandBox:self.tempImage withFileName:self.fileName andImageSize:CGSizeMake(self.chatImageRect.width, self.chatImageRect.height) andIsSender:YES];
         }
         NSError *error;
         self.messageTime = [NSDate returnTheTimeralFrom1970];
-        [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext save:&error];
+        [[HQCoreDataManager shareCoreDataManager].syManagerSaveObjectContext save:&error];
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (error) {
                 if (faild) faild();
@@ -760,7 +759,7 @@ static const char ChatMessageCallBackKey = '\0';
     [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlockAndWait:^{
         NSError *error;
         if (self.messageType == 2) {
-            [[HQLocalImageManager shareImageManager] removoeMeImageFromSandBoxWith:self.fileName];
+            [HQLocalImageManager removeImageWithImageName:self.fileName];
         }else if (self.messageType == 4 || self.messageType == 5){
             [[HQRecordManager sharedManager] removeVoiceFileWithFileName:self.fileName];
         }
@@ -779,7 +778,7 @@ static const char ChatMessageCallBackKey = '\0';
 - (void)removeFromDBOnOtherThread:(void(^)())success andError:(void (^)())faild{
     [[HQCoreDataManager shareCoreDataManager] .asyManagerSaveObjextContext performBlock:^{
         if (self.messageType == 2 || self.messageType == 8) {
-            [[HQLocalImageManager shareImageManager] removoeMeImageFromSandBoxWith:self.fileName];
+            [HQLocalImageManager removeImageWithImageName:self.fileName];
         }else if (self.messageType == 4 || self.messageType == 5){
             [[HQRecordManager sharedManager] removeVoiceFileWithFileName:self.fileName];
         }
@@ -842,7 +841,7 @@ static const char ChatMessageCallBackKey = '\0';
         NSArray *arrays = [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext executeFetchRequest:request error:&error];
         for (ChatMessageModel *model in arrays) {
             if (model.messageType == 2 || model.messageType == 8) {
-                [[HQLocalImageManager shareImageManager] removoeMeImageFromSandBoxWith:model.fileName];
+                [HQLocalImageManager removeImageWithImageName:model.fileName];
             }else if (model.messageType == 4 || model.messageType == 5){
                 [[HQRecordManager sharedManager] removeVoiceFileWithFileName:model.fileName];
             }
@@ -869,7 +868,7 @@ static const char ChatMessageCallBackKey = '\0';
         for (ChatMessageModel *model in models) {
             [[HQCoreDataManager shareCoreDataManager] .asyManagerSaveObjextContext deleteObject:model];
             if (model.messageType == 2 || model.messageType == 8) {
-                [[HQLocalImageManager shareImageManager] removoeMeImageFromSandBoxWith:model.fileName];
+                [HQLocalImageManager removeImageWithImageName:model.fileName];
             }else if (model.messageType == 4 || model.messageType == 5){
                 [[HQRecordManager sharedManager] removeVoiceFileWithFileName:model.fileName];
             }

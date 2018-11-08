@@ -34,7 +34,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) HQAssetModelMediaType type;
 @property (nonatomic, copy) NSString *timeLength;
 
+@property (nonatomic, assign) CGSize size;
 
+@property (nonatomic, copy) NSString *burstIdentifier;
 
 /// 用一个PHAsset/ALAsset实例，初始化一个照片模型
 + (instancetype)modelWithAsset:(id)asset type:(HQAssetModelMediaType)type;
@@ -45,11 +47,13 @@ typedef enum : NSUInteger {
 
 
 @class PHFetchResult;
+
+///专辑
 @interface HQAlbumModel : NSObject
 
-///< The album name
+///专辑名
 @property (nonatomic, strong) NSString *name;
-///< Count of photos the album contain
+///数量
 @property (nonatomic, assign) NSInteger count;
 ///< PHFetchResult<PHAsset> or ALAssetsGroup<ALAsset>
 @property (nonatomic, strong) id result;
@@ -59,3 +63,18 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSUInteger selectedCount;
 @end
 
+
+
+
+@interface TempModle : NSObject
+
+///本地标识符
+@property (nonatomic,copy) NSString *localIdentifier;
+///image
+@property (nonatomic,strong) UIImage *image;
+///原始大小
+@property (nonatomic,assign) CGSize origalSize;
+///显示的size 
+@property (nonatomic,assign) CGSize size;
+
+@end

@@ -10,6 +10,8 @@
 #import "DiskCache.h"
 #import "MemoryCache.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class DiskCache;
 @interface Cache : NSObject
 
@@ -29,3 +31,6 @@
 
 
 @end
+
+
+NS_ASSUME_NONNULL_END

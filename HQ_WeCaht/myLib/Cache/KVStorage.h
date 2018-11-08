@@ -8,6 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+
+/*
+ 缓存数据库的结构
+ 
+ key text
+ filename text
+ size integer
+ inline_data blob
+ modification_time integer
+ last_access_time integer
+ extended_data blob
+ primary key(key)  主键是key 
+ 
+ 
+ 如果是文件存储  数据写入文件  数据库存入文件大小 时间  文件名 
+ 
+ 
+ */
+
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -54,6 +75,15 @@ typedef NS_ENUM(NSUInteger, KVStorageType) {
 - (BOOL)saveItem:(KVStorageItem *)item;
 - (BOOL)saveItemWithKey:(NSString *)key value:(NSData *)value;
 
+/**
+ 存储数据  如果fileName 不为空 就会写入文件 数据库只会存储文件信息
+
+ @param key key
+ @param value value
+ @param filename fileName
+ @param extendedData extendedData
+ @return bool
+ */
 - (BOOL)saveItemWithKey:(NSString *)key
                   value:(NSData *)value
                filename:(nullable NSString *)filename

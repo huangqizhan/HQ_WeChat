@@ -19,13 +19,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HQ_WeCaht/Chat/View/HQChatMineImageCell.m"
-            timestampString = "562423760.839502"
+            filePath = "HQ_WeCaht/Chat/Tools/HQChatBoxViewController.m"
+            timestampString = "563379633.1657701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-setLayout:"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
+            landmarkName = "-HQCameraController:andCameraImage:andInfo:andIdentifer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HQ_WeCaht/Chat/Tools/HQChatBoxViewController.m"
+            timestampString = "563379633.165938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
+            landmarkName = "-HQCameraController:andCameraImage:andInfo:andIdentifer:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

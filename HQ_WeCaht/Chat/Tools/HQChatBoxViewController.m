@@ -450,7 +450,7 @@
     [mapVC setSearchResultCallBack:^(UIImage *image , CLLocationCoordinate2D coor2D,NSString *address){
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewControllerSendlocationMessage:andImage:andLocation:andAddress: andFileName:)]) {
             NSString *fileName = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]];
-            [[HQLocalImageManager shareImageManager] saveImage:image andFileName:fileName];
+            [HQLocalImageManager saveImage:image iamgeName:fileName];
             [_delegate chatBoxViewControllerSendlocationMessage:self andImage:image andLocation:coor2D andAddress:address andFileName:fileName];
         }
     }];
@@ -462,13 +462,31 @@
     [self presentViewController:pickerImageVC animated:YES completion:nil];
 }
 #pragma mark ------ 图片选择后处理    -------
+- (void)imagePickerController:(HQPickerImageViewController *)picker didFinishPickingImages:(NSArray<TempModle *> *)photos{
+    NSMutableArray *names = [NSMutableArray new];
+    NSMutableArray *images = [NSMutableArray new];
+    NSMutableArray *imageUuids = [NSMutableArray new];
+    for (int i = 0; i<photos.count; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]+i];
+        if (!photos[i].image) {
+            break;
+        }
+        [names addObject:fileName?:@""];
+        [images addObject:photos[i].image];
+        [imageUuids addObject:photos[i].localIdentifier?:@""];
+        [HQLocalImageManager saveImage:photos[i].image iamgeName:fileName];
+    }
+    if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendImageMessage:imagePath: andFileName:)]) {
+        [_delegate chatBoxViewController:self sendImageMessage:images imagePath:imageUuids andFileName:names];
+    }
+}
 - (void)imagePickerController:(HQPickerImageViewController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceImageUuids:(NSArray *)imageUuids{
     if (photos.count == imageUuids.count) {
         NSMutableArray *names = [NSMutableArray new];
         for (int i = 0; i<photos.count; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]+i];
             [names addObject:fileName];
-            [[HQLocalImageManager shareImageManager] saveImage:photos[i] andFileName:fileName];
+            [HQLocalImageManager saveImage:photos[i] iamgeName:fileName];
         }
         if (names.count == photos.count && names.count > 0 && photos.count > 0) {
             if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendImageMessage:imagePath: andFileName:)]) {

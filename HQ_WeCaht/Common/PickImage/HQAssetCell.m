@@ -35,15 +35,15 @@
     if (iOS8Later) {
         self.representedAssetIdentifier = [[HQImageManager manager] getAssetIdentifier:model.asset];
     }
-    PHImageRequestID imageRequestID = [[HQImageManager manager] getPhotoWithAsset:model.asset photoWidth:self.tz_width*5 completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded, id identifier) {
-        if (_progressView) {
-            self.progressView.hidden = YES;
-            self.imageView.alpha = 1.0;
-        }
+    PHImageRequestID imageRequestID = [[HQImageManager manager] getPhotoWithAsset:model.asset photoWidth:self.tz_width completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded, id identifier) {
+//        if (_progressView) {
+//            self.progressView.hidden = YES;
+//            self.imageView.alpha = 1.0;
+//        }
         // Set the cell's thumbnail image if it's still showing the same asset.
-        if (!iOS8Later) {
-            self.imageView.image = photo; return;
-        }
+//        if (!iOS8Later) {
+//            self.imageView.image = photo; return;
+//        }
         if ([self.representedAssetIdentifier isEqualToString:[[HQImageManager manager] getAssetIdentifier:model.asset]]) {
             self.imageView.image = photo;
         } else {

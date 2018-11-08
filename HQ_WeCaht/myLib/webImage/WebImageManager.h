@@ -128,7 +128,7 @@ typedef void(^YYWebImageProgressBlock)(NSInteger receivedSize, NSInteger expecte
  @param url   The image url (remote or local file path).
  @return The transformed image.
  */
-typedef UIImage * _Nullable (^YYWebImageTransformBlock)(UIImage *image, NSURL *url);
+typedef UIImage * _Nullable (^YYWebImageTransformBlock)(UIImage * _Nullable image, NSURL *url);
 
 /**
  The block invoked when image fetch finished or cancelled.
@@ -140,12 +140,12 @@ typedef UIImage * _Nullable (^YYWebImageTransformBlock)(UIImage *image, NSURL *u
  @param error       Error during image fetching.
  */
 typedef void (^YYWebImageCompletionBlock)(UIImage * _Nullable image,
-                                          NSURL *url,
+                                          NSURL * _Nullable url,
                                           YYWebImageFromType from,
                                           YYWebImageStage stage,
                                           NSError * _Nullable error);
 
-
+NS_ASSUME_NONNULL_BEGIN
 @interface WebImageManager : NSObject
 
 
@@ -157,7 +157,7 @@ typedef void (^YYWebImageCompletionBlock)(UIImage * _Nullable image,
  
  @return YYWebImageManager shared instance.
  */
-+ (instancetype)sharedManager;
++ (instancetype _Nullable )sharedManager;
 /**
  Creates a manager with an image cache and operation queue.
  
@@ -296,6 +296,8 @@ typedef void (^YYWebImageCompletionBlock)(UIImage * _Nullable image,
 
 @end
 
+
+NS_ASSUME_NONNULL_END
 
 
 /*

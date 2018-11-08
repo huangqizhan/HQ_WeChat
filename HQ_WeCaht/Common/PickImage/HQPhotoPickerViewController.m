@@ -10,8 +10,6 @@
 #import "HQPhotoPickerViewController.h"
 #import "HQPickerImageViewController.h"
 #import "HQPickerPreviewController.h"
-#import "HQVideoPlayerController.h"
-#import "HQGifPhotoPreviewController.h"
 #import "HQAssetCell.h"
 #import "HQAssetModel.h"
 
@@ -138,11 +136,7 @@ static CGSize AssetGridThumbnailSize;
     _collectionView.delegate = self;
     _collectionView.alwaysBounceHorizontal = NO;
     _collectionView.contentInset = UIEdgeInsetsMake(margin, margin, margin, margin);
-    
-//    if (_showTakePhotoBtn && tzImagePickerVc.allowTakePicture ) {
-//        _collectionView.contentSize = CGSizeMake(self.view.tz_width, ((_model.count + self.columnNumber) / self.columnNumber) * self.view.tz_width);
-//    } else {
-//    }
+
     _collectionView.contentSize = CGSizeMake(self.view.tz_width, ((_model.count + self.columnNumber - 1) / self.columnNumber) * self.view.tz_width);
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[HQAssetCell class] forCellWithReuseIdentifier:@"TZAssetCell"];
@@ -267,59 +261,16 @@ static CGSize AssetGridThumbnailSize;
 
 - (void)doneButtonClick {
     HQPickerImageViewController *tzImagePickerVc = (HQPickerImageViewController *)self.navigationController;
-    if (tzImagePickerVc.minImagesCount && tzImagePickerVc.selectedModels.count < tzImagePickerVc.minImagesCount) {
-        NSString *title = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Select a minimum of %zd photos"], tzImagePickerVc.minImagesCount];
-        [tzImagePickerVc showAlertWithTitle:title];
-        return;
-    }
+    if (tzImagePickerVc.selectedModels.count == 0) return;
     [tzImagePickerVc showProgressHUD];
-    NSMutableArray *photos = [NSMutableArray array];
-    NSMutableArray *assets = [NSMutableArray array];
-    NSMutableArray *infoArr = [NSMutableArray array];
-    for (NSInteger i = 0; i < tzImagePickerVc.selectedModels.count; i++) {
-        [photos addObject:@1];
-        [assets addObject:@1];
-        [infoArr addObject:@1];
-    }
-    
-    __block BOOL havenotShowAlert = YES;
-    [HQImageManager manager].shouldFixOrientation = YES;
-    for (NSInteger i = 0; i < tzImagePickerVc.selectedModels.count; i++) {
-        HQAssetModel *model = tzImagePickerVc.selectedModels[i];
-        [[HQImageManager manager] getPhotoWithAsset:model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded, id identifier) {
-            if (isDegraded){
-                return;
-            }
-            if (photo) {
-//                photo = [self scaleImage:photo toSize:CGSizeMake(photo.size.width, photo.size.height)];
-               // [self scaleImage:photo toSize:CGSizeMake(tzImagePickerVc.photoWidth, (int)(tzImagePickerVc.photoWidth * photo.size.height / photo.size.width))];
-                [photos replaceObjectAtIndex:i withObject:photo];
-            }
-            if (info) {
-                [infoArr replaceObjectAtIndex:i withObject:info];
-            }
-            if (identifier) {
-                [assets replaceObjectAtIndex:i withObject:identifier];
-            }
-            for (id item in photos){
-                if ([item isKindOfClass:[NSNumber class]]) return;
-            }
-            if (havenotShowAlert) {
-                [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
-            }
-        } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
-            // 如果图片正在从iCloud同步中,提醒用户
-            if (progress < 1 && havenotShowAlert) {
-                [tzImagePickerVc hideProgressHUD];
-                [tzImagePickerVc showAlertWithTitle:[NSBundle tz_localizedStringForKey:@"Synchronizing photos from iCloud"]];
-                havenotShowAlert = NO;
-                return;
-            }
-        } networkAccessAllowed:YES];
-    }
-    if (tzImagePickerVc.selectedModels.count <= 0) {
-        [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
-    }
+    [[HQImageManager manager] getImagesWith:tzImagePickerVc.selectedModels complition:^(NSArray<TempModle *> * iamges) {
+        if ([tzImagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerController:didFinishPickingImages:)]) {
+            [tzImagePickerVc.pickerDelegate imagePickerController:tzImagePickerVc didFinishPickingImages:iamges];
+        };
+        [tzImagePickerVc hideProgressHUD];
+        [tzImagePickerVc dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
 }
 - (void)pushPhotoPrevireViewController:(HQPickerPreviewController *)photoPreviewVc {
     __weak typeof(self) weakSelf = self;
@@ -392,7 +343,7 @@ static CGSize AssetGridThumbnailSize;
     if (!tzImagePickerVc.allowPreview) {
         cell.selectPhotoButton.frame = cell.bounds;
     }
-    
+
     __weak typeof(cell) weakCell = cell;
     __weak typeof(self) weakSelf = self;
     __weak typeof(_numberImageView.layer) weakLayer = _numberImageView.layer;
@@ -437,20 +388,12 @@ static CGSize AssetGridThumbnailSize;
         if (tzImagePickerVc.selectedModels.count > 0) {
             HQPickerImageViewController *imagePickerVc = (HQPickerImageViewController *)self.navigationController;
             [imagePickerVc showAlertWithTitle:[NSBundle tz_localizedStringForKey:@"Can not choose both video and photo"]];
-        } else {
-            HQVideoPlayerController *videoPlayerVc = [[HQVideoPlayerController alloc] init];
-//            videoPlayerVc.model = model;
-            [self.navigationController pushViewController:videoPlayerVc animated:YES];
         }
     } else if (model.type == HQAssetModelMediaTypePhotoGif && tzImagePickerVc.allowPickingGif) {
         if (tzImagePickerVc.selectedModels.count > 0) {
             HQPickerImageViewController *imagePickerVc = (HQPickerImageViewController *)self.navigationController;
             [imagePickerVc showAlertWithTitle:[NSBundle tz_localizedStringForKey:@"Can not choose both photo and GIF"]];
-        } else {
-            HQGifPhotoPreviewController *gifPreviewVc = [[HQGifPhotoPreviewController alloc] init];
-//            gifPreviewVc.model = model;
-            [self.navigationController pushViewController:gifPreviewVc animated:YES];
-        }
+        } 
     } else {
         HQPickerPreviewController *photoPreviewVc = [[HQPickerPreviewController alloc] init];
         photoPreviewVc.currentIndex = index;
@@ -503,46 +446,6 @@ static CGSize AssetGridThumbnailSize;
         [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
         _shouldScrollToBottom = NO;
     }
-}
-
-- (void)reloadPhotoArray {
-    HQPickerImageViewController *tzImagePickerVc = (HQPickerImageViewController *)self.navigationController;
-    [[HQImageManager manager] getCameraRoallAlbum:tzImagePickerVc.allowPickingVideo allPickingImage:tzImagePickerVc.allowPickingImage complite:^(HQAlbumModel *model) {
-        _model = model;
-        [[HQImageManager manager] getAssetsFromFetchResult:_model.result allowPickingVideo:tzImagePickerVc.allowPickingVideo allowPickingImage:tzImagePickerVc.allowPickingImage completion:^(NSArray<HQAssetModel *> *models) {
-            [tzImagePickerVc hideProgressHUD];
-            HQAssetModel *assetModel;
-            if (tzImagePickerVc.sortAscendingByModificationDate) {
-                assetModel = [models lastObject];
-                [_models addObject:assetModel];
-            } else {
-                assetModel = [models firstObject];
-                [_models insertObject:assetModel atIndex:0];
-            }
-            
-            if (tzImagePickerVc.maxImagesCount <= 1) {
-                if (tzImagePickerVc.allowCrop) {
-                    HQPickerPreviewController *photoPreviewVc = [[HQPickerPreviewController alloc] init];
-//                    photoPreviewVc.currentIndex = _models.count - 1;
-//                    photoPreviewVc.models = _models;
-                    [self pushPhotoPrevireViewController:photoPreviewVc];
-                } else {
-                    [tzImagePickerVc.selectedModels addObject:assetModel];
-                    [self doneButtonClick];
-                }
-                return;
-            }
-            if (tzImagePickerVc.selectedModels.count < tzImagePickerVc.maxImagesCount) {
-                assetModel.isSelected = YES;
-                [tzImagePickerVc.selectedModels addObject:assetModel];
-                [self refreshBottomToolBarStatus];
-            }
-            [_collectionView reloadData];
-            
-            _shouldScrollToBottom = YES;
-            [self scrollCollectionViewToBottom];
-        }];
-    }];
 }
 #pragma mark - Asset Caching
 

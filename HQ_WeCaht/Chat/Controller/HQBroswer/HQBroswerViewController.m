@@ -51,7 +51,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self hq_removeTransitionDelegate];
-    [[HQLocalImageManager shareImageManager] clearImageCacheOriginImageWhenBroswerFinishWith:self.broswerArray];
+//    [HQLocalImageManager clearImageCacheOriginImageWhenBroswerFinishWith:self.broswerArray];
     [self.broswerArray removeAllObjects];
     [self.navigationController setNavigationBarHidden:NO];
     if (iOS7Later) [UIApplication sharedApplication].statusBarHidden = NO;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface DiskCache : NSObject
 ///文件的路径
@@ -86,3 +87,6 @@
 + (void)setExtendedData:(NSData *)extendedData toObject:(id)object;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

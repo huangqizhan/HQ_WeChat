@@ -13,13 +13,12 @@
 #import "CellTextLayout.h"
 
 
-
-
-@interface HQChatMineTextCell ()<UIGestureRecognizerDelegate>
+@interface HQChatMineTextCell ()
+//<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong)UIImageView *paopaoView;
 
-@property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
+//@property (nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
 @property (nonatomic,strong) HQLabel *msgLabel;
 
@@ -34,11 +33,11 @@
         [self.contentView addSubview:self.paopaoView];
 //        [self.paopaoView addSubview:self.chatLabel];
         [self.paopaoView addSubview:self.msgLabel];
-        _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
-        _doubleTap.delegate = self;
-        _doubleTap.numberOfTapsRequired = 2;
-        _doubleTap.numberOfTouchesRequired = 1;
-        [self.paopaoView addGestureRecognizer:_doubleTap];
+//        _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
+//        _doubleTap.delegate = self;
+//        _doubleTap.numberOfTapsRequired = 2;
+//        _doubleTap.numberOfTouchesRequired = 1;
+//        [self.paopaoView addGestureRecognizer:_doubleTap];
 //        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
 //        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
 
@@ -96,71 +95,71 @@
     [super setIsEdiating:isEdiate];
 }
 #pragma mark   ------ 双击 ------
-- (void)contentDoubleTapped:(UITapGestureRecognizer *)tap {
-    if (self.isEdiating) {
-        return;
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatDoubleClick:WithChatMessage:)]) {
-        [self.delegate HQChatDoubleClick:self WithChatMessage:self.messageModel];
-    }
-}
-- (void)singalTapAction:(UITapGestureRecognizer *)singalTap{
-    if ([UIMenuController sharedMenuController].menuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-    }
-}
-- (void)attemptOpenURL:(NSURL *)url{
-    BOOL safariCompatible = [url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"];
-    if (safariCompatible && [[UIApplication sharedApplication] canOpenURL:url]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
-                [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
-            }
-        });
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-}
+//- (void)contentDoubleTapped:(UITapGestureRecognizer *)tap {
+//    if (self.isEdiating) {
+//        return;
+//    }
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatDoubleClick:WithChatMessage:)]) {
+//        [self.delegate HQChatDoubleClick:self WithChatMessage:self.messageModel];
+//    }
+//}
+//- (void)singalTapAction:(UITapGestureRecognizer *)singalTap{
+//    if ([UIMenuController sharedMenuController].menuVisible) {
+//        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+//    }
+//}
+//- (void)attemptOpenURL:(NSURL *)url{
+//    BOOL safariCompatible = [url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"];
+//    if (safariCompatible && [[UIApplication sharedApplication] canOpenURL:url]) {
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatClickLink:withChatMessage:andLinkUrl:)]) {
+//                [self.delegate HQChatClickLink:self withChatMessage:self.messageModel andLinkUrl:url];
+//            }
+//        });
+//    } else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您的链接无效" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
+//}
 #pragma mark - 弹出菜单
 
-- (NSArray<NSString *> *)menuItemNames {
-    return @[@"复制", @"转发", @"收藏", @"翻译", @"删除", @"更多..."];
-}
-
-- (NSArray<NSString *> *)menuItemActionNames {
-    return @[@"copyAction:", @"transforAction:", @"favoriteAction:", @"translateAction:",@"deleteAction:", @"moreAction:"];
-}
-- (void)contentLongPressedBeganInView:(UIView *)view {
-    if (view == self.paopaoView) {
-        self.paopaoView.highlighted = YES;
-        [self showMenuControllerInRect:self.paopaoView.bounds inView:self.paopaoView];
-    }
-}
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if (self.isEdiating) {
-        return NO;
-    }
-    if (gestureRecognizer == _doubleTap) {
-        return YES;
-    }
-    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
-        if ([UIMenuController sharedMenuController].menuVisible) {
-            return NO;
-        }
-    }
-    return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
-}
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
-    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
-    
-    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.paopaoView;
-    }
-    return self.contentView;
-}
+//- (NSArray<NSString *> *)menuItemNames {
+//    return @[@"复制", @"转发", @"收藏", @"翻译", @"删除", @"更多..."];
+//}
+//
+//- (NSArray<NSString *> *)menuItemActionNames {
+//    return @[@"copyAction:", @"transforAction:", @"favoriteAction:", @"translateAction:",@"deleteAction:", @"moreAction:"];
+//}
+//- (void)contentLongPressedBeganInView:(UIView *)view {
+//    if (view == self.paopaoView) {
+////        self.paopaoView.highlighted = YES;
+//        [self showMenuControllerInRect:self.paopaoView.bounds inView:self.paopaoView];
+//    }
+//}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+////    if (self.isEdiating) {
+////        return NO;
+////    }
+////    if (gestureRecognizer == _doubleTap) {
+////        return YES;
+////    }
+////    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+////        if ([UIMenuController sharedMenuController].menuVisible) {
+////            return NO;
+////        }
+////    }
+//    return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
+//}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
+//    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
+//
+//    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.paopaoView;
+//    }
+//    return self.contentView;
+//}
 - (void)menuControllerDidHidden{
-    self.paopaoView.highlighted = NO;
+//    self.paopaoView.highlighted = NO;
 }
 - (void)contentLongPressedEndedInView:(UIView *)view {
 }
@@ -183,9 +182,9 @@
 //    return nil;
 //}
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
 ///删除
 - (void)deleteAction:(id)sender {
     [super deleteAction:sender];
@@ -240,9 +239,15 @@
 - (UIImageView *)paopaoView{
     if (_paopaoView == nil) {
         _paopaoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 0, 0)];
+        _paopaoView.contentMode = UIViewContentModeScaleToFill;
         UIImage *image = [UIImage imageNamed:@"SenderTextNodeBkg"];
+//        [HQImageIOHelper imageWithNamed:@"SenderTextNodeBkg"];
+//
+//        image.capInsets
         image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height*0.5, image.size.width*0.5, image.size.width*0.5, image.size.width*0.5) resizingMode:UIImageResizingModeStretch];
         UIImage *hightedImage = [UIImage imageNamed:@"SenderTextNodeBkgHL"];
+//        [HQImageIOHelper imageWithNamed:@"SenderTextNodeBkgHL"];
+//
         hightedImage = [hightedImage  resizableImageWithCapInsets:UIEdgeInsetsMake(hightedImage.size.height*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5) resizingMode:UIImageResizingModeStretch];
         _paopaoView.highlightedImage = hightedImage;
         [_paopaoView setImage:image];

@@ -241,11 +241,9 @@
 		FD28EA5E1E7B8D9F0077E009 /* HQImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA5C1E7B8D9F0077E009 /* HQImageManager.m */; };
 		FD28EA631E7B8DC70077E009 /* HQPickerProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA5F1E7B8DC70077E009 /* HQPickerProcessView.m */; };
 		FD28EA641E7B8DC70077E009 /* HQAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA611E7B8DC70077E009 /* HQAssetCell.m */; };
-		FD28EA721E7B8E3B0077E009 /* HQVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA681E7B8E3B0077E009 /* HQVideoPlayerController.m */; };
 		FD28EA731E7B8E3B0077E009 /* HQPickerPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA6A1E7B8E3B0077E009 /* HQPickerPreviewController.m */; };
 		FD28EA741E7B8E3B0077E009 /* HQPickerImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA6C1E7B8E3B0077E009 /* HQPickerImageViewController.m */; };
 		FD28EA751E7B8E3B0077E009 /* HQPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA6E1E7B8E3B0077E009 /* HQPhotoPickerViewController.m */; };
-		FD28EA761E7B8E3B0077E009 /* HQGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA701E7B8E3B0077E009 /* HQGifPhotoPreviewController.m */; };
 		FD28EA791E7BC6930077E009 /* HQImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA781E7BC6920077E009 /* HQImageCropManager.m */; };
 		FD28EA7C1E7BC7F70077E009 /* HQPhotoPrevireViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28EA7B1E7BC7F70077E009 /* HQPhotoPrevireViewCell.m */; };
 		FD2A1F2B1EC2F9A0007B47E3 /* DynamicTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A1F2A1EC2F9A0007B47E3 /* DynamicTextViewController.m */; };
@@ -965,16 +963,12 @@
 		FD28EA601E7B8DC70077E009 /* HQPickerProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPickerProcessView.h; sourceTree = "<group>"; };
 		FD28EA611E7B8DC70077E009 /* HQAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQAssetCell.m; sourceTree = "<group>"; };
 		FD28EA621E7B8DC70077E009 /* HQAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQAssetCell.h; sourceTree = "<group>"; };
-		FD28EA681E7B8E3B0077E009 /* HQVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQVideoPlayerController.m; sourceTree = "<group>"; };
-		FD28EA691E7B8E3B0077E009 /* HQVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQVideoPlayerController.h; sourceTree = "<group>"; };
 		FD28EA6A1E7B8E3B0077E009 /* HQPickerPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPickerPreviewController.m; sourceTree = "<group>"; };
 		FD28EA6B1E7B8E3B0077E009 /* HQPickerPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPickerPreviewController.h; sourceTree = "<group>"; };
 		FD28EA6C1E7B8E3B0077E009 /* HQPickerImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPickerImageViewController.m; sourceTree = "<group>"; };
 		FD28EA6D1E7B8E3B0077E009 /* HQPickerImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPickerImageViewController.h; sourceTree = "<group>"; };
 		FD28EA6E1E7B8E3B0077E009 /* HQPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPhotoPickerViewController.m; sourceTree = "<group>"; };
 		FD28EA6F1E7B8E3B0077E009 /* HQPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPhotoPickerViewController.h; sourceTree = "<group>"; };
-		FD28EA701E7B8E3B0077E009 /* HQGifPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQGifPhotoPreviewController.m; sourceTree = "<group>"; };
-		FD28EA711E7B8E3B0077E009 /* HQGifPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQGifPhotoPreviewController.h; sourceTree = "<group>"; };
 		FD28EA771E7BC6920077E009 /* HQImageCropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQImageCropManager.h; sourceTree = "<group>"; };
 		FD28EA781E7BC6920077E009 /* HQImageCropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQImageCropManager.m; sourceTree = "<group>"; };
 		FD28EA7A1E7BC7F70077E009 /* HQPhotoPrevireViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPhotoPrevireViewCell.h; sourceTree = "<group>"; };
@@ -2403,16 +2397,12 @@
 		FD28EA531E7B8C330077E009 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FD28EA681E7B8E3B0077E009 /* HQVideoPlayerController.m */,
-				FD28EA691E7B8E3B0077E009 /* HQVideoPlayerController.h */,
 				FD28EA6B1E7B8E3B0077E009 /* HQPickerPreviewController.h */,
 				FD28EA6A1E7B8E3B0077E009 /* HQPickerPreviewController.m */,
 				FD28EA6D1E7B8E3B0077E009 /* HQPickerImageViewController.h */,
 				FD28EA6C1E7B8E3B0077E009 /* HQPickerImageViewController.m */,
 				FD28EA6F1E7B8E3B0077E009 /* HQPhotoPickerViewController.h */,
 				FD28EA6E1E7B8E3B0077E009 /* HQPhotoPickerViewController.m */,
-				FD28EA711E7B8E3B0077E009 /* HQGifPhotoPreviewController.h */,
-				FD28EA701E7B8E3B0077E009 /* HQGifPhotoPreviewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2420,8 +2410,8 @@
 		FD28EA571E7B8D4D0077E009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD28EA581E7B8D720077E009 /* HQAssetModel.m */,
 				FD28EA591E7B8D720077E009 /* HQAssetModel.h */,
+				FD28EA581E7B8D720077E009 /* HQAssetModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -3806,7 +3796,6 @@
 				FD9408EA1E5A78A600634206 /* main.m in Sources */,
 				FD28EA5A1E7B8D720077E009 /* HQAssetModel.m in Sources */,
 				BAF76556216CEA0C00525D8D /* TextLayout.m in Sources */,
-				FD28EA761E7B8E3B0077E009 /* HQGifPhotoPreviewController.m in Sources */,
 				FD94090A1E5A7D0C00634206 /* NSDictionary+Extension.m in Sources */,
 				FD0661C91F53AB0C005FE459 /* PoperViewController.m in Sources */,
 				FD610B671EF7C58400DCB432 /* HQChatListSecondSearchController.m in Sources */,
@@ -4053,7 +4042,6 @@
 				FD0E98FA1F5D221900B16263 /* HQRQCodeView.m in Sources */,
 				BAF7655B216CEA0C00525D8D /* CGutilies.m in Sources */,
 				FD0936191FBE728700B630D9 /* ApplicationController.m in Sources */,
-				FD28EA721E7B8E3B0077E009 /* HQVideoPlayerController.m in Sources */,
 				FD6753991F4FD622005AD79B /* GestureViewController.m in Sources */,
 				FD39F497200DD612006992DB /* TestPopViewController.m in Sources */,
 				BAF7653C216CEA0C00525D8D /* UIImage+Add.m in Sources */,
@@ -4239,7 +4227,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4276,7 +4264,7 @@
 					"$(PROJECT_DIR)/FramWorks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HQ_WeCaht/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
