@@ -115,6 +115,12 @@ __strong typeof(weakSelf) strongSelf = weakSelf
 #define hqwechatDidReceiveNewMessaage @"hqwechatDidReceiveNewMessaage"
 
 
+///定位
+#define LOCAIOTNACTION  @"locationAction"
+///扫码
+#define  SCANACTION  @"scanAction"
+///摇一摇
+#define  SHAKEACTION @"shakeAcrion"
 
 
 

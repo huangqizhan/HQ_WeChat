@@ -7,7 +7,7 @@
 //
 
 #import "StudyViewController.h"
-#import "RunTimeModel.h"
+
 
 @interface StudyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -30,12 +30,6 @@
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     [self.view addSubview:_tableView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"ceshi" style:UIBarButtonItemStylePlain target:self action:@selector(testAction:)];
-}
-- (void)testAction:(UIBarButtonItem *)sender{
-    RunTimeModel *model = [RunTimeModel new];
-    NSLog(@"first = %@",[model firstSay]);
-    NSLog(@"second = %@",[model secondSay]);
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -79,7 +73,7 @@
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray new];
-        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"GifTempViewController",@"DynamicTextViewController",@"DispachViewController",@"NSStreamViewController",@"HQWifiViewController",@"HQDownLoadFileController",@"VisualEffectViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"FaceViewController",@"ChildBordViewController",@"RunTimeViewController",@"ApplicationController",@"AsySellTicketsViewController",@"HQImageStretchController",@"TestPopViewController",@"JSWebViewController",@"LabelViewController",@"TextViewController"]];
+        [_dataArray addObjectsFromArray:@[@"ProcessController",@"TranstionAnimationViewController",@"VisualEffectViewController",@"HQEdiateImageController",@"GestureViewController",@"PoperViewController",@"TestPopViewController",@"JSWebViewController",@"LabelViewController",@"TextViewController"]];
     }
     return _dataArray;
 }
