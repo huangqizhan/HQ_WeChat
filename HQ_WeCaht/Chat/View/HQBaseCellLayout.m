@@ -9,6 +9,7 @@
 #import "HQBaseCellLayout.h"
 #import "CellTextLayout.h"
 #import "CellImageLayout.h"
+#import "CellGifLayout.h"
 
 @implementation HQBaseCellLayout
 /// 1 文本    2 图片  3GIF 4语音  5正在录音  6视频  7文件  8定位  99时间  100 系统消息  101 工作通知
@@ -92,6 +93,10 @@
        layout = [[CellTextLayout alloc] initWith:model];
     }else if (model.messageType == 2){
         layout = [[CellImageLayout alloc] initWith:model];
+    }else if (model.messageType == 3){
+        layout = [[CellGifLayout alloc] initWith:model];
+    }else{
+        layout = [self new];
     }
     layout.modle = model;
     layout.messageType = model.messageType;

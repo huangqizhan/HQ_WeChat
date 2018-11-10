@@ -7,9 +7,11 @@
 //
 
 #import "HQLocalImageManager.h"
-#import "UIImage+Resize.h"
-#import "HQFileTools.h"
-#import "UIImage+CompressImage.h"
+#import "ImageCore.h" 
+//#import "UIImage+Resize.h"
+//#import "HQFileTools.h"
+//#import "UIImage+CompressImage.h"
+
 
 @interface HQLocalImageManager ()
 
@@ -76,6 +78,9 @@
     image = [image imageByDecoded];
     [[self imageCache] setImage:image forKey:fileName];
     return image;
+}
++ (void)saveLocalGifImage:(MyImage *)image fileName:(NSString *)fileName{
+    [[self imageCache] setImage:image imageData:nil forKey:fileName withType:YYImageCacheTypeMemory];
 }
 ///**
 // 获取我的尖头图片

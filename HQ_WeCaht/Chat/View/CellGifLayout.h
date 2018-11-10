@@ -7,10 +7,16 @@
 //
 
 #import "HQBaseCellLayout.h"
+#import "ImageCore.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CellGifLayout : HQBaseCellLayout
+
+///gif data
+@property (nonatomic,strong) MyImage *image;
+///frame
+@property (nonatomic,assign) CGRect imageFrame;
 
 @end
 

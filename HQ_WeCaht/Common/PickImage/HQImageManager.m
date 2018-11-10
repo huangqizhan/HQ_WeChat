@@ -800,5 +800,19 @@ static CGFloat HQScreenScale;
     }
     return CGSizeMake(width, height);
 }
++ (CGSize)handleGifImage:(CGSize)retSize{
+    CGFloat scaleH = 0.15;
+    CGFloat scaleW = 0.28;
+    CGFloat height = 0;
+    CGFloat width = 0;
+    if (retSize.height / APP_Frame_Height + 0.16 > retSize.width / App_Frame_Width) {
+        height = APP_Frame_Height * scaleH;
+        width = retSize.width / retSize.height * height;
+    } else {
+        width = App_Frame_Width * scaleW;
+        height = retSize.height / retSize.width * width;
+    }
+    return CGSizeMake(width, height);
+}
 
 @end

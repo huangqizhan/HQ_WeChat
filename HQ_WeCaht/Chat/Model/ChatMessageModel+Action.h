@@ -162,26 +162,26 @@ typedef void (^ChatMessageSendStatusCallBack)(HQMessageDeliveryState status);
 @property (nonatomic,copy)void (^ChatMessageSendStatusCallBack)(HQMessageDeliveryState status);
 
 ////文本消息的属性字符串  
-@property (nonatomic,strong) NSMutableAttributedString *muAttributeString;
+//@property (nonatomic,strong) NSMutableAttributedString *muAttributeString;
 
 ////存放临时的图片数据
 @property (nonatomic,strong) UIImage *tempImage;
 
 #pragma mark -------- GIF ----
 ////GIF数据
-@property (nonatomic,strong) NSData *gifImageData;
-///GIF数据源
-@property (nonatomic,assign) CGImageSourceRef sourseRef;
-////当前播放的索引
-@property (nonatomic,assign) int  gifPlyIndex;
-////gif 总的帧数
-@property (nonatomic,assign) int  gifFrameCount;
-///播放时间
-@property (nonatomic,assign)float gifTimestamp;
+//@property (nonatomic,strong) NSData *gifImageData;
+/////GIF数据源
+//@property (nonatomic,assign) CGImageSourceRef sourseRef;
+//////当前播放的索引
+//@property (nonatomic,assign) int  gifPlyIndex;
+//////gif 总的帧数
+//@property (nonatomic,assign) int  gifFrameCount;
+/////播放时间
+//@property (nonatomic,assign)float gifTimestamp;
 ///当前播放时间进度
 @property (nonatomic,assign)float currentPlayProgress;
-////播放队列
-@property (strong, nonatomic) NSOperationQueue *gifPlayQueue;
+//////播放队列
+//@property (strong, nonatomic) NSOperationQueue *gifPlayQueue;
 ////是否正在播放  语音 视频
 @property (nonatomic,assign) BOOL isPlaying;
 ////消息cell 是否被选中

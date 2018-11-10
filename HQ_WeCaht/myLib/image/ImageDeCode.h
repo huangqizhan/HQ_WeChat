@@ -85,6 +85,9 @@ typedef NS_ENUM(NSUInteger, YYImageBlendOperation) {
 + (instancetype)frameWithImage:(UIImage *)image;
 @end
 
+
+
+///图片解码
 @interface ImageDeCode : NSObject
 @property (nullable, nonatomic, readonly) NSData *data;    ///< Image data.
 @property (nonatomic, readonly) YYImageType type;          ///< Image data type.
@@ -176,7 +179,7 @@ typedef NS_ENUM(NSUInteger, YYImagePreset) {
 };
 
 
-
+///图片编码  
 @interface YYImageEncoder : NSObject
 
 @property (nonatomic, readonly) YYImageType type; ///< Image type.

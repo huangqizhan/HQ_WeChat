@@ -503,68 +503,11 @@ static const char ChatMessageCallBackKey = '\0';
     objc_setAssociatedObject(self, @selector(deliverStatus), @(deliverStatus), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSMutableAttributedString *)muAttributeString{
-    return (NSMutableAttributedString *)objc_getAssociatedObject(self, _cmd);
-}
-- (void)setMuAttributeString:(NSMutableAttributedString *)muAttributeString{
-    objc_setAssociatedObject(self, @selector(muAttributeString), muAttributeString, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (UIImage *)tempImage{
     return (UIImage *)objc_getAssociatedObject(self, _cmd);
 }
 - (void)setTempImage:(UIImage *)tempImage{
     objc_setAssociatedObject(self, @selector(tempImage), tempImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (NSData *)gifImageData{
-    return (NSData *)objc_getAssociatedObject(self, _cmd);
-}
-- (void)setGifImageData:(NSData *)gifImageData{
-    objc_setAssociatedObject(self, @selector(gifImageData), gifImageData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)setGifPlyIndex:(int)gifPlyIndex{
-    objc_setAssociatedObject(self, @selector(gifPlyIndex), @(gifPlyIndex), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (int )gifPlyIndex{
-    return [objc_getAssociatedObject(self, _cmd) intValue];
-}
-
-- (void)setGifFrameCount:(int)gifFrameCount{
-    objc_setAssociatedObject(self, @selector(gifFrameCount), @(gifFrameCount), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (int)gifFrameCount{
-    return [objc_getAssociatedObject(self, _cmd) intValue];
-}
-
-- (void)setGifTimestamp:(float)gifTimestamp{
-    objc_setAssociatedObject(self, @selector(gifTimestamp), @(gifTimestamp), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (float)gifTimestamp{
-    return [objc_getAssociatedObject(self, _cmd) floatValue];
-}
-
-- (void)setCurrentPlayProgress:(float)currentPlayProgress{
-    objc_setAssociatedObject(self, @selector(currentPlayProgress), @(currentPlayProgress), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (float)currentPlayProgress{
-    return [objc_getAssociatedObject(self, _cmd) floatValue];
-}
-
-- (void)setGifPlayQueue:(NSOperationQueue *)gifPlayQueue{
-    objc_setAssociatedObject(self, @selector(gifPlayQueue), gifPlayQueue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (NSOperationQueue *)gifPlayQueue{
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setSourseRef:(CGImageSourceRef)sourseRef{
-    objc_setAssociatedObject(self, @selector(sourseRef), (__bridge id)sourseRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (CGImageSourceRef )sourseRef{
-    return (__bridge CGImageSourceRef)objc_getAssociatedObject(self, _cmd);
 }
 - (void)setChatMessageSendStatusCallBack:(void (^)(HQMessageDeliveryState))ChatMessageSendStatusCallBack{
      objc_setAssociatedObject(self, &ChatMessageCallBackKey, ChatMessageSendStatusCallBack, OBJC_ASSOCIATION_COPY_NONATOMIC);
@@ -632,8 +575,8 @@ static const char ChatMessageCallBackKey = '\0';
 ////异步保存
 - (void)saveToDBChatLisModelAsyThread:(void (^)())success andError:(void (^)())faild{
     [[HQCoreDataManager shareCoreDataManager].asyManagerSaveObjextContext performBlock:^{
-        if (self.messageType == 2 && self.tempImage != nil) {
-        }
+//        if (self.messageType == 2 && self.tempImage != nil) {
+//        }
         NSError *error;
         self.messageTime = [NSDate returnTheTimeralFrom1970];
         [[HQCoreDataManager shareCoreDataManager].syManagerSaveObjectContext save:&error];

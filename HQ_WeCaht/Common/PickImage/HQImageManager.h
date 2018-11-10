@@ -109,5 +109,6 @@
 
 // 缩放，临时的方法
 + (CGSize)handleImage:(CGSize)retSize;
-
+//gif  缩放，临时的方法
++ (CGSize)handleGifImage:(CGSize)retSize;
 @end

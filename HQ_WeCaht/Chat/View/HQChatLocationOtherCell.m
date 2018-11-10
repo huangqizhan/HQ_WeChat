@@ -31,11 +31,11 @@
     }
     return self;
 }
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    [super setMessageModel:messageModel];
-    [self .contentImageView setImage:self.messageModel.tempImage];
-    self.addressLabel.text = self.messageModel.contentString;
-}
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    [super setMessageModel:messageModel];
+//    [self .contentImageView setImage:self.messageModel.tempImage];
+//    self.addressLabel.text = self.messageModel.contentString;
+//}
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{
     [super setIsEdiating:isEdiating];

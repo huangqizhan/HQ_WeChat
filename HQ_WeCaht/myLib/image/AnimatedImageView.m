@@ -209,21 +209,21 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 
 - (instancetype)init {
     self = [super init];
-    _runloopMode = NSRunLoopCommonModes;
+    _runloopMode = NSDefaultRunLoopMode;
     _autoPlayAnimatedImage = YES;
     return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    _runloopMode = NSRunLoopCommonModes;
+    _runloopMode = NSDefaultRunLoopMode;
     _autoPlayAnimatedImage = YES;
     return self;
 }
 
 - (instancetype)initWithImage:(UIImage *)image {
     self = [super init];
-    _runloopMode = NSRunLoopCommonModes;
+    _runloopMode = NSDefaultRunLoopMode;
     _autoPlayAnimatedImage = YES;
     self.frame = (CGRect) {CGPointZero, image.size };
     self.image = image;
@@ -232,7 +232,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 
 - (instancetype)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage {
     self = [super init];
-    _runloopMode = NSRunLoopCommonModes;
+    _runloopMode = NSDefaultRunLoopMode;
     _autoPlayAnimatedImage = YES;
     CGSize size = image ? image.size : highlightedImage.size;
     self.frame = (CGRect) {CGPointZero, size };
@@ -627,7 +627,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     _runloopMode = [aDecoder decodeObjectForKey:@"runloopMode"];
-    if (_runloopMode.length == 0) _runloopMode = NSRunLoopCommonModes;
+    if (_runloopMode.length == 0) _runloopMode = NSDefaultRunLoopMode;
     if ([aDecoder containsValueForKey:@"autoPlayAnimatedImage"]) {
         _autoPlayAnimatedImage = [aDecoder decodeBoolForKey:@"autoPlayAnimatedImage"];
     } else {

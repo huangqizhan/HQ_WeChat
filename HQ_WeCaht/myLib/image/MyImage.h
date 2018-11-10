@@ -12,63 +12,30 @@
 #import "AnimatedImageView.h"
 
 /*
+  如果数据是 gif/apng/webp MyImage 会自动解析数据
   MyImage 已经解码 在CPU  计算完之后 不用解码 直接给GPU渲染  不用解码
- 
  */
 
-/**
- A YYImage object is a high-level way to display animated image data.
- 
- @discussion It is a fully compatible `UIImage` subclass. It extends the UIImage
- to support animated WebP, APNG and GIF format image data decoding. It also
- support NSCoding protocol to archive and unarchive multi-frame image data.
- 
- If the image is created from multi-frame image data, and you want to play the
- animation, try replace UIImageView with `YYAnimatedImageView`.
- 
- Sample Code:
- 
- // animation@3x.webp
- YYImage *image = [YYImage imageNamed:@"animation.webp"];
- YYAnimatedImageView *imageView = [YYAnimatedImageView alloc] initWithImage:image];
- [view addSubView:imageView];
- 
- */
+
+NS_ASSUME_NONNULL_BEGIN
 @interface MyImage : UIImage <YYAnimatedImage>
 
 + (nullable MyImage *)imageNamed:(NSString *)name; // no cache!
 + (nullable MyImage *)imageWithContentsOfFile:(NSString *)path;
 + (nullable MyImage *)imageWithData:(NSData *)data;
 + (nullable MyImage *)imageWithData:(NSData *)data scale:(CGFloat)scale;
-
-/**
- If the image is created from data or file, then the value indicates the data type.
- */
+///iamgeType
 @property (nonatomic, readonly) YYImageType animatedImageType;
 
-/**
- If the image is created from animated image data (multi-frame GIF/APNG/WebP),
- this property stores the original image data.
- */
+//// animatedData
 @property (nullable, nonatomic, readonly) NSData *animatedImageData;
 
-/**
- The total memory usage (in bytes) if all frame images was loaded into memory.
- The value is 0 if the image is not created from a multi-frame image data.
- */
+////数据大小
 @property (nonatomic, readonly) NSUInteger animatedImageMemorySize;
-
-/**
- Preload all frame image to memory.
- 
- @discussion Set this property to `YES` will block the calling thread to decode
- all animation frame image to memory, set to `NO` will release the preloaded frames.
- If the image is shared by lots of image views (such as emoticon), preload all
- frames will reduce the CPU cost.
- 
- See `animatedImageMemorySize` for memory cost.
- */
+///提前加载帧数 
 @property (nonatomic) BOOL preloadAllAnimatedImageFrames;
 
 
 @end
+
+NS_ASSUME_NONNULL_END 

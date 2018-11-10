@@ -495,11 +495,12 @@
 - (void)chatBoxViewController:(HQChatBoxViewController *)chatboxViewController sendGifMessage:(NSString *)gifFileName{
     ChatMessageModel *messageModel = [ChatMessageModel creatAnSendGifMessageWith:gifFileName andReceiveId:self.listModel.chatListId andUserName:self.listModel.userName andUserPic:self.listModel.messageUser.userHeadImaeUrl];
     [self refershListModelWithMessageModel:messageModel];
-    ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
-    if (dateModel) {
-        [self.dataArray addObject:dateModel];
-    }
-    [self.dataArray addObject:messageModel];
+//    ChatMessageModel *dateModel = [self checkTheLeastMessageTimeIsBeyondLongestTimeWithCurrentMessageTime:messageModel.messageTime];
+//    if (dateModel) {
+//        [self.dataArray addObject:dateModel];
+//    }
+    HQBaseCellLayout *layout = [HQBaseCellLayout layoutWithMessageModel:messageModel];
+    [self.dataArray addObject:layout];
     [self syncDispalyTableViewReload];
     [self scrollToTableViewBottomWithAnimated:YES andAferDealy:0.05];
     [messageModel sendTextMessage:^{
@@ -682,7 +683,7 @@
     NSMutableArray *imageArr = [NSMutableArray new];
     for (ChatMessageModel *msmodel in resultArray) {
         HQBroswerModel *model = [[HQBroswerModel alloc] init];
-        model.tempImage = msmodel.tempImage;
+//        model.tempImage = msmodel.tempImage;
         model.localPath = msmodel.filePath;
         model.fileName = msmodel.fileName;
         model.urlString = msmodel.contentString;

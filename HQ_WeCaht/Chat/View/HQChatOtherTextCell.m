@@ -42,17 +42,17 @@
     }
     return self;
 }
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    [super setMessageModel:messageModel];
-//    self.chatLabel.attributedText = self.messageModel.muAttributeString;
-    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
-    self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
-    self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
-//    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-//    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
-    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
-}
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    [super setMessageModel:messageModel];
+////    self.chatLabel.attributedText = self.messageModel.muAttributeString;
+//    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
+//    self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
+//    self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
+////    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+////    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
+//    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
+//}
 
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{

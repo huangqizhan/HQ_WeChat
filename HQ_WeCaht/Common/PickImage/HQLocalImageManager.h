@@ -36,6 +36,9 @@
 
 ///删除本地图片
 + (void)removeImageWithImageName:(NSString *)imageName;
+
+///保存资源包中的gif 到内存中 
++ (void)saveLocalGifImage:(MyImage *)image fileName:(NSString *)fileName;
 ///
 + (UIImage *)saveAndCodeImage:(UIImage *)image fileName:(NSString *)fileName;
 

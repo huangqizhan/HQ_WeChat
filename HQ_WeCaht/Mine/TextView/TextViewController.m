@@ -7,7 +7,8 @@
 //
 
 #import "TextViewController.h"
-#import "UIImage+Resize.h"
+#import "AnimatedImageView.h"
+#import "MyImage.h"
 
 @interface TextViewController ()
 
@@ -18,12 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    ImageControll *imageView = [[ImageControll alloc] initWithFrame:CGRectMake(50, 100, 120, 400)];
-    UIImage *image = [UIImage imageNamed:@"SenderTextNodeBkg"];
-    image = [image resizedImage:CGSizeMake(120, 400) interpolationQuality:kCGInterpolationNone];
-    imageView.image = image;
     
-    [self.view addSubview:imageView];
+    AnimatedImageView *anView = [[AnimatedImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"Tuzki_15" ofType:@".gif"];
+    anView.image = [MyImage imageWithContentsOfFile:path];
+    [self.view addSubview:anView];
 }
 
 /*

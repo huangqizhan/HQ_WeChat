@@ -32,11 +32,11 @@
     }
     return self;
 }
-- (void)setMessageModel:(ChatMessageModel *)messageModel{
-    [super setMessageModel:messageModel];
-    [self .contentImageView setImage:self.messageModel.tempImage];
-    self.addressLabel.text = self.messageModel.contentString;
-}
+//- (void)setMessageModel:(ChatMessageModel *)messageModel{
+//    [super setMessageModel:messageModel];
+//    [self .contentImageView setImage:self.messageModel.tempImage];
+//    self.addressLabel.text = self.messageModel.contentString;
+//}
 #pragma mark - 弹出菜单
 
 - (NSArray<NSString *> *)menuItemNames {
