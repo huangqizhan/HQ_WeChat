@@ -148,10 +148,11 @@
     }];
 }
 - (void)setUpUI{
-    [self.view addSubview:self.begImageView];
+//    [self.view addSubview:self.begImageView];
     [self addChildViewController:self.chatBoxVC];
     [self.view addSubview:self.chatBoxVC.view];
     [self.view addSubview:self.tableView];
+    self.tableView.backgroundView = self.begImageView;
     self.tableView.frame = CGRectMake(0, 0, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
     WEAKSELF;
     self.tableView.headerRefersh = [HQRefershHeaderView headerWithRefreshingBlock:^{
@@ -778,6 +779,7 @@
         _begImageView.clipsToBounds = YES;
         _begImageView.contentMode = UIViewContentModeScaleAspectFill;
         _begImageView.backgroundColor = IColor(240, 237, 237);
+        _begImageView.image = [UIImage imageNamed:@"hqz"];
     }
     return _begImageView;
 }

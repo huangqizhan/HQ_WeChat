@@ -42,9 +42,9 @@
 ///长按结束
 - (void)contentLongPressedEndedInView:(UIView *)view;
 ///tap 手势
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint;
-///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint;
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint;
+/////长按手势
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint;
 
 
 

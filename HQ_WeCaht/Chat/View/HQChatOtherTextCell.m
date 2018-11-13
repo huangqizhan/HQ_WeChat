@@ -116,14 +116,14 @@
     }
 }
 
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
-    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
-    
-    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.paopaoView;
-    }
-    return self.contentView;
-}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
+//    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
+//
+//    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.paopaoView;
+//    }
+//    return self.contentView;
+//}
 - (void)menuControllerDidHidden{
     self.paopaoView.highlighted = NO;
 }
@@ -157,23 +157,23 @@
     
     return nil;
 }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if (self.isEdiating) {
-        return NO;
-    }
-    if (gestureRecognizer == _doubleTap) {
-        return YES;
-    }
-    if ([UIMenuController sharedMenuController].menuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-        return NO;
-    }
-    return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    if (gestureRecognizer == _doubleTap) {
+//        return YES;
+//    }
+//    if ([UIMenuController sharedMenuController].menuVisible) {
+//        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+//        return NO;
+//    }
+//    return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
+//}
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
 - (void)contentDoubleTapped:(UITapGestureRecognizer *)tap {
     if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatDoubleClick:WithChatMessage:)]) {
         [self.delegate HQChatDoubleClick:self WithChatMessage:self.messageModel];

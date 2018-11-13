@@ -182,15 +182,15 @@
 //    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
 //}
 
-- (void)menuDidHideCallback:(NSNotification *)notify {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerDidHideMenuNotification object:nil];
-    
-    ((UIMenuController *)notify.object).menuItems = nil;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(MenuViewControllerDidHidden)]) {
-        [self menuControllerDidHidden];
-        [self.delegate MenuViewControllerDidHidden];
-    }
-}
+//- (void)menuDidHideCallback:(NSNotification *)notify {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerDidHideMenuNotification object:nil];
+//
+//    ((UIMenuController *)notify.object).menuItems = nil;
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(MenuViewControllerDidHidden)]) {
+//        [self menuControllerDidHidden];
+//        [self.delegate MenuViewControllerDidHidden];
+//    }
+//}
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 //    if (self.isEdiating) {
 //        return self.contentView;
@@ -243,69 +243,69 @@
 }
 
 ///tap 手势
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
-    return self.contentView;
-}
-///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return self.contentView;
-}
-- (void)menuControllerDidHidden{
-}
-- (void)delayCallBack:(UITouch *)touch{
-}
-- (void)contentLongPressedBeganInView:(UIView *)view {
-}
-- (void)contentLongPressedEndedInView:(UIView *)view {
-}
-- (void)copyAction:(id)sender{
-    [ApplicationHelper copyToPasteboard:self.layout.modle.contentString];
-}
-- (void)transforAction:(id)sender{
-
-}
-- (void)favoriteAction:(id)sender{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
-        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"收藏" andIndexPath:self.indexPath andChatModel:self.messageModel];
-    }
-}
-- (void)translateAction:(id)sender{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
-        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"翻译" andIndexPath:self.indexPath andChatModel:self.messageModel];
-    }
-}
-- (void)deleteAction:(id)sender{
-    HQActionSheet *actionSheet = [[HQActionSheet alloc] initWithTitle:@"是否删除该条消息？"];
-    WEAK_SELF;
-    HQActionSheetAction *action = [HQActionSheetAction actionWithTitle:@"确定" handler:^(HQActionSheetAction *action) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
-            [weakSelf.delegate HQChatMineBaseCell:self MenuActionTitle:@"删除" andIndexPath:self.indexPath andChatModel:self.messageModel];
-        }
-        
-    } style:HQActionStyleDestructive];
-    [actionSheet addAction:action];
-    [actionSheet showInWindow:[UIApplication popOverWindow]];
-
-}
-- (void)moreAction:(id)sender{
-    [self didSeleteCellWhenIsEdiating:YES];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
-        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"更多" andIndexPath:self.indexPath andChatModel:self.messageModel];
-    }
-}
-- (void)addToEmojiAction:(id)sender{
-}
-- (void)forwardAction:(id)sender{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
-        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"转发" andIndexPath:self.indexPath andChatModel:self.messageModel];
-    }
-}
-- (void)showAlbumAction:(id)sender{
-}
-- (void)playAction:(id)sender{
-}
-- (void)translateToWordsAction:(id)sender{
-}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
+//    return self.contentView;
+//}
+/////长按手势
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return self.contentView;
+//}
+//- (void)menuControllerDidHidden{
+//}
+//- (void)delayCallBack:(UITouch *)touch{
+//}
+//- (void)contentLongPressedBeganInView:(UIView *)view {
+//}
+//- (void)contentLongPressedEndedInView:(UIView *)view {
+//}
+//- (void)copyAction:(id)sender{
+//    [ApplicationHelper copyToPasteboard:self.layout.modle.contentString];
+//}
+//- (void)transforAction:(id)sender{
+//
+//}
+//- (void)favoriteAction:(id)sender{
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
+//        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"收藏" andIndexPath:self.indexPath andChatModel:self.messageModel];
+//    }
+//}
+//- (void)translateAction:(id)sender{
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
+//        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"翻译" andIndexPath:self.indexPath andChatModel:self.messageModel];
+//    }
+//}
+//- (void)deleteAction:(id)sender{
+//    HQActionSheet *actionSheet = [[HQActionSheet alloc] initWithTitle:@"是否删除该条消息？"];
+//    WEAK_SELF;
+//    HQActionSheetAction *action = [HQActionSheetAction actionWithTitle:@"确定" handler:^(HQActionSheetAction *action) {
+//        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
+//            [weakSelf.delegate HQChatMineBaseCell:self MenuActionTitle:@"删除" andIndexPath:self.indexPath andChatModel:self.messageModel];
+//        }
+//        
+//    } style:HQActionStyleDestructive];
+//    [actionSheet addAction:action];
+//    [actionSheet showInWindow:[UIApplication popOverWindow]];
+//
+//}
+//- (void)moreAction:(id)sender{
+//    [self didSeleteCellWhenIsEdiating:YES];
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
+//        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"更多" andIndexPath:self.indexPath andChatModel:self.messageModel];
+//    }
+//}
+//- (void)addToEmojiAction:(id)sender{
+//}
+//- (void)forwardAction:(id)sender{
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(HQChatMineBaseCell:MenuActionTitle:andIndexPath:andChatModel:)]) {
+//        [self.delegate HQChatMineBaseCell:self MenuActionTitle:@"转发" andIndexPath:self.indexPath andChatModel:self.messageModel];
+//    }
+//}
+//- (void)showAlbumAction:(id)sender{
+//}
+//- (void)playAction:(id)sender{
+//}
+//- (void)translateToWordsAction:(id)sender{
+//}
 //- (void)willDisplayCell{
 //    
 //}

@@ -8,7 +8,6 @@
 
 #import "PublicCaculateManager.h"
 #import "ContractModel+Action.h"
-#import "HQGifPlayManager.h"
 #import "HQDeviceVoiceManager.h"
 #import "HQRecordManager.h"
 #import "HQAudioPlayerManager.h"
@@ -17,10 +16,10 @@
 
 
 + (void)clearChatViewControllerManagers{
-    [[HQGifPlayManager shareInstance] stopAllGIFAnimationView];
-    [[HQDeviceVoiceManager sharedManager] disableProximitySensor];
-    [[HQRecordManager sharedManager] stopRecording];
-    [[HQAudioPlayerManager sharedManager] stopPlaying];
+//    [[HQGifPlayManager shareInstance] stopAllGIFAnimationView];
+//    [[HQDeviceVoiceManager sharedManager] disableProximitySensor];
+//    [[HQRecordManager sharedManager] stopRecording];
+//    [[HQAudioPlayerManager sharedManager] stopPlaying];
 }
 + (NSDictionary *)groupContractWith:(NSArray *)dataSourse{
     NSMutableArray *nameArray = [NSMutableArray new];

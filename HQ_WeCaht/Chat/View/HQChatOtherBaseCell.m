@@ -109,77 +109,77 @@
     return NO;//隐藏系统默认的菜单项
 }
 #pragma mark ------- UIGestureDelegate -----
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if (self.hidden || !self.userInteractionEnabled || self.alpha < 0.01) {
-        return NO;
-    }
-    CGPoint point;
-    BOOL isTapGesture = [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]];
-    BOOL isMenuControlShow = [UIMenuController sharedMenuController].menuVisible;
-    if (isTapGesture && isMenuControlShow) {
-        [self performSelectorOnMainThread:@selector(hideMenuController) withObject:nil waitUntilDone:NO];
-    }
-    ////获取手势事件响应的视图
-    UIView *hitView;
-    point = [touch locationInView:self.contentView];
-    if (isTapGesture) {
-        
-    }else{
-        _longPressView = hitView = [self hitTestForlongPressedGestureRecognizer:point];
-    }
-    if (isTapGesture) {
-        if (hitView) {
-            __weak typeof(self) weakSelf = self;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf delayCallBack:touch];
-            });
-            return YES;
-        }else{
-            return isMenuControlShow;
-        }
-    }else{
-        return hitView != nil;
-    }
-    return YES;
-}
-- (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
-    HQChatTextView *textView;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
-        textView = [self.delegate getCurentTextViewWhenShowMenuController];
-    }
-    UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setMenuItems:self.menuItems];
-    [menu setTargetRect:rect inView:contentView];
-    menu.arrowDirection = UIMenuControllerArrowDefault;
-    if (textView == nil) {
-        [self becomeFirstResponder];
-    }else{
-        textView.textCell = self;
-    }
-    [menu setMenuVisible:YES animated:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHideCallback:) name:UIMenuControllerDidHideMenuNotification object:menu];
-}
-- (void)hideMenuController {
-    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    if (self.hidden || !self.userInteractionEnabled || self.alpha < 0.01) {
+//        return NO;
+//    }
+//    CGPoint point;
+//    BOOL isTapGesture = [gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]];
+//    BOOL isMenuControlShow = [UIMenuController sharedMenuController].menuVisible;
+//    if (isTapGesture && isMenuControlShow) {
+//        [self performSelectorOnMainThread:@selector(hideMenuController) withObject:nil waitUntilDone:NO];
+//    }
+//    ////获取手势事件响应的视图
+//    UIView *hitView;
+//    point = [touch locationInView:self.contentView];
+//    if (isTapGesture) {
+//
+//    }else{
+//        _longPressView = hitView = [self hitTestForlongPressedGestureRecognizer:point];
+//    }
+//    if (isTapGesture) {
+//        if (hitView) {
+//            __weak typeof(self) weakSelf = self;
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [weakSelf delayCallBack:touch];
+//            });
+//            return YES;
+//        }else{
+//            return isMenuControlShow;
+//        }
+//    }else{
+//        return hitView != nil;
+//    }
+//    return YES;
+//}
+//- (void)showMenuControllerInRect:(CGRect )rect inView:(UIView *)contentView{
+//    HQChatTextView *textView;
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(getCurentTextViewWhenShowMenuController)]) {
+//        textView = [self.delegate getCurentTextViewWhenShowMenuController];
+//    }
+//    UIMenuController *menu = [UIMenuController sharedMenuController];
+//    [menu setMenuItems:self.menuItems];
+//    [menu setTargetRect:rect inView:contentView];
+//    menu.arrowDirection = UIMenuControllerArrowDefault;
+//    if (textView == nil) {
+//        [self becomeFirstResponder];
+//    }else{
+//        textView.textCell = self;
+//    }
+//    [menu setMenuVisible:YES animated:YES];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHideCallback:) name:UIMenuControllerDidHideMenuNotification object:menu];
+//}
+//- (void)hideMenuController {
+//    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+//}
 
-- (void)menuDidHideCallback:(NSNotification *)notify {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerDidHideMenuNotification object:nil];
-    
-    ((UIMenuController *)notify.object).menuItems = nil;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(MenuViewControllerDidHidden)]) {
-        [self menuControllerDidHidden];
-        [self.delegate MenuViewControllerDidHidden];
-    }
-}
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
-        return nil;
-    if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-        return self.contentView;
-    }
-    return nil;
-}
+//- (void)menuDidHideCallback:(NSNotification *)notify {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerDidHideMenuNotification object:nil];
+//    
+//    ((UIMenuController *)notify.object).menuItems = nil;
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(MenuViewControllerDidHidden)]) {
+//        [self menuControllerDidHidden];
+//        [self.delegate MenuViewControllerDidHidden];
+//    }
+//}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
+//        return nil;
+//    if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
+//        return self.contentView;
+//    }
+//    return nil;
+//}
 
 - (UIImageView *)selectControl {
     if (!_selectControl) {
@@ -218,13 +218,13 @@
 }
 
 ///tap 手势
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
-    return self.contentView;
-}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
+//    return self.contentView;
+//}
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return self.contentView;
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return self.contentView;
+//}
 - (void)menuControllerDidHidden{
     
 }

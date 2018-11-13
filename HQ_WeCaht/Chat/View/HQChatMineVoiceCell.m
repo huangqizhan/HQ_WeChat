@@ -129,56 +129,56 @@
     
     return nil;
 }
-///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
-    CGPoint bubblePoint = [self.contentView convertPoint:aPoint toView:self.playButton];
-    if (CGRectContainsPoint(self.playButton.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.playButton;
-    }
-    return self.contentView;
-}
-///删除
-- (void)deleteAction:(id)sender {
-    [super deleteAction:sender];
-}
-//更多
-- (void)moreAction:(id)sender {
-    [super moreAction:sender];
-}
-//转发
-- (void)transforAction:(id)sender {
-    [super transforAction:sender];
-}
-//收藏
-- (void)favoriteAction:(id)sender {
-    [super favoriteAction:sender];
-}
-- (void)addToEmojiAction:(id)sender {
-    [super addToEmojiAction:sender];
-}
-
-- (void)forwardAction:(id)sender {
-    [super forwardAction:sender];
-}
-- (void)showAlbumAction:(id)sender {
-    [super showAlbumAction:sender];
-}
-- (void)playAction:(id)sender {
-    [super playAction:sender];
-}
-- (void)translateToWordsAction:(id)sender {
-    [super translateToWordsAction:sender];
-}
-- (void)willDisplayCell{
-    
-}
-///cell将要结束呈现
-- (void)didEndDisplayingCell{
-    
-}
+/////长按手势
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
+//    CGPoint bubblePoint = [self.contentView convertPoint:aPoint toView:self.playButton];
+//    if (CGRectContainsPoint(self.playButton.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.playButton;
+//    }
+//    return self.contentView;
+//}
+/////删除
+//- (void)deleteAction:(id)sender {
+//    [super deleteAction:sender];
+//}
+////更多
+//- (void)moreAction:(id)sender {
+//    [super moreAction:sender];
+//}
+////转发
+//- (void)transforAction:(id)sender {
+//    [super transforAction:sender];
+//}
+////收藏
+//- (void)favoriteAction:(id)sender {
+//    [super favoriteAction:sender];
+//}
+//- (void)addToEmojiAction:(id)sender {
+//    [super addToEmojiAction:sender];
+//}
+//
+//- (void)forwardAction:(id)sender {
+//    [super forwardAction:sender];
+//}
+//- (void)showAlbumAction:(id)sender {
+//    [super showAlbumAction:sender];
+//}
+//- (void)playAction:(id)sender {
+//    [super playAction:sender];
+//}
+//- (void)translateToWordsAction:(id)sender {
+//    [super translateToWordsAction:sender];
+//}
+//- (void)willDisplayCell{
+//
+//}
+/////cell将要结束呈现
+//- (void)didEndDisplayingCell{
+//
+//}
 /////扬声器模式
 - (void)changeSpeakerStatus{
     if (self.delegate && [self.delegate respondsToSelector:@selector(changeSpeakerStatus)]) {

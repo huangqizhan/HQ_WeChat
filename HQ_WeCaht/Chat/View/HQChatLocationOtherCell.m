@@ -87,23 +87,23 @@
     return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
 }
 
-- (void)contentLongPressedBeganInView:(UIView *)view {
-    if (view == self.begView) {
-        UIView *fruzyView = [[UIView alloc] initWithFrame:self.begView.bounds];
-        fruzyView.tag = 100;
-        fruzyView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
-        [self.begView addSubview:fruzyView];
-        [self showMenuControllerInRect:self.begView.bounds inView:self.begView];
-    }
-}
+//- (void)contentLongPressedBeganInView:(UIView *)view {
+//    if (view == self.begView) {
+//        UIView *fruzyView = [[UIView alloc] initWithFrame:self.begView.bounds];
+//        fruzyView.tag = 100;
+//        fruzyView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
+//        [self.begView addSubview:fruzyView];
+//        [self showMenuControllerInRect:self.begView.bounds inView:self.begView];
+//    }
+//}
 
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
-    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.begView];
-    if (CGRectContainsPoint(self.begView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.begView;
-    }
-    return self.contentView;
-}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
+//    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.begView];
+//    if (CGRectContainsPoint(self.begView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.begView;
+//    }
+//    return self.contentView;
+//}
 - (void)menuControllerDidHidden{
     UIView *view = [self.begView viewWithTag:100];
     [view removeFromSuperview];
@@ -139,9 +139,9 @@
     return nil;
 }
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
 ///删除
 - (void)deleteAction:(id)sender {
     [super deleteAction:sender];

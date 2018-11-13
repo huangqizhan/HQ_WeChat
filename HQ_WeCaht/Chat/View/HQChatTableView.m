@@ -32,11 +32,18 @@
     return self;
 }
 
+- (BOOL)touchesShouldBegin:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view{
+    return [super touchesShouldBegin:touches withEvent:event inContentView:view];
+}
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view {
     if ( [view isKindOfClass:[UIControl class]]) {
         return YES;
+    }else if ([view isKindOfClass:NSClassFromString(@"HQLabel")]){
+        return NO;
     }
     return [super touchesShouldCancelInContentView:view];
 }
-
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    return self;
+//}
 @end

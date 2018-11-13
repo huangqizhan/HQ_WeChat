@@ -132,16 +132,16 @@
     return nil;
 }
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
-    CGPoint bubblePoint = [self.contentView convertPoint:aPoint toView:self.playButton];
-    if (CGRectContainsPoint(self.playButton.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.playButton;
-    }
-    return self.contentView;
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)aPoint{
+//    CGPoint bubblePoint = [self.contentView convertPoint:aPoint toView:self.playButton];
+//    if (CGRectContainsPoint(self.playButton.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.playButton;
+//    }
+//    return self.contentView;
+//}
 ///删除
 - (void)deleteAction:(id)sender {
     [super deleteAction:sender];

@@ -10,10 +10,6 @@
 #import "ImageCore.h"
 #import "CellGifLayout.h"
 
-//#import "HQPlayGifImageView.h"
-//#import "HQActionSheet.h"
-//#import "UIApplication+HQExtern.h"
-
 
 @interface HqChatMineGifCell ()
 

@@ -57,57 +57,57 @@
     return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
 }
 
-- (void)contentLongPressedBeganInView:(UIView *)view {
-    if (view == self.begView) {
-        UIView *fruzyView = [[UIView alloc] initWithFrame:self.begView.bounds];
-        fruzyView.tag = 100;
-        fruzyView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
-        [self.begView addSubview:fruzyView];
-        [self showMenuControllerInRect:self.begView.bounds inView:self.begView];
-    }
-}
-
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
-    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.begView];
-    if (CGRectContainsPoint(self.begView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.begView;
-    }
-    return self.contentView;
-}
-- (void)menuControllerDidHidden{
-    UIView *view = [self.begView viewWithTag:100];
-    [view removeFromSuperview];
-}
-- (void)contentLongPressedEndedInView:(UIView *)view {
-    NSLog(@"contentLongPressedEndedInView");
-}
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if (self.isEdiating) {
-        return self.contentView;
-    }
-    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
-        return nil;
-    
-    if ([self.begView pointInside:[self convertPoint:point toView:self.begView] withEvent:event]) {
-        return self.begView;
-    }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-        return self.contentView;
-    }
-    
-    //    if (LLMessageCell_isEditing) {
-    //        if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-    //            return self.contentView;
-    //        }
-    //    }else {
-    //        if ([self.contentLabel pointInside:[self convertPoint:point toView:self.contentLabel] withEvent:event]) {
-    //            return self.contentLabel;
-    //        }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
-    //            return self.contentView;
-    //        }
-    //    }
-    
-    return nil;
-}
+//- (void)contentLongPressedBeganInView:(UIView *)view {
+//    if (view == self.begView) {
+//        UIView *fruzyView = [[UIView alloc] initWithFrame:self.begView.bounds];
+//        fruzyView.tag = 100;
+//        fruzyView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
+//        [self.begView addSubview:fruzyView];
+//        [self showMenuControllerInRect:self.begView.bounds inView:self.begView];
+//    }
+//}
+//
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
+//    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.begView];
+//    if (CGRectContainsPoint(self.begView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.begView;
+//    }
+//    return self.contentView;
+//}
+//- (void)menuControllerDidHidden{
+//    UIView *view = [self.begView viewWithTag:100];
+//    [view removeFromSuperview];
+//}
+//- (void)contentLongPressedEndedInView:(UIView *)view {
+//    NSLog(@"contentLongPressedEndedInView");
+//}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    if (self.isEdiating) {
+//        return self.contentView;
+//    }
+//    if (self.hidden || !self.userInteractionEnabled || self.alpha <= 0.01)
+//        return nil;
+//
+//    if ([self.begView pointInside:[self convertPoint:point toView:self.begView] withEvent:event]) {
+//        return self.begView;
+//    }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
+//        return self.contentView;
+//    }
+//
+//    //    if (LLMessageCell_isEditing) {
+//    //        if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
+//    //            return self.contentView;
+//    //        }
+//    //    }else {
+//    //        if ([self.contentLabel pointInside:[self convertPoint:point toView:self.contentLabel] withEvent:event]) {
+//    //            return self.contentLabel;
+//    //        }else if ([self.contentView pointInside:[self convertPoint:point toView:self.contentView] withEvent:event]) {
+//    //            return self.contentView;
+//    //        }
+//    //    }
+//
+//    return nil;
+//}
 #pragma mark -------- 编辑 ------
 - (void)setIsEdiating:(BOOL)isEdiating{
     [super setIsEdiating:isEdiating];
@@ -136,9 +136,9 @@
 }
 
 ///长按手势
-- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
-    return [self hitTestForTapGestureRecognizer:aPoint];
-}
+//- (UIView *)hitTestForlongPressedGestureRecognizer:(CGPoint)aPoint{
+//    return [self hitTestForTapGestureRecognizer:aPoint];
+//}
 ///删除
 - (void)deleteAction:(id)sender {
     [super deleteAction:sender];

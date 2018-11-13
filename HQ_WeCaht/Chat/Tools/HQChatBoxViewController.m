@@ -13,7 +13,6 @@
 #import "HQCameraNavigationController.h"
 #import "HQCameraController.h"
 #import "HQLocalImageManager.h"
-#import "HQGifPlayManager.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "HQRecordHUDView.h"
 #import "HQRecordManager.h"
@@ -103,12 +102,10 @@
         NSValue *keyAnimationTime  =[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
         NSTimeInterval keyBordTimerval;
         [keyAnimationTime getValue:&keyBordTimerval];
-        [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
         [UIView animateWithDuration:keyBordTimerval animations:^{
             [_delegate chatBoxViewController:self didChangeChatBoxHeight: keybordSize.height + self.chatBox.height];
         }completion:^(BOOL finished) {
 //            _chatBox.boxStatus = HQChatBoxStatusShowKeyboard; // 状态改变
-            [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
         }];
     }
 }
@@ -116,14 +113,12 @@
 - (BOOL)resignFirstResponder{
     if (self.chatBox.boxStatus == HQChatBoxStatusShowVideo) { // 录制视频状态
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.3 animations:^{
                 [_delegate chatBoxViewController:self didChangeChatBoxHeight:HEIGHT_TABBAR];
             } completion:^(BOOL finished) {
 //                [self.videoView removeFromSuperview]; // 移除video视图
                 self.chatBox.boxStatus = HQChatBoxStatusNothing;//同时改变状态
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
 //                    [[ICVideoManager shareManager] exit];  // 防止内存泄露
                 });
             }];
@@ -133,7 +128,6 @@
     if (self.chatBox.boxStatus != HQChatBoxStatusNothing && self.chatBox.boxStatus != HQChatBoxStatusShowVoice) {
         [self.chatBox resignFirstResponder];
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.3 animations:^{
                 [_delegate chatBoxViewController:self didChangeChatBoxHeight:self.chatBox.height];
             } completion:^(BOOL finished) {
@@ -141,7 +135,6 @@
                 [self.moreListView removeFromSuperview];
                 // 状态改变
                 self.chatBox.boxStatus = HQChatBoxStatusNothing;
-                [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
             }];
         }
     }
@@ -160,7 +153,6 @@
         });
         return;
     } else if (toStatus == HQChatBoxStatusShowVoice) {    // 语音输入按钮
-         [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
         [UIView animateWithDuration:0.3 animations:^{
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
             [_delegate chatBoxViewController:self didChangeChatBoxHeight:self.chatBox.height];
@@ -168,7 +160,6 @@
         } completion:^(BOOL finished) {
             [self.faceListView removeFromSuperview];
             [self.moreListView removeFromSuperview];
-            [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
         }];
     } else if (toStatus == HQChatBoxStatusShowFace) {     // 表情面板
         if (fromStatus == HQChatBoxStatusShowVoice || fromStatus == HQChatBoxStatusNothing ) {
@@ -176,7 +167,6 @@
             newRect.size.height = HEIGHT_CHATBOXVIEW;
             self.faceListView.top = HEIGHT_CHATBOXVIEW;
             self.keyboardFrame = newRect;
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.3 animations:^{
                 [self.view addSubview:self.faceListView];
                self.moreListView.top = self.faceListView.top = self.chatBox.height;
@@ -184,7 +174,6 @@
                 [_delegate chatBoxViewController:self didChangeChatBoxHeight:self.chatBox.height + HEIGHT_CHATBOXVIEW];
             }
             } completion:^(BOOL finished) {
-               [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
             }];
         } else {  // 表情高度变化
             [self.view addSubview:self.faceListView];
@@ -192,12 +181,10 @@
             CGRect newRect;
             newRect.size.height = HEIGHT_CHATBOXVIEW;
             self.keyboardFrame = newRect;
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.3 animations:^{
                self.moreListView.top = self.faceListView.top = self.chatBox.height;
             } completion:^(BOOL finished) {
                 [self.moreListView removeFromSuperview];
-                [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
             }];
             if (fromStatus != HQChatBoxStatusShowMore) {
                 if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
@@ -212,14 +199,12 @@
             self.keyboardFrame = newRect;
             [self.view addSubview:self.moreListView];
             self.moreListView.top = HEIGHT_CHATBOXVIEW;
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.3 animations:^{
                 self.moreListView.top = self.chatBox.height;
                 if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:didChangeChatBoxHeight:)]) {
                     [_delegate chatBoxViewController:self didChangeChatBoxHeight:self.chatBox.height + HEIGHT_CHATBOXVIEW];
                 }
             } completion:^(BOOL finished) {
-                [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
             }];
         } else {
             CGRect newRect;
@@ -227,7 +212,6 @@
             self.keyboardFrame = newRect;
             [self.view addSubview:self.moreListView];
             self.moreListView.top = HEIGHT_CHATBOXVIEW;
-             [[HQGifPlayManager shareInstance] pauseAllAnimation]; ///暂停GIF播放
             [UIView animateWithDuration:0.2 animations:^{
                 self.moreListView.top = self.chatBox.height;
             } completion:^(BOOL finished) {
@@ -238,7 +222,6 @@
                     [_delegate chatBoxViewController:self didChangeChatBoxHeight:self.chatBox.height+HEIGHT_CHATBOXVIEW];
                 }
             } completion:^(BOOL finished) {
-                [[HQGifPlayManager shareInstance] restartAllAnimaiton]; ///GIF重新播放
             }];
         }
     }

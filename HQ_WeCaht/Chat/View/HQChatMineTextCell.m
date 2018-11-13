@@ -14,7 +14,7 @@
 
 
 @interface HQChatMineTextCell ()
-//<UIGestureRecognizerDelegate>
+
 
 @property (nonatomic,strong)UIImageView *paopaoView;
 
@@ -31,31 +31,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.paopaoView];
-//        [self.paopaoView addSubview:self.chatLabel];
         [self.paopaoView addSubview:self.msgLabel];
-//        _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(contentDoubleTapped:)];
-//        _doubleTap.delegate = self;
-//        _doubleTap.numberOfTapsRequired = 2;
-//        _doubleTap.numberOfTouchesRequired = 1;
-//        [self.paopaoView addGestureRecognizer:_doubleTap];
-//        [self.msgLabel.tapSender requireGestureRecognizerToFail:_doubleTap];
-//        [self.chatLabel.singalTap requireGestureRecognizerToFail:_doubleTap];
-
+//        [self.contentView addSubview:self.msgLabel];
     }
     return self;
 }
-//- (void)setMessageModel:(ChatMessageModel *)messageModel{
-//    [super setMessageModel:messageModel];
-////    self.chatLabel.attributedText = self.messageModel.muAttributeString;
-//    self.msgLabel.attrubuteString = self.messageModel.muAttributeString;
-//    self.paopaoView.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width+30;
-//    self.paopaoView.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height+30;
-//    self.paopaoView.right = self.headImageView.left-10;
-////    self.chatLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-////    self.chatLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
-//    self.msgLabel.width = [self.messageModel.chatLabelRect cacuLateCgrect].size.width;
-//    self.msgLabel.height = [self.messageModel.chatLabelRect cacuLateCgrect].size.height;
-//}
+
 - (void)setLayout:(HQBaseCellLayout *)layout{
     CellTextLayout *textLayout = (CellTextLayout *)layout;
     [super setLayout:layout];
@@ -186,56 +167,59 @@
 //    return [self hitTestForTapGestureRecognizer:aPoint];
 //}
 ///删除
-- (void)deleteAction:(id)sender {
-    [super deleteAction:sender];
-}
- //更多
-- (void)moreAction:(id)sender {
-    [super moreAction:sender];
-}
-//复制
-- (void)copyAction:(id)sender {
-    [super copyAction:sender];
-}
-//转发
-- (void)transforAction:(id)sender {
-    [super transforAction:sender];
-}
-//收藏
-- (void)favoriteAction:(id)sender {
-    [super favoriteAction:sender];
-}
-//翻译
-- (void)translateAction:(id)sender {
-    [super translateAction:sender];
-}
-
-- (void)addToEmojiAction:(id)sender {
-    [super addToEmojiAction:sender];
-}
-
-- (void)forwardAction:(id)sender {
-    [super forwardAction:sender];
-}
-
-- (void)showAlbumAction:(id)sender {
-    [super showAlbumAction:sender];
-}
-
-- (void)playAction:(id)sender {
-    [super playAction:sender];
-}
-
-- (void)translateToWordsAction:(id)sender {
-    [super translateToWordsAction:sender];
-}
-- (void)willDisplayCell{
-    
-}
-///cell将要结束呈现
-- (void)didEndDisplayingCell{
-    
-}
+//- (void)deleteAction:(id)sender {
+//    [super deleteAction:sender];
+//}
+// //更多
+//- (void)moreAction:(id)sender {
+//    [super moreAction:sender];
+//}
+////复制
+//- (void)copyAction:(id)sender {
+//    [super copyAction:sender];
+//}
+////转发
+//- (void)transforAction:(id)sender {
+//    [super transforAction:sender];
+//}
+////收藏
+//- (void)favoriteAction:(id)sender {
+//    [super favoriteAction:sender];
+//}
+////翻译
+//- (void)translateAction:(id)sender {
+//    [super translateAction:sender];
+//}
+//
+//- (void)addToEmojiAction:(id)sender {
+//    [super addToEmojiAction:sender];
+//}
+//
+//- (void)forwardAction:(id)sender {
+//    [super forwardAction:sender];
+//}
+//
+//- (void)showAlbumAction:(id)sender {
+//    [super showAlbumAction:sender];
+//}
+//
+//- (void)playAction:(id)sender {
+//    [super playAction:sender];
+//}
+//
+//- (void)translateToWordsAction:(id)sender {
+//    [super translateToWordsAction:sender];
+//}
+//- (void)willDisplayCell{
+//
+//}
+/////cell将要结束呈现
+//- (void)didEndDisplayingCell{
+//
+//}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    return self;
+//}
 - (UIImageView *)paopaoView{
     if (_paopaoView == nil) {
         _paopaoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 0, 0)];
@@ -251,7 +235,7 @@
         hightedImage = [hightedImage  resizableImageWithCapInsets:UIEdgeInsetsMake(hightedImage.size.height*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5) resizingMode:UIImageResizingModeStretch];
         _paopaoView.highlightedImage = hightedImage;
         [_paopaoView setImage:image];
-        _paopaoView.userInteractionEnabled = NO;
+        _paopaoView.userInteractionEnabled = YES;
     }
     return _paopaoView;
 }
@@ -262,7 +246,8 @@
         _msgLabel.textAlignment = NSTextAlignmentCenter;
         _msgLabel.numberOfLines = 0;
         _msgLabel.displaysAsynchronously = YES;
-//        _msgLabel.clearContentsBeforeAsynchronouslyDisplay = NO;
+        _msgLabel.isLongPressShowSelectionView = YES;
+    _msgLabel.clearContentsBeforeAsynchronouslyDisplay = NO;
     }
     return _msgLabel;
 }

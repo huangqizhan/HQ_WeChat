@@ -62,14 +62,14 @@
     
     return _keyFrameAnimation;
 }
-- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
-    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
-    
-    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
-        return self.paopaoView;
-    }
-    return nil;
-}
+//- (UIView *)hitTestForTapGestureRecognizer:(CGPoint)point {
+//    CGPoint bubblePoint = [self.contentView convertPoint:point toView:self.paopaoView];
+//    
+//    if (CGRectContainsPoint(self.paopaoView.bounds, bubblePoint)/* && ![self.chatLabel shouldReceiveTouchAtPoint:[self.contentView convertPoint:point toView:self.chatLabel]]*/) {
+//        return self.paopaoView;
+//    }
+//    return nil;
+//}
 
 - (void)buttonAction:(UIButton *)sender{
     [self deleteAction:nil];

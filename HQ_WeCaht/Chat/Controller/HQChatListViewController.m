@@ -10,7 +10,6 @@
 #import "HQChatListSearchController.h"
 #import "HQChatViewController.h"
 #import "ContractModel+Action.h"
-#import "HQGifPlayManager.h"
 #import "UIViewController+HQPresentTranstion.h"
 #import "HQPopoverAction.h"
 #import "HQPopoverView.h"
