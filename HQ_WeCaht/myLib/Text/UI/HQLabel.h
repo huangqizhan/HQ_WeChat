@@ -96,4 +96,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+UIKIT_EXTERN  NSString * const HQLabelDidShowSelectionViewNotification;
+UIKIT_EXTERN NSString * const HQLabelDidHiddenSelectionViewNotification;
+
 NS_ASSUME_NONNULL_END

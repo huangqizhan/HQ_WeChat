@@ -18,12 +18,15 @@
 #import "TextEffectWindow.h"
 
 
+NSString * const HQLabelDidShowSelectionViewNotification = @"HQLabelDidShowSelectionViewNotification";
+NSString * const HQLabelDidHiddenSelectionViewNotification = @"HQLabelDidHiddenSelectionViewNotification";
+
 static dispatch_queue_t HQLabelReleaseQueue(){
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
     return queue;
 }
 ///长按自身最小时间
-#define kLongPressLabelMinmumDuration 1.0
+#define kLongPressLabelMinmumDuration 0.5
 ///长按高亮时间最小值
 #define kLongPressMinimumDuration 0.5
 ///touch move 最小的移动量
@@ -507,13 +510,14 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 ///显示选中视图
 - (void)_showSelectionView{
+    [self _addSelectionView];
     _selectionView.frame = _innerLayout.textBoundingRect;
     _selectionView.hidden = NO;
     _selectionView.selectionRects = nil;
     if (!_innerLayout) return;
     [[TextEffectWindow sharedWindow] showSelectionDot:_selectionView];
     NSMutableArray *allRects = [NSMutableArray new];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:HQLabelDidShowSelectionViewNotification object:self];
     TextRange *range = [TextRange rangeWithStart:[TextPosition positionWith:0] end:[TextPosition positionWith:_innerText.length]];
     _selectedTextRange = _trackingRange = range;
     NSArray *rects = [_innerLayout selectionRectsForRange:range];
@@ -525,12 +529,24 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     _state.isHiddenSelectedView = NO;
     _selectionView.selectionRects = allRects;
 }
+- (void)_addSelectionView{
+    _selectionView = [TextSelecttionView shareSelectionView];
+    _selectionView.userInteractionEnabled = NO;
+    _selectionView.hidden = YES;
+    _selectionView.hostView = self;
+    _selectionView.color = [self _defaultTintColor];
+    [self addSubview:_selectionView];
+}
 ///隐藏选中视图
 - (void)_hiddenSelectionView{
     if (_state.isHiddenSelectedView) return;
     _state.isHiddenSelectedView = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:HQLabelDidHiddenSelectionViewNotification object:self];
     [UIView animateWithDuration:0.12 animations:^{
         self->_selectionView.hidden = YES;
+    } completion:^(BOOL finished) {
+        [self->_selectionView removeFromSuperview];
+        self->_selectionView = nil;
     }];
 }
 ///更新选中视图
@@ -591,12 +607,12 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     ///voice over
     self.isAccessibilityElement = YES;
     
-    _selectionView = [TextSelecttionView new];
-    _selectionView.userInteractionEnabled = NO;
-    _selectionView.hidden = YES;
-    _selectionView.hostView = self;
-    _selectionView.color = [self _defaultTintColor];
-    [self addSubview:_selectionView];
+//    _selectionView = [TextSelecttionView shareSelectionView];
+//    _selectionView.userInteractionEnabled = NO;
+//    _selectionView.hidden = YES;
+//    _selectionView.hostView = self;
+//    _selectionView.color = [self _defaultTintColor];
+//    [self addSubview:_selectionView];
     _state.isHiddenSelectedView = YES;
 }
 #pragma mark ------ public  method
@@ -838,8 +854,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     [self _endTouch];
     if (!_state.swallowTouch) {
         [super touchesEnded:touches withEvent:event];
-    }
-}
+    } }
 - (BOOL)canBecomeFirstResponder{
     return YES;
 }
@@ -1387,3 +1402,5 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 
 @end
+
+
