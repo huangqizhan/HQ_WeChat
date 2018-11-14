@@ -91,6 +91,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///是否忽略一般的属性
 @property (nonatomic) BOOL ignoreCommonProperties;
 
+///删除选中视图
+- (void)removeSelectionView;
 
 @end
 

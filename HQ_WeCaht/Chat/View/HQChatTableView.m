@@ -7,8 +7,11 @@
 //
 
 #import "HQChatTableView.h"
+#import "HQLabel.h"
 
-@implementation HQChatTableView
+@implementation HQChatTableView{
+    __weak HQLabel *_currentMsgLabel;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,17 +36,28 @@
 }
 
 - (BOOL)touchesShouldBegin:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view{
-    return [super touchesShouldBegin:touches withEvent:event inContentView:view];
+    if (_currentMsgLabel == view) {
+        return NO;
+    }else{
+        [_currentMsgLabel removeSelectionView];
+        return [super touchesShouldBegin:touches withEvent:event inContentView:view];
+    }
 }
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view {
+    NSLog(@"touchesShouldCancelInContentView");
     if ( [view isKindOfClass:[UIControl class]]) {
         return YES;
     }else if ([view isKindOfClass:NSClassFromString(@"HQLabel")]){
+        if (_currentMsgLabel != view) {
+            _currentMsgLabel = (HQLabel *)view;
+        }
         return NO;
     }
     return [super touchesShouldCancelInContentView:view];
 }
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-//    return self;
-//}
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    NSLog(@"hitTest");
+    NSLog(@"contentSize = %@",NSStringFromCGSize(self.contentSize));
+    return [super hitTest:point withEvent:event];
+}
 @end

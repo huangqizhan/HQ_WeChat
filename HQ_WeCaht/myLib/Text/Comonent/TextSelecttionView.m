@@ -110,6 +110,14 @@
 @end
 
 @implementation TextSelecttionView
++ (instancetype)shareSelectionView{
+    static TextSelecttionView *seleView = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        seleView = [TextSelecttionView new];
+    });
+    return seleView;
+}
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (!self) return nil;

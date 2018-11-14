@@ -90,6 +90,8 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         unsigned int contentsNeedFade : 1;
         ///是否已经touchend
         unsigned int isToutchEnd : 1;
+        ///是否touchcancel
+        unsigned int isToucheCancel : 1;
         ///是否正在显示选中视图
         unsigned int isHiddenSelectedView : 1;
     } _state;
@@ -117,11 +119,13 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 - (void)_setLayoutNeedUpdata{
     _state.layoutNeedUpdate = YES;
+    [self _hiddenSelectionView];
     [self _clearInnerLayout];
     [self _setLayoutNeedRedraw];
 }
 ///重绘
 - (void)_setLayoutNeedRedraw{
+    [self _hiddenSelectionView];
     [self.layer setNeedsDisplay];
 }
 - (void)_clearInnerLayout{
@@ -265,6 +269,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 - (void)_endTouch{
     [self _endLongPressTimer];
     [self _removeHighlightAnimated:YES];
+    _state.isToutchEnd = YES;
     _state.trackingTouch = NO;
 }
 ///把layout 上的point 转到label 上
@@ -496,8 +501,6 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
                 e = _selectedTextRange.start;
             }
         }
-        NSLog(@"s.offset = %f",s.offset);
-        NSLog(@"e.offset = %f",e.offset);
         newRange = [TextRange rangeWithStart:s                    end:e];
         _trackingRange = newRange;
     }
@@ -524,9 +527,10 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 ///隐藏选中视图
 - (void)_hiddenSelectionView{
+    if (_state.isHiddenSelectedView) return;
     _state.isHiddenSelectedView = YES;
     [UIView animateWithDuration:0.12 animations:^{
-        [self->_selectionView removeFromSuperview];
+        self->_selectionView.hidden = YES;
     }];
 }
 ///更新选中视图
@@ -593,12 +597,13 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     _selectionView.hostView = self;
     _selectionView.color = [self _defaultTintColor];
     [self addSubview:_selectionView];
-    
     _state.isHiddenSelectedView = YES;
 }
-
+#pragma mark ------ public  method
+- (void)removeSelectionView{
+    [self _hiddenSelectionView];
+}
 #pragma mark ------ override
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:CGRectZero];
     if (!self) return nil;

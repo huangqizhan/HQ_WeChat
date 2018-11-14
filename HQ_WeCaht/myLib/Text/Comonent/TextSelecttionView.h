@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TextSelecttionView : UIView
 
++ (instancetype)shareSelectionView;
+
 @property (nullable, nonatomic, weak) UIView *hostView; ///< the holder view
 @property (nullable, nonatomic, strong) UIColor *color; ///< the tint color
 ///插入点是否活跃

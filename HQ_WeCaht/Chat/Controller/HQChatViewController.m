@@ -779,7 +779,7 @@
         _begImageView.clipsToBounds = YES;
         _begImageView.contentMode = UIViewContentModeScaleAspectFill;
         _begImageView.backgroundColor = IColor(240, 237, 237);
-        _begImageView.image = [UIImage imageNamed:@"hqz"];
+//        _begImageView.image = [UIImage imageNamed:@"hqz"];
     }
     return _begImageView;
 }
