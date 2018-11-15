@@ -2,8 +2,8 @@
 //  UIPasteboard+Add.m
 //  YYStudyDemo
 //
-//  Created by hqz on 2018/8/14.
-//  Copyright © 2018年 hqz. All rights reserved.
+//  Created by hqz  QQ 757618403 on 2018/8/14.
+//  Copyright © 2018年 hqz  QQ 757618403. All rights reserved.
 //
 
 #import "UIPasteboard+Add.h"

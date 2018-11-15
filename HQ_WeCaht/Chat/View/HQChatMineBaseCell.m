@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/3/8.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "HQChatMineBaseCell.h"
@@ -208,7 +208,7 @@
     if (_headImageView == nil) {
         _headImageView = [[ImageControll alloc] initWithFrame:CGRectMake(App_Frame_Width-10-CHATHEADIMAGEWIDTH, 10, CHATHEADIMAGEWIDTH, CHATHEADIMAGEWIDTH)];
         _headImageView.backgroundColor = [UIColor blackColor];
-        _headImageView.image = [UIImage imageNamed:@"hqz"];
+        _headImageView.image = [UIImage imageNamed:@"hqz  QQ 757618403"];
         _headImageView.contentMode = UIViewContentModeScaleAspectFill;
         _headImageView.clipsToBounds = YES;
     }

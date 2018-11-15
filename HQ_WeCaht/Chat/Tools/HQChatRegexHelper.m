@@ -2,8 +2,8 @@
 //  HQChatRegexHelper.m
 //  HQ_WeChat
 //
-//  Created by 黄麒展 on 2018/10/21.
-//  Copyright © 2018年 黄麒展. All rights reserved.
+//  Created by 黄麒展  QQ 757618403 on 2018/10/21.
+//  Copyright © 2018年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "HQChatRegexHelper.h"

@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2018/1/16.
-//  Copyright © 2018年 黄麒展. All rights reserved.
+//  Copyright © 2018年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

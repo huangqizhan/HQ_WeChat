@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/2/20.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "HQChatViewController.h"
@@ -779,7 +779,7 @@
         _begImageView.clipsToBounds = YES;
         _begImageView.contentMode = UIViewContentModeScaleAspectFill;
         _begImageView.backgroundColor = IColor(240, 237, 237);
-//        _begImageView.image = [UIImage imageNamed:@"hqz"];
+//        _begImageView.image = [UIImage imageNamed:@"hqz  QQ 757618403"];
     }
     return _begImageView;
 }

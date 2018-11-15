@@ -2,8 +2,8 @@
 //  HQLabel.m
 //  YYStudyDemo
 //
-//  Created by hqz on 2018/9/4.
-//  Copyright © 2018年 hqz. All rights reserved.
+//  Created by hqz  QQ 757618403 on 2018/9/4.
+//  Copyright © 2018年 hqz  QQ 757618403. All rights reserved.
 //
 
 #import "HQLabel.h"
@@ -476,6 +476,13 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     }
     BOOL isStart = _state.trackingGrabber == kStart;
     CGPoint magPoint = _trackingPoint;
+    if (magPoint.y <= kLongPressAllowableMovement) {
+        magPoint.y = kLongPressAllowableMovement;
+    }
+    if (magPoint.y >= self.height) {
+        magPoint.y = self.height - kLongPressAllowableMovement;
+    }
+    NSLog(@"msgPoint = %@",NSStringFromCGPoint(magPoint));
     magPoint.y += kLabelMagnifierRangedTrackFix;
     magPoint = [self _convertPointToLayout:magPoint];
     TextPosition *position = [_innerLayout closestPositionToPoint:magPoint];

@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/4/17.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "HQContractTableViewCell.h"
@@ -38,7 +38,7 @@
         if (_contractModel.tempImage) {
             [_headImageBut setBackgroundImage:_contractModel.tempImage forState:UIControlStateNormal];
         }else{
-            [_headImageBut setBackgroundImageForState:UIControlStateNormal withURL:[NSURL URLWithString:_contractModel.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
+//            [_headImageBut setBackgroundImageForState:UIControlStateNormal withURL:[NSURL URLWithString:_contractModel.userHeadImaeUrl] placeholderImage:[UIImage imageNamed:@"icon_avatar"]];
         }
     }
     _nameLabel.text = _contractModel.userName;

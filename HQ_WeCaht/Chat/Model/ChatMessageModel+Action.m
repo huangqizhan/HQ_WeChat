@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/3/8.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "ChatMessageModel+Action.h"
@@ -429,25 +429,25 @@ static const char ChatMessageCallBackKey = '\0';
 
 #pragma mark ------ 网络 -----
 - (void)sendTextMessage:(ChatMessageCallBack)callBack{
-    self.messageStatus = self.deliverStatus = 1;
-    HQReqestSesstionTask *task = [HQNetWorkManager requestWithType:HQhTTPRequestTypePOST urlString:@"http://000000" parameters:[self transmitChatMessagToParmars] successBlock:^(id responseData) {
-        self.messageStatus = self.deliverStatus = 2;
-        [self saveToDBChatLisModelAsyThread:^{
-            NSLog(@"save  success self.content = %@",self.contentString);
-        } andError:^{
-            NSLog(@"save faild");
-        }];
-        callBack();
-    } failureBlock:^(NSError *error) {
-        self.messageStatus = self.deliverStatus = 3;
-        [self saveToDBChatLisModelAsyThread:^{
-            NSLog(@"save  success self.content = %@",self.contentString);
-        } andError:^{
-            NSLog(@"save faild");
-        }];
-        callBack();
-    } progress:nil];
-    task.requestTimeal = self.requestTimeral = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]];
+//    self.messageStatus = self.deliverStatus = 1;
+//    HQReqestSesstionTask *task = [HQNetWorkManager requestWithType:HQhTTPRequestTypePOST urlString:@"http://000000" parameters:[self transmitChatMessagToParmars] successBlock:^(id responseData) {
+//        self.messageStatus = self.deliverStatus = 2;
+//        [self saveToDBChatLisModelAsyThread:^{
+//            NSLog(@"save  success self.content = %@",self.contentString);
+//        } andError:^{
+//            NSLog(@"save faild");
+//        }];
+//        callBack();
+//    } failureBlock:^(NSError *error) {
+//        self.messageStatus = self.deliverStatus = 3;
+//        [self saveToDBChatLisModelAsyThread:^{
+//            NSLog(@"save  success self.content = %@",self.contentString);
+//        } andError:^{
+//            NSLog(@"save faild");
+//        }];
+//        callBack();
+//    } progress:nil];
+//    task.requestTimeal = self.requestTimeral = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]];
     [self saveToDBChatLisModelAsyThread:^{
         NSLog(@"save  success sele.content = %@",self.contentString);
     } andError:^{
@@ -457,31 +457,31 @@ static const char ChatMessageCallBackKey = '\0';
 ///语音
 - (void)sendVoiceMessageWithCallBack:(ChatMessageCallBack)callBack{
     self.messageStatus = self.deliverStatus = 1;
-   HQReqestSesstionTask *task = [HQNetWorkManager uploadFileWithUrlString:@"http://" parameters:[self transmitChatMessagToParmars] filePath:self.filePath fileName:self.filePath.lastPathComponent successBlock:^(id responseData) {
-        self.messageStatus = self.deliverStatus = 2;
-       if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Delivered);
-        [self saveToDBChatLisModelAsyThread:^{
-            NSLog(@"save  success self.content = %@",self.contentString);
-        } andError:^{
-            NSLog(@"save faild");
-        }];
-        callBack();
-       ////发送成功后删除amr文件
-       [[HQRecordManager sharedManager] removeAmrVoiceFileWithFileName:self.fileName];
-    } failurBlock:^(NSError *error) {
-        self.messageStatus = self.deliverStatus = 3;
-        [self saveToDBChatLisModelAsyThread:^{
-            NSLog(@"save  success self.content = %@",self.contentString);
-        } andError:^{
-            NSLog(@"save faild");
-        }];
-        if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Failure);
-        callBack();
-        ////发送成功后删除amr文件
-        [[HQRecordManager sharedManager] removeAmrVoiceFileWithFileName:self.fileName];
-    } upLoadProgress:nil];
-    if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Delivering);
-    task.requestTimeal = self.requestTimeral = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]];
+//   HQReqestSesstionTask *task = [HQNetWorkManager uploadFileWithUrlString:@"http://" parameters:[self transmitChatMessagToParmars] filePath:self.filePath fileName:self.filePath.lastPathComponent successBlock:^(id responseData) {
+//        self.messageStatus = self.deliverStatus = 2;
+//       if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Delivered);
+//        [self saveToDBChatLisModelAsyThread:^{
+//            NSLog(@"save  success self.content = %@",self.contentString);
+//        } andError:^{
+//            NSLog(@"save faild");
+//        }];
+//        callBack();
+//       ////发送成功后删除amr文件
+//       [[HQRecordManager sharedManager] removeAmrVoiceFileWithFileName:self.fileName];
+//    } failurBlock:^(NSError *error) {
+//        self.messageStatus = self.deliverStatus = 3;
+//        [self saveToDBChatLisModelAsyThread:^{
+//            NSLog(@"save  success self.content = %@",self.contentString);
+//        } andError:^{
+//            NSLog(@"save faild");
+//        }];
+//        if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Failure);
+//        callBack();
+//        ////发送成功后删除amr文件
+//        [[HQRecordManager sharedManager] removeAmrVoiceFileWithFileName:self.fileName];
+//    } upLoadProgress:nil];
+//    if(self.ChatMessageSendStatusCallBack) self.ChatMessageSendStatusCallBack(HQMessageDeliveryState_Delivering);
+//    task.requestTimeal = self.requestTimeral = [NSString stringWithFormat:@"%ld",(long)[NSDate returnTheTimeralFrom1970]];
     [self saveToDBChatLisModelAsyThread:^{
         NSLog(@"save  success sele.content = %@",self.contentString);
     } andError:^{

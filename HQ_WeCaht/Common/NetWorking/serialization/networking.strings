@@ -1,0 +1,14 @@
+/* 
+  networking.strings
+  AFDemo
+
+  Created by hqz on 2018/11/5.
+  Copyright © 2018年 8km. All rights reserved.
+*/
+
+"title" = "haungqizhan";
+"boundleName" = "AFDemo";
+"Reachable via WWAN" = "Reachable via WWAN";
+"Reachable via WiFi" = "Reachable via WiFi";
+"Unknown" = "Unknown";
+

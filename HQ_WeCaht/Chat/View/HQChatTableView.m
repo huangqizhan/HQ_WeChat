@@ -2,8 +2,8 @@
 //  HQChatTableView.m
 //  HQ_WeChat
 //
-//  Created by 黄麒展 on 2018/10/28.
-//  Copyright © 2018年 黄麒展. All rights reserved.
+//  Created by 黄麒展  QQ 757618403 on 2018/10/28.
+//  Copyright © 2018年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "HQChatTableView.h"
@@ -38,17 +38,20 @@
 
 - (BOOL)touchesShouldBegin:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view{
     if (_currentMsgLabel != view) {
-        [_currentMsgLabel removeSelectionView];
+        CGPoint point = [[touches anyObject] locationInView:view];
+        CGPoint newPoint = [view convertPoint:point toView:[UIApplication sharedApplication].keyWindow];
+        CGRect rect = [_currentMsgLabel.superview convertRect:_currentMsgLabel.frame toView:[UIApplication sharedApplication].keyWindow];
+        rect.origin.x -= 15;
+        rect.size.width += 30;
+        rect.origin.y -= 15;
+        rect.size.height += 30;
+        if (!CGRectContainsPoint(rect, newPoint)) {
+            [_currentMsgLabel removeSelectionView];
+        }
     }
     return [super touchesShouldBegin:touches withEvent:event inContentView:view];
 }
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view {
-    NSLog(@"touchesShouldCancelInContentView");
-    /*
-     if ( [view isKindOfClass:[UIControl class]]) {
-         return YES;
-     }
-     */
     if ([view isKindOfClass:NSClassFromString(@"HQLabel")]){
         if (_currentMsgLabel == view) {
             return NO;
@@ -61,6 +64,10 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     CGPoint newPoint = [self convertPoint:point toView:[UIApplication sharedApplication].keyWindow];
     CGRect rect = [_currentMsgLabel.superview convertRect:_currentMsgLabel.frame toView:[UIApplication sharedApplication].keyWindow];
+    rect.origin.x -= 15;
+    rect.size.width += 30;
+    rect.origin.y -= 15;
+    rect.size.height += 30;
     if (!CGRectContainsPoint(rect, newPoint)) {
         [_currentMsgLabel removeSelectionView];
     }

@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/4/14.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #import "ContractModel+Action.h"
@@ -246,7 +246,7 @@
         [modelArray addObject:model6];
         
         ContractModel *model7 = [ContractModel customerInit];
-        model7.userName = @"黄麒展";
+        model7.userName = @"黄麒展  QQ 757618403";
         model7.userType = @"user";
         model7.userId = 17;
         model7.userHeadImaeUrl = @"http://d.lanrentuku.com/down/png/1610/16young-avatar-collection/boy-2.png";

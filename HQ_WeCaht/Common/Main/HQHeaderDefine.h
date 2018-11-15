@@ -3,7 +3,7 @@
 //  HQ_WeChat
 //
 //  Created by GoodSrc on 2017/2/20.
-//  Copyright © 2017年 黄麒展. All rights reserved.
+//  Copyright © 2017年 黄麒展  QQ 757618403. All rights reserved.
 //
 
 #ifndef HQHeaderDefine_h
@@ -35,10 +35,8 @@
 #import "HQ_WeChatConst.h"
 #import "MJExtension.h"
 #import "HQChatHeaderDefine.h"
-#import "HQNetWorkManager.h"
 #import "HQImageManager.h"
 #import "NSDate+Extension.h"
-#import "UIKit+AFNetworking.h"
 #import "PublicCaculateManager.h"
 #import "NSString+Extension.h"
 #import "HQChaRootCell.h"
