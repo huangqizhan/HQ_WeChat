@@ -66,4 +66,7 @@
 
 
 
+
+
+
 #endif /* HQChatHeaderDefine_h */
