@@ -610,7 +610,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 #pragma mark -------- MenuAction  ----
 - (void)copyAciton:(id)sender{
-    [UIPasteboard generalPasteboard].string = _innerLayout.text.string;
+    [UIPasteboard generalPasteboard].string = [_innerText attributedSubstringFromRange:_selectedTextRange.asRange].string;
 }
 - (void)_initLabel{
     ((TextAsyncLayer *)self.layer).displaysAsynchronously = NO;
