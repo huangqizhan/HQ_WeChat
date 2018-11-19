@@ -71,6 +71,9 @@
 		BAD273F1201229FA00A26BBC /* HQURLProticol.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F0201229FA00A26BBC /* HQURLProticol.m */; };
 		BAD273F420122EB900A26BBC /* WKWebView+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F320122EB900A26BBC /* WKWebView+Add.m */; };
 		BAD273F72012391C00A26BBC /* WKWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */; };
+		BADA358121A2E5B400993FCA /* HQBaseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA357C21A2E5B300993FCA /* HQBaseOperation.m */; };
+		BADA358221A2E5B400993FCA /* TestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA357D21A2E5B300993FCA /* TestOperation.m */; };
+		BADA358321A2E5B400993FCA /* NSOperation+Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA357E21A2E5B300993FCA /* NSOperation+Operation.m */; };
 		BADCFA4421761CE0009B488D /* LabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4321761CE0009B488D /* LabelViewController.m */; };
 		BADCFA4721761CF1009B488D /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4621761CF1009B488D /* TextViewController.m */; };
 		BADCFA4C217B5BC4009B488D /* CellTextLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BADCFA4B217B5BC4009B488D /* CellTextLayout.m */; };
@@ -617,6 +620,12 @@
 		BAD273F320122EB900A26BBC /* WKWebView+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Add.m"; sourceTree = "<group>"; };
 		BAD273F52012391C00A26BBC /* WKWebViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewDelegate.h; sourceTree = "<group>"; };
 		BAD273F62012391C00A26BBC /* WKWebViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewDelegate.m; sourceTree = "<group>"; };
+		BADA357B21A2E5B300993FCA /* NSOperation+Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperation+Operation.h"; sourceTree = "<group>"; };
+		BADA357C21A2E5B300993FCA /* HQBaseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQBaseOperation.m; sourceTree = "<group>"; };
+		BADA357D21A2E5B300993FCA /* TestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestOperation.m; sourceTree = "<group>"; };
+		BADA357E21A2E5B300993FCA /* NSOperation+Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperation+Operation.m"; sourceTree = "<group>"; };
+		BADA357F21A2E5B300993FCA /* HQBaseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQBaseOperation.h; sourceTree = "<group>"; };
+		BADA358021A2E5B300993FCA /* TestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestOperation.h; sourceTree = "<group>"; };
 		BADCFA4221761CE0009B488D /* LabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelViewController.h; sourceTree = "<group>"; };
 		BADCFA4321761CE0009B488D /* LabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelViewController.m; sourceTree = "<group>"; };
 		BADCFA4521761CF1009B488D /* TextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
@@ -1678,6 +1687,19 @@
 			path = webjscore;
 			sourceTree = "<group>";
 		};
+		BADA357A21A2E5B300993FCA /* OperatopnTask */ = {
+			isa = PBXGroup;
+			children = (
+				BADA357B21A2E5B300993FCA /* NSOperation+Operation.h */,
+				BADA357C21A2E5B300993FCA /* HQBaseOperation.m */,
+				BADA357D21A2E5B300993FCA /* TestOperation.m */,
+				BADA357E21A2E5B300993FCA /* NSOperation+Operation.m */,
+				BADA357F21A2E5B300993FCA /* HQBaseOperation.h */,
+				BADA358021A2E5B300993FCA /* TestOperation.h */,
+			);
+			path = OperatopnTask;
+			sourceTree = "<group>";
+		};
 		BADCFA4021761CAA009B488D /* Label */ = {
 			isa = PBXGroup;
 			children = (
@@ -2736,6 +2758,7 @@
 		FD9408A21E5A70C300634206 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BADA357A21A2E5B300993FCA /* OperatopnTask */,
 				BAB70582219DC1AD002392F1 /* NetWorking */,
 				BAD273BB200F6D2600A26BBC /* webjscore */,
 				FD7358281F96F72F0042B44D /* ARTest */,
@@ -3508,6 +3531,7 @@
 				FD9408E81E5A789A00634206 /* AppDelegate.m in Sources */,
 				FD6D888F1E76743D00794E7F /* HQChatTextView.m in Sources */,
 				FD055AA81F4135F9001850FE /* HQCutImageController.m in Sources */,
+				BADA358221A2E5B400993FCA /* TestOperation.m in Sources */,
 				BAD273F1201229FA00A26BBC /* HQURLProticol.m in Sources */,
 				BA59BFEC216CF211005D6D79 /* MemoryCache.m in Sources */,
 				FD6D88851E76306900794E7F /* HQReceiveMessageManager.m in Sources */,
@@ -3562,6 +3586,7 @@
 				FDFF3B611FAFEF39001B2231 /* HQConstant.m in Sources */,
 				FD2737271E69687500629143 /* HQFaceMorePageView.m in Sources */,
 				BAB31B821F5303D80055D5FE /* HQPopoverAction.m in Sources */,
+				BADA358321A2E5B400993FCA /* NSOperation+Operation.m in Sources */,
 				BAF76540216CEA0C00525D8D /* NSNumber+Add.m in Sources */,
 				BAF7653F216CEA0C00525D8D /* UIColor+Add.m in Sources */,
 				BAF7654C216CEA0C00525D8D /* HQTextView.m in Sources */,
@@ -3638,6 +3663,7 @@
 				FD7A03E91EA45C5200BE240B /* HQContractTableViewCell.m in Sources */,
 				FD2476DB1E6FA1B70085A23C /* HQChatMineVoiceCell.m in Sources */,
 				BA59C03B216CF81C005D6D79 /* WBModel.m in Sources */,
+				BADA358121A2E5B400993FCA /* HQBaseOperation.m in Sources */,
 				BAF76561216CEA0C00525D8D /* TextRubyAnnotation.m in Sources */,
 				BAF76548216CEA0C00525D8D /* NSString+Add.m in Sources */,
 				BAF7653B216CEA0C00525D8D /* UIBezierPath+Add.m in Sources */,

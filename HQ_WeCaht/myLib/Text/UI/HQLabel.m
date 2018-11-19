@@ -482,7 +482,6 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     if (magPoint.y >= self.height) {
         magPoint.y = self.height - kLongPressAllowableMovement;
     }
-    NSLog(@"msgPoint = %@",NSStringFromCGPoint(magPoint));
     magPoint.y += kLabelMagnifierRangedTrackFix;
     magPoint = [self _convertPointToLayout:magPoint];
     TextPosition *position = [_innerLayout closestPositionToPoint:magPoint];
@@ -543,6 +542,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     _selectionView.hostView = self;
     _selectionView.color = [self _defaultTintColor];
     [self addSubview:_selectionView];
+    [self _showMenuController];
 }
 ///隐藏选中视图
 - (void)_hiddenSelectionView{
@@ -554,6 +554,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     } completion:^(BOOL finished) {
         [self->_selectionView removeFromSuperview];
         self->_selectionView = nil;
+        [self _hiddenMenuController];
     }];
 }
 ///更新选中视图
@@ -579,14 +580,28 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     TextRange *newRange = [self _getClosestTokenRangeAtPoint:_trackingPoint];
     _trackingRange = newRange;
 }
+- (void)_showMenuController{
+    [self becomeFirstResponder];
+    UIMenuItem *itme = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copyAciton:)];
+    [[UIMenuController sharedMenuController] setMenuItems:@[itme]];
+    [[UIMenuController sharedMenuController] setTargetRect:CGRectMake(0, 0, 90, 30) inView:_selectionView];
+    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+}
+- (void)_hiddenMenuController{
+    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+}
 - (void)_clearContens{
-    CGImageRef cgimage = (__bridge_retained CGImageRef)self.constraints;
+    CGImageRef cgimage = (__bridge_retained CGImageRef)self.layer.contents;
     self.layer.contents = nil;
     if (cgimage) {
         dispatch_async(HQLabelReleaseQueue(), ^{
             CGImageRelease(cgimage);
         });
     }
+}
+#pragma mark -------- MenuAction  ----
+- (void)copyAciton:(id)sender{
+    
 }
 - (void)_initLabel{
     ((TextAsyncLayer *)self.layer).displaysAsynchronously = NO;
@@ -873,6 +888,15 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 - (BOOL)resignFirstResponder{
     return YES;
+}
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+//    if (action == @selector(revokeAction)) {
+//        return YES;
+//    }
+//    if (action == @selector(sureAction)) {
+//        return YES;
+//    }
+    return YES;//隐藏系统默认的菜单项
 }
 #pragma mark ------ properties ----
 - (void)setText:(NSString *)text{

@@ -59,22 +59,22 @@
     }
     [super setIsEdiating:isEdiating];
 }
-- (void)reSetMessageCellEdiatedStatusIsEdiate:(BOOL)isEdiate{
-    if (isEdiate) {
-        self.selectControl.hidden = NO;
-        self.selectControl.centerY = self.paopaoView.centerY;
-        [UIView animateWithDuration:.35 animations:^{
-            self.selectControl.left = 0;
-        }];
-    }else{
-        self.selectControl.hidden = YES;
-        [self didSeleteCellWhenIsEdiating:NO];
-        [UIView animateWithDuration:.35 animations:^{
-            self.selectControl.right = 0;
-        }];
-    }
-    [super setIsEdiating:isEdiate];
-}
+//- (void)reSetMessageCellEdiatedStatusIsEdiate:(BOOL)isEdiate{
+//    if (isEdiate) {
+//        self.selectControl.hidden = NO;
+//        self.selectControl.centerY = self.paopaoView.centerY;
+//        [UIView animateWithDuration:.35 animations:^{
+//            self.selectControl.left = 0;
+//        }];
+//    }else{
+//        self.selectControl.hidden = YES;
+//        [self didSeleteCellWhenIsEdiating:NO];
+//        [UIView animateWithDuration:.35 animations:^{
+//            self.selectControl.right = 0;
+//        }];
+//    }
+//    [super setIsEdiating:isEdiate];
+//}
 #pragma mark   ------ 双击 ------
 //- (void)contentDoubleTapped:(UITapGestureRecognizer *)tap {
 //    if (self.isEdiating) {
@@ -220,6 +220,25 @@
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
 //    return self;
 //}
+- (BOOL)canBecomeFirstResponder{
+    if (self.isEdiating) {
+        return NO;
+    }
+    return YES;
+}
+
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (self.isEdiating) {
+        return NO;
+    }
+    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
+        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
+            return YES;
+        }
+    }
+    return YES;//隐藏系统默认的菜单项
+}
+
 - (UIImageView *)paopaoView{
     if (_paopaoView == nil) {
         _paopaoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 0, 0)];

@@ -105,24 +105,24 @@
 //        [self contentLongPressedEndedInView:_longPressView];
 //    }
 //}
-//- (BOOL)canBecomeFirstResponder{
-//    if (self.isEdiating) {
-//        return NO;
-//    }
-//    return YES;
-//}
+- (BOOL)canBecomeFirstResponder{
+    if (self.isEdiating) {
+        return NO;
+    }
+    return YES;
+}
 
-//-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-//    if (self.isEdiating) {
-//        return NO;
-//    }
-//    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
-//        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
-//            return YES;
-//        }
-//    }
-//    return NO;//隐藏系统默认的菜单项
-//}
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    if (self.isEdiating) {
+        return NO;
+    }
+    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
+        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
+            return YES;
+        }
+    }
+    return YES;//隐藏系统默认的菜单项
+}
 
 #pragma mark ------- UIGestureDelegate -----
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
