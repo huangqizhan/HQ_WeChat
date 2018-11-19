@@ -10,6 +10,9 @@
 
 @interface HQChatTableView : UITableView
 
+- (void)chatTableViewDidEndScroll;
+
+- (void)chatTableViewDidBeginScroll;
 
 @end
 

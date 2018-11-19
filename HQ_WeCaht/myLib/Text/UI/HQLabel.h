@@ -93,11 +93,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///删除选中视图
 - (void)removeSelectionView;
+///显示相应的menuItem
+- (void)showMenuController;
 
 @end
 
-
+///显示选中视图
 UIKIT_EXTERN  NSString * const HQLabelDidShowSelectionViewNotification;
+///移除选中视图
 UIKIT_EXTERN NSString * const HQLabelDidHiddenSelectionViewNotification;
 
 NS_ASSUME_NONNULL_END

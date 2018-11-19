@@ -86,4 +86,12 @@
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)chatTableViewDidEndScroll{
+    if (_currentMsgLabel) {
+        [_currentMsgLabel showMenuController];
+    }
+}
+- (void)chatTableViewDidBeginScroll{
+    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+}
 @end

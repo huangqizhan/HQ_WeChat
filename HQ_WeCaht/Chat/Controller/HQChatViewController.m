@@ -68,7 +68,6 @@
     [super viewWillDisappear:animated];
 //    [self keyBordViewDidResetOriginStatus];
     [self hq_removeTransitionDelegate];
-    [self hiddenMenuController];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -252,12 +251,15 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self hiddenMenuController];
     [self keyBordViewDidResetOriginStatus];
+    [self.tableView chatTableViewDidBeginScroll];
 }
-- (void)hiddenMenuController{
-    if ([UIMenuController sharedMenuController].menuVisible) {
-        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self.tableView chatTableViewDidEndScroll];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (!decelerate) {
+        [self.tableView chatTableViewDidEndScroll];
     }
 }
 //////清除聊天数据

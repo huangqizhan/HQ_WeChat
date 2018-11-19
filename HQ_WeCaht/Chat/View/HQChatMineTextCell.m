@@ -220,24 +220,24 @@
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
 //    return self;
 //}
-- (BOOL)canBecomeFirstResponder{
-    if (self.isEdiating) {
-        return NO;
-    }
-    return YES;
-}
-
--(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    if (self.isEdiating) {
-        return NO;
-    }
-    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
-        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
-            return YES;
-        }
-    }
-    return YES;//隐藏系统默认的菜单项
-}
+//- (BOOL)canBecomeFirstResponder{
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    return YES;
+//}
+//
+//-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+//    if (self.isEdiating) {
+//        return NO;
+//    }
+//    for (NSInteger i = 0; i < self.menuItemActionNames.count; i++) {
+//        if (action == NSSelectorFromString(self.menuItemActionNames[i])) {
+//            return YES;
+//        }
+//    }
+//    return YES;//隐藏系统默认的菜单项
+//}
 
 - (UIImageView *)paopaoView{
     if (_paopaoView == nil) {

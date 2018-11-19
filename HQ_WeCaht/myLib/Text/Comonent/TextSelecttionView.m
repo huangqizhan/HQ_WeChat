@@ -266,9 +266,13 @@
             }
         } else {
             if (rect.size.width > 0 && rect.size.height > 0) {
+                if (rect.size.width > self.width) {
+                    rect.size.width = self.width;
+                }
                 UIView *mark = [[UIView alloc] initWithFrame:rect];
                 mark.backgroundColor = self->_color;
                 mark.alpha = kMarkAlpha;
+                self.menuRect = rect;
                 [self insertSubview:mark atIndex:0];
                 [self.markViews addObject:mark];
             }

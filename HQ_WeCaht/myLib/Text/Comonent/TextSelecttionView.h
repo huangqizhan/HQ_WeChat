@@ -51,6 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) TextSelectionGrabber *startGrabber;
 @property (nonatomic, readonly) TextSelectionGrabber *endGrabber;
 
+///显示menuController 的rect
+@property (nonatomic,assign) CGRect menuRect;
 
 - (BOOL)isGrabberContainsPoint:(CGPoint)point;
 - (BOOL)isStartGrabberContainsPoint:(CGPoint)point;

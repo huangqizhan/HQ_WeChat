@@ -581,14 +581,23 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
     _trackingRange = newRange;
 }
 - (void)_showMenuController{
-    [self becomeFirstResponder];
-    UIMenuItem *itme = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copyAciton:)];
-    [[UIMenuController sharedMenuController] setMenuItems:@[itme]];
-    [[UIMenuController sharedMenuController] setTargetRect:CGRectMake(0, 0, 90, 30) inView:_selectionView];
-    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    if (menu.isMenuVisible) {
+        return ;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self becomeFirstResponder];
+        UIMenuItem *item1 = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copyAciton:)];
+        menu.menuItems = @[item1];
+        [menu setTargetRect:_selectionView.menuRect inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    });
 }
 - (void)_hiddenMenuController{
-    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    if (menu.isMenuVisible) {
+        [menu setMenuVisible:NO animated:YES];
+    }
 }
 - (void)_clearContens{
     CGImageRef cgimage = (__bridge_retained CGImageRef)self.layer.contents;
@@ -601,7 +610,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 }
 #pragma mark -------- MenuAction  ----
 - (void)copyAciton:(id)sender{
-    
+    [UIPasteboard generalPasteboard].string = _innerLayout.text.string;
 }
 - (void)_initLabel{
     ((TextAsyncLayer *)self.layer).displaysAsynchronously = NO;
@@ -641,6 +650,10 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 - (void)removeSelectionView{
     [self _hiddenSelectionView];
 }
+///显示选中视图
+- (void)showMenuController{
+    [self _showMenuController];
+}
 #pragma mark ------ override
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:CGRectZero];
@@ -654,6 +667,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 - (void)dealloc{
     [TextDebugOption removeDebugTarget:self];
     [self _endLongPressTimer];
+    [self resignFirstResponder];
 }
 ///重写label 的 layer
 + (Class)layerClass{
@@ -822,8 +836,11 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
                 [self _hiddenHighlightAnimated:YES];
             }
         }else if (!_state.isHiddenSelectedView){
-            [self _updateTextRangeByTrackingGrabber];
-            [self _updateSelectionView];
+            if (_state.touchMoved){
+                [self _updateTextRangeByTrackingGrabber];
+                [self _updateSelectionView];
+                [self _hiddenMenuController];
+            }
         }
     }
     if (!_state.swallowTouch) {
@@ -864,6 +881,7 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
         }else{
             if (!_state.isHiddenSelectedView) {
                 _selectedTextRange = _trackingRange;
+                [self _showMenuController];
             }
         }
     }
@@ -880,24 +898,24 @@ typedef NS_ENUM (NSUInteger, HQLabelGrabberDirection) {
 - (BOOL)canBecomeFirstResponder{
     return YES;
 }
-- (BOOL)becomeFirstResponder{
-    return YES;
-}
+//- (BOOL)becomeFirstResponder{
+//    return YES;
+//}
 - (BOOL)canResignFirstResponder{
     return YES;
 }
-- (BOOL)resignFirstResponder{
-    return YES;
-}
--(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-//    if (action == @selector(revokeAction)) {
-//        return YES;
-//    }
-//    if (action == @selector(sureAction)) {
-//        return YES;
-//    }
-    return YES;//隐藏系统默认的菜单项
-}
+//- (BOOL)resignFirstResponder{
+//    return YES;
+//}
+//-(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+////    if (action == @selector(revokeAction)) {
+////        return YES;
+////    }
+////    if (action == @selector(sureAction)) {
+////        return YES;
+////    }
+//    return YES;//隐藏系统默认的菜单项
+//}
 #pragma mark ------ properties ----
 - (void)setText:(NSString *)text{
     if ([_text isEqualToString:text] || _text == text) return;
