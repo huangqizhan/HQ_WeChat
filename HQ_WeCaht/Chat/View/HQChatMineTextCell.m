@@ -248,11 +248,11 @@
 //
 //        image.capInsets
         image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height*0.5, image.size.width*0.5, image.size.width*0.5, image.size.width*0.5) resizingMode:UIImageResizingModeStretch];
-        UIImage *hightedImage = [UIImage imageNamed:@"SenderTextNodeBkgHL"];
+//        UIImage *hightedImage = [UIImage imageNamed:@"SenderTextNodeBkgHL"];
 //        [HQImageIOHelper imageWithNamed:@"SenderTextNodeBkgHL"];
 //
-        hightedImage = [hightedImage  resizableImageWithCapInsets:UIEdgeInsetsMake(hightedImage.size.height*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5) resizingMode:UIImageResizingModeStretch];
-        _paopaoView.highlightedImage = hightedImage;
+//        hightedImage = [hightedImage  resizableImageWithCapInsets:UIEdgeInsetsMake(hightedImage.size.height*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5, hightedImage.size.width*0.5) resizingMode:UIImageResizingModeStretch];
+//        _paopaoView.highlightedImage = hightedImage;
         [_paopaoView setImage:image];
         _paopaoView.userInteractionEnabled = YES;
     }
