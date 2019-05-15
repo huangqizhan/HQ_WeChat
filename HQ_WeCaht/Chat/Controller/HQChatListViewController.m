@@ -49,6 +49,11 @@
     [msgBut addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:msgBut];
     NSLog(@"home = %@",NSHomeDirectory());
+    
+//    CGRect rect= CGRectMake(20, 50, 100, 80);
+//    UIEdgeInsets ed=UIEdgeInsetsMake(-3, -4, -5, -6);
+//    CGRect  r=  UIEdgeInsetsInsetRect(rect, ed);
+//    NSLog(@"%@",r);
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

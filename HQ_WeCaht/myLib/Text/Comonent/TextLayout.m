@@ -346,6 +346,7 @@ dispatch_semaphore_signal(_lock);
 @property (nonatomic,readwrite) BOOL needDrawStrikethrough;
 @property (nonatomic,readwrite) BOOL needDrawBorder;
 @property (nonatomic,readwrite) NSUInteger *lineRowsIndex;
+///记录每一行的rect的 top  bottom
 @property (nonatomic,readwrite) TextRowEdge *lineRowEdge;
 @end
 
@@ -427,6 +428,7 @@ dispatch_semaphore_signal(_lock);
     ///cgpath && cgpathbox 路径
     if (container.path == nil && container.exclusionPaths.count == 0) {
         if(container.size.width <= 0 || container.size.height <= 0) goto faild;
+        ///此处在生成绘制路径时 需要有绘制区域 也就是container.size  如果container.size 小于内容就会显示不完 
         CGRect rect = {CGPointZero ,container.size};
         if (needFixLayoutSizeBug) {
             constraintSizeIsExtended = YES;
@@ -490,6 +492,7 @@ dispatch_semaphore_signal(_lock);
     ////coreText objects
     ctFrameSetter = CTFramesetterCreateWithAttributedString((CFTypeRef) text);
     if(!ctFrameSetter) goto faild;
+    ////由path 生成ctFrame
     ctFrame = CTFramesetterCreateFrame(ctFrameSetter, TextCFRangeFromNSRange(range), cgpath, (CFDictionaryRef)frameAttrs);
     if (!ctFrame) goto faild;
     lines = [NSMutableArray new];
@@ -633,8 +636,7 @@ dispatch_semaphore_signal(_lock);
             lineRowsEdge[i - 1].foot = lineRowsEdge[i].head = (v0.foot + v1.head) * 0.5;
         }
     }
-    
-    ///计算 bounding rect
+
     {
         CGRect rect = textBoundingRect;
         if (container.path) {
@@ -2194,12 +2196,12 @@ static void TextDrawRun(TextLine *line,CTRunRef run, CGContextRef context, CGSiz
                 CGContextSetStrokeColorWithColor(context, strokeColor);
                 CGContextSetLineWidth(context, CTFontGetSize(runFont) * fabs(strokeWidth.floatValue * 0.01));
                 if (strokeWidth.floatValue > 0) {
-                    ///线的填充模式
+                    //使用填充模式绘制文字
                     CGContextSetTextDrawingMode(context, kCGTextStroke);
                 }else{
+                    //使用描边模式绘制文字
                     CGContextSetTextDrawingMode(context, kCGTextFillStroke);
                 }
-                
             }
             if (isVertical) {
                 CFIndex runStrIdx[glyphCount + 1];
