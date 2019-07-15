@@ -27,12 +27,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _lable = [[HQLabel alloc] initWithFrame:CGRectMake(20, 20, 250,9999)];
     _lable.textVerticalAlignment = TextVerticalAlignmentTop;
+    _lable.isLongPressShowSelectionView = YES;
     _lable.textAlignment = NSTextAlignmentCenter;
     _lable.numberOfLines = 0;
 //    _lable.isLongPressShowSelectionView = YES;
     _lable.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_lable];
-    
     NSString *content = @"先帝创业未半而中道崩殂，今天下三分，益州疲弊，[爱你] 此诚危急存亡之秋也。 ";
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:content];
     att.foreColor = [UIColor redColor];

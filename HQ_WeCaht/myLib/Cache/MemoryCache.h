@@ -122,7 +122,7 @@
  @discussion Unlike an NSMutableDictionary object, a cache does not copy the key
  objects that are put into it.
  */
-- (void)setObject:(nullable id)object forKey:(id)key;
+- (void)setObject:(nullable id)object forKey:(id _Nullable )key;
 
 /**
  Sets the value of the specified key in the cache, and associates the key-value
