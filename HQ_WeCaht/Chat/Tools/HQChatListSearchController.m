@@ -12,6 +12,8 @@
 #import "HQChatViewController.h"
 
 
+
+
 @interface HQChatListSearchController (){
     BOOL _searchBarIsShow;
     UISearchBar *_fromSearchBar;
@@ -39,6 +41,9 @@
 @property (nonatomic) NSMutableArray *searchResultArray;
 
 @end
+
+
+
 
 @implementation HQChatListSearchController
 

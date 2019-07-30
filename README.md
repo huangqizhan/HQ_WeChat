@@ -9,5 +9,24 @@
 2.gif 播放 采用NSDisplayLink 
 
 
-![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/置顶.png)
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/screenshort/175658.png)
+
+
+![图片说明1](https://github.com/huangqizhan/HQ_WeChat/blob/master/HQ_WeCaht/175658.png)
+
+
 
