@@ -62,5 +62,5 @@
 + (id)GetUserDefaultWithKey:(NSString *)key;
 
 
-
+- (void)test;
 @end
